@@ -154,7 +154,7 @@ other applications do not work inside it.
 |---|---|
 | Press the shortcut briefly | Recording runs until you press again |
 | Hold the shortcut | Push to talk, releasing ends the recording |
-| Escape while recording | Recording is discarded, nothing is inserted |
+| Esc while recording | Recording is discarded, nothing is inserted |
 
 The default shortcut is `⌥Space`. The space bar sits in the same place on ANSI, ISO and
 JIS keyboards, and `⌥Space` is not a system shortcut on macOS: `⌘Space` belongs to
