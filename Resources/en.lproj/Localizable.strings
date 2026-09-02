@@ -1,0 +1,115 @@
+/* Menu */
+"menu.status.last" = "Last: %@";
+"menu.status.hotkeyInactive" = "Shortcut inactive, accessibility missing";
+"menu.resetPosition" = "Move pill back to bottom center";
+"menu.copyLast" = "Copy last dictation";
+"menu.setup" = "Open setup…";
+"menu.status.notInstalled" = "Model not installed yet";
+"menu.settings" = "Settings…";
+"menu.quit" = "Quit Pegel";
+
+/* Status */
+"status.ready" = "Ready";
+"status.recording" = "Recording…";
+"status.transcribing" = "Transcribing…";
+"status.finished" = "Inserted";
+"status.discarded" = "Discarded";
+"status.failed" = "Error";
+
+/* Model preparation */
+"preparing.downloading" = "Downloading model %ld %%";
+"preparing.loading" = "Initialising model";
+"preparing.warmup" = "Warming up model";
+"preparing.waiting" = "Model not installed";
+"preparing.listing" = "Preparing download";
+"preparing.compiling" = "Compiling model";
+
+/* Errors */
+"error.microphone" = "No microphone access";
+"error.tooShort" = "Too short";
+"error.noSpeech" = "Nothing recognised";
+"error.modelLoading" = "Model still loading";
+"error.noInputDevice" = "No microphone found.";
+"error.notReady" = "The speech model is not loaded yet.";
+
+/* Windows */
+"window.settings" = "Pegel Settings";
+"window.onboarding" = "Set up Pegel";
+
+/* Settings */
+"settings.section.hotkey" = "Keyboard shortcut";
+"settings.hotkey.label" = "Start and stop dictation";
+"settings.hotkey.reset" = "Reset to %@";
+"settings.ptt.label" = "Hold from";
+"settings.ptt.explanation" = "A short press toggles recording and leaves it running. A longer press is push-to-talk: releasing ends it.";
+"settings.section.appearance" = "Appearance";
+"settings.waveform" = "Waveform";
+"settings.showTime" = "Show elapsed time";
+"settings.showTime.explanation" = "Without the time the pill is narrower and works entirely without digits.";
+"settings.section.permissions" = "Permissions";
+"settings.permissions.explanation" = "Accessibility for pasting and for locating the insertion point, input monitoring for the system-wide shortcut.";
+"settings.section.model" = "Model";
+"settings.model.label" = "Speech recognition";
+"settings.model.explanation" = "Runs locally on the Neural Engine. After the first download no network is needed.";
+
+/* Waveforms */
+"waveform.trace" = "Trail";
+"waveform.trace.explanation" = "Shows the last two seconds. You can also see in hindsight whether sound arrived.";
+"waveform.levels" = "Levels";
+"waveform.levels.explanation" = "Eleven bars with a wave running to the right. Calmer and narrower, shows only the present moment.";
+
+/* Permissions */
+"permission.microphone" = "Microphone";
+"permission.accessibility" = "Accessibility";
+"permission.inputMonitoring" = "Input Monitoring";
+
+/* Onboarding */
+"onboarding.subtitle" = "Dictation, local, anywhere in the system";
+"onboarding.intro" = "Three permissions are needed, then everything runs without further prompts.";
+"onboarding.microphone.detail" = "For recording. The audio never leaves this Mac.";
+"onboarding.accessibility.detail" = "For pasting at the cursor and locating the insertion point.";
+"onboarding.inputMonitoring.detail" = "So the shortcut is recognised system-wide. A separate item in System Settings.";
+"onboarding.start" = "Let's go";
+"onboarding.later" = "Later";
+
+/* Buttons and keys */
+"button.open" = "Open";
+"button.allow" = "Allow";
+"button.openSettings" = "System Settings…";
+"hotkey.pressKey" = "Press a key…";
+"key.space" = "Space";
+"key.unknown" = "Key %ld";
+"hotkey.reject.noModifier" = "Without a modifier the shortcut would swallow every normal keystroke.";
+"hotkey.reject.escape" = "Escape is reserved for cancelling a recording.";
+"hotkey.reject.quit" = "⌘Q quits applications.";
+"hotkey.reject.close" = "⌘W closes windows.";
+"hotkey.reject.switchApp" = "⌘Tab switches applications.";
+"hotkey.reject.spotlight" = "⌘Space opens Spotlight.";
+
+/* Setup */
+"setup.welcome.title" = "Set up once, then never again";
+"setup.welcome.body" = "Pegel recognises speech entirely on this Mac. To do that it now downloads the speech model once. Without it the app cannot dictate.";
+"setup.welcome.privacy" = "This is the only network access Pegel ever makes. Everything after it runs offline: no account, no cloud, no telemetry.";
+"setup.welcome.size" = "461 MB from Hugging Face, a few minutes depending on your connection.";
+"setup.welcome.confirm" = "Download model";
+"setup.next" = "Continue";
+"setup.permissions.title" = "Permissions";
+"setup.install.done" = "Model is installed and ready";
+"setup.install.failed" = "The download failed";
+"setup.install.retry" = "Try again";
+"setup.install.retry.hint" = "Parts already downloaded stay in place, a second attempt continues from there.";
+"setup.install.retry.offline" = "Get back online and try again. Parts already downloaded stay in place.";
+"setup.phase.waiting" = "Waiting for confirmation";
+"setup.phase.listing" = "Fetching the file list";
+"setup.phase.downloading" = "File %ld of %ld";
+"setup.phase.downloadingPlain" = "Downloading model";
+"setup.phase.compiling" = "Compiling model for the Neural Engine";
+"setup.done.title" = "Pegel is ready";
+"setup.done.body" = "The app lives in the menu bar and has no window of its own. It dictates wherever the insertion point is.";
+"setup.done.shortcut.label" = "Your shortcut";
+"setup.done.shortcut.explanation" = "A short press starts recording and leaves it running, another press ends it. Holding it down is push-to-talk. Escape discards.";
+"setup.done.changeShortcut" = "Change shortcut…";
+"setup.done.permissionsMissing" = "Some permissions are still missing. Without accessibility and input monitoring the shortcut does not respond. You can grant them later in the settings.";
+
+/* Installation errors */
+"install.error.offline" = "No network connection. Pegel needs the network only for this one download.";

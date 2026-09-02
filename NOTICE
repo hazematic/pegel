@@ -1,0 +1,63 @@
+Pegel
+Copyright (c) 2026 Alexander Koppe
+
+This product is licensed under the MIT License; see LICENSE.
+
+It bundles and depends on third-party works. Their licenses are collected in
+the licenses/ directory. This file lists what is used and what each license
+requires when Pegel is redistributed.
+
+
+--------------------------------------------------------------------------------
+FluidAudio
+--------------------------------------------------------------------------------
+https://github.com/FluidInference/FluidAudio
+Copyright FluidInference
+Licensed under the Apache License, Version 2.0.
+
+FluidAudio is statically linked into the Pegel binary, so a copy of the Apache
+License is included: licenses/FluidAudio-Apache-2.0.txt. Pegel does not modify
+FluidAudio; it is consumed unchanged as a Swift package dependency.
+
+FluidAudio in turn links the following works, which therefore also ship inside
+the Pegel binary:
+
+  NemoTextProcessing (text-processing-rs), Apache License 2.0
+  https://github.com/FluidInference/text-processing-rs
+  licenses/NemoTextProcessing-LICENSE.md, which also lists the crates that are
+  statically linked into that xcframework.
+
+  fastcluster
+  Copyright until version 1.1.23: Daniel Muellner, https://danifold.net
+  Copyright from version 1.1.24 on: Google Inc., https://www.google.com
+  BSD 2-Clause License, licenses/fastcluster-LICENSE.md
+
+  VBx (speaker diarization)
+  Copyright 2021-2024 BUT Speech@FIT (original VBx project)
+  Apache License 2.0, licenses/vbx-LICENSE.md
+
+
+--------------------------------------------------------------------------------
+Parakeet TDT 0.6B v3 (speech recognition model)
+--------------------------------------------------------------------------------
+Original model: https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3
+Copyright NVIDIA Corporation
+Licensed under CC-BY-4.0 (Creative Commons Attribution 4.0 International).
+
+Core ML conversion: https://huggingface.co/FluidInference/parakeet-tdt-0.6b-v3-coreml
+by FluidInference, also published under CC-BY-4.0.
+
+The model is NOT part of this repository and is NOT bundled with the
+application. Pegel downloads it on first launch, after explicit confirmation by
+the user, into ~/Library/Application Support/FluidAudio/Models/. The
+redistribution obligations of CC-BY-4.0 therefore do not apply to this
+repository or to a built Pegel.app. The attribution is stated here regardless,
+because the model does the actual work.
+
+
+--------------------------------------------------------------------------------
+System frameworks
+--------------------------------------------------------------------------------
+AVFoundation, AppKit, SwiftUI, Core ML, Carbon.HIToolbox, ApplicationServices
+and IOKit are part of macOS and are used under Apple's terms. They are not
+redistributed with this product.

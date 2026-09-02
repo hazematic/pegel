@@ -1,0 +1,115 @@
+/* Menü */
+"menu.status.last" = "Zuletzt: %@";
+"menu.status.hotkeyInactive" = "Kürzel inaktiv, Bedienungshilfen fehlen";
+"menu.resetPosition" = "Pille wieder unten mittig";
+"menu.copyLast" = "Letztes Diktat kopieren";
+"menu.setup" = "Einrichtung öffnen…";
+"menu.status.notInstalled" = "Modell noch nicht installiert";
+"menu.settings" = "Einstellungen…";
+"menu.quit" = "Pegel beenden";
+
+/* Status */
+"status.ready" = "Bereit";
+"status.recording" = "Nimmt auf…";
+"status.transcribing" = "Transkribiert…";
+"status.finished" = "Eingefügt";
+"status.discarded" = "Verworfen";
+"status.failed" = "Fehler";
+
+/* Modellvorbereitung */
+"preparing.downloading" = "Modell wird geladen %ld %%";
+"preparing.loading" = "Modell wird initialisiert";
+"preparing.warmup" = "Modell wird vorgewärmt";
+"preparing.waiting" = "Modell nicht installiert";
+"preparing.listing" = "Download wird vorbereitet";
+"preparing.compiling" = "Modell wird kompiliert";
+
+/* Fehler */
+"error.microphone" = "Kein Mikrofonzugriff";
+"error.tooShort" = "Zu kurz";
+"error.noSpeech" = "Nichts verstanden";
+"error.modelLoading" = "Modell lädt noch";
+"error.noInputDevice" = "Kein Mikrofon gefunden.";
+"error.notReady" = "Das Sprachmodell ist noch nicht geladen.";
+
+/* Fenster */
+"window.settings" = "Pegel Einstellungen";
+"window.onboarding" = "Pegel einrichten";
+
+/* Einstellungen */
+"settings.section.hotkey" = "Tastenkürzel";
+"settings.hotkey.label" = "Diktat starten und beenden";
+"settings.hotkey.reset" = "Zurück auf %@";
+"settings.ptt.label" = "Halten ab";
+"settings.ptt.explanation" = "Kürzer gedrückt schaltet die Aufnahme um und lässt sie laufen. Länger gedrückt ist Push-to-talk: Loslassen beendet.";
+"settings.section.appearance" = "Darstellung";
+"settings.waveform" = "Wellenform";
+"settings.showTime" = "Laufende Zeit anzeigen";
+"settings.showTime.explanation" = "Ohne Zeit wird die Pille schmaler und kommt ganz ohne Ziffern aus.";
+"settings.section.permissions" = "Berechtigungen";
+"settings.permissions.explanation" = "Bedienungshilfen für das Einfügen und die Position der Einfügemarke, Eingabeüberwachung für das systemweite Tastenkürzel.";
+"settings.section.model" = "Modell";
+"settings.model.label" = "Spracherkennung";
+"settings.model.explanation" = "Läuft lokal auf der Neural Engine. Nach dem ersten Download ist kein Netz mehr nötig.";
+
+/* Wellenformen */
+"waveform.trace" = "Spur";
+"waveform.trace.explanation" = "Zeigt die letzten zwei Sekunden. Man sieht auch rückwirkend, ob Ton angekommen ist.";
+"waveform.levels" = "Pegelreihe";
+"waveform.levels.explanation" = "Elf Striche, deren Welle nach rechts läuft. Ruhiger und schmaler, zeigt nur den Moment.";
+
+/* Berechtigungen */
+"permission.microphone" = "Mikrofon";
+"permission.accessibility" = "Bedienungshilfen";
+"permission.inputMonitoring" = "Eingabeüberwachung";
+
+/* Onboarding */
+"onboarding.subtitle" = "Diktieren, lokal, überall im System";
+"onboarding.intro" = "Drei Rechte werden gebraucht, danach läuft alles ohne Nachfragen.";
+"onboarding.microphone.detail" = "Für die Aufnahme. Das Audio verlässt den Rechner nie.";
+"onboarding.accessibility.detail" = "Für das Einfügen am Cursor und die Position der Einfügemarke.";
+"onboarding.inputMonitoring.detail" = "Damit das Tastenkürzel systemweit erkannt wird. Eigener Punkt in den Systemeinstellungen.";
+"onboarding.start" = "Los geht's";
+"onboarding.later" = "Später";
+
+/* Knöpfe und Tasten */
+"button.open" = "Öffnen";
+"button.allow" = "Erlauben";
+"button.openSettings" = "Systemeinstellungen…";
+"hotkey.pressKey" = "Taste drücken…";
+"key.space" = "Leertaste";
+"key.unknown" = "Taste %ld";
+"hotkey.reject.noModifier" = "Ohne Modifier-Taste würde das Kürzel jede normale Eingabe abfangen.";
+"hotkey.reject.escape" = "Escape ist für den Abbruch der Aufnahme reserviert.";
+"hotkey.reject.quit" = "⌘Q beendet Programme.";
+"hotkey.reject.close" = "⌘W schließt Fenster.";
+"hotkey.reject.switchApp" = "⌘Tab wechselt die App.";
+"hotkey.reject.spotlight" = "⌘Leertaste öffnet Spotlight.";
+
+/* Einrichtung */
+"setup.welcome.title" = "Einmal einrichten, dann nie wieder";
+"setup.welcome.body" = "Pegel erkennt Sprache vollständig auf diesem Mac. Dafür wird jetzt einmalig das Sprachmodell geladen. Ohne dieses Modell kann die App nicht diktieren.";
+"setup.welcome.privacy" = "Das ist der einzige Netzzugriff, den Pegel jemals macht. Danach läuft alles offline: kein Konto, keine Cloud, keine Telemetrie.";
+"setup.welcome.size" = "461 MB von Hugging Face, je nach Leitung einige Minuten.";
+"setup.welcome.confirm" = "Modell laden";
+"setup.next" = "Weiter";
+"setup.permissions.title" = "Berechtigungen";
+"setup.install.done" = "Modell ist installiert und bereit";
+"setup.install.failed" = "Der Download ist fehlgeschlagen";
+"setup.install.retry" = "Erneut versuchen";
+"setup.install.retry.hint" = "Bereits geladene Teile bleiben liegen, ein zweiter Versuch macht dort weiter.";
+"setup.install.retry.offline" = "Verbindung herstellen und noch einmal versuchen. Bereits geladene Teile bleiben liegen.";
+"setup.phase.waiting" = "Wartet auf Bestätigung";
+"setup.phase.listing" = "Dateiliste wird geholt";
+"setup.phase.downloading" = "Datei %ld von %ld";
+"setup.phase.downloadingPlain" = "Modell wird geladen";
+"setup.phase.compiling" = "Modell wird für die Neural Engine kompiliert";
+"setup.done.title" = "Pegel ist einsatzbereit";
+"setup.done.body" = "Die App sitzt in der Menüleiste und hat kein eigenes Fenster. Diktiert wird überall dort, wo die Einfügemarke steht.";
+"setup.done.shortcut.label" = "Dein Tastenkürzel";
+"setup.done.shortcut.explanation" = "Kurz drücken startet die Aufnahme und lässt sie laufen, noch einmal drücken beendet sie. Gedrückt halten ist Push-to-talk. Escape verwirft.";
+"setup.done.changeShortcut" = "Kürzel ändern…";
+"setup.done.permissionsMissing" = "Es fehlen noch Berechtigungen. Ohne Bedienungshilfen und Eingabeüberwachung reagiert das Kürzel nicht. Nachholen geht in den Einstellungen.";
+
+/* Installationsfehler */
+"install.error.offline" = "Keine Verbindung zum Netz. Pegel braucht das Netz nur für diesen einen Download.";

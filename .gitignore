@@ -1,0 +1,11 @@
+# Build-Artefakte
+.build/
+build/
+
+# Xcode und SwiftPM, wenn das Paket dort geöffnet wird
+.swiftpm/
+*.xcuserdatad
+DerivedData/
+
+# macOS
+.DS_Store
