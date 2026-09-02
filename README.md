@@ -61,10 +61,10 @@ Pegel does that one thing and nothing else.
 
 ```bash
 brew install --cask hazematic/tap/pegel
-xattr -dr com.apple.quarantine /Applications/Pegel.app
 ```
 
-The second line is needed because the app is not notarised by Apple, see below.
+That is the whole installation: the cask clears the quarantine flag for you, which
+you would otherwise have to do by hand because the app is not notarised.
 `brew upgrade` picks up new versions, and `brew uninstall --zap --cask pegel` removes
 the app together with its settings and the downloaded model.
 
