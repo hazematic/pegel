@@ -60,13 +60,13 @@ Pegel does that one thing and nothing else.
 ### Homebrew
 
 ```bash
-brew install --cask --no-quarantine hazematic/tap/pegel
+brew install --cask hazematic/tap/pegel
+xattr -dr com.apple.quarantine /Applications/Pegel.app
 ```
 
-`--no-quarantine` is needed because the app is not notarised by Apple; without it
-macOS refuses the first launch. `brew upgrade` picks up new versions, and
-`brew uninstall --zap --cask pegel` removes the app together with its settings and the
-downloaded model.
+The second line is needed because the app is not notarised by Apple, see below.
+`brew upgrade` picks up new versions, and `brew uninstall --zap --cask pegel` removes
+the app together with its settings and the downloaded model.
 
 ### Build it yourself
 
