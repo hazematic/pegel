@@ -25,7 +25,8 @@ the audio never leaves the machine.
 
 ## Why it is simple
 
-I tried a lot of dictation apps. Most were either too slow, others were fast but not accurate enough, so you had to constantly correct them manually.
+I tried a lot of dictation apps. Most were either too slow, others were fast but not 
+accurate enough, so you had to constantly correct them manually.
 The rest buried the one thing I wanted in a bundle with a subscription.
 
 Simple here means Pegel has one job and does it reliably. No history, no dictionary
