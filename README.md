@@ -153,9 +153,9 @@ It can be changed in the settings, along with the hold threshold and the appeara
 the pill. There are two waveforms, and the elapsed time can be switched off, which makes
 the pill narrower.
 
-| | Without the time | With the time |
+| | Blank | With elapsed time |
 |---|---|---|
-| **Levels**<br>the present moment, the default | <img src="assets/pill-levels.png" width="145" alt=""> | <img src="assets/pill-levels-time.png" width="188" alt=""> |
+| **Levels**<br>the present moment, default | <img src="assets/pill-levels.png" width="145" alt=""> | <img src="assets/pill-levels-time.png" width="188" alt=""> |
 | **Trail**<br>the last two seconds | <img src="assets/pill-trace.png" width="166" alt=""> | <img src="assets/pill-trace-time.png" width="209" alt=""> |
 
 While recording, the pill sits at the bottom of the screen and follows the microphone
