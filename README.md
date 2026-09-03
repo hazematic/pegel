@@ -11,6 +11,7 @@
   <img alt="macOS 14+" src="https://img.shields.io/badge/macOS-14%2B-1c1c1e">
   <img alt="Apple Silicon" src="https://img.shields.io/badge/Apple%20Silicon-required-1c1c1e">
   <img alt="MIT" src="https://img.shields.io/badge/license-MIT-1c1c1e">
+  <a href="https://buymeacoffee.com/hazematic"><img alt="Buy me a coffee" src="https://img.shields.io/badge/%E2%98%95-buy%20me%20a%20coffee-1c1c1e"></a>
 </p>
 
 <p align="center">
