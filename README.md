@@ -25,9 +25,9 @@ the audio never leaves the machine.
 
 ## Why it is simple
 
-I tried a lot of dictation apps and kept running into the same thing: either they were
-too slow to beat typing, or the one feature I wanted sat inside a bundle I was supposed
-to subscribe to.
+I tried a lot of dictation apps. Most were either too slow to beat typing, or quick but
+loose enough with the words that fixing the text by hand ate the time I had just saved.
+The rest buried the one thing I wanted in a bundle with a subscription.
 
 Simple here means Pegel has one job and does it reliably. No history, no dictionary
 manager, no per-app profiles, no account. I mostly dictate instructions for AI agents,
