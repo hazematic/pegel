@@ -188,142 +188,44 @@ enum IndicatorPreview {
 @MainActor
 enum ReadmeFigure {
 
-    /// Untergrund der Bilder, gleich dem Untergrund, auf dem sie stehen werden.
+    /// Eine einzelne Pille, freigestellt.
     ///
-    /// Die Zahlen sind GitHubs Werte für den Fließtextbereich: Weiß im hellen
-    /// Erscheinungsbild, `#0d1117` im dunklen. Letzteres ist kein neutrales Grau,
-    /// sondern hat einen Blaustich; ein danebenliegender Wert lässt das Bild als
-    /// Kasten auf der Seite erscheinen. Wer das dunkle Erscheinungsbild „Dark
-    /// dimmed" benutzt, sieht die Kante weiterhin, dessen `#22272e` lässt sich
-    /// nicht gleichzeitig treffen.
-    private static func canvas(dark: Bool) -> Color {
-        dark ? Color(red: 13 / 255, green: 17 / 255, blue: 23 / 255) : .white
-    }
-
-    private struct Row: View {
-        let title: String
-        let caption: String
+    /// Ohne Untergrund und ohne Beschriftung: die Bilder stehen in einer Tabelle in
+    /// der README, der Text daneben ist echter Text. Das spart die zweite Fassung für
+    /// das dunkle Erscheinungsbild, denn ein durchsichtiger Rand passt auf jeden
+    /// Untergrund, auch auf die Spielarten von GitHubs dunklem Thema. Nebenbei wird
+    /// die Beschriftung damit auswählbar, vorlesbar und übersetzbar, statt in Pixel
+    /// eingebrannt zu sein.
+    private struct Pill: View {
         let session: SessionState
-        let trace: [Double]
+        let style: WaveformStyle
+        let showsTime: Bool
         let time: TimeInterval
-        let dark: Bool
 
         var body: some View {
             let model = IndicatorModel()
             model.session = session
-            model.level = trace.last ?? 0
-            model.style = .levels
-            model.showsTime = false
-            model.isVisible = true
-            model.recordingStartedAt = Date(timeIntervalSinceNow: -8)
-            model.stateChangedAt = Date(timeIntervalSinceReferenceDate: time - 0.5)
-            model.setTraceForPreview(trace)
-
-            return HStack(spacing: 0) {
-                Text(title)
-                    .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(dark ? Color.white : Color(white: 0.1))
-                    .frame(width: 120, alignment: .leading)
-                Text(caption)
-                    .font(.system(size: 13))
-                    .foregroundStyle(dark ? Color.white.opacity(0.55) : Color(white: 0.45))
-                    .frame(width: 250, alignment: .leading)
-                IndicatorView(model: model, fixedTime: time)
-                Spacer(minLength: 0)
-            }
-            .frame(height: 58)
-        }
-    }
-
-    private struct Figure: View {
-        let dark: Bool
-
-        var body: some View {
-            VStack(alignment: .leading, spacing: 0) {
-                Row(
-                    title: "Recording", caption: "height follows the microphone level",
-                    session: .recording, trace: sample(seed: 0.4), time: 0.18, dark: dark)
-                Row(
-                    title: "Transcribing", caption: "same height, a light runs through",
-                    session: .transcribing, trace: sample(seed: 0.4), time: 0.45, dark: dark)
-                Row(
-                    title: "Discarded", caption: "escape, nothing is inserted",
-                    session: .discarded, trace: sample(seed: 0.4), time: 0.14, dark: dark)
-                Row(
-                    title: "Error", caption: "flashes twice, then stands",
-                    session: .failed("x"), trace: sample(seed: 0.4), time: 0.6, dark: dark)
-            }
-            .padding(.vertical, 14)
-            .padding(.horizontal, 24)
-            .frame(width: 640, alignment: .leading)
-            .background(canvas(dark: dark))
-        }
-
-        private func sample(seed: Double) -> [Double] {
-            (0..<Indicator.traceCapacity).map { index in
-                let t = Double(index) * 0.7 + seed
-                return min(1, max(0.05, 0.5 + 0.35 * sin(t) + 0.2 * sin(t * 2.3)))
-            }
-        }
-    }
-
-    /// Vierfeld: beide Wellenformen, jeweils mit und ohne laufende Zeit.
-    private struct Variants: View {
-        let dark: Bool
-
-        private var label: Color { dark ? Color.white : Color(white: 0.1) }
-        private var caption: Color {
-            dark ? Color.white.opacity(0.55) : Color(white: 0.45)
-        }
-
-        var body: some View {
-            VStack(alignment: .leading, spacing: 18) {
-                HStack(spacing: 0) {
-                    Text("").frame(width: 110, alignment: .leading)
-                    Text("without time")
-                        .font(.system(size: 12)).foregroundStyle(caption)
-                        .frame(width: 200, alignment: .leading)
-                    Text("with time")
-                        .font(.system(size: 12)).foregroundStyle(caption)
-                        .frame(width: 220, alignment: .leading)
-                }
-                row(title: "Levels", subtitle: "default", style: .levels)
-                row(title: "Trail", subtitle: "last two seconds", style: .trace)
-            }
-            .padding(.vertical, 20)
-            .padding(.horizontal, 24)
-            .frame(width: 580, alignment: .leading)
-            .background(canvas(dark: dark))
-        }
-
-        private func row(title: String, subtitle: String, style: WaveformStyle) -> some View {
-            HStack(spacing: 0) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(title).font(.system(size: 13, weight: .semibold))
-                        .foregroundStyle(label)
-                    Text(subtitle).font(.system(size: 11)).foregroundStyle(caption)
-                }
-                .frame(width: 110, alignment: .leading)
-
-                pill(style: style, showsTime: false).frame(width: 200, alignment: .leading)
-                pill(style: style, showsTime: true).frame(width: 220, alignment: .leading)
-            }
-        }
-
-        private func pill(style: WaveformStyle, showsTime: Bool) -> some View {
-            let model = IndicatorModel()
-            model.session = .recording
             model.style = style
             model.showsTime = showsTime
             model.isVisible = true
             model.level = 0.8
             model.recordingStartedAt = Date(timeIntervalSinceNow: -12)
-            model.setTraceForPreview(
-                (0..<Indicator.traceCapacity).map { index in
-                    let t = Double(index) * 0.7 + 0.4
-                    return min(1, max(0.05, 0.5 + 0.35 * sin(t) + 0.2 * sin(t * 2.3)))
-                })
-            return IndicatorView(model: model, fixedTime: 0.18)
+            model.stateChangedAt = Date(timeIntervalSinceReferenceDate: time - 0.5)
+            model.setTraceForPreview(Self.sample)
+
+            // Luft für den Schatten, der unten weiter reicht als oben.
+            return IndicatorView(model: model, fixedTime: time)
+                .padding(.horizontal, 14)
+                .padding(.top, 12)
+                .padding(.bottom, 18)
+        }
+
+        /// Ein Pegelverlauf, der wie gesprochene Sprache aussieht.
+        private static var sample: [Double] {
+            (0..<Indicator.traceCapacity).map { index in
+                let t = Double(index) * 0.7 + 0.4
+                return min(1, max(0.05, 0.5 + 0.35 * sin(t) + 0.2 * sin(t * 2.3)))
+            }
         }
     }
 
@@ -331,29 +233,74 @@ enum ReadmeFigure {
         try FileManager.default.createDirectory(
             at: directory, withIntermediateDirectories: true)
 
-        for dark in [false, true] {
-            let renderer = ImageRenderer(content: Variants(dark: dark))
-            renderer.scale = 3
-            if let image = renderer.nsImage, let tiff = image.tiffRepresentation,
-                let bitmap = NSBitmapImageRep(data: tiff),
-                let png = bitmap.representation(using: .png, properties: [:])
-            {
-                try png.write(
-                    to: directory.appendingPathComponent(
-                        "variants-\(dark ? "dark" : "light").png"))
-            }
+        // Die vier Zustände, alle in der voreingestellten Wellenform.
+        let states: [(String, SessionState, TimeInterval)] = [
+            ("pill-recording", .recording, 0.18),
+            ("pill-transcribing", .transcribing, 0.45),
+            ("pill-discarded", .discarded, 0.14),
+            ("pill-error", .failed("x"), 0.6),
+        ]
+        for (name, session, time) in states {
+            try write(
+                Pill(session: session, style: .levels, showsTime: false, time: time),
+                named: name, to: directory)
         }
 
-        for dark in [false, true] {
-            let renderer = ImageRenderer(content: Figure(dark: dark))
-            renderer.scale = 3
-            guard let image = renderer.nsImage,
-                let tiff = image.tiffRepresentation,
-                let bitmap = NSBitmapImageRep(data: tiff),
-                let png = bitmap.representation(using: .png, properties: [:])
-            else { continue }
-            try png.write(
-                to: directory.appendingPathComponent("states-\(dark ? "dark" : "light").png"))
+        // Beide Wellenformen, jeweils mit und ohne laufende Zeit.
+        for style in WaveformStyle.allCases {
+            for showsTime in [false, true] {
+                try write(
+                    Pill(session: .recording, style: style, showsTime: showsTime, time: 0.18),
+                    named: "pill-\(style.rawValue)\(showsTime ? "-time" : "")",
+                    to: directory)
+            }
         }
+    }
+
+    private static func write(_ view: some View, named name: String, to directory: URL) throws {
+        let renderer = ImageRenderer(content: view)
+        renderer.scale = 3
+        // Ohne das legt der Renderer Weiß unter das Bild und der freigestellte Rand
+        // wäre dahin.
+        renderer.isOpaque = false
+        guard let image = renderer.nsImage,
+            let tiff = image.tiffRepresentation,
+            let bitmap = NSBitmapImageRep(data: tiff),
+            let trimmed = trimmed(bitmap),
+            let png = trimmed.representation(using: .png, properties: [:])
+        else { return }
+        try png.write(to: directory.appendingPathComponent("\(name).png"))
+    }
+
+    /// Schneidet den durchsichtigen Rand weg.
+    ///
+    /// SwiftUI gibt der Pille mehr Fläche, als sie bemalt. In einer Tabellenzelle
+    /// würde dieser Leerraum die Zeilen unnötig hoch machen. Der weiche Schatten
+    /// zählt als bemalt und bleibt deshalb erhalten, er hat ja Deckkraft.
+    private static func trimmed(_ bitmap: NSBitmapImageRep) -> NSBitmapImageRep? {
+        guard let data = bitmap.bitmapData, bitmap.samplesPerPixel == 4 else { return bitmap }
+
+        let width = bitmap.pixelsWide
+        let height = bitmap.pixelsHigh
+        let rowBytes = bitmap.bytesPerRow
+        let pixelBytes = bitmap.bitsPerPixel / 8
+
+        var minX = width, minY = height, maxX = -1, maxY = -1
+        for y in 0..<height {
+            for x in 0..<width {
+                // Ein wenig Toleranz gegen Rundungsreste am Rand.
+                guard data[y * rowBytes + x * pixelBytes + 3] > 2 else { continue }
+                if x < minX { minX = x }
+                if x > maxX { maxX = x }
+                if y < minY { minY = y }
+                if y > maxY { maxY = y }
+            }
+        }
+        guard maxX >= minX, maxY >= minY, let source = bitmap.cgImage else { return bitmap }
+
+        let box = CGRect(
+            x: minX, y: minY, width: maxX - minX + 1, height: maxY - minY + 1)
+        guard let cropped = source.cropping(to: box) else { return bitmap }
+        return NSBitmapImageRep(cgImage: cropped)
     }
 }

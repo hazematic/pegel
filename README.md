@@ -186,23 +186,21 @@ It can be changed in the settings, along with the hold threshold and the appeara
 the pill. There are two waveforms: bars showing the present moment, or a trail of the
 last two seconds. The elapsed time can be switched off, which makes the pill narrower.
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/variants-dark.png">
-    <img src="assets/variants-light.png" width="580" alt="The two waveforms, each with and without the elapsed time">
-  </picture>
-</p>
+| | Without the time | With the time |
+|---|---|---|
+| **Levels**<br>the present moment, the default | <img src="assets/pill-levels.png" width="145" alt=""> | <img src="assets/pill-levels-time.png" width="188" alt=""> |
+| **Trail**<br>the last two seconds | <img src="assets/pill-trace.png" width="166" alt=""> | <img src="assets/pill-trace-time.png" width="209" alt=""> |
 
 While recording, a small dark pill appears at the bottom of the screen showing the
 microphone level, so you can see that sound is actually arriving. You can drag it
 anywhere and it stays there.
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/states-dark.png">
-    <img src="assets/states-light.png" width="640" alt="The four states of the pill: recording, transcribing, discarded and error">
-  </picture>
-</p>
+| State | | |
+|---|---|---|
+| **Recording** | height follows the microphone level | <img src="assets/pill-recording.png" width="145" alt=""> |
+| **Transcribing** | same height, a light runs through | <img src="assets/pill-transcribing.png" width="145" alt=""> |
+| **Discarded** | escape, nothing is inserted | <img src="assets/pill-discarded.png" width="139" alt=""> |
+| **Error** | flashes twice, then stands | <img src="assets/pill-error.png" width="145" alt=""> |
 
 Between two dictations Pegel inserts a space by itself when there is already text in
 front of the cursor. The character before the cursor is read from the actual text
@@ -259,8 +257,9 @@ and no network traffic at all after the initial model download.
 | `UI/IndicatorView.swift` | The waveforms in the pill, all states and curves |
 | `UI/IndicatorPanel.swift` | Non-activating window at the bottom, draggable |
 
-The figures above are not mockups. They are rendered from the same code the app runs,
-so they cannot drift from the real thing:
+The pills above are not mockups. They are rendered from the same code the app runs, so
+they cannot drift from the real thing, and they carry a transparent background so they
+sit right in every theme:
 
 ```bash
 build/Pegel.app/Contents/MacOS/Pegel --export-icons /tmp/pegel-preview
