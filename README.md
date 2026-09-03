@@ -52,9 +52,9 @@ Pegel does that one thing and nothing else.
 
 - macOS 14 or later
 - Apple Silicon. The model runs on the Neural Engine; Intel Macs are not supported.
-- About 1.7 GB of disk space: 461 MB for the model, downloaded on first launch, plus
-  roughly 1.2 GB of Core ML cache that macOS builds when it compiles the model for the
-  Neural Engine.
+- 461 MB of disk space for the model, downloaded on first launch. macOS adds a Core ML
+  cache on top when it compiles the model for the Neural Engine; that one is a few tens
+  of MB after a clean run and grows as new versions of the app are installed.
 
 ## Install
 
@@ -121,8 +121,9 @@ only time Pegel touches the network. The model lands in
 
 ## Uninstall
 
-Dragging the app to the Trash leaves about 1.7 GB behind, because the model and the
-Core ML cache live outside the bundle. If you installed through Homebrew:
+Dragging the app to the Trash leaves the model and the Core ML cache behind, half a
+gigabyte and up, because both live outside the bundle. If you installed through
+Homebrew:
 
 ```bash
 brew uninstall --zap --cask pegel
