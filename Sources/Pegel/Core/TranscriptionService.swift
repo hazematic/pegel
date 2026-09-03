@@ -41,6 +41,47 @@ actor TranscriptionService {
 
     var isReady: Bool { manager != nil }
 
+    /// Räumt die Kompilate früherer Fassungen weg.
+    ///
+    /// Core ML legt beim Kompilieren für die Neural Engine Einträge unter
+    /// `~/Library/Caches/<Bundle-ID>/com.apple.e5rt.e5bundlecache` ab und räumt alte
+    /// nie weg. Ein Satz sind rund 36 MB, aber jede neue Fassung der Programmdatei
+    /// legt einen eigenen an: auf der Entwicklungsmaschine hatten sich so 1,2 GB
+    /// angesammelt.
+    ///
+    /// Geräumt wird ausschließlich, wenn sich die Fassung seit dem letzten Start
+    /// geändert hat, denn dann kompiliert Core ML ohnehin neu und der alte Satz ist
+    /// wertlos. Als Kennung dient die Version zusammen mit dem Änderungsdatum der
+    /// Programmdatei, damit es auch bei Entwicklungsbauten derselben Versionsnummer
+    /// greift. Bei unverändertem Programm passiert nichts, sonst würde jeder Start
+    /// eine Neukompilierung von etwa 40 Sekunden auslösen.
+    nonisolated private static func purgeStaleCompilationCache() {
+        let key = "compiledModelBuild"
+        let version =
+            Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+            ?? "?"
+        let built = (try? Bundle.main.executableURL?.resourceValues(
+            forKeys: [.contentModificationDateKey]))??.contentModificationDate
+        let stamp = "\(version)@\(built?.timeIntervalSince1970.rounded() ?? 0)"
+
+        guard UserDefaults.standard.string(forKey: key) != stamp else { return }
+        defer { UserDefaults.standard.set(stamp, forKey: key) }
+
+        guard let identifier = Bundle.main.bundleIdentifier,
+            let caches = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)
+                .first
+        else { return }
+
+        let cache =
+            caches
+            .appendingPathComponent(identifier)
+            .appendingPathComponent("com.apple.e5rt.e5bundlecache")
+        guard FileManager.default.fileExists(atPath: cache.path) else { return }
+        try? FileManager.default.removeItem(at: cache)
+        Logger(subsystem: "io.github.hazematic.pegel", category: "asr").info(
+            "Kompilate der vorherigen Fassung entfernt")
+    }
+
     /// Lädt das Modell und wärmt es vor.
     ///
     /// Das Warmup ist kein Luxus: Core ML kompiliert die Modelle beim ersten Lauf für
@@ -51,6 +92,9 @@ actor TranscriptionService {
             progress(.ready)
             return
         }
+
+        // Vor dem Laden, sonst träfe es den Eintrag, der gleich entsteht.
+        Self.purgeStaleCompilationCache()
 
         progress(.listing)
         let models = try await AsrModels.downloadAndLoad(
