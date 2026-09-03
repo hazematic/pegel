@@ -37,7 +37,7 @@ if [ -z "$IDENTITY" ]; then
     fi
 fi
 BUNDLE_ID="io.github.hazematic.pegel"
-VERSION="0.1.0"
+VERSION="0.1.1"
 
 cd "$(dirname "$0")"
 echo "→ Baue ($CONFIGURATION)"
