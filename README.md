@@ -20,33 +20,26 @@
 ## What it does
 
 Pegel does one thing. You press a shortcut, you speak, and the words appear at the
-cursor in whatever app you are already working in. There is no window to manage, no
-account, and no upload.
+cursor in whatever app you are already in. Nothing to manage, nothing to sign into, and
+the audio never leaves the machine.
 
-Recognition runs on your Mac, on the Neural Engine, using NVIDIA Parakeet TDT 0.6B v3.
-After the model has been downloaded once, Pegel works without a network connection.
+## Why it is simple
 
-Parakeet covers 25 European languages. It is particularly good at the case that comes
-up constantly in practice and that trips up many other models: English technical terms
-dropped into a sentence in another language.
+I tried a lot of dictation apps and kept running into the same thing: either they were
+too slow to beat typing, or the one feature I wanted sat inside a bundle I was supposed
+to subscribe to.
 
-## Why another dictation app
+Simple here means Pegel has one job and does it reliably. No history, no dictionary
+manager, no per-app profiles, no account. I mostly dictate instructions for AI agents,
+where one spoken sentence saves a typed paragraph, and for that the only thing that
+matters is that it works every single time.
 
-There are a lot of them. I tried a great many and kept hitting the same walls. Too
-slow, so that typing was quicker after all. Not accurate enough, especially on
-technical vocabulary. Or the one thing I wanted was buried under features I never asked
-for, and I was supposed to pay a subscription for the whole bundle.
-
-What I needed was one thing only: speak, get text, at the cursor, fast enough that
-dictating beats typing. Mostly to write instructions for AI agents, where one spoken
-sentence saves a typed paragraph.
-
-After testing a number of models, Parakeet turned out to be the sweet spot. Fast enough
-to feel immediate, small enough to run locally, and accurate enough that you are not
-correcting every second line. It also handles mixed language input, which is where
-several other models produced nonsense.
-
-Pegel does that one thing and nothing else.
+Simple also means one model instead of a picker. I tested a handful and settled on
+NVIDIA Parakeet TDT 0.6B v3. It is quick enough that dictating beats typing, it fits on
+the Neural Engine, and I am not correcting every other line. It covers 25 European
+languages and keeps up when a sentence switches between them, which is where some of
+the others produced nonsense. So there is nothing to choose in the settings, the choice
+is made.
 
 ## Requirements
 
@@ -64,10 +57,10 @@ Pegel does that one thing and nothing else.
 brew install --cask hazematic/tap/pegel
 ```
 
-That is the whole installation: the cask clears the quarantine flag for you, which
-you would otherwise have to do by hand because the app is not notarised.
-`brew upgrade` picks up new versions, and `brew uninstall --zap --cask pegel` removes
-the app together with its settings and the downloaded model.
+That is the whole installation: the cask clears the quarantine flag for you, which you
+would otherwise have to do by hand because the app is not notarised. `brew upgrade`
+picks up new versions, and `brew uninstall --zap --cask pegel` removes the app together
+with its settings and the downloaded model.
 
 ### Build it yourself
 
@@ -83,18 +76,14 @@ yourself are not quarantined, so macOS starts them without complaint. Xcode itse
 not required, but it can open `Package.swift` directly.
 
 Without a certificate of your own the app is signed ad hoc, which works but makes macOS
-treat every rebuild as a different app and ask for the permissions again. A
-self-signed certificate fixes that:
-
-1. Keychain Access, Certificate Assistant, *Create a Certificate*
-2. Type *Code Signing*, self-signed, named `Pegel Local`
-3. `./build-app.sh release` picks it up automatically
+treat every rebuild as a different app and ask for the permissions again. A self-signed
+certificate fixes that: Keychain Access, Certificate Assistant, *Create a Certificate*,
+type *Code Signing*, named `Pegel Local`. The build script picks it up on its own.
 
 ### Use the prebuilt app
 
-Download the ZIP from [Releases](../../releases) and move `Pegel.app` to
-`/Applications`. Because the app is not notarised by Apple, macOS will refuse the first
-launch. Clear the quarantine flag once:
+Download the ZIP from [Releases](../../releases), move `Pegel.app` to `/Applications`
+and clear the quarantine flag once:
 
 ```bash
 xattr -dr com.apple.quarantine /Applications/Pegel.app
@@ -102,42 +91,24 @@ xattr -dr com.apple.quarantine /Applications/Pegel.app
 
 The alternative is System Settings > Privacy & Security, scroll down to Security and
 press Open Anyway after the failed launch. The old trick of right-clicking the app and
-choosing Open no longer works; it was removed in macOS Sequoia.
-
-The quarantine flag is set by whatever the app arrived through, not by the archive. A
-copy over a USB stick, a network share or `scp` never carries it, and then Pegel starts
-without any of this.
+choosing Open no longer works, it was removed in macOS Sequoia. The flag is set by
+whatever the app arrived through, so a copy over a USB stick or a network share never
+carries it and none of this applies.
 
 ## First launch
 
-The speech model is not part of the app. On first launch Pegel does not fetch it on its
-own: a window explains the one-off download of 461 MB and nothing happens until you
-press the button. From there the progress and the three permissions run side by side,
-and the last page shows the shortcut you will be using.
-
-If the download fails there is a retry that picks up where it left off. This is the
-only time Pegel touches the network. The model lands in
-`~/Library/Application Support/FluidAudio/Models/`.
+The model is not part of the app, and Pegel does not fetch it behind your back: a
+window explains the one-off download of 461 MB and nothing happens until you press the
+button. Progress and the three permissions then run side by side, a failed download can
+be retried where it left off, and the last page shows the shortcut you will be using.
+That download is the only time Pegel touches the network.
 
 ## Uninstall
 
-Dragging the app to the Trash leaves the model and the Core ML cache behind, half a
-gigabyte and up, because both live outside the bundle. If you installed through
-Homebrew:
-
-```bash
-brew uninstall --zap --cask pegel
-```
-
-Otherwise run the script in this repository, which lists what it is about to remove and
-asks before it does:
-
-```bash
-./uninstall.sh
-```
-
-Either way the three entries under Privacy & Security remain as leftovers; the script
-clears them with `tccutil`, Homebrew does not.
+The model and the Core ML cache live outside the bundle, so the Trash leaves half a
+gigabyte and up behind. Through Homebrew it is `brew uninstall --zap --cask pegel`,
+otherwise `./uninstall.sh` from this repository, which lists what it will remove and
+asks first. Only the script also clears the three entries under Privacy & Security.
 
 ## Permissions and why they are needed
 
@@ -151,23 +122,19 @@ so here is exactly what each is used for.
 | Accessibility    | Pasting the finished text at the cursor, and reading the single character in front of the cursor to decide whether a space is needed. |
 
 Nothing is logged, stored or transmitted. Audio is held in memory for the length of one
-dictation and discarded afterwards. The source is here; the parts worth checking are
+dictation and discarded afterwards. The parts worth reading are
 `Input/HotkeyMonitor.swift` for the keyboard and `Input/TextInjector.swift` for the
-pasting.
+pasting. Pegel runs without the App Sandbox, since a global event tap and pasting into
+other applications do not work inside it.
 
-Input Monitoring is a separate item in System Settings and is needed in addition to
-Accessibility. If it is missing, the Accessibility switch looks correct and still
-nothing happens. If every switch is on and the shortcut stays dead, the usual cause is
-a stale entry from an earlier build with a different signature:
+Input Monitoring is a separate item in System Settings and is needed on top of
+Accessibility; if it is missing, the Accessibility switch looks right and nothing
+happens anyway. If every switch is on and the shortcut stays dead, the cause is usually
+a stale entry from an earlier build:
 
 ```bash
-tccutil reset Accessibility io.github.hazematic.pegel
-tccutil reset ListenEvent io.github.hazematic.pegel
-tccutil reset Microphone io.github.hazematic.pegel
+tccutil reset All io.github.hazematic.pegel
 ```
-
-Pegel deliberately runs without the App Sandbox. A global event tap and pasting into
-other applications do not work inside it.
 
 ## Using it
 
@@ -183,17 +150,17 @@ Spotlight, `⌃Space` and `⌃⌥Space` to input source switching, `⌘⌥Space`
 search window. If you use Alfred you will want to rebind, since `⌥Space` is its default.
 
 It can be changed in the settings, along with the hold threshold and the appearance of
-the pill. There are two waveforms: bars showing the present moment, or a trail of the
-last two seconds. The elapsed time can be switched off, which makes the pill narrower.
+the pill. There are two waveforms, and the elapsed time can be switched off, which makes
+the pill narrower.
 
 | | Without the time | With the time |
 |---|---|---|
 | **Levels**<br>the present moment, the default | <img src="assets/pill-levels.png" width="145" alt=""> | <img src="assets/pill-levels-time.png" width="188" alt=""> |
 | **Trail**<br>the last two seconds | <img src="assets/pill-trace.png" width="166" alt=""> | <img src="assets/pill-trace-time.png" width="209" alt=""> |
 
-While recording, a small dark pill appears at the bottom of the screen showing the
-microphone level, so you can see that sound is actually arriving. You can drag it
-anywhere and it stays there.
+While recording, the pill sits at the bottom of the screen and follows the microphone
+level, so you can see that sound is actually arriving. You can drag it anywhere and it
+stays there.
 
 | State | | |
 |---|---|---|
@@ -210,63 +177,36 @@ spacing is still right if you typed something or moved the cursor in between.
 ## How fast
 
 Pegel transcribes after you stop speaking rather than while you speak, which avoids the
-visible self corrections of streaming recognition. The wait is short enough that it does
-not register as waiting.
-
-Measured on the machine this was built on, a 16 inch MacBook Pro from 2021 with M1 Pro
-and 16 GB:
+visible self corrections of streaming recognition. Measured on a 16 inch MacBook Pro
+from 2021 with M1 Pro and 16 GB:
 
 | Dictation | Time until the text appears |
 |---|---|
 | 3 seconds | 0.17 s |
 | 71 seconds | 0.72 s |
 
-There is a fixed cost of roughly 0.15 s per dictation; everything beyond that is
-processed at about 125 times realtime. A dictation of half a minute is therefore ready
-in well under half a second. Newer hardware is faster: the published benchmarks for this
-model were measured on an M4 Pro.
-
-Idle cost is 0 % CPU and about 36 MB of memory.
-
-## Privacy
-
-Everything happens on your Mac. There is no account, no telemetry, no crash reporting
-and no network traffic at all after the initial model download.
-
-## Limitations
-
-- Apple Silicon only.
-- Recognition is tuned for German and English. Other European languages are covered by
-  the model but untested here.
-- The app is not notarised, see Install.
+Roughly 0.15 s fixed cost per dictation, everything beyond that at about 125 times
+realtime. Newer hardware is faster; the published benchmarks for this model were
+measured on an M4 Pro. Idle cost is 0 % CPU and about 36 MB of memory.
 
 ## Project layout
 
 | File | Job |
 |---|---|
 | `Core/RecordingController.swift` | State machine, ties everything together |
-| `Core/AudioCapture.swift` | Microphone capture, level, length limit |
-| `Core/TranscriptionService.swift` | Loading, warming up and running Parakeet v3 |
+| `Core/TranscriptionService.swift` | Loading, warming up and running Parakeet |
 | `Input/HotkeyMonitor.swift` | Event tap, toggle, push to talk, escape |
-| `Input/HotkeyBinding.swift` | Shortcut, persistence, keyboard layout resolution |
-| `Input/CaretTracker.swift` | Cursor position with its fallback chain |
 | `Input/TextInjector.swift` | Pasting through the clipboard, then restoring it |
-| `UI/SetupView.swift` | First launch: model download and permissions |
-| `uninstall.sh` | Removes the app, the model and the Core ML cache |
-| `UI/Mark.swift` | The mark, one source for menu bar and app icon |
 | `UI/IndicatorView.swift` | The waveforms in the pill, all states and curves |
-| `UI/IndicatorPanel.swift` | Non-activating window at the bottom, draggable |
 
-The pills above are not mockups. They are rendered from the same code the app runs, so
-they cannot drift from the real thing, and they carry a transparent background so they
-sit right in every theme:
+The pills above are not mockups, they are rendered from the same code the app runs and
+cannot drift from the real thing:
 
 ```bash
 build/Pegel.app/Contents/MacOS/Pegel --export-icons /tmp/pegel-preview
 ```
 
-That writes the icon set, menu bar previews at 16, 18 and 32 pt, and under `indikator/`
-every state of the pill in light and dark with the motion frozen.
+That writes them, the icon set and the menu bar previews.
 
 ## Built with
 
@@ -274,6 +214,10 @@ every state of the pill in light and dark with the motion frozen.
   Apache 2.0
 - [Parakeet TDT 0.6B v3](https://huggingface.co/FluidInference/parakeet-tdt-0.6b-v3-coreml)
   by NVIDIA, converted by FluidInference, CC-BY-4.0
+
+Pegel passes German to the model as a language hint. That only narrows the candidates
+to Latin script, so the other Latin-script languages are unaffected; Greek or Cyrillic
+would need the hint changed.
 
 ## Licence
 
