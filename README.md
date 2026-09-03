@@ -223,3 +223,13 @@ would need the hint changed.
 ## Licence
 
 MIT. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
+
+---
+
+<p align="center">
+  If Pegel saves you time, you can buy me a coffee.
+</p>
+
+<p align="center">
+  <a href="https://buymeacoffee.com/hazematic"><img src="https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=&slug=hazematic&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" alt="Buy me a coffee" height="44"></a>
+</p>
