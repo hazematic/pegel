@@ -188,6 +188,18 @@ enum IndicatorPreview {
 @MainActor
 enum ReadmeFigure {
 
+    /// Untergrund der Bilder, gleich dem Untergrund, auf dem sie stehen werden.
+    ///
+    /// Die Zahlen sind GitHubs Werte für den Fließtextbereich: Weiß im hellen
+    /// Erscheinungsbild, `#0d1117` im dunklen. Letzteres ist kein neutrales Grau,
+    /// sondern hat einen Blaustich; ein danebenliegender Wert lässt das Bild als
+    /// Kasten auf der Seite erscheinen. Wer das dunkle Erscheinungsbild „Dark
+    /// dimmed" benutzt, sieht die Kante weiterhin, dessen `#22272e` lässt sich
+    /// nicht gleichzeitig treffen.
+    private static func canvas(dark: Bool) -> Color {
+        dark ? Color(red: 13 / 255, green: 17 / 255, blue: 23 / 255) : .white
+    }
+
     private struct Row: View {
         let title: String
         let caption: String
@@ -244,7 +256,7 @@ enum ReadmeFigure {
             .padding(.vertical, 14)
             .padding(.horizontal, 24)
             .frame(width: 640, alignment: .leading)
-            .background(dark ? Color(white: 0.07) : Color.white)
+            .background(canvas(dark: dark))
         }
 
         private func sample(seed: Double) -> [Double] {
@@ -281,7 +293,7 @@ enum ReadmeFigure {
             .padding(.vertical, 20)
             .padding(.horizontal, 24)
             .frame(width: 580, alignment: .leading)
-            .background(dark ? Color(white: 0.07) : Color.white)
+            .background(canvas(dark: dark))
         }
 
         private func row(title: String, subtitle: String, style: WaveformStyle) -> some View {
