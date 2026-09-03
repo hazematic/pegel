@@ -2,11 +2,10 @@
   <img src="assets/icon.png" width="88" height="88" alt="">
 </p>
 
-<h1 align="center">Pegel</h1>
-
-<p align="center">
-  A very simple and fast transcription app for macOS.
-</p>
+<h1 align="center">
+  Pegel<br>
+  <sub>A very simple and fast transcription app for macOS.</sub>
+</h1>
 
 <p align="center">
   <img alt="macOS 14+" src="https://img.shields.io/badge/macOS-14%2B-1c1c1e">
@@ -15,7 +14,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/hero.png" width="900" alt="Pegel: the mark in the menu bar, dictated text in the editor, the level pill at the bottom of the screen">
+  <img src="assets/hero.png" width="900" alt="The mark in the menu bar, dictated text in the editor, the level pill at the bottom of the screen">
 </p>
 
 ## What it does
