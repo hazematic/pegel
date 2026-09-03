@@ -10,6 +10,10 @@ struct HotkeyRecorderField: NSViewRepresentable {
 
     @Binding var binding: HotkeyBinding
     var onRejected: (String) -> Void
+    /// Meldet an, solange das Feld auf eine Taste wartet. Der Aufrufer legt damit
+    /// den globalen Tap still, sonst fängt der das bisherige Kürzel ab und startet
+    /// eine Aufnahme, statt dass die Taste hier ankommt.
+    var onCaptureChanged: (Bool) -> Void = { _ in }
 
     func makeNSView(context: Context) -> RecorderView {
         let view = RecorderView()
@@ -20,6 +24,7 @@ struct HotkeyRecorderField: NSViewRepresentable {
                 binding = candidate
             }
         }
+        view.onCaptureChanged = onCaptureChanged
         return view
     }
 
@@ -31,8 +36,15 @@ struct HotkeyRecorderField: NSViewRepresentable {
     final class RecorderView: NSView {
 
         var onCapture: ((HotkeyBinding) -> Void)?
+        var onCaptureChanged: ((Bool) -> Void)?
         var display: String = "" { didSet { needsDisplay = true } }
-        private var isRecording = false { didSet { needsDisplay = true } }
+        private var isRecording = false {
+            didSet {
+                guard isRecording != oldValue else { return }
+                needsDisplay = true
+                onCaptureChanged?(isRecording)
+            }
+        }
 
         override var acceptsFirstResponder: Bool { true }
         override var intrinsicContentSize: NSSize { NSSize(width: 150, height: 26) }
@@ -45,6 +57,13 @@ struct HotkeyRecorderField: NSViewRepresentable {
         override func resignFirstResponder() -> Bool {
             isRecording = false
             return true
+        }
+
+        /// Auch wenn das Feld aus dem Fenster verschwindet, muss der Tap wieder
+        /// scharf werden. Sonst bliebe das Kürzel nach dem Schließen tot.
+        override func viewDidMoveToWindow() {
+            super.viewDidMoveToWindow()
+            if window == nil { isRecording = false }
         }
 
         override func keyDown(with event: NSEvent) {

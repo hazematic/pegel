@@ -88,7 +88,7 @@
 
 /* Setup */
 "setup.welcome.title" = "Set up once, then never again";
-"setup.welcome.body" = "Pegel recognises speech entirely on this Mac. To do that it now downloads the speech model once. Without it the app cannot dictate.";
+"setup.welcome.body" = "Pegel recognises speech entirely on this Mac. To do that it now downloads the speech model once. Without it the app cannot transcribe.";
 "setup.welcome.privacy" = "This is the only network access Pegel ever makes. Everything after it runs offline: no account, no cloud, no telemetry.";
 "setup.welcome.size" = "461 MB from Hugging Face, a few minutes depending on your connection.";
 "setup.welcome.confirm" = "Download model";
@@ -106,9 +106,9 @@
 "setup.phase.compiling" = "Compiling model for the Neural Engine";
 "setup.done.title" = "Pegel is ready";
 "setup.done.body" = "The app lives in the menu bar and has no window of its own. It dictates wherever the insertion point is.";
-"setup.done.shortcut.label" = "Your shortcut";
+"setup.done.shortcut.label" = "Your shortcut, change it here";
 "setup.done.shortcut.explanation" = "A short press starts recording and leaves it running, another press ends it. Holding it down is push-to-talk. Escape discards.";
-"setup.done.changeShortcut" = "Change shortcut…";
+"setup.done.openSettings" = "More settings…";
 "setup.done.permissionsMissing" = "Some permissions are still missing. Without accessibility and input monitoring the shortcut does not respond. You can grant them later in the settings.";
 
 /* Installation errors */

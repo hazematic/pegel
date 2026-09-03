@@ -11,9 +11,10 @@ struct SettingsView: View {
         Form {
             Section(L("settings.section.hotkey")) {
                 LabeledContent(L("settings.hotkey.label")) {
-                    HotkeyRecorderField(binding: $state.binding) { reason in
-                        rejection = reason
-                    }
+                    HotkeyRecorderField(
+                        binding: $state.binding,
+                        onRejected: { reason in rejection = reason },
+                        onCaptureChanged: { controller.setHotkeyCapture($0) })
                     .frame(width: 150, height: 26)
                 }
 

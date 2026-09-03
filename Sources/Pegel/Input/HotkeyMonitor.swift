@@ -30,6 +30,13 @@ final class HotkeyMonitor {
     /// Nur während einer laufenden Aufnahme wird Escape abgefangen und geschluckt.
     var isRecording: Bool = false
 
+    /// Reicht alles unverändert durch, solange gesetzt. Gedacht für das Aufnehmen
+    /// eines neuen Kürzels: dort muss die Taste im Aufnahmefeld ankommen und darf
+    /// nicht hier abgefangen werden.
+    var isSuspended: Bool = false {
+        didSet { if isSuspended { swallowedKeyDown = false } }
+    }
+
     private var tap: CFMachPort?
     private var runLoopSource: CFRunLoopSource?
     /// Ob der letzte Druck dieser Taste als Kürzel geschluckt wurde.
@@ -105,6 +112,8 @@ final class HotkeyMonitor {
 
         let keyCode = event.getIntegerValueField(.keyboardEventKeycode)
         let pass = Unmanaged.passUnretained(event)
+
+        guard !isSuspended else { return pass }
 
         switch type {
         case .keyDown:

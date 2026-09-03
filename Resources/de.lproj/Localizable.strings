@@ -88,7 +88,7 @@
 
 /* Einrichtung */
 "setup.welcome.title" = "Einmal einrichten, dann nie wieder";
-"setup.welcome.body" = "Pegel erkennt Sprache vollständig auf diesem Mac. Dafür wird jetzt einmalig das Sprachmodell geladen. Ohne dieses Modell kann die App nicht diktieren.";
+"setup.welcome.body" = "Pegel erkennt Sprache vollständig auf diesem Mac. Dafür wird jetzt einmalig das Sprachmodell geladen. Ohne dieses Modell kann die App nicht transkribieren.";
 "setup.welcome.privacy" = "Das ist der einzige Netzzugriff, den Pegel jemals macht. Danach läuft alles offline: kein Konto, keine Cloud, keine Telemetrie.";
 "setup.welcome.size" = "461 MB von Hugging Face, je nach Leitung einige Minuten.";
 "setup.welcome.confirm" = "Modell laden";
@@ -106,9 +106,9 @@
 "setup.phase.compiling" = "Modell wird für die Neural Engine kompiliert";
 "setup.done.title" = "Pegel ist einsatzbereit";
 "setup.done.body" = "Die App sitzt in der Menüleiste und hat kein eigenes Fenster. Diktiert wird überall dort, wo die Einfügemarke steht.";
-"setup.done.shortcut.label" = "Dein Tastenkürzel";
+"setup.done.shortcut.label" = "Dein Tastenkürzel, hier änderbar";
 "setup.done.shortcut.explanation" = "Kurz drücken startet die Aufnahme und lässt sie laufen, noch einmal drücken beendet sie. Gedrückt halten ist Push-to-talk. Escape verwirft.";
-"setup.done.changeShortcut" = "Kürzel ändern…";
+"setup.done.openSettings" = "Weitere Einstellungen…";
 "setup.done.permissionsMissing" = "Es fehlen noch Berechtigungen. Ohne Bedienungshilfen und Eingabeüberwachung reagiert das Kürzel nicht. Nachholen geht in den Einstellungen.";
 
 /* Installationsfehler */

@@ -52,7 +52,9 @@ Pegel does that one thing and nothing else.
 
 - macOS 14 or later
 - Apple Silicon. The model runs on the Neural Engine; Intel Macs are not supported.
-- 461 MB of disk space for the model, downloaded on first launch.
+- About 1.7 GB of disk space: 461 MB for the model, downloaded on first launch, plus
+  roughly 1.2 GB of Core ML cache that macOS builds when it compiles the model for the
+  Neural Engine.
 
 ## Install
 
@@ -116,6 +118,25 @@ and the last page shows the shortcut you will be using.
 If the download fails there is a retry that picks up where it left off. This is the
 only time Pegel touches the network. The model lands in
 `~/Library/Application Support/FluidAudio/Models/`.
+
+## Uninstall
+
+Dragging the app to the Trash leaves about 1.7 GB behind, because the model and the
+Core ML cache live outside the bundle. If you installed through Homebrew:
+
+```bash
+brew uninstall --zap --cask pegel
+```
+
+Otherwise run the script in this repository, which lists what it is about to remove and
+asks before it does:
+
+```bash
+./uninstall.sh
+```
+
+Either way the three entries under Privacy & Security remain as leftovers; the script
+clears them with `tccutil`, Homebrew does not.
 
 ## Permissions and why they are needed
 
@@ -232,6 +253,7 @@ and no network traffic at all after the initial model download.
 | `Input/CaretTracker.swift` | Cursor position with its fallback chain |
 | `Input/TextInjector.swift` | Pasting through the clipboard, then restoring it |
 | `UI/SetupView.swift` | First launch: model download and permissions |
+| `uninstall.sh` | Removes the app, the model and the Core ML cache |
 | `UI/Mark.swift` | The mark, one source for menu bar and app icon |
 | `UI/IndicatorView.swift` | The waveforms in the pill, all states and curves |
 | `UI/IndicatorPanel.swift` | Non-activating window at the bottom, draggable |

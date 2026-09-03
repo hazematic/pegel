@@ -62,7 +62,14 @@ final class RecordingController {
     // MARK: - Start
 
     func start() {
-        appState.hotkeyActive = monitor.start()
+        // Nur mit den Tastatur-Rechten. `CGEvent.tapCreate` fragt sie sonst selbst an,
+        // und der Systemdialog stünde dann auf dem Bildschirm, bevor der Nutzer im
+        // Einrichtungsfenster überhaupt etwas bestätigt hat.
+        if Permissions.accessibilityGranted, Permissions.inputMonitoringGranted {
+            appState.hotkeyActive = monitor.start()
+        } else {
+            appState.hotkeyActive = false
+        }
 
         // Liegt das Modell schon im Cache, wird es kommentarlos geladen. Fehlt es,
         // passiert von selbst nichts: der Download braucht die ausdrückliche
@@ -91,6 +98,14 @@ final class RecordingController {
 
     func applyBindingChange() {
         monitor.binding = appState.binding
+    }
+
+    /// Während ein Kürzel aufgenommen wird, darf der globale Tap nicht dazwischenfunken.
+    ///
+    /// Ohne das schluckt er den Druck auf das bisherige Kürzel und startet eine
+    /// Aufnahme, statt dass das Aufnahmefeld die Taste zu sehen bekommt.
+    func setHotkeyCapture(_ capturing: Bool) {
+        monitor.isSuspended = capturing
     }
 
     /// Nach dem Erteilen des Bedienungshilfen-Rechts, ohne Neustart.

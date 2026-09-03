@@ -26,6 +26,8 @@ struct SetupView: View {
     }
 
     @State private var page: Page
+    /// Warum ein aufgenommenes Kürzel abgelehnt wurde.
+    @State private var rejection: String?
     @State private var microphone = Permissions.microphoneGranted
     @State private var accessibility = Permissions.accessibilityGranted
     @State private var inputMonitoring = Permissions.inputMonitoringGranted
@@ -62,6 +64,11 @@ struct SetupView: View {
         }
         .padding(24)
         .frame(width: 480, height: 560)
+        .onChange(of: state.binding) { _, _ in
+            state.persistBinding()
+            controller.applyBindingChange()
+            rejection = nil
+        }
         .onReceive(poll) { _ in
             // Nur nachfragen, was noch fehlt: jede Abfrage ist ein IPC-Aufruf an TCC.
             if !microphone { microphone = Permissions.microphoneGranted }
@@ -257,16 +264,19 @@ struct SetupView: View {
                 Text(L("setup.done.shortcut.label"))
                     .font(.callout)
                     .foregroundStyle(.secondary)
-                Text(state.binding.displayString)
-                    .font(.system(size: 24, weight: .medium))
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 8)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8).fill(.quaternary.opacity(0.5))
-                    )
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8).stroke(.separator)
-                    )
+                // Änderbar direkt hier: wer das Kürzel jetzt anders haben will, soll
+                // dafür nicht in die Einstellungen abbiegen müssen.
+                HotkeyRecorderField(
+                    binding: $state.binding,
+                    onRejected: { rejection = $0 },
+                    onCaptureChanged: { controller.setHotkeyCapture($0) })
+                .frame(width: 190, height: 34)
+                if let rejection {
+                    Text(rejection)
+                        .font(.callout)
+                        .foregroundStyle(.red)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
                 Text(L("setup.done.shortcut.explanation"))
                     .font(.callout)
                     .foregroundStyle(.secondary)
@@ -291,7 +301,8 @@ struct SetupView: View {
             Spacer()
 
             HStack {
-                Button(L("setup.done.changeShortcut")) { openSettings() }
+                Button(L("setup.done.openSettings")) { openSettings() }
+                    .buttonStyle(.link)
                 Spacer()
                 Button(L("onboarding.start")) { onFinish() }
                     .keyboardShortcut(.defaultAction)
