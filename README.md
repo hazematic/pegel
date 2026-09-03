@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/hero.png" width="900" alt="The mark in the menu bar, dictated text in the editor, the level pill at the bottom of the screen">
+  <img src="assets/hero.png" width="100%" alt="The mark in the menu bar, dictated text in the editor, the level pill at the bottom of the screen">
 </p>
 
 ## What it does
