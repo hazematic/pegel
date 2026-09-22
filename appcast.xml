@@ -6,6 +6,17 @@
     <description>Updates for Pegel</description>
     <language>en</language>
     <item>
+      <title>Version 1.0.1</title>
+      <pubDate>Tue, 22 Sep 2026 18:24:58 +0200</pubDate>
+      <sparkle:version>1.0.1</sparkle:version>
+      <sparkle:shortVersionString>1.0.1</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[<ul>
+<li>The licence texts now open in their own window.</li>
+</ul>]]></description>
+      <enclosure url="https://github.com/hazematic/pegel/releases/download/v1.0.1/Pegel-1.0.1.zip" type="application/octet-stream" sparkle:edSignature="HMmzGiQPk0t2b/436NJwf0UAjAPWXwq5gt3PlsDBD48ZEzylRIdgUus4nfn3wS7KjwCHrJnAKLwV7PN8XJFgDg==" length="10879731" />
+    </item>
+    <item>
       <title>Version 1.0.0</title>
       <pubDate>Tue, 22 Sep 2026 17:59:18 +0200</pubDate>
       <sparkle:version>1.0.0</sparkle:version>
