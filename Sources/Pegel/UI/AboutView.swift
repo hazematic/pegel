@@ -4,6 +4,7 @@ import SwiftUI
 struct AboutView: View {
 
     @ObservedObject var updates: UpdateController
+    let showLicences: () -> Void
 
     private static let repository = URL(string: "https://github.com/hazematic/pegel")!
     private static let coffee = URL(string: "https://buymeacoffee.com/hazematic")!
@@ -50,12 +51,8 @@ struct AboutView: View {
                 Text(L("about.licenses.explanation"))
                     .font(.callout)
                     .foregroundStyle(.secondary)
-                Button(L("about.licenses.show")) {
-                    if let folder = Self.licensesFolder {
-                        NSWorkspace.shared.activateFileViewerSelecting([folder])
-                    }
-                }
-                .disabled(Self.licensesFolder == nil)
+                Button(L("about.licenses.show"), action: showLicences)
+                    .disabled(Self.licensesFolder == nil)
             }
         }
         .formStyle(.grouped)
@@ -71,7 +68,7 @@ struct AboutView: View {
     }
 
     /// Placed there by `build-app.sh`; missing under `swift run`.
-    private static var licensesFolder: URL? {
+    static var licensesFolder: URL? {
         guard let url = Bundle.main.resourceURL?.appendingPathComponent("Licenses"),
             FileManager.default.fileExists(atPath: url.path)
         else { return nil }

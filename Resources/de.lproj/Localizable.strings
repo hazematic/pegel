@@ -41,6 +41,7 @@
 /* Fenster */
 "window.settings" = "Einstellungen";
 "window.about" = "Über Pegel";
+"window.licences" = "Lizenzen";
 "window.onboarding" = "Pegel einrichten";
 
 /* Einstellungen */
@@ -169,4 +170,4 @@
 "about.updates.privacy" = "Beim Suchen ruft Pegel eine Datei bei GitHub ab. GitHub sieht dabei deine IP-Adresse, die Pegel- und die macOS-Version. Audio und Text verlassen diesen Mac nie.";
 "about.section.licenses" = "Lizenzen";
 "about.licenses.explanation" = "Pegel steht unter der MIT-Lizenz. Enthalten sind FluidAudio (Apache 2.0) mit seinen Abhängigkeiten. Das Sprachmodell Parakeet TDT 0.6B v3 stammt von NVIDIA, die Core-ML-Fassung von FluidInference, beide unter CC-BY-4.0.";
-"about.licenses.show" = "Lizenztexte im Finder zeigen";
+"about.licenses.show" = "Lizenztexte anzeigen…";

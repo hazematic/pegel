@@ -32,6 +32,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, Obse
     private var settingsWindow: NSWindow?
     private var settingsTabs: NSTabViewController?
     private var aboutWindow: NSWindow?
+    private var licencesWindow: NSWindow?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         // Icon export for the build script.
@@ -126,7 +127,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, Obse
 
     func showAbout() {
         if aboutWindow == nil {
-            let host = NSHostingController(rootView: AboutView(updates: updates))
+            let host = NSHostingController(
+                rootView: AboutView(
+                    updates: updates, showLicences: { [weak self] in self?.showLicences() }))
             host.sizingOptions = .preferredContentSize
             let window = NSWindow(contentViewController: host)
             window.styleMask = [.titled, .closable]
@@ -137,6 +140,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, Obse
             aboutWindow = window
         }
         aboutWindow?.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
+    }
+
+    func showLicences() {
+        if licencesWindow == nil {
+            let host = NSHostingController(rootView: AcknowledgementsView())
+            host.sizingOptions = .preferredContentSize
+            let window = NSWindow(contentViewController: host)
+            window.styleMask = [.titled, .closable]
+            window.title = L("window.licences")
+            window.isReleasedWhenClosed = false
+            window.delegate = self
+            window.center()
+            licencesWindow = window
+        }
+        licencesWindow?.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
     }
 
@@ -177,6 +196,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, Obse
     func windowWillClose(_ notification: Notification) {
         if (notification.object as AnyObject?) === setupWindow { setupWindow = nil }
         if (notification.object as AnyObject?) === aboutWindow { aboutWindow = nil }
+        if (notification.object as AnyObject?) === licencesWindow { licencesWindow = nil }
         if (notification.object as AnyObject?) === settingsWindow {
             settingsWindow = nil
             settingsTabs = nil

@@ -41,6 +41,7 @@
 /* Windows */
 "window.settings" = "Settings";
 "window.about" = "About Pegel";
+"window.licences" = "Licences";
 "window.onboarding" = "Set up Pegel";
 
 /* Settings */
@@ -169,4 +170,4 @@
 "about.updates.privacy" = "To check, Pegel fetches a file from GitHub. GitHub sees your IP address and the Pegel and macOS versions. Audio and text never leave this Mac.";
 "about.section.licenses" = "Licences";
 "about.licenses.explanation" = "Pegel is released under the MIT License. It includes FluidAudio (Apache 2.0) and its dependencies. The speech model Parakeet TDT 0.6B v3 is by NVIDIA, the Core ML conversion by FluidInference, both under CC-BY-4.0.";
-"about.licenses.show" = "Show Licence Texts in Finder";
+"about.licenses.show" = "Show Licence Texts…";
