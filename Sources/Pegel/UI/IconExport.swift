@@ -273,3 +273,68 @@ enum ReadmeFigure {
         return NSBitmapImageRep(cgImage: cropped)
     }
 }
+
+/// Background of the DMG window, at 1x and 2x. English only: Finder shows the image
+/// as is, whatever the system language.
+@MainActor
+enum DMGBackground {
+
+    nonisolated static let size = CGSize(width: 660, height: 400)
+    /// Icon centers, shared with the Finder layout in `build-app.sh`.
+    nonisolated static let appCenter = CGPoint(x: 165, y: 180)
+    nonisolated static let applicationsCenter = CGPoint(x: 495, y: 180)
+
+    private struct Scene: View {
+        var body: some View {
+            ZStack {
+                Color(white: 0.965)
+                Arrow()
+                    .stroke(
+                        LinearGradient(
+                            colors: [PillPalette.standard.levelColor(at: 0),
+                                     PillPalette.standard.levelColor(at: 10)],
+                            startPoint: .leading, endPoint: .trailing),
+                        style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round))
+                VStack(spacing: 6) {
+                    Text("Drag Pegel to Applications.")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundStyle(Color(white: 0.2))
+                    Text("On first launch, allow it under System Settings › Privacy & Security.")
+                        .font(.system(size: 12))
+                        .foregroundStyle(Color(white: 0.45))
+                }
+                .position(x: size.width / 2, y: 330)
+            }
+            .frame(width: size.width, height: size.height)
+        }
+    }
+
+    /// Between the two 128 pt icons, with room for Finder's selection highlight.
+    private struct Arrow: Shape {
+        func path(in rect: CGRect) -> Path {
+            let y = appCenter.y
+            let start = appCenter.x + 88
+            let end = applicationsCenter.x - 88
+            var path = Path()
+            path.move(to: CGPoint(x: start, y: y))
+            path.addLine(to: CGPoint(x: end, y: y))
+            path.move(to: CGPoint(x: end - 14, y: y - 12))
+            path.addLine(to: CGPoint(x: end, y: y))
+            path.addLine(to: CGPoint(x: end - 14, y: y + 12))
+            return path
+        }
+    }
+
+    static func write(to directory: URL) throws {
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        for scale in [1, 2] {
+            let renderer = ImageRenderer(content: Scene().environment(\.colorScheme, .light))
+            renderer.scale = CGFloat(scale)
+            guard let image = renderer.cgImage,
+                let png = NSBitmapImageRep(cgImage: image).representation(using: .png, properties: [:])
+            else { continue }
+            let name = scale == 1 ? "background.png" : "background@2x.png"
+            try png.write(to: directory.appendingPathComponent(name))
+        }
+    }
+}

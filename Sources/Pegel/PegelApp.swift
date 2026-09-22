@@ -42,6 +42,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, Obse
             try? IconExporter.writeIconset(to: target)
             try? IndicatorPreview.write(to: target.appendingPathComponent("indikator"))
             try? ReadmeFigure.write(to: target.appendingPathComponent("readme"))
+            try? DMGBackground.write(to: target.appendingPathComponent("dmg"))
             NSApp.terminate(nil)
             return
         }

@@ -6,14 +6,16 @@
 # code-signing certificate named "Pegel Local".
 set -euo pipefail
 
-# Usage: build-app.sh [configuration] [--zip] [--install]
+# Usage: build-app.sh [configuration] [--zip] [--dmg] [--install]
 CONFIGURATION="release"
 DO_INSTALL=false
 DO_ZIP=false
+DO_DMG=false
 for arg in "$@"; do
     case "$arg" in
         --install) DO_INSTALL=true ;;
         --zip) DO_ZIP=true ;;
+        --dmg) DO_DMG=true ;;
         --*) echo "Unknown argument: $arg" >&2; exit 1 ;;
         *) CONFIGURATION="$arg" ;;
     esac
@@ -93,6 +95,7 @@ PLIST
 echo "→ Rendering icon set"
 ICONSET="$(mktemp -d)/Pegel.iconset"
 "$APP/Contents/MacOS/Pegel" --export-icons "$ICONSET" >/dev/null 2>&1 || true
+DMG_ART="$ICONSET/dmg"
 if [ -d "$ICONSET" ] && [ -n "$(ls -A "$ICONSET" 2>/dev/null)" ]; then
     iconutil -c icns "$ICONSET" -o "$APP/Contents/Resources/Pegel.icns"
 else
@@ -140,6 +143,53 @@ if [ "$DO_ZIP" = true ]; then
     echo "  SHA256: $(shasum -a 256 "$ZIP" | cut -d' ' -f1)"
     # Recipients clear the browser's quarantine flag once:
     #   xattr -dr com.apple.quarantine /Applications/Pegel.app
+fi
+
+# DMG for manual downloads: drag to Applications. The ZIP stays for Sparkle and
+# Homebrew. Finder layout via AppleScript, which may ask to control Finder once.
+if [ "$DO_DMG" = true ]; then
+    DMG="build/Pegel-$VERSION.dmg"
+    STAGE="$(mktemp -d)/Pegel"
+    mkdir -p "$STAGE/.background"
+    ditto "$APP" "$STAGE/Pegel.app"
+    ln -s /Applications "$STAGE/Applications"
+    tiffutil -cathidpicheck "$DMG_ART/background.png" "$DMG_ART/background@2x.png" \
+        -out "$STAGE/.background/background.tiff" >/dev/null
+
+    RW="$(mktemp -d)/Pegel-rw.dmg"
+    hdiutil create -quiet -srcfolder "$STAGE" -volname Pegel -fs HFS+ -format UDRW "$RW"
+    MOUNT="$(hdiutil attach -readwrite -noverify -noautoopen "$RW" | awk -F'\t' '/\/Volumes\//{print $NF}')"
+    DISK="$(basename "$MOUNT")"
+
+    # Window 660 × 400 plus title bar; icon centers match DMGBackground.
+    osascript <<APPLESCRIPT >/dev/null
+tell application "Finder"
+    tell disk "$DISK"
+        open
+        set current view of container window to icon view
+        set toolbar visible of container window to false
+        set statusbar visible of container window to false
+        set bounds of container window to {200, 120, 860, 548}
+        set viewOptions to icon view options of container window
+        set arrangement of viewOptions to not arranged
+        set icon size of viewOptions to 128
+        set text size of viewOptions to 13
+        set background picture of viewOptions to file ".background:background.tiff"
+        set position of item "Pegel.app" of container window to {165, 180}
+        set position of item "Applications" of container window to {495, 180}
+        update without registering applications
+        delay 1
+        close
+    end tell
+end tell
+APPLESCRIPT
+
+    sync
+    hdiutil detach -quiet "$MOUNT"
+    rm -f "$DMG"
+    hdiutil convert -quiet "$RW" -format UDZO -imagekey zlib-level=9 -o "$DMG"
+    rm -f "$RW"
+    echo "✓ $DMG"
 fi
 
 # Same path every time: granted permissions are tied to it.

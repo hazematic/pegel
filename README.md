@@ -84,8 +84,9 @@ type *Code Signing*, named `Pegel Local`. The build script picks it up on its ow
 
 ### Use the prebuilt app
 
-Download the ZIP from [Releases](../../releases), move `Pegel.app` to `/Applications`
-and clear the quarantine flag once:
+Download the DMG from [Releases](../../releases), open it and drag Pegel to
+Applications. Because the app is not notarised, macOS refuses the first launch; clear
+the quarantine flag once:
 
 ```bash
 xattr -dr com.apple.quarantine /Applications/Pegel.app
