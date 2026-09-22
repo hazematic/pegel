@@ -5,5 +5,19 @@
     <link>https://github.com/hazematic/pegel</link>
     <description>Updates for Pegel</description>
     <language>en</language>
+    <item>
+      <title>Version 1.0.0</title>
+      <pubDate>Tue, 22 Sep 2026 17:59:18 +0200</pubDate>
+      <sparkle:version>1.0.0</sparkle:version>
+      <sparkle:shortVersionString>1.0.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[<ul>
+<li>Transcribe an audio file from the menu; the text goes to the clipboard.</li>
+<li>The pill follows the caret's screen and remembers a position per screen.</li>
+<li>Fixed microphone choice, six colour palettes, settings with a live preview.</li>
+<li>Fixed: the first dictation after a pause sometimes recorded nothing.</li>
+</ul>]]></description>
+      <enclosure url="https://github.com/hazematic/pegel/releases/download/v1.0.0/Pegel-1.0.0.zip" type="application/octet-stream" sparkle:edSignature="KEJYS0vslS88o3aEomNtWgHFb5fuB89QpkU5ON2R96QikOyWeKhX1VKjm7RZmIuXtTnYGpA+SQeIzFTKi//WCw==" length="10873357" />
+    </item>
   </channel>
 </rss>
