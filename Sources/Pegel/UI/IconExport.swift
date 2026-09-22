@@ -1,17 +1,12 @@
 import AppKit
 import SwiftUI
 
-/// Das App-Icon: dieselbe Bildmarke, nur größer.
-///
-/// Wird nicht als Bitmap gepflegt, sondern aus derselben `PegelMark` gerendert,
-/// die auch Menüleiste und Indikator benutzen. Eine Formänderung schlägt damit
-/// überall gleichzeitig durch.
+/// The app icon, rendered from the same `PegelMark` as the menu bar and indicator.
 struct AppIcon: View {
     var body: some View {
         GeometryReader { geometry in
             let side = min(geometry.size.width, geometry.size.height)
-            // macOS-Icons sitzen nicht randfüllend im Rahmen, sondern mit Luft
-            // ringsum. 0.82 entspricht dem Verhältnis der Systemsymbole.
+            // macOS icons sit inset in their frame; 0.82 matches the system symbols.
             let plate = side * 0.82
             ZStack {
                 RoundedRectangle(cornerRadius: plate * 0.2237, style: .continuous)
@@ -27,7 +22,6 @@ struct AppIcon: View {
 
 enum IconExporter {
 
-    /// Größen, die `iconutil` für ein vollständiges Iconset erwartet.
     private static let variants: [(name: String, points: CGFloat, scale: CGFloat)] = [
         ("icon_16x16", 16, 1), ("icon_16x16@2x", 16, 2),
         ("icon_32x32", 32, 1), ("icon_32x32@2x", 32, 2),
@@ -58,8 +52,7 @@ enum IconExporter {
         try writeMarkPreview(to: directory)
     }
 
-    /// Die nackte Marke in Menüleistengrößen, hell und dunkel. Dient der Prüfung,
-    /// ob die Form bei 16 Punkt noch trägt.
+    /// Menu bar sizes, light and dark, to check the shape still reads at 16 pt.
     @MainActor
     private static func writeMarkPreview(to directory: URL) throws {
         for size in [16.0, 18.0, 32.0] as [CGFloat] {
@@ -89,14 +82,10 @@ enum IconExporter {
     }
 }
 
-/// Vorschau der Pille als Bildfolge.
-///
-/// Dient der Abnahme des Designs: die Zustände lassen sich sonst nur durch echtes
-/// Diktieren betrachten. Die Bewegung wird dafür auf feste Zeitpunkte eingefroren.
+/// Pill states as still images for design review, motion frozen at fixed times.
 @MainActor
 enum IndicatorPreview {
 
-    /// Untergrund wie im Entwurf: die Kapsel muss über Hellem wie Dunklem tragen.
     private struct Scene: View {
         let session: SessionState
         let trace: [Double]
@@ -123,7 +112,6 @@ enum IndicatorPreview {
         }
     }
 
-    /// Ein Pegelverlauf, der wie gesprochene Sprache aussieht.
     private static func sampleTrace(seed: Double) -> [Double] {
         (0..<Indicator.traceCapacity).map { index in
             let t = Double(index) * 0.7 + seed
@@ -179,23 +167,12 @@ enum IndicatorPreview {
     }
 }
 
-
-/// Zustandsgrafik für die README.
-///
-/// Wird aus demselben Code gerendert, den die App benutzt, und kann deshalb nicht vom
-/// echten Aussehen abweichen. Das ist der Vorteil gegenüber einem Export aus dem
-/// Designprojekt, der bei jeder Änderung nachgezogen werden müsste.
+/// README figures, rendered from the app's own code so they can't drift.
 @MainActor
 enum ReadmeFigure {
 
-    /// Eine einzelne Pille, freigestellt.
-    ///
-    /// Ohne Untergrund und ohne Beschriftung: die Bilder stehen in einer Tabelle in
-    /// der README, der Text daneben ist echter Text. Das spart die zweite Fassung für
-    /// das dunkle Erscheinungsbild, denn ein durchsichtiger Rand passt auf jeden
-    /// Untergrund, auch auf die Spielarten von GitHubs dunklem Thema. Nebenbei wird
-    /// die Beschriftung damit auswählbar, vorlesbar und übersetzbar, statt in Pixel
-    /// eingebrannt zu sein.
+    /// Transparent, no labels: the README places them in a table next to real text,
+    /// which works on light and dark GitHub themes alike.
     private struct Pill: View {
         let session: SessionState
         let style: WaveformStyle
@@ -213,14 +190,13 @@ enum ReadmeFigure {
             model.stateChangedAt = Date(timeIntervalSinceReferenceDate: time - 0.5)
             model.setTraceForPreview(Self.sample)
 
-            // Luft für den Schatten, der unten weiter reicht als oben.
+            // Room for the shadow, which reaches further down.
             return IndicatorView(model: model, fixedTime: time)
                 .padding(.horizontal, 14)
                 .padding(.top, 12)
                 .padding(.bottom, 18)
         }
 
-        /// Ein Pegelverlauf, der wie gesprochene Sprache aussieht.
         private static var sample: [Double] {
             (0..<Indicator.traceCapacity).map { index in
                 let t = Double(index) * 0.7 + 0.4
@@ -233,7 +209,6 @@ enum ReadmeFigure {
         try FileManager.default.createDirectory(
             at: directory, withIntermediateDirectories: true)
 
-        // Die vier Zustände, alle in der voreingestellten Wellenform.
         let states: [(String, SessionState, TimeInterval)] = [
             ("pill-recording", .recording, 0.18),
             ("pill-transcribing", .transcribing, 0.45),
@@ -246,7 +221,6 @@ enum ReadmeFigure {
                 named: name, to: directory)
         }
 
-        // Beide Wellenformen, jeweils mit und ohne laufende Zeit.
         for style in WaveformStyle.allCases {
             for showsTime in [false, true] {
                 try write(
@@ -260,8 +234,7 @@ enum ReadmeFigure {
     private static func write(_ view: some View, named name: String, to directory: URL) throws {
         let renderer = ImageRenderer(content: view)
         renderer.scale = 3
-        // Ohne das legt der Renderer Weiß unter das Bild und der freigestellte Rand
-        // wäre dahin.
+        // Otherwise the renderer adds a white background.
         renderer.isOpaque = false
         guard let image = renderer.nsImage,
             let tiff = image.tiffRepresentation,
@@ -272,11 +245,7 @@ enum ReadmeFigure {
         try png.write(to: directory.appendingPathComponent("\(name).png"))
     }
 
-    /// Schneidet den durchsichtigen Rand weg.
-    ///
-    /// SwiftUI gibt der Pille mehr Fläche, als sie bemalt. In einer Tabellenzelle
-    /// würde dieser Leerraum die Zeilen unnötig hoch machen. Der weiche Schatten
-    /// zählt als bemalt und bleibt deshalb erhalten, er hat ja Deckkraft.
+    /// Trims the transparent margin; the shadow counts as painted and stays.
     private static func trimmed(_ bitmap: NSBitmapImageRep) -> NSBitmapImageRep? {
         guard let data = bitmap.bitmapData, bitmap.samplesPerPixel == 4 else { return bitmap }
 
@@ -288,7 +257,7 @@ enum ReadmeFigure {
         var minX = width, minY = height, maxX = -1, maxY = -1
         for y in 0..<height {
             for x in 0..<width {
-                // Ein wenig Toleranz gegen Rundungsreste am Rand.
+                // Tolerance for rounding residue at the edge.
                 guard data[y * rowBytes + x * pixelBytes + 3] > 2 else { continue }
                 if x < minX { minX = x }
                 if x > maxX { maxX = x }

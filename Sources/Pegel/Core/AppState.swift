@@ -1,7 +1,6 @@
 import Foundation
 import SwiftUI
 
-/// Was die App gerade tut. Treibt Indikator, Menüleistensymbol und Menütexte.
 enum SessionState: Equatable {
     case preparing(String)
     case ready
@@ -19,13 +18,8 @@ enum SessionState: Equatable {
     }
 }
 
-/// Wo die einmalige Einrichtung des Modells steht.
-///
-/// Getrennt von `SessionState`, weil beide unterschiedliche Fragen beantworten:
-/// `SessionState` treibt Pille und Menüleistensymbol und braucht dort nur eine kurze
-/// Zeile, das Einrichtungsfenster braucht Bruchteil, Phase und Fehlergrund.
+/// Separate from `SessionState`: setup needs fraction, phase and failure reason.
 enum ModelInstall: Equatable {
-    /// Modell fehlt, der Nutzer hat den Download noch nicht bestätigt.
     case waitingForConsent
     case listing
     case downloading(fraction: Double, completedFiles: Int, totalFiles: Int)
@@ -33,11 +27,9 @@ enum ModelInstall: Equatable {
     case loading
     case warmingUp
     case ready
-    /// `offline` unterscheidet fehlendes Netz vom Serverfehler: der Nutzer muss in
-    /// den beiden Fällen etwas anderes tun.
+    /// `offline` needs a different action from the user than a server error.
     case failed(reason: String, offline: Bool)
 
-    /// Ob gerade etwas läuft, das man nicht zweimal anstoßen darf.
     var isRunning: Bool {
         switch self {
         case .waitingForConsent, .ready, .failed: return false
@@ -45,8 +37,7 @@ enum ModelInstall: Equatable {
         }
     }
 
-    /// Bruchteil für den Balken. Nach dem Download bleibt er voll stehen, die
-    /// Beschriftung erklärt derweil, woran noch gearbeitet wird.
+    /// Stays full after the download while the label explains what is still running.
     var fraction: Double {
         switch self {
         case .waitingForConsent, .listing: return 0
@@ -60,20 +51,43 @@ enum ModelInstall: Equatable {
 @MainActor
 final class AppState: ObservableObject {
     @Published var session: SessionState = .preparing(L("preparing.loading"))
-    /// Stand der einmaligen Modell-Installation.
     @Published var install: ModelInstall = .waitingForConsent
-    /// Mikrofonpegel 0...1, nur während der Aufnahme aktuell.
     @Published var level: Double = 0
     @Published var binding: HotkeyBinding = HotkeyBinding.load()
     @Published var lastTranscript: String = ""
-    /// Letzter vorübergehender Fehler, nur zur Anzeige im Menü.
+    /// nil when idle or the file is too short for FluidAudio to report progress.
+    @Published var fileProgress: Double?
     @Published var lastError: String?
-    /// Ob der globale Event-Tap steht. Ohne Bedienungshilfen-Recht bleibt er aus.
     @Published var hotkeyActive: Bool = false
-    /// Ab wie vielen Sekunden Halten als Push-to-talk statt als Umschalten gilt.
+    /// Hold duration in seconds that counts as push-to-talk.
     @Published var pushToTalkThreshold: Double = UserDefaults.standard.pttThreshold
     @Published var waveformStyle: WaveformStyle = .load()
     @Published var indicatorShowsTime: Bool = UserDefaults.standard.indicatorShowsTime
+    @Published var palette: PillPalette = .load()
+    /// nil means system default.
+    @Published var inputDeviceUID: String? = UserDefaults.standard.inputDeviceUID
+    @Published var inputDevices: [AudioInputDevice] = []
+    @Published var defaultInputDevice: AudioInputDevice?
+
+    var effectiveInputDevice: AudioInputDevice? {
+        if let uid = inputDeviceUID,
+            let chosen = inputDevices.first(where: { $0.uid == uid })
+        {
+            return chosen
+        }
+        return defaultInputDevice
+    }
+
+    var inputDeviceMissing: Bool {
+        guard let uid = inputDeviceUID else { return false }
+        return !inputDevices.contains { $0.uid == uid }
+    }
+
+    /// Stored in state so HAL calls don't run on every view update.
+    func refreshInputDevices() {
+        inputDevices = AudioDevices.inputs()
+        defaultInputDevice = AudioDevices.defaultInput
+    }
 
     func persistBinding() {
         binding.save()
@@ -83,8 +97,13 @@ final class AppState: ObservableObject {
         UserDefaults.standard.pttThreshold = pushToTalkThreshold
     }
 
+    func persistInputDevice() {
+        UserDefaults.standard.inputDeviceUID = inputDeviceUID
+    }
+
     func persistAppearance() {
         waveformStyle.save()
+        palette.save()
         UserDefaults.standard.indicatorShowsTime = indicatorShowsTime
     }
 
@@ -92,6 +111,13 @@ final class AppState: ObservableObject {
 
 extension UserDefaults {
     private static let pttKey = "pushToTalkThresholdSeconds"
+    private static let inputDeviceKey = "inputDeviceUID"
+
+    /// The UID, not the `AudioDeviceID`, which changes on every restart.
+    var inputDeviceUID: String? {
+        get { string(forKey: Self.inputDeviceKey) }
+        set { set(newValue, forKey: Self.inputDeviceKey) }
+    }
 
     var pttThreshold: Double {
         get {

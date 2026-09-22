@@ -3,15 +3,10 @@ import FluidAudio
 import Foundation
 import os
 
-/// Kapselt Parakeet TDT 0.6B v3 über FluidAudio.
-///
-/// Ein einziges Modell, keine Auswahl. Läuft lokal auf der Neural Engine; nach dem
-/// ersten Download ist kein Netz mehr nötig.
+/// Parakeet TDT 0.6B v3 via FluidAudio, running locally on the Neural Engine.
 actor TranscriptionService {
 
-    /// Wo die Vorbereitung gerade steht. Feiner als nur ein Prozentwert, weil die
-    /// CoreML-Kompilierung am Ende Minuten ohne sichtbaren Zuwachs kostet: ein
-    /// stehender Balken ohne Erklärung sieht wie ein Hänger aus.
+    /// Finer than a percentage: Core ML compilation takes minutes without visible progress.
     enum Preparation: Equatable {
         case listing
         case downloading(fraction: Double, completedFiles: Int, totalFiles: Int)
@@ -21,11 +16,7 @@ actor TranscriptionService {
         case ready
     }
 
-    /// Ob das Modell schon im Cache liegt.
-    ///
-    /// Bewusst aus dem Dateizustand abgeleitet und nicht als Flag in `UserDefaults`
-    /// gemerkt: wer den Modellordner löscht, bekommt damit korrekt wieder die
-    /// Einrichtung, ein Flag würde in dem Fall lügen.
+    /// Derived from the files, not a stored flag, so deleting the model folder brings back setup.
     nonisolated static var isModelInstalled: Bool {
         AsrModels.modelsExist(at: AsrModels.defaultCacheDirectory(for: .v3), version: .v3)
     }
@@ -34,27 +25,13 @@ actor TranscriptionService {
     private let converter = AudioConverter()
     private let log = Logger(subsystem: "io.github.hazematic.pegel", category: "asr")
 
-    /// Skript-Hinweis für v3. Filtert Kandidaten aus fremden Schriftsystemen heraus.
-    /// Englische Fachbegriffe im deutschen Satz bleiben unberührt, weil beide Sprachen
-    /// lateinisch schreiben.
+    /// Filters out candidates from other scripts; English terms in German stay intact.
     private let languageHint: Language = .german
 
     var isReady: Bool { manager != nil }
 
-    /// Räumt die Kompilate früherer Fassungen weg.
-    ///
-    /// Core ML legt beim Kompilieren für die Neural Engine Einträge unter
-    /// `~/Library/Caches/<Bundle-ID>/com.apple.e5rt.e5bundlecache` ab und räumt alte
-    /// nie weg. Ein Satz sind rund 36 MB, aber jede neue Fassung der Programmdatei
-    /// legt einen eigenen an: auf der Entwicklungsmaschine hatten sich so 1,2 GB
-    /// angesammelt.
-    ///
-    /// Geräumt wird ausschließlich, wenn sich die Fassung seit dem letzten Start
-    /// geändert hat, denn dann kompiliert Core ML ohnehin neu und der alte Satz ist
-    /// wertlos. Als Kennung dient die Version zusammen mit dem Änderungsdatum der
-    /// Programmdatei, damit es auch bei Entwicklungsbauten derselben Versionsnummer
-    /// greift. Bei unverändertem Programm passiert nichts, sonst würde jeder Start
-    /// eine Neukompilierung von etwa 40 Sekunden auslösen.
+    /// Removes Core ML compilation caches of previous builds (~36 MB each, never cleaned
+    /// by the system). Only when the build changed, since that recompiles anyway (~40 s).
     nonisolated private static func purgeStaleCompilationCache() {
         let key = "compiledModelBuild"
         let version =
@@ -79,21 +56,17 @@ actor TranscriptionService {
         guard FileManager.default.fileExists(atPath: cache.path) else { return }
         try? FileManager.default.removeItem(at: cache)
         Logger(subsystem: "io.github.hazematic.pegel", category: "asr").info(
-            "Kompilate der vorherigen Fassung entfernt")
+            "Removed compiled models of the previous build")
     }
 
-    /// Lädt das Modell und wärmt es vor.
-    ///
-    /// Das Warmup ist kein Luxus: Core ML kompiliert die Modelle beim ersten Lauf für
-    /// die Neural Engine, und diese Sekunden würden sonst im ersten echten Diktat
-    /// anfallen.
+    /// The warmup moves the first-run Core ML compilation out of the first dictation.
     func prepare(progress: @escaping @Sendable (Preparation) -> Void) async throws {
         guard manager == nil else {
             progress(.ready)
             return
         }
 
-        // Vor dem Laden, sonst träfe es den Eintrag, der gleich entsteht.
+        // Before loading, or this would hit the entry about to be created.
         Self.purgeStaleCompilationCache()
 
         progress(.listing)
@@ -122,13 +95,10 @@ actor TranscriptionService {
         _ = try? await transcribe(samples: [Float](repeating: 0, count: 8_000), sampleRate: 16_000)
 
         progress(.ready)
-        log.info("Parakeet TDT v3 bereit")
+        log.info("Parakeet TDT v3 ready")
     }
 
-    /// Transkribiert eine abgeschlossene Aufnahme.
-    ///
-    /// Der Decoder-Zustand wird pro Aufruf frisch angelegt: jedes Diktat ist eine
-    /// eigene Äußerung und soll keinen Kontext aus dem vorherigen mitschleppen.
+    /// Fresh decoder state per call: each dictation is its own utterance.
     func transcribe(samples: [Float], sampleRate: Double) async throws -> String {
         guard let manager else { throw ServiceError.notReady }
         guard !samples.isEmpty else { return "" }
@@ -146,13 +116,54 @@ actor TranscriptionService {
             prepared, decoderState: &decoderState, language: languageHint)
         let elapsed = Date().timeIntervalSince(started)
 
-        // Echtzeitfaktor auf dieser Maschine protokollieren. Fremde Benchmarks taugen
-        // nicht als Zusage: die veröffentlichten Zahlen stammen von deutlich neuerer
-        // Hardware.
+        // Real-time factor on this machine; published benchmarks come from newer hardware.
         let audioSeconds = Double(prepared.count) / 16_000
         if elapsed > 0 {
             log.info(
-                "Transkribiert: \(audioSeconds, format: .fixed(precision: 1)) s Audio in \(elapsed, format: .fixed(precision: 2)) s, Faktor \(audioSeconds / elapsed, format: .fixed(precision: 0))x"
+                "Transcribed: \(audioSeconds, format: .fixed(precision: 1)) s of audio in \(elapsed, format: .fixed(precision: 2)) s, factor \(audioSeconds / elapsed, format: .fixed(precision: 0))x"
+            )
+        }
+        return result.text.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    /// FluidAudio handles decoding, resampling and chunking; large files stream from disk.
+    /// - Parameter progress: 0...1, only for files over 15 s.
+    func transcribe(
+        fileAt url: URL, progress: @escaping @Sendable (Double) -> Void
+    ) async throws -> String {
+        guard let manager else { throw ServiceError.notReady }
+
+        let duration: TimeInterval
+        do {
+            let file = try AVAudioFile(forReading: url)
+            duration = Double(file.length) / file.processingFormat.sampleRate
+        } catch {
+            log.error("File unreadable: \(error.localizedDescription)")
+            throw ServiceError.unreadableFile(url.lastPathComponent)
+        }
+        guard duration >= 0.25 else { throw ServiceError.tooShort }
+
+        // Short files never finish a progress session, and the open stream would leak into
+        // the next long dictation.
+        var watcher: Task<Void, Never>?
+        if duration > 15 {
+            let stream = await manager.transcriptionProgressStream
+            watcher = Task {
+                do {
+                    for try await value in stream { progress(value) }
+                } catch {}
+            }
+        }
+        defer { watcher?.cancel() }
+
+        var decoderState = try TdtDecoderState(decoderLayers: await manager.decoderLayerCount)
+        let started = Date()
+        let result = try await manager.transcribe(
+            url, decoderState: &decoderState, language: languageHint)
+        let elapsed = Date().timeIntervalSince(started)
+        if elapsed > 0 {
+            log.info(
+                "File transcribed: \(duration, format: .fixed(precision: 1)) s of audio in \(elapsed, format: .fixed(precision: 2)) s, factor \(duration / elapsed, format: .fixed(precision: 0))x"
             )
         }
         return result.text.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -160,10 +171,14 @@ actor TranscriptionService {
 
     enum ServiceError: LocalizedError {
         case notReady
+        case unreadableFile(String)
+        case tooShort
 
         var errorDescription: String? {
             switch self {
             case .notReady: return L("error.notReady")
+            case .unreadableFile(let name): return L("error.unreadableFile", name)
+            case .tooShort: return L("error.tooShort")
             }
         }
     }

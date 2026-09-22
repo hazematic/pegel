@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SettingsView: View {
+struct GeneralSettingsView: View {
 
     @ObservedObject var state: AppState
     let controller: RecordingController
@@ -11,11 +11,16 @@ struct SettingsView: View {
         Form {
             Section(L("settings.section.hotkey")) {
                 LabeledContent(L("settings.hotkey.label")) {
-                    HotkeyRecorderField(
-                        binding: $state.binding,
-                        onRejected: { reason in rejection = reason },
-                        onCaptureChanged: { controller.setHotkeyCapture($0) })
-                    .frame(width: 150, height: 26)
+                    VStack(spacing: 4) {
+                        HotkeyRecorderField(
+                            binding: $state.binding,
+                            onRejected: { reason in rejection = reason },
+                            onCaptureChanged: { controller.setHotkeyCapture($0) })
+                        .frame(width: 220, height: 38)
+                        Text(L("hotkey.clickToChange"))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                 }
 
                 if let rejection {
@@ -44,21 +49,38 @@ struct SettingsView: View {
                 }
             }
 
-            Section(L("settings.section.appearance")) {
-                Picker(L("settings.waveform"), selection: $state.waveformStyle) {
-                    ForEach(WaveformStyle.allCases, id: \.self) { style in
-                        Text(style.label).tag(style)
+            Section(L("settings.section.audio")) {
+                Picker(L("settings.input.label"), selection: $state.inputDeviceUID) {
+                    Text(L("settings.input.systemDefault")).tag(String?.none)
+                    ForEach(state.inputDevices) { device in
+                        Text(device.name).tag(String?.some(device.uid))
                     }
                 }
-                .pickerStyle(.radioGroup)
 
-                Text(state.waveformStyle.explanation)
-                    .font(.callout)
-                    .foregroundStyle(.secondary)
+                if let device = state.effectiveInputDevice {
+                    // The only place that shows which device the system default resolves to.
+                    Text(L("settings.input.current", device.summary))
+                        .font(.callout)
+                        .foregroundStyle(.secondary)
 
-                Toggle(L("settings.showTime"), isOn: $state.indicatorShowsTime)
+                    if device.isNarrowband {
+                        Text(L("settings.input.narrowband"))
+                            .font(.callout)
+                            .foregroundStyle(.orange)
+                    }
+                } else {
+                    Text(L("settings.input.none"))
+                        .font(.callout)
+                        .foregroundStyle(.orange)
+                }
 
-                Text(L("settings.showTime.explanation"))
+                if state.inputDeviceMissing {
+                    Text(L("settings.input.missing"))
+                        .font(.callout)
+                        .foregroundStyle(.orange)
+                }
+
+                Text(L("settings.input.explanation"))
                     .font(.callout)
                     .foregroundStyle(.secondary)
             }
@@ -86,7 +108,8 @@ struct SettingsView: View {
             }
         }
         .formStyle(.grouped)
-        .frame(minWidth: 460, minHeight: 420)
+        .frame(width: SettingsLayout.width, height: 640)
+        .onAppear { state.refreshInputDevices() }
         .onChange(of: state.binding) { _, _ in
             state.persistBinding()
             controller.applyBindingChange()
@@ -95,9 +118,66 @@ struct SettingsView: View {
         .onChange(of: state.pushToTalkThreshold) { _, _ in
             state.persistThreshold()
         }
+        .onChange(of: state.inputDeviceUID) { _, _ in state.persistInputDevice() }
+    }
+}
+
+struct AppearanceSettingsView: View {
+
+    @ObservedObject var state: AppState
+
+    var body: some View {
+        Form {
+            Section {
+                PillPreview(state: state)
+            }
+
+            Section {
+                Picker(L("settings.waveform"), selection: $state.waveformStyle) {
+                    ForEach(WaveformStyle.allCases, id: \.self) { style in
+                        Text(style.label).tag(style)
+                    }
+                }
+                .pickerStyle(.radioGroup)
+
+                Text(state.waveformStyle.explanation)
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+
+                LabeledContent(L("settings.palette")) {
+                    HStack(spacing: 8) {
+                        ForEach(PillPalette.allCases, id: \.self) { palette in
+                            PaletteSwatch(
+                                palette: palette, selected: state.palette == palette
+                            ) {
+                                state.palette = palette
+                            }
+                        }
+                    }
+                }
+
+                Text("\(state.palette.label): \(state.palette.note)")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+
+                Toggle(L("settings.showTime"), isOn: $state.indicatorShowsTime)
+
+                Text(L("settings.showTime.explanation"))
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .formStyle(.grouped)
+        .frame(width: SettingsLayout.width, height: 600)
         .onChange(of: state.waveformStyle) { _, _ in state.persistAppearance() }
         .onChange(of: state.indicatorShowsTime) { _, _ in state.persistAppearance() }
+        .onChange(of: state.palette) { _, _ in state.persistAppearance() }
     }
+}
+
+/// Shared width, so switching tabs only changes the height.
+enum SettingsLayout {
+    static let width: CGFloat = 520
 }
 
 private struct PermissionRow: View {
@@ -115,5 +195,37 @@ private struct PermissionRow: View {
                 }
             }
         }
+    }
+}
+
+/// On the pill's dark background, as it will look on screen.
+private struct PaletteSwatch: View {
+    let palette: PillPalette
+    let selected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 2) {
+                ForEach(0..<11, id: \.self) { index in
+                    RoundedRectangle(cornerRadius: 1, style: .continuous)
+                        .fill(palette.levelColor(at: index))
+                        .frame(width: 2, height: 9)
+                }
+            }
+            .padding(.horizontal, 7)
+            .frame(height: 20)
+            .background(Capsule().fill(Indicator.capsuleColor))
+            .overlay(
+                Capsule().strokeBorder(
+                    selected ? Color.accentColor : .clear, lineWidth: 2)
+                    .padding(-3)
+            )
+            .padding(3)
+        }
+        .buttonStyle(.plain)
+        .help(palette.label)
+        .accessibilityLabel(palette.label)
+        .accessibilityAddTraits(selected ? .isSelected : [])
     }
 }

@@ -3,29 +3,101 @@ import ApplicationServices
 import Foundation
 import os
 
-/// Liest den Text unmittelbar vor der Einfügemarke.
-///
-/// Dient nur noch einem Zweck: der Frage, ob vor dem Diktat ein Leerzeichen gehört.
-/// Die Anzeige während der Aufnahme hängt nicht mehr daran, weil sich die Position der
-/// Einfügemarke als app-abhängig und am Zeilenende unzuverlässig erwiesen hat.
+/// Reads text and position around the caret: for the leading space and for choosing
+/// the pill's screen. Too unreliable to place anything at the caret itself.
 enum CaretTracker {
 
-    // MARK: - Textkontext
+    // MARK: - Location
 
-    /// Was unmittelbar vor der Einfügemarke steht.
+    /// Runs on the main thread at recording start; a hung app must not block the pill.
+    private static let locationTimeout: Float = 0.2
+
+    /// A point on the caret's screen in Cocoa coordinates. Falls back from caret rect to
+    /// focused element to focused window; VS Code has no caret rect but a field frame.
+    static func caretLocation() -> NSPoint? {
+        enableManualAccessibilityForFrontmostApp()
+        guard AXIsProcessTrusted() else { return nil }
+
+        if let element = focusedElement() {
+            AXUIElementSetMessagingTimeout(element, locationTimeout)
+            if let rect = caretBounds(in: element) ?? frame(of: element) {
+                return cocoaPoint(at: rect)
+            }
+        }
+        if let window = focusedWindow(), let rect = frame(of: window) {
+            return cocoaPoint(at: rect)
+        }
+        return nil
+    }
+
+    private static func caretBounds(in element: AXUIElement) -> CGRect? {
+        guard let range = selectedRange(in: element) else { return nil }
+        // Selection first, then the character right of the caret, then left. An empty
+        // selection often yields a zero rect.
+        let candidates = [
+            range,
+            CFRange(location: range.location, length: 1),
+            CFRange(location: max(range.location - 1, 0), length: 1),
+        ]
+        return candidates.lazy.compactMap { bounds(of: $0, in: element) }.first(where: isUsable)
+    }
+
+    private static func frame(of element: AXUIElement) -> CGRect? {
+        var positionValue: CFTypeRef?
+        var sizeValue: CFTypeRef?
+        guard
+            AXUIElementCopyAttributeValue(
+                element, kAXPositionAttribute as CFString, &positionValue) == .success,
+            AXUIElementCopyAttributeValue(
+                element, kAXSizeAttribute as CFString, &sizeValue) == .success,
+            let positionValue, let sizeValue
+        else { return nil }
+
+        var position = CGPoint.zero
+        var size = CGSize.zero
+        guard AXValueGetValue(positionValue as! AXValue, .cgPoint, &position),
+            AXValueGetValue(sizeValue as! AXValue, .cgSize, &size)
+        else { return nil }
+        let rect = CGRect(origin: position, size: size)
+        return isUsable(rect) ? rect : nil
+    }
+
+    private static func focusedWindow() -> AXUIElement? {
+        guard let pid = NSWorkspace.shared.frontmostApplication?.processIdentifier else {
+            return nil
+        }
+        let application = AXUIElementCreateApplication(pid)
+        AXUIElementSetMessagingTimeout(application, locationTimeout)
+        var value: CFTypeRef?
+        guard
+            AXUIElementCopyAttributeValue(
+                application, kAXFocusedWindowAttribute as CFString, &value) == .success,
+            let window = value
+        else { return nil }
+        return (window as! AXUIElement)
+    }
+
+    /// Some apps return a zero rect instead of an error.
+    private static func isUsable(_ rect: CGRect) -> Bool {
+        rect != .zero && rect.origin != .zero
+    }
+
+    /// Accessibility counts from the primary screen's top left, Cocoa from bottom left.
+    private static func cocoaPoint(at rect: CGRect) -> NSPoint? {
+        guard let primary = NSScreen.screens.first else { return nil }
+        return NSPoint(x: rect.midX, y: primary.frame.maxY - rect.midY)
+    }
+
+    // MARK: - Text context
+
     enum PrecedingContext {
-        /// Die Einfügemarke steht am Anfang des Feldes.
         case startOfText
         case character(Character)
-        /// Die App gibt ihren Text nicht preis.
+        /// The app doesn't expose its text.
         case unknown
     }
 
-    /// Liest das Zeichen direkt vor der Einfügemarke.
-    ///
-    /// Grundlage für die Frage, ob vor dem Diktat ein Leerzeichen gehört. Bewusst
-    /// aus dem echten Text gelesen statt aus dem zuletzt Eingefügten geschlossen:
-    /// dazwischen kann getippt oder der Cursor bewegt worden sein.
+    /// Read from the actual text rather than inferred: the user may have typed or moved since.
     static func precedingContext() -> PrecedingContext {
         enableManualAccessibilityForFrontmostApp()
         guard AXIsProcessTrusted(), let element = focusedElement() else { return .unknown }
@@ -55,12 +127,6 @@ enum CaretTracker {
         return (element as! AXUIElement)
     }
 
-    /// Rechteck der Einfügemarke.
-    ///
-    /// Eine Einfügemarke ohne Auswahl ist null Zeichen lang, und viele Apps liefern
-    /// dafür kein brauchbares Rechteck. Deshalb in mehreren Anläufen, beginnend mit
-    /// dem Zeichen rechts der Marke: dessen linke Kante ist die Marke, und es liegt
-    /// garantiert auf der richtigen Zeile.
     private static func selectedRange(in element: AXUIElement) -> CFRange? {
         var value: CFTypeRef?
         guard
@@ -104,10 +170,7 @@ enum CaretTracker {
         return rect
     }
 
-    /// Bittet die Vordergrund-App, ihren Accessibility-Baum aufzubauen.
-    ///
-    /// Chromium- und damit Electron-Apps (Obsidian, Slack, VS Code) geben ohne dieses
-    /// Attribut keinen Text heraus. Einmal pro Prozess genügt.
+    /// Chromium/Electron apps (Obsidian, Slack, VS Code) expose no text without this.
     private static var manualAccessibilityEnabled: Set<pid_t> = []
 
     static func enableManualAccessibilityForFrontmostApp() {

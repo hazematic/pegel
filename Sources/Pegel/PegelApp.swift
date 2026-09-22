@@ -12,6 +12,7 @@ struct PegelApp: App {
             MenuBarView(
                 state: delegate.appState, controller: delegate.controller,
                 openSettings: { delegate.showSettings() },
+                openAbout: { delegate.showAbout() },
                 openSetup: { delegate.showSetup() })
         } label: {
             MenuBarLabel(state: delegate.appState)
@@ -25,12 +26,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, Obse
 
     let appState = AppState()
     private(set) lazy var controller = RecordingController(appState: appState)
+    /// Lazy, so the build script's icon export doesn't create it.
+    private(set) lazy var updates = UpdateController()
     private var setupWindow: NSWindow?
     private var settingsWindow: NSWindow?
+    private var settingsTabs: NSTabViewController?
+    private var aboutWindow: NSWindow?
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        // Icon-Export für das Build-Skript: rendert das Iconset aus derselben
-        // Bildmarke, die die App benutzt, und beendet sich wieder.
+        // Icon export for the build script.
         if let index = CommandLine.arguments.firstIndex(of: "--export-icons"),
             index + 1 < CommandLine.arguments.count
         {
@@ -42,21 +46,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, Obse
             return
         }
 
-        // Kein Dock-Icon, kein Fenster beim Start: Pegel lebt in der Menüleiste.
         NSApp.setActivationPolicy(.accessory)
 
-        // Rechtestatus protokollieren: die drei Dienste sind von außen nicht
-        // unterscheidbar, im Log sieht man sofort, welcher fehlt.
+        // The three services look alike from outside; the log shows which one is missing.
         Logger(subsystem: "io.github.hazematic.pegel", category: "l10n").info(
-            "Sprache: \(Bundle.main.preferredLocalizations.joined(separator: ","), privacy: .public), Systemwunsch: \(Locale.preferredLanguages.joined(separator: ","), privacy: .public)"
+            "Language: \(Bundle.main.preferredLocalizations.joined(separator: ","), privacy: .public), system preference: \(Locale.preferredLanguages.joined(separator: ","), privacy: .public)"
         )
 
         Logger(subsystem: "io.github.hazematic.pegel", category: "permissions").info(
-            "Rechte beim Start: Mikrofon=\(Permissions.microphoneGranted, privacy: .public) Bedienungshilfen=\(Permissions.accessibilityGranted, privacy: .public) Eingabeueberwachung=\(Permissions.inputMonitoringGranted, privacy: .public)")
+            "Permissions at launch: microphone=\(Permissions.microphoneGranted, privacy: .public) accessibility=\(Permissions.accessibilityGranted, privacy: .public) inputMonitoring=\(Permissions.inputMonitoringGranted, privacy: .public)")
 
-        // Vor dem Start merken, ob das Modell noch fehlt: `controller.start()` setzt
-        // den Zustand danach schon auf `.listing`, wenn der Cache gefüllt ist.
+        // Check before `start()`, which moves the state on when the cache is filled.
         let needsModel = !TranscriptionService.isModelInstalled
+        // Early, so enabled automatic checks get their schedule. Nothing goes out otherwise.
+        _ = updates
         controller.onNeedsSetup = { [weak self] in self?.showSetup() }
         controller.start()
 
@@ -65,42 +68,77 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, Obse
         }
     }
 
-    /// Pegel lebt in der Menüleiste. Das Schließen des Onboarding-Fensters darf
-    /// die App nicht mitnehmen.
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         false
     }
 
-    /// Einstellungen öffnen oder ein bereits offenes Fenster nach vorn holen.
-    ///
-    /// Bewusst ein eigenes `NSWindow` statt der SwiftUI-`Settings`-Szene: die holt in
-    /// einer Menüleisten-App ohne Dock-Icon ein offenes Fenster nicht nach vorn und
-    /// lässt sich in der Größe nicht steuern.
-    func showSettings() {
-        if let window = settingsWindow {
-            window.makeKeyAndOrderFront(nil)
-            NSApp.activate(ignoringOtherApps: true)
-            return
-        }
-
-        let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 540, height: 620),
-            styleMask: [.titled, .closable, .resizable],
-            backing: .buffered, defer: false)
-        window.title = L("window.settings")
-        window.contentView = NSHostingView(
-            rootView: SettingsView(state: appState, controller: controller))
-        window.contentMinSize = NSSize(width: 460, height: 420)
-        window.isReleasedWhenClosed = false
-        window.setFrameAutosaveName("PegelSettings")
-        window.center()
-        window.makeKeyAndOrderFront(nil)
-        NSApp.activate(ignoringOtherApps: true)
-        settingsWindow = window
+    enum SettingsTab: Int {
+        case general, appearance
     }
 
-    /// Das Einrichtungsfenster: Modell-Download bestätigen und verfolgen, Rechte
-    /// erteilen. Auch nachträglich über das Menü erreichbar.
+    /// Own window instead of the SwiftUI `Settings` scene, which doesn't bring an open
+    /// window to the front in a menu bar app without a Dock icon.
+    func showSettings(tab: SettingsTab? = nil) {
+        if settingsWindow == nil { buildSettingsWindow() }
+        if let tab { settingsTabs?.selectedTabViewItemIndex = tab.rawValue }
+        settingsWindow?.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
+    }
+
+    private func buildSettingsWindow() {
+        let tabs = NSTabViewController()
+        tabs.tabStyle = .toolbar
+        tabs.canPropagateSelectedChildViewControllerTitle = false
+        tabs.addTabViewItem(
+            Self.settingsTab(
+                GeneralSettingsView(state: appState, controller: controller),
+                label: L("settings.tab.general"), symbol: "gearshape"))
+        tabs.addTabViewItem(
+            Self.settingsTab(
+                AppearanceSettingsView(state: appState),
+                label: L("settings.tab.appearance"), symbol: "paintpalette"))
+
+        let window = NSWindow(contentViewController: tabs)
+        window.styleMask = [.titled, .closable]
+        window.title = L("window.settings")
+        // Centers the title above the tabs; without it the title sits off-center.
+        window.toolbarStyle = .preference
+        window.isReleasedWhenClosed = false
+        // Forget on close so the preview's timers stop too.
+        window.delegate = self
+        window.center()
+        settingsWindow = window
+        settingsTabs = tabs
+    }
+
+    private static func settingsTab(
+        _ view: some View, label: String, symbol: String
+    ) -> NSTabViewItem {
+        let host = NSHostingController(rootView: view)
+        host.sizingOptions = .preferredContentSize
+        host.title = label
+        let item = NSTabViewItem(viewController: host)
+        item.label = label
+        item.image = NSImage(systemSymbolName: symbol, accessibilityDescription: label)
+        return item
+    }
+
+    func showAbout() {
+        if aboutWindow == nil {
+            let host = NSHostingController(rootView: AboutView(updates: updates))
+            host.sizingOptions = .preferredContentSize
+            let window = NSWindow(contentViewController: host)
+            window.styleMask = [.titled, .closable]
+            window.title = L("window.about")
+            window.isReleasedWhenClosed = false
+            window.delegate = self
+            window.center()
+            aboutWindow = window
+        }
+        aboutWindow?.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
+    }
+
     func showSetup() {
         if let window = setupWindow {
             window.makeKeyAndOrderFront(nil)
@@ -126,8 +164,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, Obse
             styleMask: [.titled, .closable], backing: .buffered, defer: false)
         window.title = L("window.onboarding")
         window.contentView = NSHostingView(rootView: view)
-        // Beim Schließen vergessen, damit ein späteres Öffnen wieder auf der Seite
-        // beginnt, die zum aktuellen Stand passt.
+        // Forget on close so reopening starts on the page matching the current state.
         window.delegate = self
         window.center()
         window.isReleasedWhenClosed = false
@@ -136,14 +173,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, Obse
         setupWindow = window
     }
 
-    /// Schließt das Fenster, wenn der Nutzer es über den roten Knopf loswird.
     func windowWillClose(_ notification: Notification) {
         if (notification.object as AnyObject?) === setupWindow { setupWindow = nil }
+        if (notification.object as AnyObject?) === aboutWindow { aboutWindow = nil }
+        if (notification.object as AnyObject?) === settingsWindow {
+            settingsWindow = nil
+            settingsTabs = nil
+        }
     }
 }
 
-/// Das Menüleistensymbol spiegelt denselben Zustand wie der Indikator, damit der
-/// Status auch dann sichtbar ist, wenn der Indikator auf einem anderen Bildschirm sitzt.
+/// Mirrors the indicator, visible even when the pill is on another screen.
 private struct MenuBarLabel: View {
     @ObservedObject var state: AppState
 

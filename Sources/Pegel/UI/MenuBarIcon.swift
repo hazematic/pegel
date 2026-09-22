@@ -1,18 +1,14 @@
 import AppKit
 import SwiftUI
 
-/// Das vorgerenderte Menüleistensymbol.
-///
-/// Es gibt nur eines: die Leiste zeigt in Ruhe, Aufnahme und Transkription dasselbe
-/// Bild. Der Umweg über `NSImage` bleibt nötig, weil SwiftUI einen `Canvas` als
-/// MenuBarExtra-Label nicht zeichnet und das Statusitem sonst leer bliebe.
+/// Pre-rendered menu bar icon, the same in every state. SwiftUI doesn't draw a
+/// `Canvas` as a MenuBarExtra label, hence `NSImage`.
 @MainActor
 enum MenuBarIcon {
 
     private static var cached: NSImage?
 
-    /// Der Zustand wird bewusst ignoriert; der Parameter bleibt, damit die Aufrufstelle
-    /// gleich aussieht, falls sich das je wieder ändert.
+    /// State is ignored on purpose; the parameter keeps call sites stable.
     static func image(for session: SessionState) -> NSImage {
         if let cached { return cached }
         let image = PegelMark.menuBarImage() ?? NSImage(size: NSSize(width: 18, height: 18))

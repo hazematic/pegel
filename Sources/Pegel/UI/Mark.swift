@@ -1,19 +1,11 @@
 import AppKit
 import SwiftUI
 
-/// Die Bildmarke: ein Pegel aus fünf senkrechten Strichen, symmetrisch um die
-/// Mitte, monochrom.
-///
-/// Konstruiert in einem 16 × 16-Raster. Gerade Striche sind die einzige Form, die bei
-/// 16 pt verlustfrei durchkommt; die vorherige Marke aus Einfügemarke und laufenden
-/// Bögen ist daran gescheitert.
-///
-/// Das Zeichen kennt keinen Zustand. In der Menüleiste sieht es beim Aufnehmen aus wie
-/// im Ruhezustand, der Zustand gehört an den Cursor, weil man dort hinsieht.
+/// The mark: five vertical bars on a 16 × 16 grid, the only shape that survives 16 pt.
+/// Stateless: status belongs at the cursor, where the user looks.
 struct PegelMark: View {
 
     var color: Color = .primary
-    /// Strichstärke in Rastereinheiten.
     var lineWidth: Double = 1.5
 
     private let unit: Double = 16
@@ -36,12 +28,11 @@ struct PegelMark: View {
     }
 }
 
-// MARK: - Rendering für AppKit
+// MARK: - AppKit rendering
 
 extension PegelMark {
 
-    /// Rendert das Zeichen als Template-Image für die Menüleiste.
-    /// Template heißt: macOS färbt selbst ein, hell wie dunkel.
+    /// Template image, so macOS tints it for light and dark.
     @MainActor
     static func menuBarImage(pointSize: CGFloat = 18) -> NSImage? {
         let renderer = ImageRenderer(

@@ -59,8 +59,9 @@ brew install --cask hazematic/tap/pegel
 ```
 
 That is the whole installation: the cask clears the quarantine flag for you, which you
-would otherwise have to do by hand because the app is not notarised. `brew upgrade`
-picks up new versions, and `brew uninstall --zap --cask pegel` removes the app together
+would otherwise have to do by hand because the app is not notarised. New versions
+arrive either through `brew upgrade` or through Pegel's own update check (see
+[Updates](#updates)), and `brew uninstall --zap --cask pegel` removes the app together
 with its settings and the downloaded model.
 
 ### Build it yourself
@@ -102,7 +103,29 @@ The model is not part of the app, and Pegel does not fetch it behind your back: 
 window explains the one-off download of 461 MB and nothing happens until you press the
 button. Progress and the three permissions then run side by side, a failed download can
 be retried where it left off, and the last page shows the shortcut you will be using.
-That download is the only time Pegel touches the network.
+Apart from an update check you start yourself, that download is the only time Pegel
+touches the network.
+
+## Updates
+
+Pegel can update itself through [Sparkle](https://sparkle-project.org), but it never
+checks on its own unless you ask it to. *About Pegel…* in the menu has a *Check for
+Updates…* button and a switch for automatic checks, which is off by default. An update
+is only installed if it carries the project's signature and is signed with the same
+certificate as the version you have, so the permissions you granted survive it.
+
+## Privacy
+
+Audio and text never leave the Mac. There is no analytics, no crash reporting and no
+account. Pegel reaches the network in exactly two cases, both started by you:
+
+- **Model download**, once, after you press the button: the files come from Hugging
+  Face, which sees your IP address.
+- **Update check**, only when you press *Check for Updates…* or switch on automatic
+  checks: Pegel fetches `appcast.xml` from GitHub and, if there is a new version, the
+  ZIP from the release. GitHub sees your IP address and, in the user agent, the Pegel
+  and macOS versions. See GitHub's
+  [privacy statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement).
 
 ## Uninstall
 

@@ -1,22 +1,14 @@
 import SwiftUI
 
-/// Die Einrichtung beim ersten Start: Modell-Download bestätigen, den Fortschritt
-/// verfolgen, die drei Rechte erteilen.
-///
-/// Drei Seiten in einem Fenster. Rechte und Download laufen bewusst nebeneinander:
-/// der Download dauert Minuten, in denen der Nutzer ohnehin in den Systemeinstellungen
-/// unterwegs sein kann.
-///
-/// Das Bedienungshilfen-Recht wird erst nach dem Umlegen des Schalters wirksam,
-/// deshalb wird der Zustand hier gepollt statt einmalig abgefragt.
+/// First-run setup: confirm the model download, follow it, grant permissions.
+/// Permissions and download run side by side. Accessibility only takes effect after
+/// the switch is flipped, hence polling.
 struct SetupView: View {
 
     @ObservedObject var state: AppState
     let controller: RecordingController
-    /// Öffnet die Einstellungen, damit das Kürzel gleich hier geändert werden kann.
     let openSettings: () -> Void
     let onFinish: () -> Void
-    /// Feuert, sobald alle Rechte stehen. Zieht den Event-Tap nach.
     let onReady: () -> Void
 
     private enum Page {
@@ -26,7 +18,6 @@ struct SetupView: View {
     }
 
     @State private var page: Page
-    /// Warum ein aufgenommenes Kürzel abgelehnt wurde.
     @State private var rejection: String?
     @State private var microphone = Permissions.microphoneGranted
     @State private var accessibility = Permissions.accessibilityGranted
@@ -34,8 +25,7 @@ struct SetupView: View {
 
     private let poll = Timer.publish(every: 2, on: .main, in: .common).autoconnect()
 
-    /// `startsAtWelcome` kommt von außen, weil nur der Aufrufer weiß, ob das Modell
-    /// noch fehlt oder ob das Fenster bloß wegen der Rechte offen ist.
+    /// Only the caller knows whether the model is missing or just permissions.
     init(
         state: AppState, controller: RecordingController, startsAtWelcome: Bool,
         openSettings: @escaping () -> Void, onFinish: @escaping () -> Void,
@@ -70,11 +60,10 @@ struct SetupView: View {
             rejection = nil
         }
         .onReceive(poll) { _ in
-            // Nur nachfragen, was noch fehlt: jede Abfrage ist ein IPC-Aufruf an TCC.
+            // Every check is an IPC call to TCC.
             if !microphone { microphone = Permissions.microphoneGranted }
             if !accessibility { accessibility = Permissions.accessibilityGranted }
             if !inputMonitoring { inputMonitoring = Permissions.inputMonitoringGranted }
-            // Sobald alles steht, den Event-Tap ohne Neustart nachziehen.
             if allGranted { onReady() }
         }
     }
@@ -91,12 +80,10 @@ struct SetupView: View {
         }
     }
 
-    // MARK: - Seite 1: Willkommen
+    // MARK: - Page 1: Welcome
 
     private var welcomePage: some View {
         VStack(alignment: .leading, spacing: 16) {
-            // Oben und unten Luft: der Text steht damit ruhig in der Fensterhöhe, die
-            // erst die Installationsseite wirklich braucht.
             Spacer(minLength: 0)
             Text(L("setup.welcome.title")).font(.headline)
             Text(L("setup.welcome.body"))
@@ -128,7 +115,7 @@ struct SetupView: View {
         }
     }
 
-    // MARK: - Seite 2: Installation, parallel zu den Rechten
+    // MARK: - Page 2: Installation and permissions
 
     private var installPage: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -156,10 +143,8 @@ struct SetupView: View {
                 Task { microphone = await Permissions.requestMicrophone() }
             }
 
-            // Anfordern und Systemeinstellungen öffnen sind bewusst zwei Knöpfe. Der
-            // Systemdialog ist der Aufruf, der die App überhaupt erst in die Liste
-            // einträgt; öffnet man die Systemeinstellungen im selben Atemzug, schiebt
-            // sich deren Fenster davor und der Dialog geht unter.
+            // Two buttons on purpose: the system prompt adds the app to the list, and opening
+            // System Settings at the same time would hide the prompt.
             step(
                 title: L("permission.accessibility"), granted: accessibility,
                 detail: L("onboarding.accessibility.detail"),
@@ -184,8 +169,7 @@ struct SetupView: View {
                     Button(L("setup.next")) { page = .done }
                         .keyboardShortcut(.defaultAction)
                 } else {
-                    // Ohne fertiges Modell gibt es nichts zu bestätigen. Das Fenster
-                    // darf trotzdem weg, der Download läuft im Hintergrund weiter.
+                    // The window may close; the download continues in the background.
                     Button(L("onboarding.later")) { onFinish() }
                 }
             }
@@ -228,8 +212,7 @@ struct SetupView: View {
                 .font(.callout)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
-            // Angefangene Dateien bleiben liegen, ein zweiter Versuch macht dort
-            // weiter statt von vorn anzufangen.
+            // Partial files are kept, so a retry resumes.
             Text(offline ? L("setup.install.retry.offline") : L("setup.install.retry.hint"))
                 .font(.callout)
                 .foregroundStyle(.secondary)
@@ -253,7 +236,7 @@ struct SetupView: View {
         }
     }
 
-    // MARK: - Seite 3: Fertig
+    // MARK: - Page 3: Done
 
     private var donePage: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -264,13 +247,14 @@ struct SetupView: View {
                 Text(L("setup.done.shortcut.label"))
                     .font(.callout)
                     .foregroundStyle(.secondary)
-                // Änderbar direkt hier: wer das Kürzel jetzt anders haben will, soll
-                // dafür nicht in die Einstellungen abbiegen müssen.
                 HotkeyRecorderField(
                     binding: $state.binding,
                     onRejected: { rejection = $0 },
                     onCaptureChanged: { controller.setHotkeyCapture($0) })
-                .frame(width: 190, height: 34)
+                .frame(width: 220, height: 40)
+                Text(L("hotkey.clickToChange"))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
                 if let rejection {
                     Text(rejection)
                         .font(.callout)
@@ -287,8 +271,7 @@ struct SetupView: View {
             .background(.quaternary.opacity(0.35), in: RoundedRectangle(cornerRadius: 10))
 
             if !allGranted {
-                // Ohne die beiden Tastatur-Rechte bleibt der Event-Tap aus, das Kürzel
-                // reagiert dann nirgends. Das gehört hier gesagt, nicht verschwiegen.
+                // Without both keyboard permissions the event tap stays off; say so.
                 HStack(alignment: .top, spacing: 10) {
                     Image(systemName: "exclamationmark.circle.fill")
                         .foregroundStyle(.orange)
@@ -310,7 +293,7 @@ struct SetupView: View {
         }
     }
 
-    // MARK: - Bausteine
+    // MARK: - Components
 
     @ViewBuilder
     private func step(
@@ -330,8 +313,7 @@ struct SetupView: View {
             if !granted {
                 VStack(alignment: .trailing, spacing: 6) {
                     Button(L("button.allow"), action: action)
-                    // Zweiter Weg für den Fall, dass der Systemdialog nicht mehr
-                    // erscheint: macOS zeigt ihn pro Recht nur einmal.
+                    // macOS shows the system prompt only once per permission.
                     if let openSettings {
                         Button(L("button.openSettings"), action: openSettings)
                             .buttonStyle(.link)

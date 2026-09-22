@@ -1,22 +1,27 @@
 import AppKit
 import Carbon.HIToolbox
 import Foundation
+import os
 
-/// Fügt Text an der Einfügemarke der gerade aktiven App ein.
-///
-/// Über die Zwischenablage plus synthetisches ⌘V, weil das in praktisch jeder App
-/// funktioniert. Direktes Setzen über die Accessibility-API klappt nur in einem Teil
-/// der Programme und ignoriert dort außerdem die Undo-Historie.
+/// Inserts text at the caret via the clipboard and a synthetic ⌘V, which works in
+/// virtually every app, unlike setting text through Accessibility.
 enum TextInjector {
 
-    /// Zeit, die die Zielanwendung zum Verarbeiten des Pastes bekommt, bevor die
-    /// Zwischenablage zurückgesetzt wird.
+    /// Time for the target app to read the clipboard before it is restored.
     private static let restoreDelay: TimeInterval = 0.2
+
+    private static let log = Logger(subsystem: "io.github.hazematic.pegel", category: "insert")
 
     static func insert(_ text: String) {
         guard !text.isEmpty else { return }
 
         let payload = leadingSpace(before: text) + text
+        // Logs no text. A still-held ⌥ turns ⌘V into ⌥⌘V, which many apps ignore.
+        let held = CGEventSource.flagsState(.hidSystemState)
+            .intersection([.maskAlternate, .maskShift, .maskControl, .maskCommand])
+        log.notice(
+            "Inserting \(payload.count) characters into \(NSWorkspace.shared.frontmostApplication?.bundleIdentifier ?? "?", privacy: .public), held modifiers: \(held.rawValue)"
+        )
         let pasteboard = NSPasteboard.general
         let backup = snapshot(of: pasteboard)
 
@@ -31,22 +36,17 @@ enum TextInjector {
         }
     }
 
-    // MARK: - Abstand zum vorherigen Satz
+    // MARK: - Leading space
 
-    /// Zeichen, nach denen kein Leerzeichen gehört, obwohl sie kein Leerraum sind.
     private static let openingCharacters: Set<Character> = [
         "(", "[", "{", "\"", "'", "„", "“", "‚", "‘", "«", "‹", "/", "-", "–", "@", "#",
     ]
 
-    /// Zeichen, vor denen kein Leerzeichen gehört, wenn das Diktat damit anfängt.
     private static let closingCharacters: Set<Character> = [
         ".", ",", ";", ":", "!", "?", ")", "]", "}", "“", "”", "‘", "»", "›",
     ]
 
-    /// Entscheidet, ob vor dem Diktat ein Leerzeichen gehört.
-    ///
-    /// Parakeet schließt jeden Satz mit einem Punkt ab. Ohne diesen Zusatz klebte
-    /// das nächste Diktat direkt am vorherigen Satzende.
+    /// Parakeet ends every sentence with a period; without this the next one would stick to it.
     private static func leadingSpace(before text: String) -> String {
         guard let first = text.first, !first.isWhitespace,
             !closingCharacters.contains(first)
@@ -59,8 +59,7 @@ enum TextInjector {
             if previous.isWhitespace || openingCharacters.contains(previous) { return "" }
             return " "
         case .unknown:
-            // Terminal und einige Java- und Electron-Apps geben ihren Text nicht
-            // preis. Dann bleibt nur, sich an das eigene letzte Einfügen zu erinnern.
+            // Some apps hide their text; fall back to our own last insertion.
             return fallbackSpace()
         }
     }
@@ -85,7 +84,7 @@ enum TextInjector {
         )
     }
 
-    // MARK: - Zwischenablage sichern
+    // MARK: - Clipboard backup
 
     private static func snapshot(of pasteboard: NSPasteboard) -> [[NSPasteboard.PasteboardType: Data]] {
         (pasteboard.pasteboardItems ?? []).map { item in
@@ -110,7 +109,7 @@ enum TextInjector {
         pasteboard.writeObjects(items)
     }
 
-    // MARK: - Tastendruck erzeugen
+    // MARK: - Synthetic key press
 
     private static func postPasteShortcut() {
         guard let source = CGEventSource(stateID: .combinedSessionState) else { return }

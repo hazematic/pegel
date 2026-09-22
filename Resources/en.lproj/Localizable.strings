@@ -1,17 +1,19 @@
 /* Menu */
 "menu.status.last" = "Last: %@";
 "menu.status.hotkeyInactive" = "Shortcut inactive, accessibility missing";
-"menu.resetPosition" = "Move pill back to bottom center";
+"menu.resetPosition" = "Reset Position";
 "menu.copyLast" = "Copy last dictation";
+"menu.transcribeFile" = "Transcribe Audio File…";
 "menu.setup" = "Open setup…";
 "menu.status.notInstalled" = "Model not installed yet";
 "menu.settings" = "Settings…";
-"menu.quit" = "Quit Pegel";
+"menu.quit" = "Quit";
 
 /* Status */
 "status.ready" = "Ready";
 "status.recording" = "Recording…";
 "status.transcribing" = "Transcribing…";
+"status.transcribingFile" = "Transcribing… %d %%";
 "status.finished" = "Inserted";
 "status.discarded" = "Discarded";
 "status.failed" = "Error";
@@ -27,13 +29,18 @@
 /* Errors */
 "error.microphone" = "No microphone access";
 "error.tooShort" = "Too short";
+"error.unreadableFile" = "Cannot read %@";
 "error.noSpeech" = "Nothing recognised";
 "error.modelLoading" = "Model still loading";
 "error.noInputDevice" = "No microphone found.";
+"error.deviceUnavailable" = "Microphone %@ is unavailable";
+"error.silentInput" = "No signal from %@";
+"error.noAudioData" = "No data from %@";
 "error.notReady" = "The speech model is not loaded yet.";
 
 /* Windows */
-"window.settings" = "Pegel Settings";
+"window.settings" = "Settings";
+"window.about" = "About Pegel";
 "window.onboarding" = "Set up Pegel";
 
 /* Settings */
@@ -42,6 +49,14 @@
 "settings.hotkey.reset" = "Reset to %@";
 "settings.ptt.label" = "Hold from";
 "settings.ptt.explanation" = "A short press toggles recording and leaves it running. A longer press is push-to-talk: releasing ends it.";
+"settings.section.audio" = "Audio";
+"settings.input.label" = "Microphone";
+"settings.input.systemDefault" = "System default";
+"settings.input.current" = "Recording through %@";
+"settings.input.narrowband" = "Narrowband below 16 kHz, typical for Bluetooth headsets on the phone profile. Recognition suffers noticeably.";
+"settings.input.missing" = "The selected microphone is not connected. Until it is, the system default applies.";
+"settings.input.none" = "No input device found.";
+"settings.input.explanation" = "On system default Pegel follows whichever microphone macOS picks. That can be a Bluetooth speaker that just connected: macOS treats it as a headset and makes it the input. A fixed device rules that out.";
 "settings.section.appearance" = "Appearance";
 "settings.waveform" = "Waveform";
 "settings.showTime" = "Show elapsed time";
@@ -57,6 +72,10 @@
 "waveform.trace.explanation" = "Shows the last two seconds. You can also see in hindsight whether sound arrived.";
 "waveform.levels" = "Levels";
 "waveform.levels.explanation" = "Eleven bars with a wave running to the right. Calmer and narrower, shows only the present moment.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "System default";
+"audio.device.unknown" = "Unknown device";
 
 /* Permissions */
 "permission.microphone" = "Microphone";
@@ -77,6 +96,7 @@
 "button.allow" = "Allow";
 "button.openSettings" = "System Settings…";
 "hotkey.pressKey" = "Press a key…";
+"hotkey.clickToChange" = "Click to change";
 "key.space" = "Space";
 "key.unknown" = "Key %ld";
 "hotkey.reject.noModifier" = "Without a modifier the shortcut would swallow every normal keystroke.";
@@ -113,3 +133,40 @@
 
 /* Installation errors */
 "install.error.offline" = "No network connection. Pegel needs the network only for this one download.";
+
+/* Audiodatei */
+"file.panel.message" = "The result goes to the clipboard.";
+"file.panel.prompt" = "Transcribe";
+
+/* Colours */
+"settings.palette" = "Colours";
+"palette.standard" = "Standard";
+"palette.standard.note" = "Violet → Blue";
+"palette.citrus" = "Citrus";
+"palette.citrus.note" = "Lime → Lemon → Orange";
+"palette.lagoon" = "Lagoon";
+"palette.lagoon.note" = "Turquoise → Azure → Blue";
+"palette.ember" = "Ember";
+"palette.ember.note" = "Magenta → Coral → Amber";
+"palette.neon" = "Neon";
+"palette.neon.note" = "Pink → Violet → Indigo";
+"palette.fern" = "Fern";
+"palette.fern.note" = "Mint → Green → Teal";
+
+/* Settings and About */
+"menu.about" = "About Pegel…";
+"settings.tab.general" = "General";
+"settings.tab.appearance" = "Appearance";
+"about.tagline" = "Dictation on the Mac, entirely local.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Version %@";
+"about.versionBuild" = "Version %@ (%@)";
+"about.repository" = "Pegel on GitHub";
+"about.coffee" = "Buy me a coffee";
+"about.section.updates" = "Updates";
+"about.updates.automatic" = "Check for Updates Automatically";
+"about.updates.check" = "Check for Updates…";
+"about.updates.privacy" = "To check, Pegel fetches a file from GitHub. GitHub sees your IP address and the Pegel and macOS versions. Audio and text never leave this Mac.";
+"about.section.licenses" = "Licences";
+"about.licenses.explanation" = "Pegel is released under the MIT License. It includes FluidAudio (Apache 2.0) and its dependencies. The speech model Parakeet TDT 0.6B v3 is by NVIDIA, the Core ML conversion by FluidInference, both under CC-BY-4.0.";
+"about.licenses.show" = "Show Licence Texts in Finder";

@@ -1,26 +1,29 @@
 import AppKit
 import SwiftUI
 
-/// Beobachtbarer Zustand der Pille.
 @MainActor
 final class IndicatorModel: ObservableObject {
 
     @Published var session: SessionState = .ready
-    /// Aktueller, bereits geglätteter Mikrofonpegel 0…1.
     @Published var level: Double = 0
-    /// Die letzten Pegelwerte, ältester zuerst. Füllt die Spur.
+    /// Recent levels, oldest first.
     @Published private(set) var trace: [Double] = Array(
         repeating: 0, count: Indicator.traceCapacity)
-    /// Wann der letzte Wert dazukam. Daraus rechnet die Ansicht den Zwischenschritt,
-    /// damit die Spur fließt statt im Takt zu springen.
+    /// Lets the view interpolate between values so the trace flows.
     @Published private(set) var lastAdvance: Date = .distantPast
     @Published var recordingStartedAt: Date = .distantPast
-    /// Beginn von Fehler oder Verwerfen; treibt die einmaligen Animationen.
+    /// Start of error or discard; drives the one-shot animations.
     @Published var stateChangedAt: Date = .distantPast
     @Published var style: WaveformStyle = .levels
     @Published var showsTime: Bool = true
-    /// Ob die Pille gerade zu sehen ist. Steuert, ob die Zeitachse überhaupt läuft.
+    @Published var palette: PillPalette = .standard
+    /// Stops the timeline while hidden.
     @Published var isVisible: Bool = false
+
+    /// Audio file mode: progress, X, then a checkmark. Reset once hidden.
+    @Published var isFile: Bool = false
+    @Published var fileProgress: Double = 0
+    @Published var cancelHovered: Bool = false
 
     func advanceTrace() {
         trace.removeFirst()
@@ -28,7 +31,6 @@ final class IndicatorModel: ObservableObject {
         lastAdvance = Date()
     }
 
-    /// Nur für die Vorschau: setzt einen Verlauf, ohne den Takt laufen zu lassen.
     func setTraceForPreview(_ values: [Double]) {
         trace = values
         lastAdvance = Date()
@@ -40,64 +42,66 @@ final class IndicatorModel: ObservableObject {
     }
 }
 
-/// Maße der Pille. Aus dem Handoff 6c, mit zwei begründeten Abweichungen:
-/// die Spur ist 104 pt breit (16 Werte × 6,5 pt geht exakt auf, die 112 pt im
-/// Prototyp sind der CSS-Container), und die Kapselbreite ist ausgerechnet statt
-/// gesetzt, weil die angegebenen 168 pt für die Zeitanzeige nur 18 pt übrig ließen.
+/// Pill metrics. Widths are computed: the handoff values don't fit their own content.
 enum Indicator {
 
-    /// Deckend, nicht durchscheinend: das im Entwurf vorgesehene Vibrancy-Material
-    /// wird auf hellem Untergrund flau, und ein Statusanzeiger muss überall tragen.
+    /// Opaque: vibrancy washes out on light backgrounds.
     static let capsuleColor = Color(white: 0.094)
 
     static let horizontalInset: CGFloat = 16
     static let itemSpacing: CGFloat = 14
-    /// Feste Breite für die Zeit, damit die Kapsel bei 0:09 → 0:10 nicht springt.
+    /// Fixed so the capsule doesn't jump at 0:09 → 0:10.
     static let timeWidth: CGFloat = 30
 
-    // MARK: - Spur (Entwurf 6c)
+    // MARK: - Trace
 
     static let traceWidth: CGFloat = 104
     static let traceHeight: CGFloat = 24
     static let barWidth: CGFloat = 3
     static let barSpacing: CGFloat = 3.5
     static let barRadius: CGFloat = 1.5
-    static let slotWidth: CGFloat = barWidth + barSpacing  // 6.5
-    static let traceCapacity = 20  // 16 sichtbare plus Reserve
+    static let slotWidth: CGFloat = barWidth + barSpacing
+    static let traceCapacity = 20  // 16 visible plus spare
 
-    /// Ein neuer Wert alle 74 ms, macht zwei Sekunden Historie auf 16 Werten.
+    /// Two seconds of history across 16 values.
     static let advanceInterval: TimeInterval = 0.074
 
     static let minimumBarHeight: CGFloat = 5
     static let maximumBarHeight: CGFloat = 24
 
-    // MARK: - Pegelreihe (Entwurf 9a)
+    // MARK: - Levels
 
     static let levelBarSpacing: CGFloat = 5
-    /// Elf Striche à 3 pt mit 5 pt Abstand ergeben 83 pt.
     static let levelRowWidth: CGFloat = 11 * barWidth + 10 * levelBarSpacing
-    /// Eigene Maximalhöhe je Strich: die Reihe verjüngt sich zu den Enden.
     static let levelMaxHeights: [CGFloat] = [15, 18, 21, 22, 22, 22, 22, 22, 21, 18, 15]
-    /// Eigener Versatz je Strich, dadurch läuft die Welle nach rechts.
     static let levelPhases: [Double] = (0..<11).map { Double($0) * 0.05 }
-    static let levelColors: [UInt32] = [
-        0xB4_78EC, 0xAD_7BED, 0xA6_7FEF, 0x9F_82F0, 0x98_85F2, 0x92_89F3,
-        0x8B_8CF4, 0x84_8FF6, 0x7D_92F7, 0x76_96F9, 0x6F_99FA,
-    ]
     static let levelCycle: Double = 0.72
-    /// Bei Stille bleibt die Reihe als flache Linie sichtbar.
     static let levelRestingFactor: CGFloat = 0.25
     static let transcribingBarHeight: CGFloat = 7
     static let levelSweepStagger: Double = 0.06
 
-    // MARK: - Kapsel
+    // MARK: - Audio file
 
-    static func capsuleHeight(for style: WaveformStyle) -> CGFloat {
-        style == .trace ? 42 : 40
+    /// 16 + 83 + 14 + 34 + 12 + 20 + 12, independent of style and time.
+    static let fileCapsuleWidth: CGFloat = 191
+    static let fileTrailingInset: CGFloat = 12
+    static let percentWidth: CGFloat = 34
+    static let cancelSpacing: CGFloat = 12
+    static let cancelSize: CGFloat = 20
+    static let cancelHitSlop: CGFloat = 4
+
+    /// In capsule coordinates, origin bottom left like the window.
+    static var cancelFrameInCapsule: CGRect {
+        CGRect(
+            x: fileCapsuleWidth - fileTrailingInset - cancelSize,
+            y: (capsuleHeight(for: .levels) - cancelSize) / 2,
+            width: cancelSize, height: cancelSize)
     }
 
-    static func cornerRadius(for style: WaveformStyle) -> CGFloat {
-        capsuleHeight(for: style) / 2
+    // MARK: - Capsule
+
+    static func capsuleHeight(for style: WaveformStyle, file: Bool = false) -> CGFloat {
+        file || style == .levels ? 40 : 42
     }
 
     static func contentWidth(for style: WaveformStyle) -> CGFloat {
@@ -108,32 +112,33 @@ enum Indicator {
         traceHeight
     }
 
-    /// Die Breite ist gerechnet, nicht gesetzt: die Handoffs geben Werte an, in die
-    /// ihre eigenen Bestandteile nicht hineinpassen.
-    static func capsuleWidth(for style: WaveformStyle, showsTime: Bool) -> CGFloat {
+    static func capsuleWidth(
+        for style: WaveformStyle, showsTime: Bool, file: Bool = false
+    ) -> CGFloat {
+        if file { return fileCapsuleWidth }
         var width = 2 * horizontalInset + contentWidth(for: style)
         if showsTime { width += itemSpacing + timeWidth }
         return width
     }
 
-    /// Der Schatten wird in SwiftUI gezeichnet, deshalb ist das Fenster größer als
-    /// die Kapsel und der Inhalt darin zentriert.
+    /// The shadow is drawn in SwiftUI, so the window is larger than the capsule.
     static let panelPadding: CGFloat = 24
 
-    static func panelSize(for style: WaveformStyle, showsTime: Bool) -> CGSize {
+    static func panelSize(
+        for style: WaveformStyle, showsTime: Bool, file: Bool = false
+    ) -> CGSize {
         CGSize(
-            width: capsuleWidth(for: style, showsTime: showsTime) + 2 * panelPadding,
-            height: capsuleHeight(for: style) + 2 * panelPadding)
+            width: capsuleWidth(for: style, showsTime: showsTime, file: file) + 2 * panelPadding,
+            height: capsuleHeight(for: style, file: file) + 2 * panelPadding)
     }
 
-    /// Abstand der Kapsel zur Unterkante des nutzbaren Bildschirms.
     static let distanceFromBottom: CGFloat = 96
 }
 
 struct IndicatorView: View {
 
     @ObservedObject var model: IndicatorModel
-    /// Nur für die Vorschau: friert die Bewegung auf einen Zeitpunkt ein.
+    /// Freezes motion for rendered previews.
     var fixedTime: TimeInterval?
 
     var body: some View {
@@ -144,24 +149,30 @@ struct IndicatorView: View {
                 capsule(at: timeline.date.timeIntervalSinceReferenceDate)
             }
         } else {
-            // Ohne diese Verzweigung tickt die Zeitachse auch bei ausgeblendetem
-            // Fenster weiter, treibt fortwährend Core-Animation-Transaktionen und
-            // kostet im Leerlauf dauerhaft CPU.
+            // Otherwise the timeline keeps ticking while hidden and burns CPU.
             Color.clear
         }
     }
 
     private func capsule(at time: TimeInterval) -> some View {
-        HStack(spacing: Indicator.itemSpacing) {
-            content(at: time)
+        let panel = Indicator.panelSize(
+            for: model.style, showsTime: model.showsTime, file: model.isFile)
+        return HStack(spacing: Indicator.itemSpacing) {
+            if model.isFile {
+                fileContent(at: time)
+            } else {
+                content(at: time)
+            }
         }
-        .padding(.horizontal, Indicator.horizontalInset)
+        .padding(.leading, Indicator.horizontalInset)
+        .padding(
+            .trailing, model.isFile ? Indicator.fileTrailingInset : Indicator.horizontalInset)
         .frame(
-            width: Indicator.capsuleWidth(for: model.style, showsTime: model.showsTime),
-            height: Indicator.capsuleHeight(for: model.style))
+            width: Indicator.capsuleWidth(
+                for: model.style, showsTime: model.showsTime, file: model.isFile),
+            height: Indicator.capsuleHeight(for: model.style, file: model.isFile))
         .background(Indicator.capsuleColor)
         .clipShape(Capsule())
-        // Innenkante oben, wie im Entwurf: eine Spur Licht auf der Oberkante.
         .overlay(
             Capsule()
                 .strokeBorder(
@@ -172,10 +183,39 @@ struct IndicatorView: View {
         )
         .opacity(capsuleOpacity)
         .shadow(color: .black.opacity(0.24), radius: 10, y: 6)
-        .frame(
-            width: Indicator.panelSize(for: model.style, showsTime: model.showsTime).width,
-            height: Indicator.panelSize(for: model.style, showsTime: model.showsTime).height)
+        .frame(width: panel.width, height: panel.height)
         .accessibilityHidden(true)
+    }
+
+    /// Always the levels row: progress needs eleven fixed steps.
+    @ViewBuilder
+    private func fileContent(at time: TimeInterval) -> some View {
+        switch model.session {
+        case .transcribing:
+            FileProgressRow(model: model, time: time)
+            HStack(spacing: Indicator.cancelSpacing) {
+                Text("\(Int(model.fileProgress * 100)) %")
+                    .font(.system(size: 12.5).monospacedDigit())
+                    .foregroundStyle(Color.white.opacity(0.65))
+                    .frame(width: Indicator.percentWidth, alignment: .trailing)
+                CancelGlyph(hovered: model.cancelHovered)
+            }
+
+        case .finished:
+            Checkmark(opacity: flashOpacity(at: time))
+                .frame(maxWidth: .infinity)
+
+        case .discarded:
+            CollapsedRow(model: model, time: time)
+            Spacer(minLength: 0)
+
+        case .failed:
+            ErrorGlyph(opacity: flashOpacity(at: time))
+                .frame(maxWidth: .infinity)
+
+        default:
+            Spacer(minLength: 0)
+        }
     }
 
     @ViewBuilder
@@ -186,9 +226,7 @@ struct IndicatorView: View {
             if model.showsTime { TimeLabel(seconds: elapsed, opacity: 0.85) }
 
         case .transcribing:
-            // Die Darstellung steht still und wird zum Bild des Gesagten; darüber
-            // läuft ein Lauflicht. So ist der Zustand ohne Wort von der Aufnahme zu
-            // unterscheiden.
+            // Frozen waveform with a light sweep, distinguishable from recording without text.
             waveform(at: time, running: false)
             if model.showsTime { TimeLabel(seconds: elapsed, opacity: 0.45) }
 
@@ -228,7 +266,6 @@ struct IndicatorView: View {
         return 1
     }
 
-    /// Zweimaliges Aufblitzen beim Erscheinen, danach steht das Zeichen.
     private func flashOpacity(at time: TimeInterval) -> Double {
         let elapsed = time - model.stateChangedAt.timeIntervalSinceReferenceDate
         let stops: [(TimeInterval, Double)] = [
@@ -245,14 +282,11 @@ struct IndicatorView: View {
     }
 }
 
-// MARK: - Spur
+// MARK: - Curves
 
-
-/// Die Bewegungskurven aus den Entwürfen, an einer Stelle.
 enum Curves {
 
-    /// Dreieckschwingung mit weichem Ein- und Ausschwingen, Ergebnis 0…1.
-    /// Entspricht der CSS-Kurve `ease-in-out` zwischen zwei Keyframes.
+    /// Triangle wave with ease-in-out, 0...1 (CSS `ease-in-out` between two keyframes).
     static func pulse(time: TimeInterval, cycle: Double, delay: Double) -> Double {
         let phase = (((time - delay).truncatingRemainder(dividingBy: cycle) + cycle) / cycle)
             .truncatingRemainder(dividingBy: 1)
@@ -260,7 +294,7 @@ enum Curves {
         return triangle * triangle * (3 - 2 * triangle)
     }
 
-    /// Lauflicht: 0.15, bis 35 Prozent auf 1, bis 70 Prozent zurück, dann Pause.
+    /// 0.15, up to 1 at 35 %, back at 70 %, then rest.
     static func sweep(time: TimeInterval, cycle: Double, delay: Double) -> Double {
         let phase = (((time - delay).truncatingRemainder(dividingBy: cycle) + cycle) / cycle)
             .truncatingRemainder(dividingBy: 1)
@@ -272,15 +306,10 @@ enum Curves {
     }
 }
 
-/// Die Pegelreihe aus Entwurf 9a: elf Striche, die Welle läuft nach rechts.
-///
-/// Jeder Strich hat eine eigene Maximalhöhe, dadurch verjüngt sich die Reihe zu den
-/// Enden, und einen eigenen Versatz, dadurch wandert die Welle.
 private struct LevelRow: View {
 
     @ObservedObject var model: IndicatorModel
     let time: TimeInterval
-    /// Während der Aufnahme folgt die Höhe dem Pegel, danach läuft nur Licht durch.
     let running: Bool
 
     private let sweepCycle: Double = 1.1
@@ -289,7 +318,7 @@ private struct LevelRow: View {
         HStack(spacing: Indicator.levelBarSpacing) {
             ForEach(0..<11, id: \.self) { index in
                 RoundedRectangle(cornerRadius: Indicator.barRadius, style: .continuous)
-                    .fill(Color(hex: Indicator.levelColors[index]))
+                    .fill(model.palette.levelColor(at: index))
                     .frame(width: Indicator.barWidth, height: height(at: index))
                     .opacity(running ? 1 : opacity(at: index))
             }
@@ -302,8 +331,6 @@ private struct LevelRow: View {
         guard running else { return Indicator.transcribingBarHeight }
         let oscillation = Curves.pulse(
             time: time, cycle: Indicator.levelCycle, delay: Indicator.levelPhases[index])
-        // Der Pegel bestimmt die Amplitude, der Versatz lässt die Welle wandern.
-        // Bei Stille bleibt die Reihe als flache Linie stehen.
         let factor =
             Indicator.levelRestingFactor
             + (1 - Indicator.levelRestingFactor) * CGFloat(model.level * oscillation)
@@ -317,14 +344,34 @@ private struct LevelRow: View {
     }
 }
 
-extension Color {
-    fileprivate init(hex: UInt32) {
-        self.init(
-            .sRGB,
-            red: Double((hex >> 16) & 0xFF) / 255,
-            green: Double((hex >> 8) & 0xFF) / 255,
-            blue: Double(hex & 0xFF) / 255,
-            opacity: 1)
+/// Done bars glow on the left; open bars keep the sweep, running right to left.
+private struct FileProgressRow: View {
+
+    @ObservedObject var model: IndicatorModel
+    let time: TimeInterval
+
+    private let sweepCycle: Double = 1.1
+
+    var body: some View {
+        let done = Int((model.fileProgress * 11).rounded())
+        HStack(spacing: Indicator.levelBarSpacing) {
+            ForEach(0..<11, id: \.self) { index in
+                let color = model.palette.levelColor(at: index)
+                RoundedRectangle(cornerRadius: Indicator.barRadius, style: .continuous)
+                    .fill(color)
+                    .frame(width: Indicator.barWidth, height: Indicator.transcribingBarHeight)
+                    .opacity(index < done ? 1 : sweep(at: index))
+                    // CSS 6 px blur ≈ SwiftUI radius 3.
+                    .shadow(color: index < done ? color.opacity(0.55) : .clear, radius: 3)
+            }
+        }
+        .frame(width: Indicator.levelRowWidth, height: Indicator.contentHeight(for: .levels))
+    }
+
+    private func sweep(at index: Int) -> Double {
+        Curves.sweep(
+            time: time, cycle: sweepCycle,
+            delay: Indicator.levelSweepStagger * Double(10 - index))
     }
 }
 
@@ -332,7 +379,6 @@ private struct TraceView: View {
 
     @ObservedObject var model: IndicatorModel
     let time: TimeInterval
-    /// Während der Aufnahme wandert die Spur, danach steht sie.
     let running: Bool
 
     private let sweepDuration: Double = 1.3
@@ -345,7 +391,6 @@ private struct TraceView: View {
         }
         .frame(width: Indicator.traceWidth, height: Indicator.traceHeight)
         .clipped()
-        // Links ausblenden, damit die Werte nicht abgeschnitten verschwinden.
         .mask(
             LinearGradient(
                 stops: [
@@ -361,7 +406,7 @@ private struct TraceView: View {
         HStack(spacing: Indicator.barSpacing) {
             ForEach(Array(model.trace.enumerated()), id: \.offset) { index, value in
                 RoundedRectangle(cornerRadius: Indicator.barRadius, style: .continuous)
-                    .fill(TraceColors.color(atSlot: index, of: model.trace.count))
+                    .fill(model.palette.traceColor(atSlot: index, of: model.trace.count))
                     .frame(
                         width: Indicator.barWidth,
                         height: Indicator.minimumBarHeight
@@ -370,8 +415,7 @@ private struct TraceView: View {
         }
         .frame(
             width: Indicator.traceWidth, height: Indicator.traceHeight, alignment: .trailing)
-        // Zwischen zwei Werten linear weiterschieben: der neueste Wert kommt von rechts
-        // herein, statt an Ort und Stelle aufzuploppen.
+        // Slide between values so the newest enters from the right instead of popping in.
         .offset(x: running ? Indicator.slotWidth * (1 - progress) : 0)
     }
 
@@ -380,7 +424,6 @@ private struct TraceView: View {
         return CGFloat(min(1, max(0, since / Indicator.advanceInterval)))
     }
 
-    /// Lichtstreifen über der stehenden Spur.
     private var sweep: some View {
         let phase = (time.truncatingRemainder(dividingBy: sweepDuration)) / sweepDuration
         let travel = Indicator.traceWidth + sweepWidth
@@ -394,38 +437,7 @@ private struct TraceView: View {
     }
 }
 
-/// Farbe hängt am Platz, nicht am Wert: ein wandernder Strich wechselt die Farbe,
-/// dadurch bleibt das Farbbild ruhig.
-enum TraceColors {
-
-    private static let stops: [(r: Double, g: Double, b: Double)] = [
-        (0xB4 / 255, 0x78 / 255, 0xEC / 255),
-        (0x90 / 255, 0x84 / 255, 0xF5 / 255),
-        (0x6F / 255, 0x99 / 255, 0xFA / 255),
-    ]
-
-    static func color(atSlot index: Int, of count: Int) -> Color {
-        guard count > 1 else { return rgb(stops[0]) }
-        let position = Double(index) / Double(count - 1)
-        let scaled = position * Double(stops.count - 1)
-        let lower = min(Int(scaled), stops.count - 2)
-        let fraction = scaled - Double(lower)
-        let a = stops[lower]
-        let b = stops[lower + 1]
-        return rgb(
-            (
-                r: a.r + (b.r - a.r) * fraction,
-                g: a.g + (b.g - a.g) * fraction,
-                b: a.b + (b.b - a.b) * fraction
-            ))
-    }
-
-    private static func rgb(_ value: (r: Double, g: Double, b: Double)) -> Color {
-        Color(.sRGB, red: value.r, green: value.g, blue: value.b, opacity: 1)
-    }
-}
-
-/// Escape: die Darstellung fällt auf eine Reihe Punkte zusammen und verschwindet.
+/// Discard: the bars collapse into a row of dots.
 private struct CollapsedRow: View {
 
     @ObservedObject var model: IndicatorModel
@@ -437,9 +449,10 @@ private struct CollapsedRow: View {
         let elapsed = time - model.stateChangedAt.timeIntervalSinceReferenceDate
         let progress = min(1, max(0, elapsed / collapseDuration))
 
-        let count = model.style == .trace ? 6 : 11
+        let style = displayedStyle
+        let count = style == .trace ? 6 : 11
         let spacing =
-            (Indicator.contentWidth(for: model.style) - CGFloat(count) * Indicator.barWidth)
+            (Indicator.contentWidth(for: style) - CGFloat(count) * Indicator.barWidth)
             / CGFloat(count - 1)
 
         return HStack(spacing: spacing) {
@@ -451,12 +464,14 @@ private struct CollapsedRow: View {
             }
         }
         .frame(
-            width: Indicator.contentWidth(for: model.style),
-            height: Indicator.contentHeight(for: model.style), alignment: .center)
+            width: Indicator.contentWidth(for: style),
+            height: Indicator.contentHeight(for: style), alignment: .center)
     }
 
-    /// Ausgangshöhe: der Wert, der an dieser Stelle zuletzt stand.
+    private var displayedStyle: WaveformStyle { model.isFile ? .levels : model.style }
+
     private func startHeight(_ index: Int) -> CGFloat {
+        if model.isFile { return Indicator.transcribingBarHeight }
         let count = model.style == .trace ? 6 : 11
         let source = model.trace.suffix(count)
         guard index < source.count else { return 3 }
@@ -466,7 +481,7 @@ private struct CollapsedRow: View {
     }
 }
 
-// MARK: - Bausteine
+// MARK: - Glyphs
 
 private struct TimeLabel: View {
     let seconds: Int
@@ -496,4 +511,42 @@ private struct ErrorGlyph: View {
     }
 }
 
+/// Hit-tested by the panel, not here: the SwiftUI view ignores mouse events.
+private struct CancelGlyph: View {
+    let hovered: Bool
 
+    var body: some View {
+        ZStack {
+            Circle()
+                .fill(Color.white.opacity(hovered ? 0.10 : 0))
+            ForEach([45.0, -45.0], id: \.self) { angle in
+                RoundedRectangle(cornerRadius: 0.75, style: .continuous)
+                    .frame(width: 11, height: 1.5)
+                    .rotationEffect(.degrees(angle))
+            }
+            .foregroundStyle(Color.white.opacity(hovered ? 0.95 : 0.55))
+        }
+        .frame(width: Indicator.cancelSize, height: Indicator.cancelSize)
+    }
+}
+
+private struct Checkmark: View {
+    let opacity: Double
+
+    private let color = Color(.sRGB, red: 0x30 / 255, green: 0xD1 / 255, blue: 0x58 / 255)
+
+    var body: some View {
+        // L shape, arms 7 and 13 pt, rotated −45°.
+        Path { path in
+            path.move(to: CGPoint(x: 1.5, y: 1.5))
+            path.addLine(to: CGPoint(x: 1.5, y: 8.5))
+            path.addLine(to: CGPoint(x: 14.5, y: 8.5))
+        }
+        .stroke(color, style: StrokeStyle(lineWidth: 3, lineCap: .round, lineJoin: .round))
+        .frame(width: 16, height: 10)
+        .rotationEffect(.degrees(-45))
+        .offset(y: -1)
+        .frame(width: 20, height: 16)
+        .opacity(opacity)
+    }
+}

@@ -1,17 +1,19 @@
 /* Menü */
 "menu.status.last" = "Zuletzt: %@";
 "menu.status.hotkeyInactive" = "Kürzel inaktiv, Bedienungshilfen fehlen";
-"menu.resetPosition" = "Pille wieder unten mittig";
+"menu.resetPosition" = "Position zurücksetzen";
 "menu.copyLast" = "Letztes Diktat kopieren";
+"menu.transcribeFile" = "Audiodatei transkribieren…";
 "menu.setup" = "Einrichtung öffnen…";
 "menu.status.notInstalled" = "Modell noch nicht installiert";
 "menu.settings" = "Einstellungen…";
-"menu.quit" = "Pegel beenden";
+"menu.quit" = "Beenden";
 
 /* Status */
 "status.ready" = "Bereit";
 "status.recording" = "Nimmt auf…";
 "status.transcribing" = "Transkribiert…";
+"status.transcribingFile" = "Transkribiert… %d %%";
 "status.finished" = "Eingefügt";
 "status.discarded" = "Verworfen";
 "status.failed" = "Fehler";
@@ -27,13 +29,18 @@
 /* Fehler */
 "error.microphone" = "Kein Mikrofonzugriff";
 "error.tooShort" = "Zu kurz";
+"error.unreadableFile" = "%@ ist nicht lesbar";
 "error.noSpeech" = "Nichts verstanden";
 "error.modelLoading" = "Modell lädt noch";
 "error.noInputDevice" = "Kein Mikrofon gefunden.";
+"error.deviceUnavailable" = "Mikrofon %@ ist nicht verfügbar";
+"error.silentInput" = "Kein Signal von %@";
+"error.noAudioData" = "Keine Daten von %@";
 "error.notReady" = "Das Sprachmodell ist noch nicht geladen.";
 
 /* Fenster */
-"window.settings" = "Pegel Einstellungen";
+"window.settings" = "Einstellungen";
+"window.about" = "Über Pegel";
 "window.onboarding" = "Pegel einrichten";
 
 /* Einstellungen */
@@ -42,6 +49,14 @@
 "settings.hotkey.reset" = "Zurück auf %@";
 "settings.ptt.label" = "Halten ab";
 "settings.ptt.explanation" = "Kürzer gedrückt schaltet die Aufnahme um und lässt sie laufen. Länger gedrückt ist Push-to-talk: Loslassen beendet.";
+"settings.section.audio" = "Audio";
+"settings.input.label" = "Mikrofon";
+"settings.input.systemDefault" = "Systemvorgabe";
+"settings.input.current" = "Nimmt auf über %@";
+"settings.input.narrowband" = "Schmalband unter 16 kHz, typisch für Bluetooth-Headsets im Telefonprofil. Die Erkennung leidet deutlich.";
+"settings.input.missing" = "Das gewählte Mikrofon ist nicht angeschlossen. Bis dahin gilt die Systemvorgabe.";
+"settings.input.none" = "Kein Eingabegerät gefunden.";
+"settings.input.explanation" = "Bei Systemvorgabe folgt Pegel dem Mikrofon, das macOS gerade wählt. Das kann ein Bluetooth-Lautsprecher sein, der sich gerade verbunden hat: macOS stuft ihn als Headset ein und macht ihn zur Eingabe. Ein festes Gerät schließt das aus.";
 "settings.section.appearance" = "Darstellung";
 "settings.waveform" = "Wellenform";
 "settings.showTime" = "Laufende Zeit anzeigen";
@@ -57,6 +72,10 @@
 "waveform.trace.explanation" = "Zeigt die letzten zwei Sekunden. Man sieht auch rückwirkend, ob Ton angekommen ist.";
 "waveform.levels" = "Pegelreihe";
 "waveform.levels.explanation" = "Elf Striche, deren Welle nach rechts läuft. Ruhiger und schmaler, zeigt nur den Moment.";
+
+/* Audio-Geräte */
+"audio.device.systemDefault" = "Systemvorgabe";
+"audio.device.unknown" = "Unbekanntes Gerät";
 
 /* Berechtigungen */
 "permission.microphone" = "Mikrofon";
@@ -77,6 +96,7 @@
 "button.allow" = "Erlauben";
 "button.openSettings" = "Systemeinstellungen…";
 "hotkey.pressKey" = "Taste drücken…";
+"hotkey.clickToChange" = "Zum Ändern klicken";
 "key.space" = "Leertaste";
 "key.unknown" = "Taste %ld";
 "hotkey.reject.noModifier" = "Ohne Modifier-Taste würde das Kürzel jede normale Eingabe abfangen.";
@@ -113,3 +133,40 @@
 
 /* Installationsfehler */
 "install.error.offline" = "Keine Verbindung zum Netz. Pegel braucht das Netz nur für diesen einen Download.";
+
+/* Audiodatei */
+"file.panel.message" = "Das Ergebnis landet in der Zwischenablage.";
+"file.panel.prompt" = "Transkribieren";
+
+/* Farben */
+"settings.palette" = "Farben";
+"palette.standard" = "Standard";
+"palette.standard.note" = "Violett → Blau";
+"palette.citrus" = "Zitrus";
+"palette.citrus.note" = "Limette → Zitrone → Orange";
+"palette.lagoon" = "Lagune";
+"palette.lagoon.note" = "Türkis → Azur → Blau";
+"palette.ember" = "Glut";
+"palette.ember.note" = "Magenta → Koralle → Bernstein";
+"palette.neon" = "Neon";
+"palette.neon.note" = "Pink → Violett → Indigo";
+"palette.fern" = "Farn";
+"palette.fern.note" = "Mint → Grün → Petrol";
+
+/* Einstellungen und Über */
+"menu.about" = "Über Pegel…";
+"settings.tab.general" = "Allgemein";
+"settings.tab.appearance" = "Aussehen";
+"about.tagline" = "Diktieren auf dem Mac, vollständig lokal.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Version %@";
+"about.versionBuild" = "Version %@ (%@)";
+"about.repository" = "Pegel auf GitHub";
+"about.coffee" = "Buy me a coffee";
+"about.section.updates" = "Updates";
+"about.updates.automatic" = "Automatisch nach Updates suchen";
+"about.updates.check" = "Nach Updates suchen…";
+"about.updates.privacy" = "Beim Suchen ruft Pegel eine Datei bei GitHub ab. GitHub sieht dabei deine IP-Adresse, die Pegel- und die macOS-Version. Audio und Text verlassen diesen Mac nie.";
+"about.section.licenses" = "Lizenzen";
+"about.licenses.explanation" = "Pegel steht unter der MIT-Lizenz. Enthalten sind FluidAudio (Apache 2.0) mit seinen Abhängigkeiten. Das Sprachmodell Parakeet TDT 0.6B v3 stammt von NVIDIA, die Core-ML-Fassung von FluidInference, beide unter CC-BY-4.0.";
+"about.licenses.show" = "Lizenztexte im Finder zeigen";

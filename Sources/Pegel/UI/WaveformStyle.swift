@@ -1,10 +1,9 @@
 import Foundation
 
-/// Welche Darstellung die Pille zeigt.
 enum WaveformStyle: String, CaseIterable, Codable, Sendable {
-    /// Elf Striche, deren Welle nach rechts läuft (Entwurf 9a). Voreinstellung.
+    /// Eleven bars with a wave running right. Default.
     case levels
-    /// Die Pegelspur der letzten zwei Sekunden, läuft nach links (Entwurf 6c).
+    /// Level trace of the last two seconds, moving left.
     case trace
 
     var label: String {

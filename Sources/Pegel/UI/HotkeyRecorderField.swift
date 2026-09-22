@@ -2,17 +2,47 @@ import AppKit
 import CoreGraphics
 import SwiftUI
 
-/// Feld, das den nächsten Tastendruck als Kürzel aufnimmt.
-///
-/// Bewusst über einen lokalen Responder und nicht über den globalen Event-Tap:
-/// beim Aufnehmen soll die Taste ausschließlich hier ankommen.
-struct HotkeyRecorderField: NSViewRepresentable {
+/// Records the next key press as a shortcut and shows it as keycaps. Capture needs a
+/// real AppKit responder; the keycaps are drawn in SwiftUI.
+struct HotkeyRecorderField: View {
 
     @Binding var binding: HotkeyBinding
     var onRejected: (String) -> Void
-    /// Meldet an, solange das Feld auf eine Taste wartet. Der Aufrufer legt damit
-    /// den globalen Tap still, sonst fängt der das bisherige Kürzel ab und startet
-    /// eine Aufnahme, statt dass die Taste hier ankommt.
+    var onCaptureChanged: (Bool) -> Void = { _ in }
+
+    @State private var capturing = false
+
+    var body: some View {
+        KeyCaptureView(
+            binding: $binding, onRejected: onRejected,
+            onCaptureChanged: { active in
+                capturing = active
+                onCaptureChanged(active)
+            }
+        )
+        .overlay {
+            Group {
+                if capturing {
+                    Text(L("hotkey.pressKey"))
+                        .foregroundStyle(.secondary)
+                } else {
+                    KeycapRow(labels: binding.keycapLabels)
+                }
+            }
+            // Clicks go to the capture view underneath.
+            .allowsHitTesting(false)
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(capturing ? L("hotkey.pressKey") : binding.displayString)
+    }
+}
+
+/// A local responder, not the global tap, so the key arrives only here.
+private struct KeyCaptureView: NSViewRepresentable {
+
+    @Binding var binding: HotkeyBinding
+    var onRejected: (String) -> Void
+    /// True while waiting; the caller suspends the global tap meanwhile.
     var onCaptureChanged: (Bool) -> Void = { _ in }
 
     func makeNSView(context: Context) -> RecorderView {
@@ -29,7 +59,6 @@ struct HotkeyRecorderField: NSViewRepresentable {
     }
 
     func updateNSView(_ view: RecorderView, context: Context) {
-        view.display = binding.displayString
         view.needsDisplay = true
     }
 
@@ -37,7 +66,6 @@ struct HotkeyRecorderField: NSViewRepresentable {
 
         var onCapture: ((HotkeyBinding) -> Void)?
         var onCaptureChanged: ((Bool) -> Void)?
-        var display: String = "" { didSet { needsDisplay = true } }
         private var isRecording = false {
             didSet {
                 guard isRecording != oldValue else { return }
@@ -46,7 +74,26 @@ struct HotkeyRecorderField: NSViewRepresentable {
             }
         }
 
+        private var isHovered = false { didSet { needsDisplay = true } }
+
         override var acceptsFirstResponder: Bool { true }
+
+        override func updateTrackingAreas() {
+            super.updateTrackingAreas()
+            trackingAreas.forEach(removeTrackingArea)
+            addTrackingArea(
+                NSTrackingArea(
+                    rect: .zero,
+                    options: [.mouseEnteredAndExited, .activeInKeyWindow, .inVisibleRect],
+                    owner: self))
+        }
+
+        override func mouseEntered(with event: NSEvent) { isHovered = true }
+        override func mouseExited(with event: NSEvent) { isHovered = false }
+
+        override func resetCursorRects() {
+            addCursorRect(bounds, cursor: .pointingHand)
+        }
         override var intrinsicContentSize: NSSize { NSSize(width: 150, height: 26) }
 
         override func mouseDown(with event: NSEvent) {
@@ -59,8 +106,7 @@ struct HotkeyRecorderField: NSViewRepresentable {
             return true
         }
 
-        /// Auch wenn das Feld aus dem Fenster verschwindet, muss der Tap wieder
-        /// scharf werden. Sonst bliebe das Kürzel nach dem Schließen tot.
+        /// Re-arm the tap when the field leaves the window, or the shortcut stays dead.
         override func viewDidMoveToWindow() {
             super.viewDidMoveToWindow()
             if window == nil { isRecording = false }
@@ -74,7 +120,7 @@ struct HotkeyRecorderField: NSViewRepresentable {
             isRecording = false
             window?.makeFirstResponder(nil)
 
-            if event.keyCode == 53 { return }  // Escape bricht das Aufnehmen ab
+            if event.keyCode == 53 { return }    // Escape cancels capture
 
             var flags: CGEventFlags = []
             if event.modifierFlags.contains(.command) { flags.insert(.maskCommand) }
@@ -87,22 +133,63 @@ struct HotkeyRecorderField: NSViewRepresentable {
 
         override func draw(_ dirtyRect: NSRect) {
             let path = NSBezierPath(roundedRect: bounds.insetBy(dx: 1, dy: 1), xRadius: 6, yRadius: 6)
-            (isRecording ? NSColor.controlAccentColor.withAlphaComponent(0.12)
-                : NSColor.controlBackgroundColor).setFill()
+            let fill: NSColor
+            if isRecording {
+                fill = NSColor.controlAccentColor.withAlphaComponent(0.12)
+            } else if isHovered {
+                fill = NSColor.controlAccentColor.withAlphaComponent(0.06)
+            } else {
+                fill = NSColor.controlBackgroundColor
+            }
+            fill.setFill()
             path.fill()
             (isRecording ? NSColor.controlAccentColor : NSColor.separatorColor).setStroke()
             path.lineWidth = isRecording ? 2 : 1
             path.stroke()
-
-            let text = isRecording ? L("hotkey.pressKey") : display
-            let attributes: [NSAttributedString.Key: Any] = [
-                .font: NSFont.systemFont(ofSize: 13),
-                .foregroundColor: isRecording ? NSColor.secondaryLabelColor : NSColor.labelColor,
-            ]
-            let size = text.size(withAttributes: attributes)
-            text.draw(
-                at: NSPoint(x: (bounds.width - size.width) / 2, y: (bounds.height - size.height) / 2),
-                withAttributes: attributes)
         }
+    }
+}
+
+struct KeycapRow: View {
+    let labels: [String]
+
+    var body: some View {
+        HStack(spacing: 5) {
+            ForEach(Array(labels.enumerated()), id: \.offset) { _, label in
+                Keycap(label: label)
+            }
+        }
+    }
+}
+
+struct Keycap: View {
+    let label: String
+
+    @Environment(\.colorScheme) private var colorScheme
+
+    var body: some View {
+        let dark = colorScheme == .dark
+        Text(label)
+            .font(.system(size: 14, weight: .medium))
+            .foregroundStyle(.primary)
+            .padding(.horizontal, 8)
+            .frame(minWidth: 28, minHeight: 26)
+            .background(
+                RoundedRectangle(cornerRadius: 6, style: .continuous)
+                    .fill(
+                        LinearGradient(
+                            colors: dark
+                                ? [Color(white: 0.36), Color(white: 0.30)]
+                                : [Color.white, Color(white: 0.94)],
+                            startPoint: .top, endPoint: .bottom))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 6, style: .continuous)
+                    .strokeBorder(
+                        dark ? Color.white.opacity(0.10) : Color.black.opacity(0.16),
+                        lineWidth: 0.5)
+            )
+            // Hard shadow as the bottom edge, so the key stands rather than floats.
+            .shadow(color: .black.opacity(dark ? 0.55 : 0.22), radius: 0, y: 1)
     }
 }

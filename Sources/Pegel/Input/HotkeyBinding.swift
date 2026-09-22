@@ -2,33 +2,20 @@ import Carbon.HIToolbox
 import CoreGraphics
 import Foundation
 
-/// Ein Tastenkürzel als Keycode plus Modifier.
-///
-/// Keycodes sind Positionsangaben und layout-unabhängig: Keycode 10 ist auf jeder
-/// ISO-Tastatur die Taste links neben der 1, auf deutschem Layout also `^ °`.
-/// Für die Anzeige muss der Keycode deshalb über das aktive Layout aufgelöst werden.
+/// A shortcut as keycode plus modifiers. Keycodes are layout-independent positions,
+/// so the label is resolved through the active layout.
 struct HotkeyBinding: Codable, Equatable, Sendable {
     var keyCode: UInt16
-    /// Rohwert der `CGEventFlags`, bereits auf die relevanten Bits maskiert.
+    /// Raw `CGEventFlags`, masked to the relevant bits.
     var modifiers: UInt64
 
-    /// Nur diese Modifier werden verglichen. CapsLock, Fn und die Numpad-Bits
-    /// bleiben außen vor, sonst reagiert das Kürzel je nach Tastaturzustand nicht.
+    /// Caps Lock, Fn and numpad bits are ignored so keyboard state doesn't matter.
     static let relevantFlags: CGEventFlags = [
         .maskCommand, .maskAlternate, .maskControl, .maskShift,
     ]
 
-    /// ⌥ + Leertaste.
-    ///
-    /// Die Leertaste sitzt auf jeder Tastatur an derselben Stelle, ANSI wie ISO wie
-    /// JIS. Das frühere ⌘ plus `^ °` war Keycode 10 (`kVK_ISO_Section`) und existiert
-    /// auf amerikanischen ANSI-Tastaturen physisch nicht.
-    ///
-    /// ⌥Leertaste ist in macOS kein Kurzbefehl: ⌘Leertaste gehört Spotlight,
-    /// ⌃Leertaste und ⌃⌥Leertaste der Eingabequellen-Umschaltung, ⌘⌥Leertaste dem
-    /// Finder-Suchfenster. Übrig bleibt, dass ⌥Leertaste beim Tippen ein geschütztes
-    /// Leerzeichen einfügt; das fängt der Event-Tap ab. Bekannter Konflikt außerhalb
-    /// des Systems: Alfred belegt ⌥Leertaste vorgegeben.
+    /// ⌥Space: same position on ANSI, ISO and JIS, and not a system shortcut. Alfred
+    /// uses it by default. The old ⌘ + `^` (keycode 10) doesn't exist on ANSI keyboards.
     static let fallback = HotkeyBinding(
         keyCode: UInt16(kVK_Space),
         modifiers: CGEventFlags.maskAlternate.rawValue
@@ -41,7 +28,7 @@ struct HotkeyBinding: Codable, Equatable, Sendable {
         return eventFlags.intersection(Self.relevantFlags).rawValue == modifiers
     }
 
-    // MARK: - Anzeige
+    // MARK: - Display
 
     var displayString: String {
         var result = ""
@@ -53,7 +40,18 @@ struct HotkeyBinding: Codable, Equatable, Sendable {
         return result + Self.keyLabel(for: keyCode)
     }
 
-    /// Löst einen Keycode gegen das aktive Tastaturlayout auf.
+    /// macOS order: ⌃ ⌥ ⇧ ⌘, then the key.
+    var keycapLabels: [String] {
+        let f = flags
+        var labels: [String] = []
+        if f.contains(.maskControl) { labels.append("⌃") }
+        if f.contains(.maskAlternate) { labels.append("⌥") }
+        if f.contains(.maskShift) { labels.append("⇧") }
+        if f.contains(.maskCommand) { labels.append("⌘") }
+        labels.append(Self.keyLabel(for: keyCode))
+        return labels
+    }
+
     static func keyLabel(for keyCode: UInt16) -> String {
         if let special = specialKeyNames[Int(keyCode)] { return special }
         if let translated = translate(keyCode: keyCode), !translated.isEmpty {
@@ -94,15 +92,14 @@ struct HotkeyBinding: Codable, Equatable, Sendable {
             }
 
             guard run() == noErr else { return nil }
-            // Tottasten (auf deutschem Layout etwa `^`) liefern beim ersten Durchlauf
-            // nichts und geben ihr Zeichen erst mit dem gesetzten Dead-Key-State heraus.
+            // Dead keys (e.g. `^` on German layouts) only yield their character on a second pass.
             if length == 0, deadKeyState != 0, run() != noErr { return nil }
             guard length > 0 else { return nil }
             return String(utf16CodeUnits: chars, count: length)
         }
     }
 
-    // MARK: - Persistenz
+    // MARK: - Persistence
 
     private static let defaultsKey = "hotkeyBinding"
 
@@ -118,9 +115,8 @@ struct HotkeyBinding: Codable, Equatable, Sendable {
         UserDefaults.standard.set(data, forKey: Self.defaultsKey)
     }
 
-    // MARK: - Validierung
+    // MARK: - Validation
 
-    /// Kürzel, die das System oder die App unbrauchbar machen würden.
     func rejectionReason() -> String? {
         let f = flags
         let hasModifier = !f.intersection(Self.relevantFlags).isEmpty
