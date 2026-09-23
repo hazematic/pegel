@@ -64,6 +64,7 @@ final class AppState: ObservableObject {
     @Published var waveformStyle: WaveformStyle = .load()
     @Published var indicatorShowsTime: Bool = UserDefaults.standard.indicatorShowsTime
     @Published var palette: PillPalette = .load()
+    @Published var playsTones: Bool = UserDefaults.standard.playsTones
     /// nil means system default.
     @Published var inputDeviceUID: String? = UserDefaults.standard.inputDeviceUID
     @Published var inputDevices: [AudioInputDevice] = []
@@ -104,6 +105,7 @@ final class AppState: ObservableObject {
     func persistAppearance() {
         waveformStyle.save()
         palette.save()
+        UserDefaults.standard.playsTones = playsTones
         UserDefaults.standard.indicatorShowsTime = indicatorShowsTime
     }
 

@@ -165,6 +165,12 @@ struct AppearanceSettingsView: View {
                 Text(L("settings.showTime.explanation"))
                     .font(.callout)
                     .foregroundStyle(.secondary)
+
+                Toggle(L("settings.tones"), isOn: $state.playsTones)
+
+                Text(L("settings.tones.explanation"))
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
             }
         }
         .formStyle(.grouped)
@@ -172,6 +178,11 @@ struct AppearanceSettingsView: View {
         .onChange(of: state.waveformStyle) { _, _ in state.persistAppearance() }
         .onChange(of: state.indicatorShowsTime) { _, _ in state.persistAppearance() }
         .onChange(of: state.palette) { _, _ in state.persistAppearance() }
+        .onChange(of: state.playsTones) { _, playing in
+            state.persistAppearance()
+            // Hear it right away when switching it on.
+            if playing { Tones.start() }
+        }
     }
 }
 

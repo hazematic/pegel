@@ -62,6 +62,8 @@
 "settings.waveform" = "Waveform";
 "settings.showTime" = "Show elapsed time";
 "settings.showTime.explanation" = "Without the time the pill is narrower and works entirely without digits.";
+"settings.tones" = "Tones";
+"settings.tones.explanation" = "A quiet two-note cue confirms start and end of a recording: rising at the start, falling on release. Quiet enough to stay out of the transcript.";
 "settings.section.permissions" = "Permissions";
 "settings.permissions.explanation" = "Accessibility for pasting and for locating the insertion point, input monitoring for the system-wide shortcut.";
 "settings.section.model" = "Model";

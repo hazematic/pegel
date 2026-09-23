@@ -372,6 +372,7 @@ final class RecordingController {
             return
         }
 
+        if appState.playsTones { Tones.start() }
         mode = .awaitingRelease(since: Date())
         monitor.isRecording = true
         appState.session = .recording
@@ -382,6 +383,7 @@ final class RecordingController {
 
     private func finishRecording() {
         guard monitor.isRecording else { return }
+        if appState.playsTones { Tones.stop() }
         let recording = capture.stop()
         monitor.isRecording = false
         mode = .idle

@@ -62,6 +62,8 @@
 "settings.waveform" = "Wellenform";
 "settings.showTime" = "Laufende Zeit anzeigen";
 "settings.showTime.explanation" = "Ohne Zeit wird die Pille schmaler und kommt ganz ohne Ziffern aus.";
+"settings.tones" = "Töne";
+"settings.tones.explanation" = "Ein leiser Zweiklang bestätigt Start und Ende der Aufnahme: aufsteigend beim Start, absteigend beim Loslassen. Leise genug, um nicht im Diktat zu landen.";
 "settings.section.permissions" = "Berechtigungen";
 "settings.permissions.explanation" = "Bedienungshilfen für das Einfügen und die Position der Einfügemarke, Eingabeüberwachung für das systemweite Tastenkürzel.";
 "settings.section.model" = "Modell";
