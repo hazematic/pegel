@@ -58,12 +58,20 @@
 "settings.input.missing" = "The selected microphone is not connected. Until it is, the system default applies.";
 "settings.input.none" = "No input device found.";
 "settings.input.explanation" = "On system default Pegel follows whichever microphone macOS picks. That can be a Bluetooth speaker that just connected: macOS treats it as a headset and makes it the input. A fixed device rules that out.";
+"settings.section.tones" = "Tones";
+"settings.tones.label" = "Tone";
+"settings.tones.play" = "Play";
+"settings.tones.explanation" = "A short, quiet tone confirms start and end of a recording: rising at the start, falling on release. The list runs from most subtle to most noticeable. All are quiet enough to stay out of the transcript.";
+"tones.off" = "Off";
+"tones.cricket" = "Cricket";
+"tones.pebble" = "Pebble";
+"tones.drop" = "Drop";
+"tones.moss" = "Moss";
+"tones.glass" = "Glass";
 "settings.section.appearance" = "Appearance";
 "settings.waveform" = "Waveform";
 "settings.showTime" = "Show elapsed time";
 "settings.showTime.explanation" = "Without the time the pill is narrower and works entirely without digits.";
-"settings.tones" = "Tones";
-"settings.tones.explanation" = "A quiet two-note cue confirms start and end of a recording: rising at the start, falling on release. Quiet enough to stay out of the transcript.";
 "settings.section.permissions" = "Permissions";
 "settings.permissions.explanation" = "Accessibility for pasting and for locating the insertion point, input monitoring for the system-wide shortcut.";
 "settings.section.model" = "Model";
@@ -144,17 +152,11 @@
 /* Colours */
 "settings.palette" = "Colours";
 "palette.standard" = "Standard";
-"palette.standard.note" = "Violet → Blue";
 "palette.citrus" = "Citrus";
-"palette.citrus.note" = "Lime → Lemon → Orange";
 "palette.lagoon" = "Lagoon";
-"palette.lagoon.note" = "Turquoise → Azure → Blue";
 "palette.ember" = "Ember";
-"palette.ember.note" = "Magenta → Coral → Amber";
 "palette.neon" = "Neon";
-"palette.neon.note" = "Pink → Violet → Indigo";
 "palette.fern" = "Fern";
-"palette.fern.note" = "Mint → Green → Teal";
 
 /* Settings and About */
 "menu.about" = "About Pegel…";

@@ -11,7 +11,6 @@ enum PillPalette: String, CaseIterable, Codable, Sendable {
     case fern
 
     var label: String { L("palette.\(rawValue)") }
-    var note: String { L("palette.\(rawValue).note") }
 
     /// Eleven steps taken from the design handoff, not computed, to match it exactly.
     var levelColors: [UInt32] {

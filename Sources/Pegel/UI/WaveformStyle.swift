@@ -39,16 +39,6 @@ enum WaveformStyle: String, CaseIterable, Codable, Sendable {
 extension UserDefaults {
     private static let showsTimeKey = "indicatorShowsTime"
 
-    private static let tonesKey = "playsTones"
-
-    var playsTones: Bool {
-        get {
-            guard object(forKey: Self.tonesKey) != nil else { return true }
-            return bool(forKey: Self.tonesKey)
-        }
-        set { set(newValue, forKey: Self.tonesKey) }
-    }
-
     var indicatorShowsTime: Bool {
         get {
             guard object(forKey: Self.showsTimeKey) != nil else { return true }

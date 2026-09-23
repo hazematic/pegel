@@ -58,12 +58,20 @@
 "settings.input.missing" = "Das gewählte Mikrofon ist nicht angeschlossen. Bis dahin gilt die Systemvorgabe.";
 "settings.input.none" = "Kein Eingabegerät gefunden.";
 "settings.input.explanation" = "Bei Systemvorgabe folgt Pegel dem Mikrofon, das macOS gerade wählt. Das kann ein Bluetooth-Lautsprecher sein, der sich gerade verbunden hat: macOS stuft ihn als Headset ein und macht ihn zur Eingabe. Ein festes Gerät schließt das aus.";
+"settings.section.tones" = "Töne";
+"settings.tones.label" = "Ton";
+"settings.tones.play" = "Anhören";
+"settings.tones.explanation" = "Ein kurzer, leiser Ton bestätigt Start und Ende der Aufnahme: steigend beim Start, fallend beim Loslassen. Die Liste geht vom dezentesten zum deutlichsten. Alle sind leise genug, um nicht im Diktat zu landen.";
+"tones.off" = "Aus";
+"tones.cricket" = "Grille";
+"tones.pebble" = "Kiesel";
+"tones.drop" = "Tropfen";
+"tones.moss" = "Moos";
+"tones.glass" = "Glas";
 "settings.section.appearance" = "Darstellung";
 "settings.waveform" = "Wellenform";
 "settings.showTime" = "Laufende Zeit anzeigen";
 "settings.showTime.explanation" = "Ohne Zeit wird die Pille schmaler und kommt ganz ohne Ziffern aus.";
-"settings.tones" = "Töne";
-"settings.tones.explanation" = "Ein leiser Zweiklang bestätigt Start und Ende der Aufnahme: aufsteigend beim Start, absteigend beim Loslassen. Leise genug, um nicht im Diktat zu landen.";
 "settings.section.permissions" = "Berechtigungen";
 "settings.permissions.explanation" = "Bedienungshilfen für das Einfügen und die Position der Einfügemarke, Eingabeüberwachung für das systemweite Tastenkürzel.";
 "settings.section.model" = "Modell";
@@ -144,17 +152,11 @@
 /* Farben */
 "settings.palette" = "Farben";
 "palette.standard" = "Standard";
-"palette.standard.note" = "Violett → Blau";
 "palette.citrus" = "Zitrus";
-"palette.citrus.note" = "Limette → Zitrone → Orange";
 "palette.lagoon" = "Lagune";
-"palette.lagoon.note" = "Türkis → Azur → Blau";
 "palette.ember" = "Glut";
-"palette.ember.note" = "Magenta → Koralle → Bernstein";
 "palette.neon" = "Neon";
-"palette.neon.note" = "Pink → Violett → Indigo";
 "palette.fern" = "Farn";
-"palette.fern.note" = "Mint → Grün → Petrol";
 
 /* Einstellungen und Über */
 "menu.about" = "Über Pegel…";
