@@ -6,6 +6,19 @@
     <description>Updates for Pegel</description>
     <language>en</language>
     <item>
+      <title>Version 1.1.0</title>
+      <pubDate>Wed, 23 Sep 2026 11:35:14 +0200</pubDate>
+      <sparkle:version>1.1.0</sparkle:version>
+      <sparkle:shortVersionString>1.1.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[<ul>
+<li>Quiet start and stop tones, five sets to choose from or off, with a preview in the settings.</li>
+<li>Colour palettes shown as round swatches with their name.</li>
+<li>Fixed: releasing Command a moment before the key sometimes inserted only "^" instead of the dictation.</li>
+</ul>]]></description>
+      <enclosure url="https://github.com/hazematic/pegel/releases/download/v1.1.0/Pegel-1.1.0.zip" type="application/octet-stream" sparkle:edSignature="nX7iSLs3AzccEOflEJpWr50WwDASvfpN3ygsoYFhN4p8wtX8lwsqBGnA84+KUXhYEWVmuqD37+mN4rFjYksLCA==" length="10897234" />
+    </item>
+    <item>
       <title>Version 1.0.1</title>
       <pubDate>Tue, 22 Sep 2026 18:24:58 +0200</pubDate>
       <sparkle:version>1.0.1</sparkle:version>
