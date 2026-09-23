@@ -105,13 +105,23 @@ final class HotkeyMonitor {
         switch type {
         case .keyDown:
             if isRecording || isTranscribingFile, keyCode == Int64(kVK_Escape) {
-                onSignal?(.escape)
+                signal(.escape)
+                return nil
+            }
+            let isRepeat = event.getIntegerValueField(.keyboardEventAutorepeat) != 0
+            // Letting go of ⌘ a moment before the key leaves repeats without the modifier.
+            // Passed through, such a repeat reaches the app as a bare `^`, a dead key that
+            // then swallows the ⌘V of the insertion. Only repeats: after a missed release,
+            // a fresh press must still be judged by its modifiers.
+            if isRepeat, swallowedKeyDown,
+                UInt16(truncatingIfNeeded: keyCode) == binding.keyCode
+            {
                 return nil
             }
             guard binding.matches(keyCode: keyCode, flags: event.flags) else { return pass }
             swallowedKeyDown = true
-            if event.getIntegerValueField(.keyboardEventAutorepeat) != 0 { return nil }
-            onSignal?(.hotkeyDown)
+            if isRepeat { return nil }
+            signal(.hotkeyDown)
             return nil
 
         case .keyUp:
@@ -119,11 +129,18 @@ final class HotkeyMonitor {
             guard swallowedKeyDown, UInt16(truncatingIfNeeded: keyCode) == binding.keyCode
             else { return pass }
             swallowedKeyDown = false
-            onSignal?(.hotkeyUp)
+            signal(.hotkeyUp)
             return nil
 
         default:
             return pass
         }
+    }
+
+    /// Starting a recording builds the audio engine, which can take long enough after a
+    /// wake for macOS to disable the tap and hand the key to the app. So the callback
+    /// only decides and returns; the work runs right after, in order.
+    private func signal(_ signal: Signal) {
+        DispatchQueue.main.async { [weak self] in self?.onSignal?(signal) }
     }
 }
