@@ -48,6 +48,12 @@ cp "$BIN_PATH/Pegel" "$APP/Contents/MacOS/Pegel"
 mkdir -p "$APP/Contents/Frameworks"
 ditto "$BIN_PATH/Sparkle.framework" "$APP/Contents/Frameworks/Sparkle.framework"
 install_name_tool -add_rpath "@executable_path/../Frameworks" "$APP/Contents/MacOS/Pegel"
+
+# SwiftPM records the deployment target as SDK version. macOS judges the look by that
+# field and would draw Pegel in the pre-26 compatibility style; use the real SDK.
+vtool -set-build-version macos 14.0 "$(xcrun --show-sdk-version)" -replace \
+    -output "$APP/Contents/MacOS/Pegel.sdk" "$APP/Contents/MacOS/Pegel"
+mv "$APP/Contents/MacOS/Pegel.sdk" "$APP/Contents/MacOS/Pegel"
 for bundle in "$BIN_PATH"/*.bundle; do
     [ -e "$bundle" ] && cp -R "$bundle" "$APP/Contents/Resources/"
 done
