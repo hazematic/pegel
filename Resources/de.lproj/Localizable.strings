@@ -61,6 +61,7 @@
 "settings.section.tones" = "Töne";
 "settings.tones.label" = "Ton";
 "settings.tones.play" = "Anhören";
+"settings.tones.volume" = "Lautstärke";
 "settings.tones.explanation" = "Ein kurzer, leiser Ton bestätigt Start und Ende der Aufnahme: steigend beim Start, fallend beim Loslassen. Die Liste geht vom dezentesten zum deutlichsten. Alle sind leise genug, um nicht im Diktat zu landen.";
 "tones.off" = "Aus";
 "tones.cricket" = "Grille";

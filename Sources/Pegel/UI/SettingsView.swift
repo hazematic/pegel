@@ -101,13 +101,25 @@ struct GeneralSettingsView: View {
                         Button {
                             if let toneSet = state.toneSet { Tones.preview(toneSet) }
                         } label: {
-                            Image(systemName: "play.fill")
+                            Image(systemName: "play.circle")
+                                .font(.system(size: 17))
+                                .foregroundStyle(.secondary)
                         }
+                        .buttonStyle(.borderless)
                         .help(L("settings.tones.play"))
                         .accessibilityLabel(L("settings.tones.play"))
                         .disabled(state.toneSet == nil)
                     }
                 }
+
+                LabeledContent(L("settings.tones.volume")) {
+                    ToneVolumeSlider(value: $state.toneVolume) {
+                        // Hear the level once the knob is let go.
+                        if let toneSet = state.toneSet { Tones.preview(toneSet) }
+                    }
+                    .frame(width: 240)
+                }
+                .disabled(state.toneSet == nil)
 
                 Text(L("settings.tones.explanation"))
                     .font(.callout)
@@ -148,6 +160,7 @@ struct GeneralSettingsView: View {
             state.persistThreshold()
         }
         .onChange(of: state.inputDeviceUID) { _, _ in state.persistInputDevice() }
+        .onChange(of: state.toneVolume) { _, _ in state.persistToneVolume() }
         .onChange(of: state.toneSet) { _, toneSet in
             state.persistToneSet()
             // Hear the choice right away.
@@ -210,6 +223,43 @@ struct AppearanceSettingsView: View {
 /// Shared width, so switching tabs only changes the height.
 enum SettingsLayout {
     static let width: CGFloat = 520
+}
+
+/// Like the sliders in System Settings: from macOS 26 with tick marks, the capsule knob
+/// and the accent fill; earlier systems get their own plain slider.
+private struct ToneVolumeSlider: View {
+    @Binding var value: Double
+    let onRelease: () -> Void
+    private let step = 0.25
+
+    var body: some View {
+        if #available(macOS 26, *) {
+            Slider(
+                value: $value, in: Tones.volumeRange, step: step,
+                label: { Text(L("settings.tones.volume")) },
+                minimumValueLabel: { speaker("speaker.fill") },
+                maximumValueLabel: { speaker("speaker.wave.3.fill") },
+                tick: { SliderTick($0) },
+                onEditingChanged: released)
+            .labelsHidden()
+        } else {
+            Slider(
+                value: $value, in: Tones.volumeRange, step: step,
+                label: { Text(L("settings.tones.volume")) },
+                minimumValueLabel: { speaker("speaker.fill") },
+                maximumValueLabel: { speaker("speaker.wave.3.fill") },
+                onEditingChanged: released)
+            .labelsHidden()
+        }
+    }
+
+    private func speaker(_ name: String) -> some View {
+        Image(systemName: name).foregroundStyle(.secondary)
+    }
+
+    private func released(_ editing: Bool) {
+        if !editing { onRelease() }
+    }
 }
 
 private struct PermissionRow: View {

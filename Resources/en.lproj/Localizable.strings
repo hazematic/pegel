@@ -61,6 +61,7 @@
 "settings.section.tones" = "Tones";
 "settings.tones.label" = "Tone";
 "settings.tones.play" = "Play";
+"settings.tones.volume" = "Volume";
 "settings.tones.explanation" = "A short, quiet tone confirms start and end of a recording: rising at the start, falling on release. The list runs from most subtle to most noticeable. All are quiet enough to stay out of the transcript.";
 "tones.off" = "Off";
 "tones.cricket" = "Cricket";

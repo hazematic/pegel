@@ -28,6 +28,11 @@ enum ToneSet: String, CaseIterable, Sendable {
 enum Tones {
 
     private static let sampleRate: Double = 44_100
+
+    /// Loudness factor on top of each set's level, set in the settings.
+    static let volumeRange: ClosedRange<Double> = 0.5...3
+    /// Tones are synthesised at the top of the range; the player can only attenuate.
+    private static var headroom: Double { volumeRange.upperBound }
     private static var players: [String: AVAudioPlayer] = [:]
     private static var pendingPreview: DispatchWorkItem?
 
@@ -46,10 +51,12 @@ enum Tones {
     private static func play(_ set: ToneSet, rising: Bool) {
         let key = "\(set.rawValue).\(rising)"
         if players[key] == nil {
-            players[key] = try? AVAudioPlayer(data: wav(samples(set, rising: rising)))
+            let loud = samples(set, rising: rising).map { $0 * headroom }
+            players[key] = try? AVAudioPlayer(data: wav(loud))
             players[key]?.prepareToPlay()
         }
         guard let player = players[key] else { return }
+        player.volume = Float(UserDefaults.standard.toneVolume / headroom)
         player.currentTime = 0
         player.play()
     }
@@ -156,6 +163,17 @@ enum Tones {
 
 extension UserDefaults {
     private static let toneSetKey = "toneSet"
+    private static let toneVolumeKey = "toneVolume"
+
+    /// 1 is the level in the table; missing means 1.
+    var toneVolume: Double {
+        get {
+            let value = double(forKey: Self.toneVolumeKey)
+            guard value > 0 else { return 1 }
+            return min(max(value, Tones.volumeRange.lowerBound), Tones.volumeRange.upperBound)
+        }
+        set { set(newValue, forKey: Self.toneVolumeKey) }
+    }
 
     /// nil means off.
     var toneSet: ToneSet? {

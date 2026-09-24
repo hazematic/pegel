@@ -66,6 +66,7 @@ final class AppState: ObservableObject {
     @Published var palette: PillPalette = .load()
     /// nil means off.
     @Published var toneSet: ToneSet? = UserDefaults.standard.toneSet
+    @Published var toneVolume: Double = UserDefaults.standard.toneVolume
     /// nil means system default.
     @Published var inputDeviceUID: String? = UserDefaults.standard.inputDeviceUID
     @Published var inputDevices: [AudioInputDevice] = []
@@ -105,6 +106,10 @@ final class AppState: ObservableObject {
 
     func persistToneSet() {
         UserDefaults.standard.toneSet = toneSet
+    }
+
+    func persistToneVolume() {
+        UserDefaults.standard.toneVolume = toneVolume
     }
 
     func persistAppearance() {
