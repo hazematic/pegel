@@ -20,7 +20,7 @@ enum TextInjector {
         let held = CGEventSource.flagsState(.hidSystemState)
             .intersection([.maskAlternate, .maskShift, .maskControl, .maskCommand])
         log.notice(
-            "Inserting \(payload.count) characters into \(NSWorkspace.shared.frontmostApplication?.bundleIdentifier ?? "?", privacy: .public), held modifiers: \(held.rawValue)"
+            "Inserting \(payload.count) characters into \(CaretTracker.activeApplication?.bundleIdentifier ?? "?", privacy: .public), held modifiers: \(held.rawValue)"
         )
         let pasteboard = NSPasteboard.general
         let backup = snapshot(of: pasteboard)
@@ -52,21 +52,26 @@ enum TextInjector {
             !closingCharacters.contains(first)
         else { return "" }
 
+        // Logs only what kind of context was found, never the text itself.
+        let space: String
+        let found: String
         switch CaretTracker.precedingContext() {
         case .startOfText:
-            return ""
+            (space, found) = ("", "start of text")
         case .character(let previous):
-            if previous.isWhitespace || openingCharacters.contains(previous) { return "" }
-            return " "
+            let open = previous.isWhitespace || openingCharacters.contains(previous)
+            (space, found) = (open ? "" : " ", "character")
         case .unknown:
             // Some apps hide their text; fall back to our own last insertion.
-            return fallbackSpace()
+            (space, found) = (fallbackSpace(), "unknown, fallback")
         }
+        log.notice("Preceding context: \(found, privacy: .public), leading space: \(!space.isEmpty)")
+        return space
     }
 
     private static func fallbackSpace() -> String {
         guard let last = lastInsertion,
-            last.app == NSWorkspace.shared.frontmostApplication?.bundleIdentifier,
+            last.app == CaretTracker.activeApplication?.bundleIdentifier,
             Date().timeIntervalSince(last.at) < 120,
             let previous = last.text.last, !previous.isWhitespace,
             !openingCharacters.contains(previous)
@@ -79,7 +84,7 @@ enum TextInjector {
     private static func rememberInsertion(of text: String) {
         lastInsertion = (
             text: text,
-            app: NSWorkspace.shared.frontmostApplication?.bundleIdentifier,
+            app: CaretTracker.activeApplication?.bundleIdentifier,
             at: Date()
         )
     }

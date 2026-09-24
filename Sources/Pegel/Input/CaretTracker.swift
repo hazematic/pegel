@@ -63,7 +63,7 @@ enum CaretTracker {
     }
 
     private static func focusedWindow() -> AXUIElement? {
-        guard let pid = NSWorkspace.shared.frontmostApplication?.processIdentifier else {
+        guard let pid = activeApplication?.processIdentifier else {
             return nil
         }
         let application = AXUIElementCreateApplication(pid)
@@ -99,11 +99,16 @@ enum CaretTracker {
 
     /// Read from the actual text rather than inferred: the user may have typed or moved since.
     static func precedingContext() -> PrecedingContext {
-        enableManualAccessibilityForFrontmostApp()
-        guard AXIsProcessTrusted(), let element = focusedElement() else { return .unknown }
+        let justEnabled = enableManualAccessibilityForFrontmostApp()
+        guard AXIsProcessTrusted() else { return .unknown }
+        // Chromium builds its tree only after the first request; ask once more.
+        if justEnabled, selectedRange(in: focusedElement()) == nil {
+            Thread.sleep(forTimeInterval: 0.15)
+        }
+        guard let element = focusedElement() else { return .unknown }
 
         guard let range = selectedRange(in: element) else { return .unknown }
-        guard range.location > 0 else { return .startOfText }
+        guard range.location > 0, !showsOnlyGeneratedText(element) else { return .startOfText }
 
         guard
             let text = string(
@@ -116,18 +121,70 @@ enum CaretTracker {
 
     // MARK: - Accessibility
 
+    /// System-wide first, then the frontmost app: Electron apps such as VS Code answer
+    /// the system-wide query with kAXErrorCannotComplete but report focus to their own element.
     private static func focusedElement() -> AXUIElement? {
-        let systemWide = AXUIElementCreateSystemWide()
+        if let element = focusedElement(of: AXUIElementCreateSystemWide()) { return element }
+        guard let pid = activeApplication?.processIdentifier else {
+            return nil
+        }
+        return focusedElement(of: AXUIElementCreateApplication(pid))
+    }
+
+    private static func focusedElement(of owner: AXUIElement) -> AXUIElement? {
         var value: CFTypeRef?
         guard
             AXUIElementCopyAttributeValue(
-                systemWide, kAXFocusedUIElementAttribute as CFString, &value) == .success,
+                owner, kAXFocusedUIElementAttribute as CFString, &value) == .success,
             let element = value
         else { return nil }
         return (element as! AXUIElement)
     }
 
-    private static func selectedRange(in element: AXUIElement) -> CFRange? {
+    /// Chromium reports a CSS placeholder as field content, with the caret behind it.
+    /// Generated text has a negative ChromeAXNodeId, typed text a positive one.
+    private static func showsOnlyGeneratedText(_ field: AXUIElement) -> Bool {
+        guard nodeId(of: field) != nil else { return false }
+        var generated = false
+        var budget = 64
+        func visit(_ element: AXUIElement, depth: Int) -> Bool {
+            guard depth < 4, budget > 0 else { return true }
+            for child in children(of: element) {
+                budget -= 1
+                if role(of: child) == kAXStaticTextRole {
+                    guard let id = nodeId(of: child), id < 0 else { return false }
+                    generated = true
+                }
+                guard visit(child, depth: depth + 1) else { return false }
+            }
+            return true
+        }
+        return visit(field, depth: 0) && generated
+    }
+
+    private static func nodeId(of element: AXUIElement) -> Int? {
+        var value: CFTypeRef?
+        guard AXUIElementCopyAttributeValue(element, "ChromeAXNodeId" as CFString, &value) == .success
+        else { return nil }
+        return (value as? NSNumber)?.intValue ?? (value as? String).flatMap { Int($0) }
+    }
+
+    private static func role(of element: AXUIElement) -> String? {
+        var value: CFTypeRef?
+        guard AXUIElementCopyAttributeValue(element, kAXRoleAttribute as CFString, &value) == .success
+        else { return nil }
+        return value as? String
+    }
+
+    private static func children(of element: AXUIElement) -> [AXUIElement] {
+        var value: CFTypeRef?
+        guard AXUIElementCopyAttributeValue(element, kAXChildrenAttribute as CFString, &value) == .success
+        else { return [] }
+        return value as? [AXUIElement] ?? []
+    }
+
+    private static func selectedRange(in element: AXUIElement?) -> CFRange? {
+        guard let element else { return nil }
         var value: CFTypeRef?
         guard
             AXUIElementCopyAttributeValue(
@@ -170,17 +227,27 @@ enum CaretTracker {
         return rect
     }
 
+    /// The app that receives keystrokes. After unlocking the screen, macOS can keep
+    /// reporting loginwindow as frontmost until another app is activated; the menu bar
+    /// owner is right in that state.
+    static var activeApplication: NSRunningApplication? {
+        NSWorkspace.shared.menuBarOwningApplication ?? NSWorkspace.shared.frontmostApplication
+    }
+
     /// Chromium/Electron apps (Obsidian, Slack, VS Code) expose no text without this.
     private static var manualAccessibilityEnabled: Set<pid_t> = []
 
-    static func enableManualAccessibilityForFrontmostApp() {
-        guard let pid = NSWorkspace.shared.frontmostApplication?.processIdentifier,
+    /// True when this call switched it on, i.e. the app's tree may not exist yet.
+    @discardableResult
+    static func enableManualAccessibilityForFrontmostApp() -> Bool {
+        guard let pid = activeApplication?.processIdentifier,
             !manualAccessibilityEnabled.contains(pid)
-        else { return }
+        else { return false }
 
         manualAccessibilityEnabled.insert(pid)
         let application = AXUIElementCreateApplication(pid)
         AXUIElementSetAttributeValue(
             application, "AXManualAccessibility" as CFString, kCFBooleanTrue)
+        return true
     }
 }
