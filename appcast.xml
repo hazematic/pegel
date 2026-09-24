@@ -6,6 +6,22 @@
     <description>Updates for Pegel</description>
     <language>en</language>
     <item>
+      <title>Version 1.2.0</title>
+      <pubDate>Thu, 24 Sep 2026 22:18:33 +0200</pubDate>
+      <sparkle:version>1.2.0</sparkle:version>
+      <sparkle:shortVersionString>1.2.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[<ul>
+<li>Volume control for the start and stop tones.</li>
+<li>Updates can now install automatically; a second switch in About Pegel.</li>
+<li>On macOS 26 and later, Pegel now uses the current system design.</li>
+<li>Percentages and milliseconds follow your region's number format.</li>
+<li>Dictating in Bulgarian, Russian, Ukrainian or Greek no longer turns the text into Latin letters when that language is among your system languages.</li>
+<li>Fixed: a space was inserted at the start of empty fields in VS Code, Slack and other Chromium-based apps.</li>
+</ul>]]></description>
+      <enclosure url="https://github.com/hazematic/pegel/releases/download/v1.2.0/Pegel-1.2.0.zip" type="application/octet-stream" sparkle:edSignature="rOmIsaLoNCYwmw5yLrbWKomwoa8/mys0NTsSKaOBUTZMNB3X5zRip1eWQPQJ1g0tZ/1VLerMrdKcI4nfjnAtAQ==" length="10916244" />
+    </item>
+    <item>
       <title>Version 1.1.0</title>
       <pubDate>Wed, 23 Sep 2026 11:35:14 +0200</pubDate>
       <sparkle:version>1.1.0</sparkle:version>
