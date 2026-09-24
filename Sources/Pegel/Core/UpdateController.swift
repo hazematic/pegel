@@ -14,6 +14,15 @@ final class UpdateController: NSObject, ObservableObject {
             updater.automaticallyChecksForUpdates = automaticallyChecks
         }
     }
+    /// Download found updates quietly and install them on quit, instead of asking.
+    /// Only takes effect while automatic checks are on.
+    @Published var automaticallyInstalls: Bool = false {
+        didSet {
+            guard let updater, updater.automaticallyDownloadsUpdates != automaticallyInstalls
+            else { return }
+            updater.automaticallyDownloadsUpdates = automaticallyInstalls
+        }
+    }
     @Published private(set) var canCheck = false
 
     /// No feed URL without a bundle (e.g. `swift run`); Sparkle would show an error.
@@ -29,7 +38,14 @@ final class UpdateController: NSObject, ObservableObject {
         let controller = SPUStandardUpdaterController(
             startingUpdater: true, updaterDelegate: nil, userDriverDelegate: self)
         self.controller = controller
-        automaticallyChecks = controller.updater.automaticallyChecksForUpdates
+        // Followed rather than read once: Sparkle's update window has its own checkbox
+        // for automatic installs, and the About window must show what it changed.
+        controller.updater.publisher(for: \.automaticallyChecksForUpdates)
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$automaticallyChecks)
+        controller.updater.publisher(for: \.automaticallyDownloadsUpdates)
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$automaticallyInstalls)
         controller.updater.publisher(for: \.canCheckForUpdates)
             .receive(on: DispatchQueue.main)
             .assign(to: &$canCheck)

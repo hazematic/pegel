@@ -71,7 +71,7 @@
 "settings.section.appearance" = "Darstellung";
 "settings.waveform" = "Wellenform";
 "settings.showTime" = "Laufende Zeit anzeigen";
-"settings.showTime.explanation" = "Ohne Zeit wird die Pille schmaler und kommt ganz ohne Ziffern aus.";
+"settings.showTime.explanation" = "Ohne Zeit wird die Pegelanzeige schmaler und kommt ganz ohne Ziffern aus.";
 "settings.section.permissions" = "Berechtigungen";
 "settings.permissions.explanation" = "Bedienungshilfen für das Einfügen und die Position der Einfügemarke, Eingabeüberwachung für das systemweite Tastenkürzel.";
 "settings.section.model" = "Modell";
@@ -170,6 +170,8 @@
 "about.coffee" = "Buy me a coffee";
 "about.section.updates" = "Updates";
 "about.updates.automatic" = "Automatisch nach Updates suchen";
+"about.updates.install" = "Updates automatisch installieren";
+"about.updates.install.explanation" = "Pegel lädt ein gefundenes Update im Hintergrund und installiert es beim nächsten Beenden. Ausgeschaltet fragt Pegel vorher. Wirkt nur mit der automatischen Suche.";
 "about.updates.check" = "Nach Updates suchen…";
 "about.updates.privacy" = "Beim Suchen ruft Pegel eine Datei bei GitHub ab. GitHub sieht dabei deine IP-Adresse, die Pegel- und die macOS-Version. Audio und Text verlassen diesen Mac nie.";
 "about.section.licenses" = "Lizenzen";

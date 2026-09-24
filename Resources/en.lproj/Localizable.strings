@@ -71,7 +71,7 @@
 "settings.section.appearance" = "Appearance";
 "settings.waveform" = "Waveform";
 "settings.showTime" = "Show elapsed time";
-"settings.showTime.explanation" = "Without the time the pill is narrower and works entirely without digits.";
+"settings.showTime.explanation" = "Without the time the level meter is narrower and works entirely without digits.";
 "settings.section.permissions" = "Permissions";
 "settings.permissions.explanation" = "Accessibility for pasting and for locating the insertion point, input monitoring for the system-wide shortcut.";
 "settings.section.model" = "Model";
@@ -170,6 +170,8 @@
 "about.coffee" = "Buy me a coffee";
 "about.section.updates" = "Updates";
 "about.updates.automatic" = "Check for Updates Automatically";
+"about.updates.install" = "Install Updates Automatically";
+"about.updates.install.explanation" = "Pegel downloads a found update in the background and installs it the next time it quits. When off, Pegel asks first. Only works with automatic checks.";
 "about.updates.check" = "Check for Updates…";
 "about.updates.privacy" = "To check, Pegel fetches a file from GitHub. GitHub sees your IP address and the Pegel and macOS versions. Audio and text never leave this Mac.";
 "about.section.licenses" = "Licences";

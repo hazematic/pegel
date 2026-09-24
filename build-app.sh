@@ -147,8 +147,9 @@ fi
 
 # DMG for manual downloads: drag to Applications. The ZIP stays for Sparkle and
 # Homebrew. Finder layout via AppleScript, which may ask to control Finder once.
+# No version in the name: the website links releases/latest/download/Pegel.dmg.
 if [ "$DO_DMG" = true ]; then
-    DMG="build/Pegel-$VERSION.dmg"
+    DMG="build/Pegel.dmg"
     STAGE="$(mktemp -d)/Pegel"
     mkdir -p "$STAGE/.background"
     ditto "$APP" "$STAGE/Pegel.app"

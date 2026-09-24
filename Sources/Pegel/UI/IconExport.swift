@@ -178,12 +178,15 @@ enum ReadmeFigure {
         let style: WaveformStyle
         let showsTime: Bool
         let time: TimeInterval
+        var fileProgress: Double? = nil
 
         var body: some View {
             let model = IndicatorModel()
             model.session = session
             model.style = style
             model.showsTime = showsTime
+            model.isFile = fileProgress != nil
+            model.fileProgress = fileProgress ?? 0
             model.isVisible = true
             model.level = 0.8
             model.recordingStartedAt = Date(timeIntervalSinceNow: -12)
@@ -220,6 +223,11 @@ enum ReadmeFigure {
                 Pill(session: session, style: .levels, showsTime: false, time: time),
                 named: name, to: directory)
         }
+        try write(
+            Pill(
+                session: .transcribing, style: .levels, showsTime: false, time: 0.45,
+                fileProgress: 0.68),
+            named: "pill-file", to: directory)
 
         for style in WaveformStyle.allCases {
             for showsTime in [false, true] {

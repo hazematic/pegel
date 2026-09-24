@@ -6,6 +6,12 @@ struct AboutView: View {
     @ObservedObject var updates: UpdateController
     let showLicences: () -> Void
 
+    private var installBinding: Binding<Bool> {
+        Binding(
+            get: { updates.automaticallyChecks && updates.automaticallyInstalls },
+            set: { updates.automaticallyInstalls = $0 })
+    }
+
     private static let repository = URL(string: "https://github.com/hazematic/pegel")!
     private static let coffee = URL(string: "https://buymeacoffee.com/hazematic")!
 
@@ -40,6 +46,13 @@ struct AboutView: View {
             Section(L("about.section.updates")) {
                 Toggle(L("about.updates.automatic"), isOn: $updates.automaticallyChecks)
                     .disabled(!updates.isAvailable)
+                // Shown off without checks, since it does nothing then; the stored
+                // value stays and returns with the checks.
+                Toggle(L("about.updates.install"), isOn: installBinding)
+                    .disabled(!updates.isAvailable || !updates.automaticallyChecks)
+                Text(L("about.updates.install.explanation"))
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
                 Button(L("about.updates.check")) { updates.checkForUpdates() }
                     .disabled(!updates.canCheck)
                 Text(L("about.updates.privacy"))
@@ -56,7 +69,7 @@ struct AboutView: View {
             }
         }
         .formStyle(.grouped)
-        .frame(width: 460, height: 560)
+        .frame(width: 460, height: 640)
     }
 
     private static var versionLine: String {
