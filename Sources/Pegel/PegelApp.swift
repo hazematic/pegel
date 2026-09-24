@@ -52,7 +52,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, Obse
 
         // The three services look alike from outside; the log shows which one is missing.
         Logger(subsystem: "io.github.hazematic.pegel", category: "l10n").info(
-            "Language: \(Bundle.main.preferredLocalizations.joined(separator: ","), privacy: .public), system preference: \(Locale.preferredLanguages.joined(separator: ","), privacy: .public)"
+            "Language: \(Bundle.main.preferredLocalizations.joined(separator: ","), privacy: .public), system preference: \(Locale.preferredLanguages.joined(separator: ","), privacy: .public), script filter: \(TranscriptionService.languageHint == nil ? "none" : "Latin", privacy: .public)"
         )
 
         Logger(subsystem: "io.github.hazematic.pegel", category: "permissions").info(

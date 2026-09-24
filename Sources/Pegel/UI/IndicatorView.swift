@@ -194,7 +194,7 @@ struct IndicatorView: View {
         case .transcribing:
             FileProgressRow(model: model, time: time)
             HStack(spacing: Indicator.cancelSpacing) {
-                Text("\(Int(model.fileProgress * 100)) %")
+                Text(percentText(model.fileProgress))
                     .font(.system(size: 12.5).monospacedDigit())
                     .foregroundStyle(Color.white.opacity(0.65))
                     .frame(width: Indicator.percentWidth, alignment: .trailing)

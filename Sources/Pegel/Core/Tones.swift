@@ -30,7 +30,7 @@ enum Tones {
     private static let sampleRate: Double = 44_100
 
     /// Loudness factor on top of each set's level, set in the settings.
-    static let volumeRange: ClosedRange<Double> = 0.5...3
+    nonisolated static let volumeRange: ClosedRange<Double> = 0.5...3
     /// Tones are synthesised at the top of the range; the player can only attenuate.
     private static var headroom: Double { volumeRange.upperBound }
     private static var players: [String: AVAudioPlayer] = [:]

@@ -25,8 +25,18 @@ actor TranscriptionService {
     private let converter = AudioConverter()
     private let log = Logger(subsystem: "io.github.hazematic.pegel", category: "asr")
 
-    /// Filters out candidates from other scripts; English terms in German stay intact.
-    private let languageHint: Language = .german
+    /// Script filter only, read per call so a changed system language applies at once.
+    /// Latin when every known system language writes Latin, otherwise none: the Cyrillic
+    /// and Greek filters reject Latin letters and wreck English terms (spec 4.11).
+    /// .german is the Latin filter alone; .french would also block English words.
+    nonisolated static var languageHint: Language? {
+        let scripts = Set(
+            Locale.preferredLanguages.compactMap { identifier in
+                Locale.Language(identifier: identifier).languageCode
+                    .flatMap { Language(rawValue: $0.identifier) }?.script
+            })
+        return scripts == [.latin] ? .german : nil
+    }
 
     var isReady: Bool { manager != nil }
 
@@ -113,7 +123,7 @@ actor TranscriptionService {
         var decoderState = try TdtDecoderState(decoderLayers: await manager.decoderLayerCount)
         let started = Date()
         let result = try await manager.transcribe(
-            prepared, decoderState: &decoderState, language: languageHint)
+            prepared, decoderState: &decoderState, language: Self.languageHint)
         let elapsed = Date().timeIntervalSince(started)
 
         // Real-time factor on this machine; published benchmarks come from newer hardware.
@@ -159,7 +169,7 @@ actor TranscriptionService {
         var decoderState = try TdtDecoderState(decoderLayers: await manager.decoderLayerCount)
         let started = Date()
         let result = try await manager.transcribe(
-            url, decoderState: &decoderState, language: languageHint)
+            url, decoderState: &decoderState, language: Self.languageHint)
         let elapsed = Date().timeIntervalSince(started)
         if elapsed > 0 {
             log.info(

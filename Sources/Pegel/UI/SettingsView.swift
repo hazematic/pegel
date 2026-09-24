@@ -33,7 +33,9 @@ struct GeneralSettingsView: View {
                     HStack {
                         Slider(value: $state.pushToTalkThreshold, in: 0.15...0.8, step: 0.05)
                             .frame(width: 160)
-                        Text("\(Int(state.pushToTalkThreshold * 1000)) ms")
+                        Text(
+                            Duration.milliseconds(Int(state.pushToTalkThreshold * 1000))
+                                .formatted(.units(allowed: [.milliseconds], width: .abbreviated)))
                             .monospacedDigit()
                             .foregroundStyle(.secondary)
                     }

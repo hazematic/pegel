@@ -13,13 +13,13 @@
 "status.ready" = "Ready";
 "status.recording" = "Recording…";
 "status.transcribing" = "Transcribing…";
-"status.transcribingFile" = "Transcribing… %d %%";
+"status.transcribingFile" = "Transcribing… %@";
 "status.finished" = "Inserted";
 "status.discarded" = "Discarded";
 "status.failed" = "Error";
 
 /* Model preparation */
-"preparing.downloading" = "Downloading model %ld %%";
+"preparing.downloading" = "Downloading model %@";
 "preparing.loading" = "Initialising model";
 "preparing.warmup" = "Warming up model";
 "preparing.waiting" = "Model not installed";

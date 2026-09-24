@@ -13,13 +13,13 @@
 "status.ready" = "Bereit";
 "status.recording" = "Nimmt auf…";
 "status.transcribing" = "Transkribiert…";
-"status.transcribingFile" = "Transkribiert… %d %%";
+"status.transcribingFile" = "Transkribiert… %@";
 "status.finished" = "Eingefügt";
 "status.discarded" = "Verworfen";
 "status.failed" = "Fehler";
 
 /* Modellvorbereitung */
-"preparing.downloading" = "Modell wird geladen %ld %%";
+"preparing.downloading" = "Modell wird geladen %@";
 "preparing.loading" = "Modell wird initialisiert";
 "preparing.warmup" = "Modell wird vorgewärmt";
 "preparing.waiting" = "Modell nicht installiert";

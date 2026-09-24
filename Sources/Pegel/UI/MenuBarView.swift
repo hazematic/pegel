@@ -64,7 +64,7 @@ struct MenuBarView: View {
         case .recording: return L("status.recording")
         case .transcribing:
             if let progress = state.fileProgress {
-                return L("status.transcribingFile", Int(progress * 100))
+                return L("status.transcribingFile", percentText(progress))
             }
             return L("status.transcribing")
         case .finished: return L("status.finished")

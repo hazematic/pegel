@@ -191,7 +191,7 @@ struct SetupView: View {
                     .foregroundStyle(.secondary)
                 Spacer()
                 if case .downloading(let fraction, _, _) = state.install {
-                    Text("\(Int(fraction * 100)) %")
+                    Text(percentText(fraction))
                         .font(.callout)
                         .monospacedDigit()
                         .foregroundStyle(.secondary)

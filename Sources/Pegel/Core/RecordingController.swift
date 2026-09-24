@@ -271,7 +271,7 @@ final class RecordingController {
         case .downloading(let fraction, let completed, let total):
             appState.install = .downloading(
                 fraction: fraction, completedFiles: completed, totalFiles: total)
-            appState.session = .preparing(L("preparing.downloading", Int(fraction * 100)))
+            appState.session = .preparing(L("preparing.downloading", percentText(fraction)))
         case .compiling:
             appState.install = .compiling
             appState.session = .preparing(L("preparing.compiling"))
