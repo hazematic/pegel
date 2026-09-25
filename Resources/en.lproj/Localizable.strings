@@ -169,6 +169,10 @@
 "about.versionBuild" = "Version %@ (%@)";
 "about.repository" = "Pegel on GitHub";
 "about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Translation";
+"about.translation.machine" = "This translation was created automatically and has not been checked by a native speaker.";
+"about.translation.report" = "Report a Mistake";
+"about.translation.useEnglish" = "Use Pegel in English…";
 "about.section.updates" = "Updates";
 "about.updates.automatic" = "Check for Updates Automatically";
 "about.updates.install" = "Install Updates Automatically";

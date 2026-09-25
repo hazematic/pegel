@@ -82,8 +82,8 @@
 /* Wellenformen */
 "waveform.trace" = "Spur";
 "waveform.trace.explanation" = "Zeigt die letzten zwei Sekunden. Man sieht auch rückwirkend, ob Ton angekommen ist.";
-"waveform.levels" = "Pegelreihe";
-"waveform.levels.explanation" = "Elf Striche, deren Welle nach rechts läuft. Ruhiger und schmaler, zeigt nur den Moment.";
+"waveform.levels" = "Balken";
+"waveform.levels.explanation" = "Elf Balken, deren Welle nach rechts läuft. Ruhiger und schmaler, zeigt nur den Moment.";
 
 /* Audio-Geräte */
 "audio.device.systemDefault" = "Systemvorgabe";
@@ -169,6 +169,10 @@
 "about.versionBuild" = "Version %@ (%@)";
 "about.repository" = "Pegel auf GitHub";
 "about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Übersetzung";
+"about.translation.machine" = "Diese Übersetzung wurde automatisch erstellt und nicht von Muttersprachlern geprüft.";
+"about.translation.report" = "Fehler melden";
+"about.translation.useEnglish" = "Pegel auf Englisch verwenden…";
 "about.section.updates" = "Updates";
 "about.updates.automatic" = "Automatisch nach Updates suchen";
 "about.updates.install" = "Updates automatisch installieren";
