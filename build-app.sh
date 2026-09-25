@@ -68,6 +68,13 @@ for lproj in Resources/*.lproj; do
     [ -d "$lproj" ] && cp -R "$lproj" "$APP/Contents/Resources/"
 done
 
+# Sparkle replaces whichever copy is running. A test build in build/ has no feed, or an
+# update lands there and the next build deletes it, leaving /Applications behind.
+FEED_KEY=""
+if [ "$DO_INSTALL" = true ] || [ "$DO_ZIP" = true ] || [ "$DO_DMG" = true ]; then
+    FEED_KEY="    <key>SUFeedURL</key><string>https://raw.githubusercontent.com/hazematic/pegel/main/appcast.xml</string>"
+fi
+
 cat > "$APP/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -87,7 +94,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
     <key>NSHighResolutionCapable</key><true/>
     <key>LSUIElement</key><true/>
     <!-- Sparkle: no automatic checks, no prompt, no system profile. -->
-    <key>SUFeedURL</key><string>https://raw.githubusercontent.com/hazematic/pegel/main/appcast.xml</string>
+$FEED_KEY
     <key>SUPublicEDKey</key><string>M5CY+6kw4VpY9xdB2ZpNO+2OjZ1KmI3rf7W9C+6t/CE=</string>
     <key>SUEnableAutomaticChecks</key><false/>
     <key>SUEnableSystemProfiling</key><false/>
