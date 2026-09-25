@@ -1,0 +1,184 @@
+/* Menu */
+"menu.status.last" = "Dernier : %@";
+"menu.status.hotkeyInactive" = "Raccourci inactif, autorisation Accessibilité manquante";
+"menu.resetPosition" = "Réinitialiser la position";
+"menu.copyLast" = "Copier la dernière dictée";
+"menu.transcribeFile" = "Transcrire un fichier audio…";
+"menu.setup" = "Configurer…";
+"menu.status.notInstalled" = "Modèle pas encore installé";
+"menu.settings" = "Réglages…";
+"menu.quit" = "Quitter";
+
+/* Status */
+"status.ready" = "Prêt";
+"status.recording" = "Enregistrement…";
+"status.transcribing" = "Transcription…";
+"status.transcribingFile" = "Transcription… %@";
+"status.finished" = "Inséré";
+"status.discarded" = "Annulé";
+"status.failed" = "Erreur";
+
+/* Model preparation */
+"preparing.downloading" = "Téléchargement du modèle %@";
+"preparing.loading" = "Initialisation du modèle";
+"preparing.warmup" = "Préchauffage du modèle";
+"preparing.waiting" = "Modèle non installé";
+"preparing.listing" = "Préparation du téléchargement";
+"preparing.compiling" = "Compilation du modèle";
+
+/* Errors */
+"error.microphone" = "Pas d’accès au micro";
+"error.tooShort" = "Trop court";
+"error.unreadableFile" = "Impossible de lire %@";
+"error.noSpeech" = "Rien n’a été reconnu";
+"error.modelLoading" = "Modèle en cours de chargement";
+"error.noInputDevice" = "Aucun micro trouvé.";
+"error.deviceUnavailable" = "Le micro %@ n’est pas disponible";
+"error.silentInput" = "Aucun signal de %@";
+"error.noAudioData" = "Aucune donnée de %@";
+"error.notReady" = "Le modèle n’est pas encore chargé.";
+
+/* Windows */
+"window.settings" = "Réglages";
+"window.about" = "À propos de Pegel";
+"window.licences" = "Licences";
+"window.onboarding" = "Configurer Pegel";
+
+/* Settings */
+"settings.section.hotkey" = "Raccourci clavier";
+"settings.hotkey.label" = "Démarrer et arrêter la dictée";
+"settings.hotkey.reset" = "Rétablir %@";
+"settings.ptt.label" = "Maintien à partir de";
+"settings.ptt.explanation" = "Un appui bref lance ou arrête l’enregistrement. Un appui plus long fonctionne comme un talkie-walkie : relâcher la touche y met fin.";
+"settings.section.audio" = "Audio";
+"settings.input.label" = "Micro";
+"settings.input.systemDefault" = "Par défaut du système";
+"settings.input.current" = "Enregistrement via %@";
+"settings.input.narrowband" = "Bande étroite sous 16 kHz, typique des casques Bluetooth en profil téléphone. La reconnaissance en pâtit nettement.";
+"settings.input.missing" = "Le micro sélectionné n’est pas connecté. En attendant, celui par défaut du système est utilisé.";
+"settings.input.none" = "Aucun périphérique d’entrée trouvé.";
+"settings.input.explanation" = "Réglé par défaut du système, Pegel suit le micro choisi par macOS. Il peut s’agir d’une enceinte Bluetooth qui vient de se connecter : macOS la traite comme un casque et en fait l’entrée. Un périphérique fixe évite cela.";
+"settings.section.tones" = "Sons";
+"settings.tones.label" = "Son";
+"settings.tones.play" = "Écouter";
+"settings.tones.volume" = "Volume";
+"settings.tones.explanation" = "Un son bref et discret confirme le début et la fin d’un enregistrement : montant au début, descendant au relâchement. La liste va du plus discret au plus perceptible. Tous restent assez faibles pour ne pas apparaître dans la dictée.";
+"tones.off" = "Désactivé";
+"tones.cricket" = "Grillon";
+"tones.pebble" = "Galet";
+"tones.drop" = "Goutte";
+"tones.moss" = "Mousse";
+"tones.glass" = "Verre";
+"settings.section.appearance" = "Apparence";
+"settings.waveform" = "Forme d’onde";
+"settings.showTime" = "Afficher la durée";
+"settings.showTime.explanation" = "Sans la durée, l’indicateur de niveau est plus étroit et se passe entièrement de chiffres.";
+"settings.section.permissions" = "Autorisations";
+"settings.permissions.explanation" = "Accessibilité pour coller le texte et repérer le point d’insertion, Surveillance de l’entrée pour le raccourci dans tout le système.";
+"settings.section.model" = "Modèle";
+"settings.model.label" = "Reconnaissance vocale";
+"settings.model.explanation" = "Fonctionne localement sur le Neural Engine. Après le premier téléchargement, aucun réseau n’est nécessaire.";
+
+/* Waveforms */
+"waveform.trace" = "Trace";
+"waveform.trace.explanation" = "Affiche les deux dernières secondes. Vous voyez aussi après coup si le son est bien arrivé.";
+"waveform.levels" = "Niveaux";
+"waveform.levels.explanation" = "Onze barres parcourues par une vague vers la droite. Plus calme et plus étroite, elle ne montre que l’instant présent.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "Par défaut du système";
+"audio.device.unknown" = "Périphérique inconnu";
+
+/* Permissions */
+"permission.microphone" = "Micro";
+"permission.accessibility" = "Accessibilité";
+"permission.inputMonitoring" = "Surveillance de l’entrée";
+
+/* Onboarding */
+"onboarding.subtitle" = "Dictée locale, partout dans le système";
+"onboarding.intro" = "Trois autorisations sont nécessaires, ensuite tout fonctionne sans autre demande.";
+"onboarding.microphone.detail" = "Pour l’enregistrement. L’audio ne quitte jamais ce Mac.";
+"onboarding.accessibility.detail" = "Pour coller au curseur et repérer le point d’insertion.";
+"onboarding.inputMonitoring.detail" = "Pour que le raccourci soit reconnu dans tout le système. Une rubrique à part dans Réglages Système.";
+"onboarding.start" = "C’est parti";
+"onboarding.later" = "Plus tard";
+
+/* Buttons and keys */
+"button.open" = "Ouvrir";
+"button.allow" = "Autoriser";
+"button.openSettings" = "Réglages Système…";
+"hotkey.pressKey" = "Appuyez sur une touche…";
+"hotkey.clickToChange" = "Cliquez pour modifier";
+"key.space" = "Espace";
+"key.unknown" = "Touche %ld";
+"hotkey.reject.noModifier" = "Sans touche de modification, le raccourci avalerait chaque frappe normale.";
+"hotkey.reject.escape" = "Échap est réservé à l’annulation d’un enregistrement.";
+"hotkey.reject.quit" = "⌘Q quitte les applications.";
+"hotkey.reject.close" = "⌘W ferme les fenêtres.";
+"hotkey.reject.switchApp" = "⌘Tab passe d’une application à l’autre.";
+"hotkey.reject.spotlight" = "⌘Espace ouvre Spotlight.";
+
+/* Setup */
+"setup.welcome.title" = "Configurer une fois, puis plus jamais";
+"setup.welcome.body" = "Pegel reconnaît la parole entièrement sur ce Mac. Pour cela, il télécharge maintenant une seule fois le modèle de reconnaissance vocale. Sans lui, l’app ne peut pas transcrire.";
+"setup.welcome.privacy" = "C’est le seul accès au réseau que Pegel effectue. Tout le reste fonctionne hors ligne : pas de compte, pas de cloud, pas de télémétrie.";
+"setup.welcome.size" = "461 Mo depuis Hugging Face, quelques minutes selon votre connexion.";
+"setup.welcome.confirm" = "Télécharger le modèle";
+"setup.next" = "Continuer";
+"setup.permissions.title" = "Autorisations";
+"setup.install.done" = "Le modèle est installé et prêt";
+"setup.install.failed" = "Le téléchargement a échoué";
+"setup.install.retry" = "Réessayer";
+"setup.install.retry.hint" = "Les parties déjà téléchargées sont conservées, une nouvelle tentative reprend à partir de là.";
+"setup.install.retry.offline" = "Reconnectez-vous puis réessayez. Les parties déjà téléchargées sont conservées.";
+"setup.phase.waiting" = "En attente de confirmation";
+"setup.phase.listing" = "Récupération de la liste des fichiers";
+"setup.phase.downloading" = "Fichier %ld sur %ld";
+"setup.phase.downloadingPlain" = "Téléchargement du modèle";
+"setup.phase.compiling" = "Compilation du modèle pour le Neural Engine";
+"setup.done.title" = "Pegel est prêt";
+"setup.done.body" = "L’app se trouve dans la barre des menus et n’a pas de fenêtre à elle. Elle dicte partout où se trouve le point d’insertion.";
+"setup.done.shortcut.label" = "Votre raccourci, modifiable ici";
+"setup.done.shortcut.explanation" = "Un appui bref lance l’enregistrement et le laisse tourner, un nouvel appui l’arrête. En maintenant la touche enfoncée, vous parlez comme avec un talkie-walkie. Échap annule.";
+"setup.done.openSettings" = "Plus de réglages…";
+"setup.done.permissionsMissing" = "Certaines autorisations manquent encore. Sans Accessibilité et Surveillance de l’entrée, le raccourci ne réagit pas. Vous pourrez les accorder plus tard dans les réglages.";
+
+/* Installation errors */
+"install.error.offline" = "Pas de connexion réseau. Pegel n’a besoin du réseau que pour ce seul téléchargement.";
+
+/* Audiodatei */
+"file.panel.message" = "Le résultat est copié dans le presse-papiers.";
+"file.panel.prompt" = "Transcrire";
+
+/* Colours */
+"settings.palette" = "Couleurs";
+"palette.standard" = "Standard";
+"palette.citrus" = "Agrumes";
+"palette.lagoon" = "Lagon";
+"palette.ember" = "Braise";
+"palette.neon" = "Néon";
+"palette.fern" = "Fougère";
+
+/* Settings and About */
+"menu.about" = "À propos de Pegel…";
+"settings.tab.general" = "Général";
+"settings.tab.appearance" = "Apparence";
+"about.tagline" = "La dictée sur Mac, entièrement locale.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Version %@";
+"about.versionBuild" = "Version %@ (%@)";
+"about.repository" = "Pegel sur GitHub";
+"about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Traduction";
+"about.translation.machine" = "Cette traduction a été réalisée automatiquement et n’a pas été vérifiée par un locuteur natif.";
+"about.translation.report" = "Signaler une erreur";
+"about.translation.useEnglish" = "Utiliser Pegel en anglais…";
+"about.section.updates" = "Mises à jour";
+"about.updates.automatic" = "Rechercher les mises à jour automatiquement";
+"about.updates.install" = "Installer les mises à jour automatiquement";
+"about.updates.install.explanation" = "Pegel télécharge en arrière-plan une mise à jour trouvée et l’installe à la prochaine fermeture. Désactivé, Pegel demande d’abord. Ne fonctionne qu’avec la recherche automatique.";
+"about.updates.check" = "Rechercher des mises à jour…";
+"about.updates.privacy" = "Pour la recherche, Pegel récupère un fichier sur GitHub. GitHub voit votre adresse IP ainsi que les versions de Pegel et de macOS. L’audio et le texte ne quittent jamais ce Mac.";
+"about.section.licenses" = "Licences";
+"about.licenses.explanation" = "Pegel est publié sous licence MIT. Il inclut FluidAudio (Apache 2.0) et ses dépendances. Le modèle de reconnaissance vocale Parakeet TDT 0.6B v3 est de NVIDIA, la conversion Core ML de FluidInference, tous deux sous CC-BY-4.0.";
+"about.licenses.show" = "Afficher les textes de licence…";

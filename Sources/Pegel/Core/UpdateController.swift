@@ -31,12 +31,14 @@ final class UpdateController: NSObject, ObservableObject {
     private var controller: SPUStandardUpdaterController?
     private var updater: SPUUpdater? { controller?.updater }
 
-    override init() {
+    /// `starting: false` for the window export: the About window gets its values, but
+    /// Sparkle never schedules or runs a check.
+    init(starting: Bool = true) {
         isAvailable = Bundle.main.object(forInfoDictionaryKey: "SUFeedURL") != nil
         super.init()
         guard isAvailable else { return }
         let controller = SPUStandardUpdaterController(
-            startingUpdater: true, updaterDelegate: nil, userDriverDelegate: self)
+            startingUpdater: starting, updaterDelegate: nil, userDriverDelegate: self)
         self.controller = controller
         // Followed rather than read once: Sparkle's update window has its own checkbox
         // for automatic installs, and the About window must show what it changed.

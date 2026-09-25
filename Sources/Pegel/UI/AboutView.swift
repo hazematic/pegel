@@ -84,7 +84,10 @@ struct AboutView: View {
             }
         }
         .formStyle(.grouped)
-        .frame(width: 460, height: Self.machineTranslated ? 740 : 640)
+        // Measured with --export-windows: German and English fit in 780 pt. A translated
+        // language with its extra section scrolls rather than grow past what a 13" MacBook
+        // Air shows (French would need 920). A Form cannot size itself to its content.
+        .frame(width: 460, height: 780)
     }
 
     /// `Translation.plist`, written into each `.lproj` by `pegel-i18n sync`; the bundle returns

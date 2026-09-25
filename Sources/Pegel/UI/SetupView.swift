@@ -11,7 +11,7 @@ struct SetupView: View {
     let onFinish: () -> Void
     let onReady: () -> Void
 
-    private enum Page {
+    enum Page {
         case welcome
         case install
         case done
@@ -26,8 +26,10 @@ struct SetupView: View {
     private let poll = Timer.publish(every: 2, on: .main, in: .common).autoconnect()
 
     /// Only the caller knows whether the model is missing or just permissions.
+    /// `page` overrides the start page; used by the window export only.
     init(
         state: AppState, controller: RecordingController, startsAtWelcome: Bool,
+        page: Page? = nil,
         openSettings: @escaping () -> Void, onFinish: @escaping () -> Void,
         onReady: @escaping () -> Void
     ) {
@@ -36,7 +38,7 @@ struct SetupView: View {
         self.openSettings = openSettings
         self.onFinish = onFinish
         self.onReady = onReady
-        _page = State(initialValue: startsAtWelcome ? .welcome : .install)
+        _page = State(initialValue: page ?? (startsAtWelcome ? .welcome : .install))
     }
 
     private var allGranted: Bool { microphone && accessibility && inputMonitoring }

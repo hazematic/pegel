@@ -27,7 +27,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, Obse
     let appState = AppState()
     private(set) lazy var controller = RecordingController(appState: appState)
     /// Lazy, so the build script's icon export doesn't create it.
-    private(set) lazy var updates = UpdateController()
+    private(set) lazy var updates = UpdateController(starting: !exporting)
+    /// Set by `--export-windows`; keeps Sparkle from starting.
+    private var exporting = false
     private var setupWindow: NSWindow?
     private var settingsWindow: NSWindow?
     private var settingsTabs: NSTabViewController?
@@ -49,6 +51,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, Obse
         }
 
         NSApp.setActivationPolicy(.accessory)
+
+        // Window export for checking a translation, see exportWindows(to:).
+        if let index = CommandLine.arguments.firstIndex(of: "--export-windows"),
+            index + 1 < CommandLine.arguments.count
+        {
+            exporting = true
+            exportWindows(to: URL(fileURLWithPath: CommandLine.arguments[index + 1]))
+            return
+        }
 
         // The three services look alike from outside; the log shows which one is missing.
         Logger(subsystem: "io.github.hazematic.pegel", category: "l10n").info(
@@ -126,21 +137,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, Obse
     }
 
     func showAbout() {
-        if aboutWindow == nil {
-            let host = NSHostingController(
-                rootView: AboutView(
-                    updates: updates, showLicences: { [weak self] in self?.showLicences() }))
-            host.sizingOptions = .preferredContentSize
-            let window = NSWindow(contentViewController: host)
-            window.styleMask = [.titled, .closable]
-            window.title = L("window.about")
-            window.isReleasedWhenClosed = false
-            window.delegate = self
-            window.center()
-            aboutWindow = window
-        }
+        if aboutWindow == nil { buildAboutWindow() }
         aboutWindow?.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
+    }
+
+    private func buildAboutWindow() {
+        let host = NSHostingController(
+            rootView: AboutView(
+                updates: updates, showLicences: { [weak self] in self?.showLicences() }))
+        host.sizingOptions = .preferredContentSize
+        let window = NSWindow(contentViewController: host)
+        window.styleMask = [.titled, .closable]
+        window.title = L("window.about")
+        window.isReleasedWhenClosed = false
+        window.delegate = self
+        window.center()
+        aboutWindow = window
     }
 
     func showLicences() {
@@ -210,5 +223,100 @@ private struct MenuBarLabel: View {
 
     var body: some View {
         Image(nsImage: MenuBarIcon.image(for: state.session))
+    }
+}
+
+// MARK: - Window export
+
+extension AppDelegate {
+
+    /// `Pegel --export-windows <folder>`, with `-AppleLanguages '(fr)'` for a language:
+    /// writes every window as PNG, for checking a translation (cut-off texts, wrapping,
+    /// window sizes). The windows stay invisible; nothing is recorded, no hotkey tap,
+    /// no update check. Permission and model state are those of this Mac, so the setup
+    /// pages show what applies here.
+    fileprivate func exportWindows(to folder: URL) {
+        try? FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        buildSettingsWindow()
+        buildAboutWindow()
+        func setup(_ page: SetupView.Page) -> NSWindow {
+            let window = NSWindow(
+                contentRect: NSRect(x: 0, y: 0, width: 480, height: 560),
+                styleMask: [.titled, .closable], backing: .buffered, defer: false)
+            window.title = L("window.onboarding")
+            window.contentView = NSHostingView(
+                rootView: SetupView(
+                    state: appState, controller: controller, startsAtWelcome: false, page: page,
+                    openSettings: {}, onFinish: {}, onReady: {}))
+            window.isReleasedWhenClosed = false
+            return window
+        }
+        var steps: [(String, NSWindow, () -> Void)] = [
+            ("1-setup-welcome", setup(.welcome), {}),
+            ("2-setup-install", setup(.install), {}),
+            ("3-setup-done", setup(.done), {}),
+        ]
+        if let settings = settingsWindow {
+            steps.append(("4-settings-general", settings, { [weak self] in self?.settingsTabs?.selectedTabViewItemIndex = 0 }))
+            steps.append(("5-settings-appearance", settings, { [weak self] in self?.settingsTabs?.selectedTabViewItemIndex = 1 }))
+        }
+        if let about = aboutWindow { steps.append(("6-about", about, {})) }
+
+        // Transparent but ordered in, so SwiftUI lays out and draws; a short pause per
+        // window lets it settle before the snapshot.
+        func next(_ index: Int) {
+            guard index < steps.count else {
+                print("\(steps.count) windows in \(folder.path)")
+                NSApp.terminate(nil)
+                return
+            }
+            let (name, window, prepare) = steps[index]
+            prepare()
+            window.alphaValue = 0
+            window.orderFrontRegardless()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                Self.snapshot(window, to: folder.appendingPathComponent("\(name).png"))
+                // Scrolling windows a second time from the end, so no text goes unseen
+                guard let scroll = Self.scrollView(in: window.contentView),
+                    let document = scroll.documentView,
+                    document.frame.height > scroll.contentView.bounds.height + 1
+                else {
+                    window.orderOut(nil)
+                    next(index + 1)
+                    return
+                }
+                let bottom = document.isFlipped ? document.frame.height - scroll.contentView.bounds.height : 0
+                scroll.contentView.scroll(to: NSPoint(x: 0, y: bottom))
+                scroll.reflectScrolledClipView(scroll.contentView)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    Self.snapshot(window, to: folder.appendingPathComponent("\(name)-end.png"))
+                    scroll.contentView.scroll(to: .zero)
+                    window.orderOut(nil)
+                    next(index + 1)
+                }
+            }
+        }
+        next(0)
+    }
+
+    /// The Form's scroll view: the largest one, so pickers and text fields don't count.
+    private static func scrollView(in view: NSView?) -> NSScrollView? {
+        guard let view else { return nil }
+        var found: [NSScrollView] = []
+        func walk(_ v: NSView) {
+            if let s = v as? NSScrollView { found.append(s) }
+            v.subviews.forEach(walk)
+        }
+        walk(view)
+        return found.max { $0.frame.height < $1.frame.height }
+    }
+
+    /// The frame view, so title bar and toolbar are in the picture.
+    private static func snapshot(_ window: NSWindow, to url: URL) {
+        guard let view = window.contentView?.superview else { return }
+        view.layoutSubtreeIfNeeded()
+        guard let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds) else { return }
+        view.cacheDisplay(in: view.bounds, to: rep)
+        try? rep.representation(using: .png, properties: [:])?.write(to: url)
     }
 }
