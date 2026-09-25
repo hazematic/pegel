@@ -1,0 +1,184 @@
+/* Menu */
+"menu.status.last" = "Ultima: %@";
+"menu.status.hotkeyInactive" = "Scorciatoia inattiva, manca il permesso Accessibilità";
+"menu.resetPosition" = "Ripristina posizione";
+"menu.copyLast" = "Copia l’ultima dettatura";
+"menu.transcribeFile" = "Trascrivi file audio…";
+"menu.setup" = "Configura…";
+"menu.status.notInstalled" = "Modello non ancora installato";
+"menu.settings" = "Impostazioni…";
+"menu.quit" = "Esci";
+
+/* Status */
+"status.ready" = "Pronto";
+"status.recording" = "Registrazione…";
+"status.transcribing" = "Trascrizione…";
+"status.transcribingFile" = "Trascrizione… %@";
+"status.finished" = "Inserito";
+"status.discarded" = "Scartato";
+"status.failed" = "Errore";
+
+/* Model preparation */
+"preparing.downloading" = "Download del modello %@";
+"preparing.loading" = "Inizializzazione del modello";
+"preparing.warmup" = "Preriscaldamento del modello";
+"preparing.waiting" = "Modello non installato";
+"preparing.listing" = "Preparazione del download";
+"preparing.compiling" = "Compilazione del modello";
+
+/* Errors */
+"error.microphone" = "Nessun accesso al microfono";
+"error.tooShort" = "Troppo breve";
+"error.unreadableFile" = "Impossibile leggere %@";
+"error.noSpeech" = "Nessun testo riconosciuto";
+"error.modelLoading" = "Modello in caricamento";
+"error.noInputDevice" = "Nessun microfono trovato.";
+"error.deviceUnavailable" = "Il microfono %@ non è disponibile";
+"error.silentInput" = "Nessun segnale da %@";
+"error.noAudioData" = "Nessun dato da %@";
+"error.notReady" = "Il modello vocale non è ancora caricato.";
+
+/* Windows */
+"window.settings" = "Impostazioni";
+"window.about" = "Informazioni su Pegel";
+"window.licences" = "Licenze";
+"window.onboarding" = "Configura Pegel";
+
+/* Settings */
+"settings.section.hotkey" = "Scorciatoia da tastiera";
+"settings.hotkey.label" = "Avvia e interrompi la dettatura";
+"settings.hotkey.reset" = "Ripristina %@";
+"settings.ptt.label" = "Pressione lunga da";
+"settings.ptt.explanation" = "Una pressione breve avvia o interrompe la registrazione. Una più lunga funziona come un walkie-talkie: al rilascio, termina.";
+"settings.section.audio" = "Audio";
+"settings.input.label" = "Microfono";
+"settings.input.systemDefault" = "Predefinito di sistema";
+"settings.input.current" = "Registrazione tramite %@";
+"settings.input.narrowband" = "Banda stretta sotto i 16 kHz, tipica delle cuffie Bluetooth nel profilo telefono. Il riconoscimento peggiora sensibilmente.";
+"settings.input.missing" = "Il microfono selezionato non è collegato. Nel frattempo si usa quello predefinito di sistema.";
+"settings.input.none" = "Nessun dispositivo di input.";
+"settings.input.explanation" = "Con il predefinito di sistema, Pegel segue il microfono che macOS sceglie in quel momento. Può essere un altoparlante Bluetooth appena collegato: macOS lo tratta come cuffie e lo imposta come input. Un dispositivo fisso lo evita.";
+"settings.section.tones" = "Suoni";
+"settings.tones.label" = "Suono";
+"settings.tones.play" = "Ascolta";
+"settings.tones.volume" = "Volume";
+"settings.tones.explanation" = "Un suono breve e discreto conferma l’inizio e la fine della registrazione: ascendente all’avvio, discendente al rilascio. L’elenco va dal più discreto al più percepibile. Sono tutti abbastanza bassi da non finire nella dettatura.";
+"tones.off" = "Disattivato";
+"tones.cricket" = "Grillo";
+"tones.pebble" = "Sassolino";
+"tones.drop" = "Goccia";
+"tones.moss" = "Muschio";
+"tones.glass" = "Vetro";
+"settings.section.appearance" = "Aspetto";
+"settings.waveform" = "Forma d’onda";
+"settings.showTime" = "Mostra il tempo trascorso";
+"settings.showTime.explanation" = "Senza il tempo, l’indicatore di livello è più stretto e fa del tutto a meno delle cifre.";
+"settings.section.permissions" = "Permessi";
+"settings.permissions.explanation" = "Accessibilità per incollare il testo e individuare il punto di inserimento, Monitoraggio input per la scorciatoia in tutto il sistema.";
+"settings.section.model" = "Modello";
+"settings.model.label" = "Riconoscimento vocale";
+"settings.model.explanation" = "Funziona in locale sul Neural Engine. Dopo il primo download non serve più la rete.";
+
+/* Waveforms */
+"waveform.trace" = "Traccia";
+"waveform.trace.explanation" = "Mostra gli ultimi due secondi. Puoi vedere anche a posteriori se il suono è arrivato.";
+"waveform.levels" = "Livelli";
+"waveform.levels.explanation" = "Undici barre attraversate da un’onda verso destra. Più calma e più stretta, mostra solo l’istante presente.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "Predefinito di sistema";
+"audio.device.unknown" = "Dispositivo sconosciuto";
+
+/* Permissions */
+"permission.microphone" = "Microfono";
+"permission.accessibility" = "Accessibilità";
+"permission.inputMonitoring" = "Monitoraggio input";
+
+/* Onboarding */
+"onboarding.subtitle" = "Dettatura locale, in tutto il sistema";
+"onboarding.intro" = "Servono tre permessi, poi tutto funziona senza altre richieste.";
+"onboarding.microphone.detail" = "Per la registrazione. L’audio non lascia mai questo Mac.";
+"onboarding.accessibility.detail" = "Per incollare al cursore e individuare il punto di inserimento.";
+"onboarding.inputMonitoring.detail" = "Perché la scorciatoia venga riconosciuta in tutto il sistema. È una voce a parte in Impostazioni di Sistema.";
+"onboarding.start" = "Iniziamo";
+"onboarding.later" = "Più tardi";
+
+/* Buttons and keys */
+"button.open" = "Apri";
+"button.allow" = "Consenti";
+"button.openSettings" = "Impostazioni di Sistema…";
+"hotkey.pressKey" = "Premi un tasto…";
+"hotkey.clickToChange" = "Fai clic per modificare";
+"key.space" = "Spazio";
+"key.unknown" = "Tasto %ld";
+"hotkey.reject.noModifier" = "Senza un tasto modificatore, la scorciatoia intercetterebbe ogni normale digitazione.";
+"hotkey.reject.escape" = "Il tasto Esc è riservato all’annullamento della registrazione.";
+"hotkey.reject.quit" = "⌘Q chiude le applicazioni.";
+"hotkey.reject.close" = "⌘W chiude le finestre.";
+"hotkey.reject.switchApp" = "⌘Tab passa da un’applicazione all’altra.";
+"hotkey.reject.spotlight" = "⌘Spazio apre Spotlight.";
+
+/* Setup */
+"setup.welcome.title" = "Configura una volta, poi mai più";
+"setup.welcome.body" = "Pegel riconosce la voce interamente su questo Mac. Per farlo scarica ora, una sola volta, il modello vocale. Senza di esso l’app non può trascrivere.";
+"setup.welcome.privacy" = "È l’unico accesso alla rete che Pegel effettua. Dopo, tutto funziona offline: nessun account, nessun cloud, nessuna telemetria.";
+"setup.welcome.size" = "461 MB da Hugging Face, qualche minuto a seconda della connessione.";
+"setup.welcome.confirm" = "Scarica il modello";
+"setup.next" = "Continua";
+"setup.permissions.title" = "Permessi";
+"setup.install.done" = "Il modello è installato e pronto";
+"setup.install.failed" = "Il download non è riuscito";
+"setup.install.retry" = "Riprova";
+"setup.install.retry.hint" = "Le parti già scaricate restano, un secondo tentativo riprende da lì.";
+"setup.install.retry.offline" = "Ristabilisci la connessione e riprova. Le parti già scaricate restano.";
+"setup.phase.waiting" = "In attesa di conferma";
+"setup.phase.listing" = "Recupero dell’elenco dei file";
+"setup.phase.downloading" = "File %ld di %ld";
+"setup.phase.downloadingPlain" = "Download del modello";
+"setup.phase.compiling" = "Compilazione del modello per il Neural Engine";
+"setup.done.title" = "Pegel è pronto";
+"setup.done.body" = "L’app si trova nella barra dei menu e non ha una finestra propria. Detta ovunque si trovi il punto di inserimento.";
+"setup.done.shortcut.label" = "La tua scorciatoia, modificabile qui";
+"setup.done.shortcut.explanation" = "Una pressione breve avvia la registrazione e la lascia in corso, un’altra pressione la termina. Tenere premuto funziona come un walkie-talkie. Esc annulla.";
+"setup.done.openSettings" = "Altre impostazioni…";
+"setup.done.permissionsMissing" = "Mancano ancora dei permessi. Senza Accessibilità e Monitoraggio input la scorciatoia non risponde. Puoi concederli più tardi nelle impostazioni.";
+
+/* Installation errors */
+"install.error.offline" = "Nessuna connessione di rete. Pegel ha bisogno della rete solo per questo download.";
+
+/* Audiodatei */
+"file.panel.message" = "Il risultato va negli Appunti.";
+"file.panel.prompt" = "Trascrivi";
+
+/* Colours */
+"settings.palette" = "Colori";
+"palette.standard" = "Standard";
+"palette.citrus" = "Agrumi";
+"palette.lagoon" = "Laguna";
+"palette.ember" = "Brace";
+"palette.neon" = "Neon";
+"palette.fern" = "Felce";
+
+/* Settings and About */
+"menu.about" = "Informazioni su Pegel…";
+"settings.tab.general" = "Generali";
+"settings.tab.appearance" = "Aspetto";
+"about.tagline" = "La dettatura sul Mac, interamente in locale.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Versione %@";
+"about.versionBuild" = "Versione %@ (%@)";
+"about.repository" = "Pegel su GitHub";
+"about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Traduzione";
+"about.translation.machine" = "Questa traduzione è stata creata automaticamente e non è stata verificata da madrelingua.";
+"about.translation.report" = "Segnala un errore";
+"about.translation.useEnglish" = "Usa Pegel in inglese…";
+"about.section.updates" = "Aggiornamenti";
+"about.updates.automatic" = "Cerca aggiornamenti automaticamente";
+"about.updates.install" = "Installa aggiornamenti automaticamente";
+"about.updates.install.explanation" = "Pegel scarica in background un aggiornamento trovato e lo installa alla prossima chiusura. Se disattivato, Pegel chiede prima. Funziona solo con la ricerca automatica.";
+"about.updates.check" = "Cerca aggiornamenti…";
+"about.updates.privacy" = "Per la ricerca, Pegel scarica un file da GitHub. GitHub vede il tuo indirizzo IP e le versioni di Pegel e di macOS. Audio e testo non lasciano mai questo Mac.";
+"about.section.licenses" = "Licenze";
+"about.licenses.explanation" = "Pegel è distribuito con licenza MIT. Include FluidAudio (Apache 2.0) e le sue dipendenze. Il modello vocale Parakeet TDT 0.6B v3 è di NVIDIA, la versione Core ML di FluidInference, entrambi con licenza CC-BY-4.0.";
+"about.licenses.show" = "Mostra i testi delle licenze…";
