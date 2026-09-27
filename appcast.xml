@@ -6,6 +6,19 @@
     <description>Updates for Pegel</description>
     <language>en</language>
     <item>
+      <title>Version 1.3.0</title>
+      <pubDate>Sun, 27 Sep 2026 18:01:50 +0200</pubDate>
+      <sparkle:version>1.3.0</sparkle:version>
+      <sparkle:shortVersionString>1.3.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[<ul>
+<li>Transcribe video files too: MP4, MOV and other films, Pegel reads their sound track. The menu item is now "Transcribe Audio or Video File…".</li>
+<li>The interface is now also in French, Spanish and Italian, machine-translated. About Pegel says so and links to a form for reporting mistakes.</li>
+<li>The About window is taller, so the licences are no longer cut off.</li>
+</ul>]]></description>
+      <enclosure url="https://github.com/hazematic/pegel/releases/download/v1.3.0/Pegel-1.3.0.zip" type="application/octet-stream" sparkle:edSignature="gQDZebT6fer6W46Yk70xPqpHr5MqfFeSRvvef8rOHMtFjDzqW1cAPfTDOK9+HpqmgM+A0jo+RuWeNhg6RoJ1Bg==" length="10954534" />
+    </item>
+    <item>
       <title>Version 1.2.0</title>
       <pubDate>Thu, 24 Sep 2026 22:18:33 +0200</pubDate>
       <sparkle:version>1.2.0</sparkle:version>
