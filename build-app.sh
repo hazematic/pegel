@@ -30,7 +30,7 @@ if [ -z "$IDENTITY" ]; then
     fi
 fi
 BUNDLE_ID="io.github.hazematic.pegel"
-VERSION="1.2.0"
+VERSION="1.3.0"
 
 cd "$(dirname "$0")"
 echo "→ Building ($CONFIGURATION)"
@@ -178,6 +178,11 @@ if [ "$DO_DMG" = true ]; then
     # Window 660 × 400 plus title bar; icon centers match DMGBackground.
     osascript <<APPLESCRIPT >/dev/null
 tell application "Finder"
+    -- Finder learns about a fresh mount a moment later; asking at once fails with -1728.
+    repeat 40 times
+        if exists disk "$DISK" then exit repeat
+        delay 0.25
+    end repeat
     tell disk "$DISK"
         open
         set current view of container window to icon view
