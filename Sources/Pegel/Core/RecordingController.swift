@@ -103,7 +103,8 @@ final class RecordingController {
         guard case .ready = appState.session else { return }
 
         let panel = NSOpenPanel()
-        panel.allowedContentTypes = [.audio]
+        // Films too: AVAudioFile reads their sound track, the picture is never decoded.
+        panel.allowedContentTypes = [.audio, .movie]
         panel.allowsMultipleSelection = false
         panel.canChooseDirectories = false
         panel.message = L("file.panel.message")

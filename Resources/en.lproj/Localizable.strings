@@ -3,7 +3,7 @@
 "menu.status.hotkeyInactive" = "Shortcut inactive, accessibility missing";
 "menu.resetPosition" = "Reset Position";
 "menu.copyLast" = "Copy last dictation";
-"menu.transcribeFile" = "Transcribe Audio File…";
+"menu.transcribeFile" = "Transcribe Audio or Video File…";
 "menu.setup" = "Open setup…";
 "menu.status.notInstalled" = "Model not installed yet";
 "menu.settings" = "Settings…";

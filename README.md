@@ -20,9 +20,10 @@
 
 ## What it does
 
-Pegel does one thing. You press a shortcut, you speak, and the words appear at the
-cursor in whatever app you are already in. Nothing to manage, nothing to sign into, and
-the audio never leaves the machine.
+Pegel does one thing: it turns speech into text. You press a shortcut, you speak, and
+the words appear at the cursor in whatever app you are already in. A recording or a
+video you already have goes through the same model and lands on the clipboard. Nothing
+to manage, nothing to sign into, and the audio never leaves the machine.
 
 ## Why it is simple
 
@@ -116,7 +117,9 @@ level, so you can see that sound is arriving. You can drag it anywhere.
 | **Error** | flashes twice, then stands | <img src="assets/pill-error.png" width="145" alt=""> |
 
 When there is already text in front of the cursor, Pegel adds a space by itself.
-*Transcribe Audio File…* in the menu puts the text of an audio file on the clipboard.
+*Transcribe Audio or Video File…* in the menu puts the text of a file on the clipboard.
+It reads M4A, MP3, WAV, AIFF, CAF, FLAC and AAC, the sound of MP4 and MOV videos, and
+from macOS 15.4 also Ogg and Opus.
 
 The interface is in English and German. French, Spanish and Italian are
 machine-translated; mistakes can be reported through the
@@ -125,15 +128,15 @@ machine-translated; mistakes can be reported through the
 ## How fast
 
 Pegel transcribes after you stop speaking rather than while you speak, which avoids the
-visible self corrections of streaming recognition. Measured on a 2021 MacBook Pro with
-M1 Pro and 16 GB:
+visible self corrections of streaming recognition. Measured on a 2020 MacBook Pro with
+M1 and 16 GB, the first generation of Apple silicon:
 
 | Dictation | Time until the text appears |
 |---|---|
-| 3 seconds | 0.17 s |
-| 71 seconds | 0.72 s |
+| 3 seconds | 0.13 s |
+| 90 seconds | 1.27 s |
 
-Idle, Pegel uses 0 % CPU and about 36 MB of memory.
+Idle, Pegel uses 0 % CPU and about 68 MB of memory.
 
 ## Privacy
 

@@ -223,10 +223,12 @@ enum ReadmeFigure {
                 Pill(session: session, style: .levels, showsTime: false, time: time),
                 named: name, to: directory)
         }
+        // At 1.0 s every open bar rests at 15 % of the sweep, so the filled left part reads
+        // as progress; earlier the open bars were mid-sweep and looked filled too.
         try write(
             Pill(
-                session: .transcribing, style: .levels, showsTime: false, time: 0.45,
-                fileProgress: 0.68),
+                session: .transcribing, style: .levels, showsTime: false, time: 1.0,
+                fileProgress: 0.67),
             named: "pill-file", to: directory)
 
         for style in WaveformStyle.allCases {

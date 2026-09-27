@@ -3,7 +3,7 @@
 "menu.status.hotkeyInactive" = "Kürzel inaktiv, Bedienungshilfen fehlen";
 "menu.resetPosition" = "Position zurücksetzen";
 "menu.copyLast" = "Letztes Diktat kopieren";
-"menu.transcribeFile" = "Audiodatei transkribieren…";
+"menu.transcribeFile" = "Audio- oder Videodatei transkribieren…";
 "menu.setup" = "Einrichtung öffnen…";
 "menu.status.notInstalled" = "Modell noch nicht installiert";
 "menu.settings" = "Einstellungen…";

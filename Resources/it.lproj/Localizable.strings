@@ -3,7 +3,7 @@
 "menu.status.hotkeyInactive" = "Scorciatoia inattiva, manca il permesso Accessibilità";
 "menu.resetPosition" = "Ripristina posizione";
 "menu.copyLast" = "Copia l’ultima dettatura";
-"menu.transcribeFile" = "Trascrivi file audio…";
+"menu.transcribeFile" = "Trascrivi file audio o video…";
 "menu.setup" = "Configura…";
 "menu.status.notInstalled" = "Modello non ancora installato";
 "menu.settings" = "Impostazioni…";

@@ -3,7 +3,7 @@
 "menu.status.hotkeyInactive" = "Atajo inactivo, falta el permiso de Accesibilidad";
 "menu.resetPosition" = "Restablecer posición";
 "menu.copyLast" = "Copiar el último dictado";
-"menu.transcribeFile" = "Transcribir archivo de audio…";
+"menu.transcribeFile" = "Transcribir archivo de audio o vídeo…";
 "menu.setup" = "Configurar…";
 "menu.status.notInstalled" = "Modelo aún no instalado";
 "menu.settings" = "Ajustes…";
