@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/icon.png" width="88" height="88" alt="">
+  <img src="assets/mark.svg" width="72" height="72" alt="">
 </p>
 
 <h1 align="center">
@@ -15,7 +15,7 @@
 </p>
 
 <p align="center">
-  <img src="assets/hero.png" width="100%" alt="The mark in the menu bar, dictated text in the editor, the level pill at the bottom of the screen">
+  <img src="assets/hero.jpg" width="100%" alt="An editor with three dictated sentences and the cursor after the last one, the level meter resting at the bottom of the screen">
 </p>
 
 ## What it does
@@ -46,9 +46,8 @@ is made.
 
 - macOS 14 or later
 - Apple Silicon. The model runs on the Neural Engine; Intel Macs are not supported.
-- 461 MB of disk space for the model, downloaded on first launch. macOS adds a Core ML
-  cache on top when it compiles the model for the Neural Engine; that one is a few tens
-  of MB after a clean run and grows as new versions of the app are installed.
+- 461 MB for the model, downloaded on first launch, plus the Core ML cache macOS creates
+  when it compiles the model.
 
 ## Install
 
@@ -58,11 +57,21 @@ is made.
 brew install --cask hazematic/tap/pegel
 ```
 
-That is the whole installation: the cask clears the quarantine flag for you, which you
-would otherwise have to do by hand because the app is not notarised. New versions
-arrive either through `brew upgrade` or through Pegel's own update check (see
-[Updates](#updates)), and `brew uninstall --zap --cask pegel` removes the app together
-with its settings and the downloaded model.
+The cask clears the quarantine flag, which you would otherwise have to do by hand
+because the app is not notarised.
+
+### Prebuilt app
+
+Download [Pegel.dmg](../../releases/latest/download/Pegel.dmg), open it and drag Pegel to
+Applications. Because the app is not notarised, macOS refuses the first launch. Clear
+the quarantine flag once:
+
+```bash
+xattr -dr com.apple.quarantine /Applications/Pegel.app
+```
+
+Or press *Open Anyway* under System Settings > Privacy & Security after the failed
+launch. Right-click and Open no longer works since macOS Sequoia.
 
 ### Build it yourself
 
@@ -72,94 +81,17 @@ cd pegel
 ./build-app.sh release --install
 ```
 
-This needs the Xcode Command Line Tools (`xcode-select --install`). The script builds
-the app, signs it locally, copies it to `/Applications` and launches it. Apps you build
-yourself are not quarantined, so macOS starts them without complaint. Xcode itself is
-not required, but it can open `Package.swift` directly.
-
-Without a certificate of your own the app is signed ad hoc, which works but makes macOS
-treat every rebuild as a different app and ask for the permissions again. A self-signed
-certificate fixes that: Keychain Access, Certificate Assistant, *Create a Certificate*,
-type *Code Signing*, named `Pegel Local`. The build script picks it up on its own.
-
-### Use the prebuilt app
-
-Download the DMG from [Releases](../../releases), open it and drag Pegel to
-Applications. Because the app is not notarised, macOS refuses the first launch; clear
-the quarantine flag once:
-
-```bash
-xattr -dr com.apple.quarantine /Applications/Pegel.app
-```
-
-The alternative is System Settings > Privacy & Security, scroll down to Security and
-press Open Anyway after the failed launch. The old trick of right-clicking the app and
-choosing Open no longer works, it was removed in macOS Sequoia. The flag is set by
-whatever the app arrived through, so a copy over a USB stick or a network share never
-carries it and none of this applies.
+This needs the Xcode Command Line Tools (`xcode-select --install`) and builds, signs,
+installs and launches the app. Without a certificate of your own it is signed ad hoc,
+and macOS asks for the permissions again after every rebuild. A self-signed *Code
+Signing* certificate named `Pegel Local`, made in Keychain Access, fixes that; the
+script picks it up on its own.
 
 ## First launch
 
-The model is not part of the app, and Pegel does not fetch it behind your back: a
-window explains the one-off download of 461 MB and nothing happens until you press the
-button. Progress and the three permissions then run side by side, a failed download can
-be retried where it left off, and the last page shows the shortcut you will be using.
-Apart from an update check you start yourself, that download is the only time Pegel
-touches the network.
-
-## Updates
-
-Pegel can update itself through [Sparkle](https://sparkle-project.org), but it never
-checks on its own unless you ask it to. *About Pegel…* in the menu has a *Check for
-Updates…* button and a switch for automatic checks, which is off by default. An update
-is only installed if it carries the project's signature and is signed with the same
-certificate as the version you have, so the permissions you granted survive it.
-
-## Privacy
-
-Audio and text never leave the Mac. There is no analytics, no crash reporting and no
-account. Pegel reaches the network in exactly two cases, both started by you:
-
-- **Model download**, once, after you press the button: the files come from Hugging
-  Face, which sees your IP address.
-- **Update check**, only when you press *Check for Updates…* or switch on automatic
-  checks: Pegel fetches `appcast.xml` from GitHub and, if there is a new version, the
-  ZIP from the release. GitHub sees your IP address and, in the user agent, the Pegel
-  and macOS versions. See GitHub's
-  [privacy statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement).
-
-## Uninstall
-
-The model and the Core ML cache live outside the bundle, so the Trash leaves half a
-gigabyte and up behind. Through Homebrew it is `brew uninstall --zap --cask pegel`,
-otherwise `./uninstall.sh` from this repository, which lists what it will remove and
-asks first. Only the script also clears the three entries under Privacy & Security.
-
-## Permissions and why they are needed
-
-Pegel asks for three permissions. Two of them are the ones a keylogger would ask for,
-so here is exactly what each is used for.
-
-| Permission       | Used for                                                                                                                              |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Microphone       | Recording your dictation.                                                                                                             |
-| Input Monitoring | Seeing the keyboard shortcut while another app is in front. This is the only reason keyboard events are read at all.                  |
-| Accessibility    | Pasting the finished text at the cursor, and reading the single character in front of the cursor to decide whether a space is needed. |
-
-Nothing is logged, stored or transmitted. Audio is held in memory for the length of one
-dictation and discarded afterwards. The parts worth reading are
-`Input/HotkeyMonitor.swift` for the keyboard and `Input/TextInjector.swift` for the
-pasting. Pegel runs without the App Sandbox, since a global event tap and pasting into
-other applications do not work inside it.
-
-Input Monitoring is a separate item in System Settings and is needed on top of
-Accessibility; if it is missing, the Accessibility switch looks right and nothing
-happens anyway. If every switch is on and the shortcut stays dead, the cause is usually
-a stale entry from an earlier build:
-
-```bash
-tccutil reset All io.github.hazematic.pegel
-```
+A window explains the one-off download of the model and waits until you press the
+button. The permissions are granted alongside, and a failed download resumes where it
+stopped.
 
 ## Using it
 
@@ -169,23 +101,12 @@ tccutil reset All io.github.hazematic.pegel
 | Hold the shortcut | Push to talk, releasing ends the recording |
 | Esc while recording | Recording is discarded, nothing is inserted |
 
-The default shortcut is `⌥Space`. The space bar sits in the same place on ANSI, ISO and
-JIS keyboards, and `⌥Space` is not a system shortcut on macOS: `⌘Space` belongs to
-Spotlight, `⌃Space` and `⌃⌥Space` to input source switching, `⌘⌥Space` to the Finder
-search window. If you use Alfred you will want to rebind, since `⌥Space` is its default.
+The default shortcut is `⌥Space`, which macOS does not use. If you use Alfred, which
+has the same default, change it in the settings. That is also where you pick the
+microphone, the start and stop tones, the waveform and the colours.
 
-It can be changed in the settings, along with the hold threshold and the appearance of
-the pill. There are two waveforms, and the elapsed time can be switched off, which makes
-the pill narrower.
-
-| | Blank | With elapsed time |
-|---|---|---|
-| **Levels**<br>the present moment, default | <img src="assets/pill-levels.png" width="145" alt=""> | <img src="assets/pill-levels-time.png" width="188" alt=""> |
-| **Trail**<br>the last two seconds | <img src="assets/pill-trace.png" width="166" alt=""> | <img src="assets/pill-trace-time.png" width="209" alt=""> |
-
-While recording, the pill sits at the bottom of the screen and follows the microphone
-level, so you can see that sound is actually arriving. You can drag it anywhere and it
-stays there.
+While recording, the level meter at the bottom of the screen follows the microphone
+level, so you can see that sound is arriving. You can drag it anywhere.
 
 | State | | |
 |---|---|---|
@@ -194,25 +115,68 @@ stays there.
 | **Discarded** | escape, nothing is inserted | <img src="assets/pill-discarded.png" width="139" alt=""> |
 | **Error** | flashes twice, then stands | <img src="assets/pill-error.png" width="145" alt=""> |
 
-Between two dictations Pegel inserts a space by itself when there is already text in
-front of the cursor. The character before the cursor is read from the actual text
-through the Accessibility API rather than inferred from what was inserted last, so the
-spacing is still right if you typed something or moved the cursor in between.
+When there is already text in front of the cursor, Pegel adds a space by itself.
+*Transcribe Audio File…* in the menu puts the text of an audio file on the clipboard.
+
+The interface is in English and German. French, Spanish and Italian are
+machine-translated; mistakes can be reported through the
+[translation form](../../issues/new?template=translation.yml).
 
 ## How fast
 
 Pegel transcribes after you stop speaking rather than while you speak, which avoids the
-visible self corrections of streaming recognition. Measured on a 16 inch MacBook Pro
-from 2021 with M1 Pro and 16 GB:
+visible self corrections of streaming recognition. Measured on a 2021 MacBook Pro with
+M1 Pro and 16 GB:
 
 | Dictation | Time until the text appears |
 |---|---|
 | 3 seconds | 0.17 s |
 | 71 seconds | 0.72 s |
 
-Roughly 0.15 s fixed cost per dictation, everything beyond that at about 125 times
-realtime. Newer hardware is faster; the published benchmarks for this model were
-measured on an M4 Pro. Idle cost is 0 % CPU and about 36 MB of memory.
+Idle, Pegel uses 0 % CPU and about 36 MB of memory.
+
+## Privacy
+
+Audio and text never leave the Mac. There is no analytics, no crash reporting and no
+account. Pegel goes online in two cases, both started by you:
+
+- **Model download**, once, after you press the button. The files come from Hugging
+  Face, which sees your IP address.
+- **Update check**, only through *Check for Updates…* in *About Pegel…* or the automatic
+  check you can switch on there. Pegel fetches `appcast.xml` from GitHub and, if there
+  is a new version, the ZIP from the release. GitHub sees your IP address and the Pegel
+  and macOS versions. Updates run through [Sparkle](https://sparkle-project.org) and are
+  only installed if they carry the project's signature and the same certificate, so
+  the permissions you granted survive.
+
+## Permissions
+
+Two of the three permissions are the ones a keylogger would ask for, so here is exactly
+what each is used for.
+
+| Permission | Used for |
+|---|---|
+| Microphone | Recording your dictation. |
+| Input Monitoring | Seeing the shortcut while another app is in front. This is the only reason keyboard events are read at all. |
+| Accessibility | Pasting the text at the cursor, and reading the character in front of it to decide whether a space is needed. |
+
+Nothing is logged or stored, audio is held in memory for one dictation. The parts worth
+reading are `Input/HotkeyMonitor.swift` and `Input/TextInjector.swift`. Pegel runs
+without the App Sandbox, since a global event tap and pasting into other apps do not
+work inside it.
+
+If every switch is on and the shortcut stays dead, Input Monitoring is missing or an
+entry from an earlier build is stale:
+
+```bash
+tccutil reset All io.github.hazematic.pegel
+```
+
+## Uninstall
+
+Model and cache live outside the app, so the Trash leaves half a gigabyte behind. Use
+`brew uninstall --zap --cask pegel` or `./uninstall.sh` from this repository, which
+asks first and also clears the entries under Privacy & Security.
 
 ## Project layout
 
@@ -222,16 +186,11 @@ measured on an M4 Pro. Idle cost is 0 % CPU and about 36 MB of memory.
 | `Core/TranscriptionService.swift` | Loading, warming up and running Parakeet |
 | `Input/HotkeyMonitor.swift` | Event tap, toggle, push to talk, escape |
 | `Input/TextInjector.swift` | Pasting through the clipboard, then restoring it |
-| `UI/IndicatorView.swift` | The waveforms in the pill, all states and curves |
+| `Input/CaretTracker.swift` | Text before the cursor, screen of the cursor |
+| `UI/IndicatorView.swift` | The level meter, all states and curves |
 
-The pills above are not mockups, they are rendered from the same code the app runs and
-cannot drift from the real thing:
-
-```bash
-build/Pegel.app/Contents/MacOS/Pegel --export-icons /tmp/pegel-preview
-```
-
-That writes them, the icon set and the menu bar previews.
+The images above are rendered from the same code the app runs:
+`Pegel --export-icons <folder>`.
 
 ## Built with
 
@@ -240,13 +199,12 @@ That writes them, the icon set and the menu bar previews.
 - [Parakeet TDT 0.6B v3](https://huggingface.co/FluidInference/parakeet-tdt-0.6b-v3-coreml)
   by NVIDIA, converted by FluidInference, CC-BY-4.0
 
-Pegel passes German to the model as a language hint. That only narrows the candidates
-to Latin script, so the other Latin-script languages are unaffected; Greek or Cyrillic
-would need the hint changed.
-
 ## Licence
 
 MIT. See [LICENSE](LICENSE) and [NOTICE](NOTICE).
+
+Apple, Mac, macOS and Apple silicon are trademarks of Apple Inc., registered in the U.S.
+and other countries. Pegel is an independent project and is not affiliated with Apple.
 
 ---
 
