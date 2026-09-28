@@ -1,0 +1,184 @@
+/* Menu */
+"menu.status.last" = "Último: %@";
+"menu.status.hotkeyInactive" = "Atalho inativo, falta Acessibilidade";
+"menu.resetPosition" = "Repor posição";
+"menu.copyLast" = "Copiar o último ditado";
+"menu.transcribeFile" = "Transcrever ficheiro de áudio ou vídeo…";
+"menu.setup" = "Configurar…";
+"menu.status.notInstalled" = "Modelo ainda não instalado";
+"menu.settings" = "Definições…";
+"menu.quit" = "Sair";
+
+/* Status */
+"status.ready" = "Pronto";
+"status.recording" = "A gravar…";
+"status.transcribing" = "A transcrever…";
+"status.transcribingFile" = "A transcrever… %@";
+"status.finished" = "Inserido";
+"status.discarded" = "Descartado";
+"status.failed" = "Erro";
+
+/* Model preparation */
+"preparing.downloading" = "A descarregar o modelo %@";
+"preparing.loading" = "A inicializar o modelo";
+"preparing.warmup" = "A aquecer o modelo";
+"preparing.waiting" = "Modelo não instalado";
+"preparing.listing" = "A preparar a descarga";
+"preparing.compiling" = "A compilar o modelo";
+
+/* Errors */
+"error.microphone" = "Sem acesso ao microfone";
+"error.tooShort" = "Demasiado curto";
+"error.unreadableFile" = "Não é possível ler %@";
+"error.noSpeech" = "Nada reconhecido";
+"error.modelLoading" = "O modelo ainda está a carregar";
+"error.noInputDevice" = "Nenhum microfone encontrado.";
+"error.deviceUnavailable" = "O microfone %@ não está disponível";
+"error.silentInput" = "Sem sinal de %@";
+"error.noAudioData" = "Sem dados de %@";
+"error.notReady" = "O modelo de voz ainda não está carregado.";
+
+/* Windows */
+"window.settings" = "Definições";
+"window.about" = "Acerca do Pegel";
+"window.licences" = "Licenças";
+"window.onboarding" = "Configurar o Pegel";
+
+/* Settings */
+"settings.section.hotkey" = "Atalho de teclado";
+"settings.hotkey.label" = "Iniciar e parar o ditado";
+"settings.hotkey.reset" = "Repor %@";
+"settings.ptt.label" = "Manter a partir de";
+"settings.ptt.explanation" = "Uma pressão curta inicia ou para a gravação. Uma pressão mais longa é push-to-talk: ao soltar, termina.";
+"settings.section.audio" = "Áudio";
+"settings.input.label" = "Microfone";
+"settings.input.systemDefault" = "Predefinição do sistema";
+"settings.input.current" = "A gravar através de %@";
+"settings.input.narrowband" = "Banda estreita abaixo de 16 kHz, típica dos auscultadores Bluetooth no perfil de chamada. O reconhecimento piora bastante.";
+"settings.input.missing" = "O microfone selecionado não está ligado. Até lá, aplica-se a predefinição do sistema.";
+"settings.input.none" = "Nenhuma entrada encontrada.";
+"settings.input.explanation" = "Com a predefinição do sistema, o Pegel segue o microfone que o macOS escolher. Pode ser uma coluna Bluetooth que acabou de se ligar: o macOS trata-a como auricular e usa-a como entrada. Um dispositivo fixo evita isso.";
+"settings.section.tones" = "Sons";
+"settings.tones.label" = "Som";
+"settings.tones.play" = "Ouvir";
+"settings.tones.volume" = "Volume";
+"settings.tones.explanation" = "Um som curto e baixo confirma o início e o fim da gravação: ascendente no início, descendente ao soltar. A lista vai do mais discreto ao mais percetível. Todos são suficientemente baixos para não aparecerem no ditado.";
+"tones.off" = "Desligado";
+"tones.cricket" = "Grilo";
+"tones.pebble" = "Seixo";
+"tones.drop" = "Gota";
+"tones.moss" = "Musgo";
+"tones.glass" = "Vidro";
+"settings.section.appearance" = "Aspeto";
+"settings.waveform" = "Forma de onda";
+"settings.showTime" = "Mostrar o tempo decorrido";
+"settings.showTime.explanation" = "Sem o tempo, o indicador de nível fica mais estreito e dispensa totalmente os algarismos.";
+"settings.section.permissions" = "Permissões";
+"settings.permissions.explanation" = "Acessibilidade para colar e para localizar o ponto de inserção, Monitorização de entrada para o atalho em todo o sistema.";
+"settings.section.model" = "Modelo";
+"settings.model.label" = "Reconhecimento de voz";
+"settings.model.explanation" = "Funciona localmente no Neural Engine. Depois da primeira descarga, já não é necessária rede.";
+
+/* Waveforms */
+"waveform.trace" = "Rasto";
+"waveform.trace.explanation" = "Mostra os últimos dois segundos. Também permite ver depois se chegou som.";
+"waveform.levels" = "Níveis";
+"waveform.levels.explanation" = "Onze barras com uma onda a correr para a direita. Mais calmo e estreito, mostra só o momento presente.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "Predefinição do sistema";
+"audio.device.unknown" = "Dispositivo desconhecido";
+
+/* Permissions */
+"permission.microphone" = "Microfone";
+"permission.accessibility" = "Acessibilidade";
+"permission.inputMonitoring" = "Monitorização de entrada";
+
+/* Onboarding */
+"onboarding.subtitle" = "Ditado, local, em todo o sistema";
+"onboarding.intro" = "São necessárias três permissões; depois, tudo funciona sem mais pedidos.";
+"onboarding.microphone.detail" = "Para a gravação. O áudio nunca sai deste Mac.";
+"onboarding.accessibility.detail" = "Para colar no cursor e localizar o ponto de inserção.";
+"onboarding.inputMonitoring.detail" = "Para que o atalho seja reconhecido em todo o sistema. Um item próprio nas Definições do Sistema.";
+"onboarding.start" = "Começar";
+"onboarding.later" = "Mais tarde";
+
+/* Buttons and keys */
+"button.open" = "Abrir";
+"button.allow" = "Permitir";
+"button.openSettings" = "Definições do Sistema…";
+"hotkey.pressKey" = "Prima uma tecla…";
+"hotkey.clickToChange" = "Clique para alterar";
+"key.space" = "Espaço";
+"key.unknown" = "Tecla %ld";
+"hotkey.reject.noModifier" = "Sem uma tecla modificadora, o atalho intercetaria todas as teclas normais.";
+"hotkey.reject.escape" = "Escape está reservado para cancelar uma gravação.";
+"hotkey.reject.quit" = "⌘Q encerra aplicações.";
+"hotkey.reject.close" = "⌘W fecha janelas.";
+"hotkey.reject.switchApp" = "⌘Tab alterna entre aplicações.";
+"hotkey.reject.spotlight" = "⌘Espaço abre o Spotlight.";
+
+/* Setup */
+"setup.welcome.title" = "Configurar uma vez e nunca mais";
+"setup.welcome.body" = "O Pegel reconhece a voz inteiramente neste Mac. Para isso, descarrega agora o modelo de voz uma única vez. Sem ele, a aplicação não consegue transcrever.";
+"setup.welcome.privacy" = "É o único acesso à rede que o Pegel alguma vez faz. Depois disso, tudo funciona offline: sem conta, sem nuvem, sem telemetria.";
+"setup.welcome.size" = "461 MB do Hugging Face, alguns minutos consoante a ligação.";
+"setup.welcome.confirm" = "Descarregar modelo";
+"setup.next" = "Continuar";
+"setup.permissions.title" = "Permissões";
+"setup.install.done" = "O modelo está instalado e pronto";
+"setup.install.failed" = "A descarga falhou";
+"setup.install.retry" = "Tentar novamente";
+"setup.install.retry.hint" = "As partes já descarregadas ficam guardadas; uma segunda tentativa continua a partir daí.";
+"setup.install.retry.offline" = "Volte a ligar-se à Internet e tente novamente. As partes já descarregadas ficam guardadas.";
+"setup.phase.waiting" = "A aguardar confirmação";
+"setup.phase.listing" = "A obter a lista de ficheiros";
+"setup.phase.downloading" = "Ficheiro %ld de %ld";
+"setup.phase.downloadingPlain" = "A descarregar o modelo";
+"setup.phase.compiling" = "A compilar o modelo para o Neural Engine";
+"setup.done.title" = "O Pegel está pronto";
+"setup.done.body" = "A aplicação fica na barra de menus e não tem janela própria. Dita onde quer que esteja o ponto de inserção.";
+"setup.done.shortcut.label" = "O seu atalho, pode alterá-lo aqui";
+"setup.done.shortcut.explanation" = "Uma pressão curta inicia a gravação e mantém-na ativa, outra pressão termina-a. Manter premido é push-to-talk. Escape descarta.";
+"setup.done.openSettings" = "Mais definições…";
+"setup.done.permissionsMissing" = "Ainda faltam permissões. Sem Acessibilidade e Monitorização de entrada, o atalho não responde. Pode concedê-las mais tarde nas definições.";
+
+/* Installation errors */
+"install.error.offline" = "Sem ligação à rede. O Pegel só precisa da rede para esta descarga.";
+
+/* Audiodatei */
+"file.panel.message" = "O resultado vai para o clipboard.";
+"file.panel.prompt" = "Transcrever";
+
+/* Colours */
+"settings.palette" = "Cores";
+"palette.standard" = "Padrão";
+"palette.citrus" = "Citrinos";
+"palette.lagoon" = "Lagoa";
+"palette.ember" = "Brasa";
+"palette.neon" = "Néon";
+"palette.fern" = "Folhagem";
+
+/* Settings and About */
+"menu.about" = "Acerca do Pegel…";
+"settings.tab.general" = "Geral";
+"settings.tab.appearance" = "Aspeto";
+"about.tagline" = "Ditado no Mac, totalmente local.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Versão %@";
+"about.versionBuild" = "Versão %@ (%@)";
+"about.repository" = "Pegel no GitHub";
+"about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Tradução";
+"about.translation.machine" = "Esta tradução foi criada automaticamente e não foi revista por um falante nativo.";
+"about.translation.report" = "Comunicar um erro";
+"about.translation.useEnglish" = "Usar o Pegel em inglês…";
+"about.section.updates" = "Atualizações";
+"about.updates.automatic" = "Procurar atualizações automaticamente";
+"about.updates.install" = "Instalar atualizações automaticamente";
+"about.updates.install.explanation" = "O Pegel descarrega em segundo plano uma atualização encontrada e instala-a quando for encerrado. Se estiver desativado, o Pegel pergunta primeiro. Só funciona com a procura automática.";
+"about.updates.check" = "Procurar atualizações…";
+"about.updates.privacy" = "Para procurar, o Pegel obtém um ficheiro do GitHub. O GitHub vê o seu endereço IP e as versões do Pegel e do macOS. O áudio e o texto nunca saem deste Mac.";
+"about.section.licenses" = "Licenças";
+"about.licenses.explanation" = "O Pegel é distribuído sob a licença MIT. Inclui o FluidAudio (Apache 2.0) e as respetivas dependências. O modelo de voz Parakeet TDT 0.6B v3 é da NVIDIA, a conversão para Core ML é da FluidInference, ambos sob CC-BY-4.0.";
+"about.licenses.show" = "Mostrar textos das licenças…";

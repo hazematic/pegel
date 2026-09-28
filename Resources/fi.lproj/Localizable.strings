@@ -1,0 +1,184 @@
+/* Menu */
+"menu.status.last" = "Viimeisin: %@";
+"menu.status.hotkeyInactive" = "Oikotie ei käytössä, Käyttöapu puuttuu";
+"menu.resetPosition" = "Palauta sijainti";
+"menu.copyLast" = "Kopioi viimeisin sanelu";
+"menu.transcribeFile" = "Litteroi ääni- tai videotiedosto…";
+"menu.setup" = "Avaa käyttöönotto…";
+"menu.status.notInstalled" = "Mallia ei ole vielä asennettu";
+"menu.settings" = "Asetukset…";
+"menu.quit" = "Lopeta";
+
+/* Status */
+"status.ready" = "Valmis";
+"status.recording" = "Tallennetaan…";
+"status.transcribing" = "Litteroidaan…";
+"status.transcribingFile" = "Litteroidaan… %@";
+"status.finished" = "Lisätty";
+"status.discarded" = "Hylätty";
+"status.failed" = "Virhe";
+
+/* Model preparation */
+"preparing.downloading" = "Ladataan mallia %@";
+"preparing.loading" = "Alustetaan mallia";
+"preparing.warmup" = "Lämmitetään mallia";
+"preparing.waiting" = "Mallia ei ole asennettu";
+"preparing.listing" = "Valmistellaan latausta";
+"preparing.compiling" = "Käännetään mallia";
+
+/* Errors */
+"error.microphone" = "Ei mikrofonin käyttöoikeutta";
+"error.tooShort" = "Liian lyhyt";
+"error.unreadableFile" = "Tiedostoa %@ ei voi lukea";
+"error.noSpeech" = "Mitään ei tunnistettu";
+"error.modelLoading" = "Mallia ladataan vielä";
+"error.noInputDevice" = "Mikrofonia ei löytynyt.";
+"error.deviceUnavailable" = "Mikrofoni %@ ei ole käytettävissä";
+"error.silentInput" = "Ei signaalia laitteesta %@";
+"error.noAudioData" = "Ei dataa laitteesta %@";
+"error.notReady" = "Puhemallia ei ole vielä ladattu.";
+
+/* Windows */
+"window.settings" = "Asetukset";
+"window.about" = "Tietoja: Pegel";
+"window.licences" = "Lisenssit";
+"window.onboarding" = "Ota Pegel käyttöön";
+
+/* Settings */
+"settings.section.hotkey" = "Näppäinoikotie";
+"settings.hotkey.label" = "Aloita ja lopeta sanelu";
+"settings.hotkey.reset" = "Palauta: %@";
+"settings.ptt.label" = "Pito alkaen";
+"settings.ptt.explanation" = "Lyhyt painallus käynnistää tai pysäyttää tallennuksen. Pitkä painallus on push-to-talk: vapautus lopettaa.";
+"settings.section.audio" = "Ääni";
+"settings.input.label" = "Mikrofoni";
+"settings.input.systemDefault" = "Järjestelmän oletus";
+"settings.input.current" = "Tallennetaan: %@";
+"settings.input.narrowband" = "Kapeakaista alle 16 kHz, tyypillistä Bluetooth-kuulokemikrofoneille puhelinprofiilissa. Tunnistus kärsii selvästi.";
+"settings.input.missing" = "Valittu mikrofoni ei ole liitettynä. Siihen asti käytetään järjestelmän oletusta.";
+"settings.input.none" = "Syöttölaitetta ei löytynyt.";
+"settings.input.explanation" = "Järjestelmän oletuksella Pegel käyttää sitä mikrofonia, jonka macOS kulloinkin valitsee. Se voi olla juuri yhdistetty Bluetooth-kaiutin: macOS pitää sitä kuulokemikrofonina ja tekee siitä syötteen. Kiinteä laite estää tämän.";
+"settings.section.tones" = "Äänimerkit";
+"settings.tones.label" = "Äänimerkki";
+"settings.tones.play" = "Toista";
+"settings.tones.volume" = "Äänenvoimakkuus";
+"settings.tones.explanation" = "Lyhyt, hiljainen äänimerkki vahvistaa tallennuksen alun ja lopun: nouseva alussa, laskeva vapautettaessa. Luettelo etenee huomaamattomimmasta selvimpään. Kaikki ovat niin hiljaisia, etteivät ne päädy saneluun.";
+"tones.off" = "Pois";
+"tones.cricket" = "Sirkka";
+"tones.pebble" = "Pikkukivi";
+"tones.drop" = "Pisara";
+"tones.moss" = "Sammal";
+"tones.glass" = "Lasi";
+"settings.section.appearance" = "Ulkoasu";
+"settings.waveform" = "Aaltomuoto";
+"settings.showTime" = "Näytä kulunut aika";
+"settings.showTime.explanation" = "Ilman aikaa tasomittari on kapeampi ja täysin ilman numeroita.";
+"settings.section.permissions" = "Oikeudet";
+"settings.permissions.explanation" = "Käyttöapu lisäämiseen ja lisäyskohdan sijainnin selvittämiseen, Syötteen tarkkailu koko järjestelmän näppäinoikotietä varten.";
+"settings.section.model" = "Malli";
+"settings.model.label" = "Puheentunnistus";
+"settings.model.explanation" = "Toimii paikallisesti Neural Enginellä. Ensimmäisen latauksen jälkeen verkkoa ei tarvita.";
+
+/* Waveforms */
+"waveform.trace" = "Jälki";
+"waveform.trace.explanation" = "Näyttää kaksi viimeisintä sekuntia. Näet jälkikäteenkin, tuliko ääntä.";
+"waveform.levels" = "Tasot";
+"waveform.levels.explanation" = "Yksitoista palkkia, joiden aalto kulkee oikealle. Rauhallisempi ja kapeampi, näyttää vain hetken.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "Järjestelmän oletus";
+"audio.device.unknown" = "Tuntematon laite";
+
+/* Permissions */
+"permission.microphone" = "Mikrofoni";
+"permission.accessibility" = "Käyttöapu";
+"permission.inputMonitoring" = "Syötteen tarkkailu";
+
+/* Onboarding */
+"onboarding.subtitle" = "Sanelu, paikallisesti, missä tahansa järjestelmässä";
+"onboarding.intro" = "Tarvitaan kolme oikeutta, sen jälkeen kaikki toimii ilman lisäkysymyksiä.";
+"onboarding.microphone.detail" = "Tallennusta varten. Ääni ei koskaan poistu tästä Macista.";
+"onboarding.accessibility.detail" = "Kursorin kohdalle lisäämistä ja lisäyskohdan sijaintia varten.";
+"onboarding.inputMonitoring.detail" = "Jotta näppäinoikotie tunnistetaan koko järjestelmässä. Oma kohtansa Järjestelmäasetuksissa.";
+"onboarding.start" = "Aloitetaan";
+"onboarding.later" = "Myöhemmin";
+
+/* Buttons and keys */
+"button.open" = "Avaa";
+"button.allow" = "Salli";
+"button.openSettings" = "Järjestelmäasetukset…";
+"hotkey.pressKey" = "Paina näppäintä…";
+"hotkey.clickToChange" = "Muuta osoittamalla";
+"key.space" = "Välilyönti";
+"key.unknown" = "Näppäin %ld";
+"hotkey.reject.noModifier" = "Ilman muokkausnäppäintä oikotie sieppaisi jokaisen tavallisen näppäilyn.";
+"hotkey.reject.escape" = "Esc on varattu tallennuksen keskeyttämiseen.";
+"hotkey.reject.quit" = "⌘Q lopettaa apit.";
+"hotkey.reject.close" = "⌘W sulkee ikkunat.";
+"hotkey.reject.switchApp" = "⌘Sarkain vaihtaa appia.";
+"hotkey.reject.spotlight" = "⌘Välilyönti avaa Spotlightin.";
+
+/* Setup */
+"setup.welcome.title" = "Kerran käyttöön, ei koskaan uudelleen";
+"setup.welcome.body" = "Pegel tunnistaa puheen kokonaan tällä Macilla. Sitä varten se lataa nyt kerran puhemallin. Ilman sitä appi ei voi litteroida.";
+"setup.welcome.privacy" = "Tämä on ainoa verkkoyhteys, jonka Pegel koskaan muodostaa. Sen jälkeen kaikki toimii offline-tilassa: ei tiliä, ei pilveä, ei telemetriaa.";
+"setup.welcome.size" = "461 Mt Hugging Facesta, muutama minuutti yhteydestä riippuen.";
+"setup.welcome.confirm" = "Lataa malli";
+"setup.next" = "Jatka";
+"setup.permissions.title" = "Oikeudet";
+"setup.install.done" = "Malli on asennettu ja valmis";
+"setup.install.failed" = "Lataus epäonnistui";
+"setup.install.retry" = "Yritä uudelleen";
+"setup.install.retry.hint" = "Jo ladatut osat säilyvät, uusi yritys jatkaa niistä.";
+"setup.install.retry.offline" = "Yhdistä verkkoon ja yritä uudelleen. Jo ladatut osat säilyvät.";
+"setup.phase.waiting" = "Odotetaan vahvistusta";
+"setup.phase.listing" = "Haetaan tiedostoluetteloa";
+"setup.phase.downloading" = "Tiedosto %ld/%ld";
+"setup.phase.downloadingPlain" = "Ladataan mallia";
+"setup.phase.compiling" = "Käännetään mallia Neural Enginelle";
+"setup.done.title" = "Pegel on valmis";
+"setup.done.body" = "Appi on valikkorivillä eikä sillä ole omaa ikkunaa. Sanelu toimii kaikkialla, missä lisäyskohta on.";
+"setup.done.shortcut.label" = "Näppäinoikotiesi, voit muuttaa sen tässä";
+"setup.done.shortcut.explanation" = "Lyhyt painallus aloittaa tallennuksen ja jättää sen käyntiin, uusi painallus lopettaa sen. Pohjassa pitäminen on push-to-talk. Esc hylkää.";
+"setup.done.openSettings" = "Lisää asetuksia…";
+"setup.done.permissionsMissing" = "Oikeuksia puuttuu vielä. Ilman Käyttöapua ja Syötteen tarkkailua oikotie ei reagoi. Voit myöntää ne myöhemmin asetuksissa.";
+
+/* Installation errors */
+"install.error.offline" = "Ei verkkoyhteyttä. Pegel tarvitsee verkkoa vain tähän yhteen lataukseen.";
+
+/* Audiodatei */
+"file.panel.message" = "Tulos menee leikepöydälle.";
+"file.panel.prompt" = "Litteroi";
+
+/* Colours */
+"settings.palette" = "Värit";
+"palette.standard" = "Vakio";
+"palette.citrus" = "Sitrus";
+"palette.lagoon" = "Laguuni";
+"palette.ember" = "Hiillos";
+"palette.neon" = "Neon";
+"palette.fern" = "Saniainen";
+
+/* Settings and About */
+"menu.about" = "Tietoja: Pegel…";
+"settings.tab.general" = "Yleiset";
+"settings.tab.appearance" = "Ulkoasu";
+"about.tagline" = "Sanelu Macilla, täysin paikallisesti.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Versio %@";
+"about.versionBuild" = "Versio %@ (%@)";
+"about.repository" = "Pegel GitHubissa";
+"about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Käännös";
+"about.translation.machine" = "Tämä käännös on tehty automaattisesti, eikä äidinkielinen puhuja ole tarkistanut sitä.";
+"about.translation.report" = "Ilmoita virheestä";
+"about.translation.useEnglish" = "Käytä Pegeliä englanniksi…";
+"about.section.updates" = "Päivitykset";
+"about.updates.automatic" = "Etsi päivityksiä automaattisesti";
+"about.updates.install" = "Asenna päivitykset automaattisesti";
+"about.updates.install.explanation" = "Pegel lataa löydetyn päivityksen taustalla ja asentaa sen, kun se seuraavan kerran lopetetaan. Pois päältä ollessaan Pegel kysyy ensin. Toimii vain automaattisen etsinnän kanssa.";
+"about.updates.check" = "Etsi päivityksiä…";
+"about.updates.privacy" = "Etsiessään Pegel hakee tiedoston GitHubista. GitHub näkee tällöin IP-osoitteesi sekä Pegelin ja macOS:n versiot. Ääni ja teksti eivät koskaan poistu tästä Macista.";
+"about.section.licenses" = "Lisenssit";
+"about.licenses.explanation" = "Pegel on julkaistu MIT-lisenssillä. Mukana on FluidAudio (Apache 2.0) riippuvuuksineen. Puhemallin Parakeet TDT 0.6B v3 on tehnyt NVIDIA, Core ML -version FluidInference, molemmat CC‑BY‑4.0-lisenssillä.";
+"about.licenses.show" = "Näytä lisenssitekstit…";

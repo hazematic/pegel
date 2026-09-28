@@ -1,0 +1,184 @@
+/* Menu */
+"menu.status.last" = "Naposledy: %@";
+"menu.status.hotkeyInactive" = "Skratka neaktívna, chýba Prístupnosť";
+"menu.resetPosition" = "Obnoviť polohu";
+"menu.copyLast" = "Kopírovať posledné diktovanie";
+"menu.transcribeFile" = "Prepísať zvukový súbor alebo video…";
+"menu.setup" = "Úvodné nastavenie…";
+"menu.status.notInstalled" = "Model ešte nie je nainštalovaný";
+"menu.settings" = "Nastavenia…";
+"menu.quit" = "Ukončiť";
+
+/* Status */
+"status.ready" = "Pripravené";
+"status.recording" = "Nahrávam…";
+"status.transcribing" = "Prepisujem…";
+"status.transcribingFile" = "Prepisujem… %@";
+"status.finished" = "Vložené";
+"status.discarded" = "Zahodené";
+"status.failed" = "Chyba";
+
+/* Model preparation */
+"preparing.downloading" = "Sťahujem model %@";
+"preparing.loading" = "Inicializujem model";
+"preparing.warmup" = "Zahrievam model";
+"preparing.waiting" = "Model nie je nainštalovaný";
+"preparing.listing" = "Pripravujem sťahovanie";
+"preparing.compiling" = "Kompilujem model";
+
+/* Errors */
+"error.microphone" = "Bez prístupu k mikrofónu";
+"error.tooShort" = "Príliš krátke";
+"error.unreadableFile" = "%@ sa nedá prečítať";
+"error.noSpeech" = "Nič sa nerozpoznalo";
+"error.modelLoading" = "Model sa ešte načítava";
+"error.noInputDevice" = "Nenašiel sa žiadny mikrofón.";
+"error.deviceUnavailable" = "Mikrofón %@ nie je k dispozícii";
+"error.silentInput" = "Žiadny signál z %@";
+"error.noAudioData" = "Žiadne dáta z %@";
+"error.notReady" = "Model reči ešte nie je načítaný.";
+
+/* Windows */
+"window.settings" = "Nastavenia";
+"window.about" = "O aplikácii Pegel";
+"window.licences" = "Licencie";
+"window.onboarding" = "Nastaviť Pegel";
+
+/* Settings */
+"settings.section.hotkey" = "Klávesová skratka";
+"settings.hotkey.label" = "Spustenie a ukončenie diktovania";
+"settings.hotkey.reset" = "Späť na %@";
+"settings.ptt.label" = "Podržanie od";
+"settings.ptt.explanation" = "Krátke stlačenie zapne alebo vypne nahrávanie. Dlhšie stlačenie je push-to-talk: pustením sa nahrávanie ukončí.";
+"settings.section.audio" = "Zvuk";
+"settings.input.label" = "Mikrofón";
+"settings.input.systemDefault" = "Systémová predvoľba";
+"settings.input.current" = "Nahráva sa cez %@";
+"settings.input.narrowband" = "Úzke pásmo pod 16 kHz, typické pre Bluetooth headsety v telefónnom profile. Rozpoznávanie tým citeľne trpí.";
+"settings.input.missing" = "Vybraný mikrofón nie je pripojený. Dovtedy platí systémová predvoľba.";
+"settings.input.none" = "Nenašlo sa žiadne vstupné zariadenie.";
+"settings.input.explanation" = "Pri systémovej predvoľbe Pegel používa mikrofón, ktorý práve vyberie macOS. Môže to byť Bluetooth reproduktor, ktorý sa práve pripojil: macOS ho považuje za headset a nastaví ho ako vstup. Pevne zvolené zariadenie to vylučuje.";
+"settings.section.tones" = "Zvuky";
+"settings.tones.label" = "Zvuk";
+"settings.tones.play" = "Prehrať";
+"settings.tones.volume" = "Hlasitosť";
+"settings.tones.explanation" = "Krátky, tichý tón potvrdí začiatok a koniec nahrávania: stúpajúci na začiatku, klesajúci po pustení. Zoznam ide od najnenápadnejšieho po najvýraznejší. Všetky sú dosť tiché na to, aby sa nedostali do diktovania.";
+"tones.off" = "Vyp.";
+"tones.cricket" = "Svrček";
+"tones.pebble" = "Kamienok";
+"tones.drop" = "Kvapka";
+"tones.moss" = "Mach";
+"tones.glass" = "Sklo";
+"settings.section.appearance" = "Vzhľad";
+"settings.waveform" = "Tvar vlny";
+"settings.showTime" = "Zobrazovať uplynutý čas";
+"settings.showTime.explanation" = "Bez času je ukazovateľ úrovne užší a zaobíde sa úplne bez číslic.";
+"settings.section.permissions" = "Povolenia";
+"settings.permissions.explanation" = "Prístupnosť na vkladanie a zistenie polohy kurzora, Monitorovanie vstupu pre klávesovú skratku v celom systéme.";
+"settings.section.model" = "Model";
+"settings.model.label" = "Rozpoznávanie reči";
+"settings.model.explanation" = "Beží lokálne na Neural Engine. Po prvom stiahnutí už nie je potrebná sieť.";
+
+/* Waveforms */
+"waveform.trace" = "Stopa";
+"waveform.trace.explanation" = "Zobrazuje posledné dve sekundy. Aj spätne vidno, či prišiel zvuk.";
+"waveform.levels" = "Úrovne";
+"waveform.levels.explanation" = "Jedenásť pruhov s vlnou bežiacou doprava. Pokojnejšie a užšie zobrazenie, ukazuje len aktuálny okamih.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "Systémová predvoľba";
+"audio.device.unknown" = "Neznáme zariadenie";
+
+/* Permissions */
+"permission.microphone" = "Mikrofón";
+"permission.accessibility" = "Prístupnosť";
+"permission.inputMonitoring" = "Monitorovanie vstupu";
+
+/* Onboarding */
+"onboarding.subtitle" = "Diktovanie, lokálne, kdekoľvek v systéme";
+"onboarding.intro" = "Potrebné sú tri povolenia, potom všetko beží bez ďalších otázok.";
+"onboarding.microphone.detail" = "Na nahrávanie. Zvuk nikdy neopustí tento Mac.";
+"onboarding.accessibility.detail" = "Na vkladanie textu a zistenie polohy kurzora.";
+"onboarding.inputMonitoring.detail" = "Aby sa klávesová skratka rozpoznala v celom systéme. Samostatná položka v Systémových nastaveniach.";
+"onboarding.start" = "Poďme na to";
+"onboarding.later" = "Neskôr";
+
+/* Buttons and keys */
+"button.open" = "Otvoriť";
+"button.allow" = "Povoliť";
+"button.openSettings" = "Systémové nastavenia…";
+"hotkey.pressKey" = "Stlačte kláves…";
+"hotkey.clickToChange" = "Kliknutím zmeníte";
+"key.space" = "Medzerník";
+"key.unknown" = "Kláves %ld";
+"hotkey.reject.noModifier" = "Bez modifikačného klávesu by skratka zachytila každé bežné stlačenie klávesu.";
+"hotkey.reject.escape" = "Escape je vyhradený na zrušenie nahrávania.";
+"hotkey.reject.quit" = "⌘Q ukončuje aplikácie.";
+"hotkey.reject.close" = "⌘W zatvára okná.";
+"hotkey.reject.switchApp" = "⌘Tab prepína aplikácie.";
+"hotkey.reject.spotlight" = "⌘Medzerník otvára Spotlight.";
+
+/* Setup */
+"setup.welcome.title" = "Raz nastaviť a potom už nikdy";
+"setup.welcome.body" = "Pegel rozpoznáva reč úplne na tomto Macu. Na to si teraz jednorazovo stiahne model reči. Bez neho aplikácia nedokáže prepisovať.";
+"setup.welcome.privacy" = "Je to jediný prístup do siete, aký Pegel kedy urobí. Potom všetko beží offline: žiadny účet, žiadny cloud, žiadna telemetria.";
+"setup.welcome.size" = "461 MB z Hugging Face, podľa pripojenia niekoľko minút.";
+"setup.welcome.confirm" = "Stiahnuť model";
+"setup.next" = "Pokračovať";
+"setup.permissions.title" = "Povolenia";
+"setup.install.done" = "Model je nainštalovaný a pripravený";
+"setup.install.failed" = "Sťahovanie zlyhalo";
+"setup.install.retry" = "Skúsiť znovu";
+"setup.install.retry.hint" = "Už stiahnuté časti zostanú, ďalší pokus bude pokračovať od nich.";
+"setup.install.retry.offline" = "Pripojte sa k sieti a skúste to znovu. Už stiahnuté časti zostanú.";
+"setup.phase.waiting" = "Čaká sa na potvrdenie";
+"setup.phase.listing" = "Načítava sa zoznam súborov";
+"setup.phase.downloading" = "Súbor %ld z %ld";
+"setup.phase.downloadingPlain" = "Sťahujem model";
+"setup.phase.compiling" = "Kompilujem model pre Neural Engine";
+"setup.done.title" = "Pegel je pripravený";
+"setup.done.body" = "Aplikácia sa nachádza v lište a nemá vlastné okno. Diktuje všade tam, kde je kurzor.";
+"setup.done.shortcut.label" = "Vaša klávesová skratka, tu ju môžete zmeniť";
+"setup.done.shortcut.explanation" = "Krátke stlačenie spustí nahrávanie a nechá ho bežať, ďalšie stlačenie ho ukončí. Podržanie je push-to-talk. Escape nahrávku zahodí.";
+"setup.done.openSettings" = "Ďalšie nastavenia…";
+"setup.done.permissionsMissing" = "Ešte chýbajú povolenia. Bez Prístupnosti a Monitorovania vstupu skratka nereaguje. Udeliť ich môžete neskôr v nastaveniach.";
+
+/* Installation errors */
+"install.error.offline" = "Žiadne pripojenie k sieti. Pegel potrebuje sieť len na toto jedno stiahnutie.";
+
+/* Audiodatei */
+"file.panel.message" = "Výsledok sa uloží do schránky.";
+"file.panel.prompt" = "Prepísať";
+
+/* Colours */
+"settings.palette" = "Farby";
+"palette.standard" = "Štandardné";
+"palette.citrus" = "Citrus";
+"palette.lagoon" = "Lagúna";
+"palette.ember" = "Pahreba";
+"palette.neon" = "Neón";
+"palette.fern" = "Papraď";
+
+/* Settings and About */
+"menu.about" = "O aplikácii Pegel…";
+"settings.tab.general" = "Všeobecné";
+"settings.tab.appearance" = "Vzhľad";
+"about.tagline" = "Diktovanie na Macu, úplne lokálne.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Verzia %@";
+"about.versionBuild" = "Verzia %@ (%@)";
+"about.repository" = "Pegel na GitHube";
+"about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Preklad";
+"about.translation.machine" = "Tento preklad vznikol automaticky a nekontroloval ho rodený hovoriaci.";
+"about.translation.report" = "Nahlásiť chybu";
+"about.translation.useEnglish" = "Používať Pegel v angličtine…";
+"about.section.updates" = "Aktualizácie";
+"about.updates.automatic" = "Automaticky vyhľadávať aktualizácie";
+"about.updates.install" = "Automaticky inštalovať aktualizácie";
+"about.updates.install.explanation" = "Pegel stiahne nájdenú aktualizáciu na pozadí a nainštaluje ju pri ďalšom ukončení. Keď je voľba vypnutá, Pegel sa najprv opýta. Funguje len s automatickým vyhľadávaním.";
+"about.updates.check" = "Vyhľadať aktualizácie…";
+"about.updates.privacy" = "Pri vyhľadávaní Pegel stiahne súbor z GitHubu. GitHub pritom vidí vašu IP adresu a verzie Pegel a macOS. Zvuk a text nikdy neopustia tento Mac.";
+"about.section.licenses" = "Licencie";
+"about.licenses.explanation" = "Pegel je vydaný pod licenciou MIT. Obsahuje FluidAudio (Apache 2.0) s jeho závislosťami. Model reči Parakeet TDT 0.6B v3 pochádza od spoločnosti NVIDIA, verzia pre Core ML od FluidInference, obe pod licenciou CC-BY-4.0.";
+"about.licenses.show" = "Zobraziť texty licencií…";

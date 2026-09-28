@@ -1,0 +1,184 @@
+/* Menu */
+"menu.status.last" = "Ultima: %@";
+"menu.status.hotkeyInactive" = "Scurtătură inactivă, lipsește Accesibilitate";
+"menu.resetPosition" = "Resetați poziția";
+"menu.copyLast" = "Copiați ultima dictare";
+"menu.transcribeFile" = "Transcrieți un fișier audio sau video…";
+"menu.setup" = "Configurare inițială…";
+"menu.status.notInstalled" = "Modelul nu este încă instalat";
+"menu.settings" = "Configurări…";
+"menu.quit" = "Închideți aplicația";
+
+/* Status */
+"status.ready" = "Pregătit";
+"status.recording" = "Înregistrare…";
+"status.transcribing" = "Transcriere…";
+"status.transcribingFile" = "Transcriere… %@";
+"status.finished" = "Inserat";
+"status.discarded" = "Abandonat";
+"status.failed" = "Eroare";
+
+/* Model preparation */
+"preparing.downloading" = "Descărcare model %@";
+"preparing.loading" = "Inițializare model";
+"preparing.warmup" = "Pregătire model";
+"preparing.waiting" = "Modelul nu este instalat";
+"preparing.listing" = "Pregătire descărcare";
+"preparing.compiling" = "Compilare model";
+
+/* Errors */
+"error.microphone" = "Fără acces la microfon";
+"error.tooShort" = "Prea scurt";
+"error.unreadableFile" = "%@ nu poate fi citit";
+"error.noSpeech" = "Nimic recunoscut";
+"error.modelLoading" = "Modelul încă se încarcă";
+"error.noInputDevice" = "Nu s‑a găsit niciun microfon.";
+"error.deviceUnavailable" = "Microfonul %@ nu este disponibil";
+"error.silentInput" = "Niciun semnal de la %@";
+"error.noAudioData" = "Nicio dată de la %@";
+"error.notReady" = "Modelul de vorbire nu este încă încărcat.";
+
+/* Windows */
+"window.settings" = "Configurări";
+"window.about" = "Despre Pegel";
+"window.licences" = "Licențe";
+"window.onboarding" = "Configurați Pegel";
+
+/* Settings */
+"settings.section.hotkey" = "Scurtătură din tastatură";
+"settings.hotkey.label" = "Pornire și oprire dictare";
+"settings.hotkey.reset" = "Înapoi la %@";
+"settings.ptt.label" = "Menținere de la";
+"settings.ptt.explanation" = "O apăsare scurtă pornește sau oprește înregistrarea. O apăsare mai lungă este push-to-talk: eliberarea o încheie.";
+"settings.section.audio" = "Audio";
+"settings.input.label" = "Microfon";
+"settings.input.systemDefault" = "Implicit pentru sistem";
+"settings.input.current" = "Se înregistrează prin %@";
+"settings.input.narrowband" = "Bandă îngustă sub 16 kHz, tipică pentru căștile cu microfon Bluetooth în profilul de telefon. Recunoașterea are de suferit vizibil.";
+"settings.input.missing" = "Microfonul selectat nu este conectat. Până atunci se folosește setarea implicită pentru sistem.";
+"settings.input.none" = "Nu s‑a găsit niciun dispozitiv de intrare.";
+"settings.input.explanation" = "Cu setarea implicită pentru sistem, Pegel folosește microfonul pe care îl alege macOS în acel moment. Poate fi o boxă Bluetooth tocmai conectată: macOS o tratează drept căști cu microfon și o face intrare. Un dispozitiv fix exclude acest lucru.";
+"settings.section.tones" = "Sunete";
+"settings.tones.label" = "Sunet";
+"settings.tones.play" = "Redați";
+"settings.tones.volume" = "Volum";
+"settings.tones.explanation" = "Un sunet scurt și încet confirmă începutul și sfârșitul înregistrării: ascendent la pornire, descendent la eliberare. Lista merge de la cel mai discret la cel mai evident. Toate sunt destul de încete încât să nu ajungă în dictare.";
+"tones.off" = "Dezactivat";
+"tones.cricket" = "Greier";
+"tones.pebble" = "Pietricică";
+"tones.drop" = "Picătură";
+"tones.moss" = "Mușchi";
+"tones.glass" = "Sticlă";
+"settings.section.appearance" = "Aspect";
+"settings.waveform" = "Formă de undă";
+"settings.showTime" = "Afișați timpul scurs";
+"settings.showTime.explanation" = "Fără timp, indicatorul de nivel este mai îngust și nu are deloc cifre.";
+"settings.section.permissions" = "Permisiuni";
+"settings.permissions.explanation" = "Accesibilitate pentru inserare și poziția punctului de inserare, Monitorizare intrare pentru scurtătura din tastatură la nivelul întregului sistem.";
+"settings.section.model" = "Model";
+"settings.model.label" = "Recunoaștere vocală";
+"settings.model.explanation" = "Rulează local pe Neural Engine. După prima descărcare nu mai este nevoie de rețea.";
+
+/* Waveforms */
+"waveform.trace" = "Urmă";
+"waveform.trace.explanation" = "Arată ultimele două secunde. Se vede și retroactiv dacă a ajuns sunetul.";
+"waveform.levels" = "Niveluri";
+"waveform.levels.explanation" = "Unsprezece bare cu o undă care merge spre dreapta. Mai calm și mai îngust, arată doar momentul prezent.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "Implicit pentru sistem";
+"audio.device.unknown" = "Dispozitiv necunoscut";
+
+/* Permissions */
+"permission.microphone" = "Microfon";
+"permission.accessibility" = "Accesibilitate";
+"permission.inputMonitoring" = "Monitorizare intrare";
+
+/* Onboarding */
+"onboarding.subtitle" = "Dictare, local, oriunde în sistem";
+"onboarding.intro" = "Sunt necesare trei permisiuni, apoi totul funcționează fără alte întrebări.";
+"onboarding.microphone.detail" = "Pentru înregistrare. Sunetul nu părăsește niciodată acest Mac.";
+"onboarding.accessibility.detail" = "Pentru inserarea la cursor și poziția punctului de inserare.";
+"onboarding.inputMonitoring.detail" = "Pentru ca scurtătura din tastatură să fie recunoscută în tot sistemul. Element separat în Configurări sistem.";
+"onboarding.start" = "Să începem";
+"onboarding.later" = "Mai târziu";
+
+/* Buttons and keys */
+"button.open" = "Deschideți";
+"button.allow" = "Permiteți";
+"button.openSettings" = "Configurări sistem…";
+"hotkey.pressKey" = "Apăsați o tastă…";
+"hotkey.clickToChange" = "Faceți clic pentru a modifica";
+"key.space" = "Spațiu";
+"key.unknown" = "Tasta %ld";
+"hotkey.reject.noModifier" = "Fără o tastă modificatoare, scurtătura ar intercepta orice tastare obișnuită.";
+"hotkey.reject.escape" = "Escape este rezervat pentru anularea înregistrării.";
+"hotkey.reject.quit" = "⌘Q închide aplicațiile.";
+"hotkey.reject.close" = "⌘W închide ferestrele.";
+"hotkey.reject.switchApp" = "⌘Tab comută între aplicații.";
+"hotkey.reject.spotlight" = "⌘Spațiu deschide Spotlight.";
+
+/* Setup */
+"setup.welcome.title" = "Configurați o dată, apoi niciodată";
+"setup.welcome.body" = "Pegel recunoaște vorbirea în întregime pe acest Mac. Pentru asta descarcă acum o singură dată modelul de vorbire. Fără el, aplicația nu poate transcrie.";
+"setup.welcome.privacy" = "Este singurul acces la rețea pe care îl face vreodată Pegel. După aceea totul rulează offline: fără cont, fără cloud, fără telemetrie.";
+"setup.welcome.size" = "461 MB de la Hugging Face, câteva minute în funcție de conexiune.";
+"setup.welcome.confirm" = "Descărcați modelul";
+"setup.next" = "Continuați";
+"setup.permissions.title" = "Permisiuni";
+"setup.install.done" = "Modelul este instalat și pregătit";
+"setup.install.failed" = "Descărcarea a eșuat";
+"setup.install.retry" = "Reîncercați";
+"setup.install.retry.hint" = "Părțile deja descărcate rămân, o a doua încercare continuă de acolo.";
+"setup.install.retry.offline" = "Conectați‑vă din nou la rețea și reîncercați. Părțile deja descărcate rămân.";
+"setup.phase.waiting" = "Se așteaptă confirmarea";
+"setup.phase.listing" = "Se obține lista de fișiere";
+"setup.phase.downloading" = "Fișierul %ld din %ld";
+"setup.phase.downloadingPlain" = "Descărcare model";
+"setup.phase.compiling" = "Compilare model pentru Neural Engine";
+"setup.done.title" = "Pegel este pregătit";
+"setup.done.body" = "Aplicația stă în bara de meniu și nu are o fereastră proprie. Dictați oriunde se află punctul de inserare.";
+"setup.done.shortcut.label" = "Scurtătura dvs., o puteți schimba aici";
+"setup.done.shortcut.explanation" = "O apăsare scurtă pornește înregistrarea și o lasă să ruleze, încă o apăsare o încheie. Ținută apăsat este push-to-talk. Escape abandonează.";
+"setup.done.openSettings" = "Mai multe configurări…";
+"setup.done.permissionsMissing" = "Mai lipsesc permisiuni. Fără Accesibilitate și Monitorizare intrare, scurtătura nu reacționează. Le puteți acorda mai târziu în configurări.";
+
+/* Installation errors */
+"install.error.offline" = "Nu există conexiune la rețea. Pegel are nevoie de rețea doar pentru această singură descărcare.";
+
+/* Audiodatei */
+"file.panel.message" = "Rezultatul ajunge în clipboard.";
+"file.panel.prompt" = "Transcrieți";
+
+/* Colours */
+"settings.palette" = "Culori";
+"palette.standard" = "Standard";
+"palette.citrus" = "Citrice";
+"palette.lagoon" = "Lagună";
+"palette.ember" = "Jar";
+"palette.neon" = "Neon";
+"palette.fern" = "Ferigă";
+
+/* Settings and About */
+"menu.about" = "Despre Pegel…";
+"settings.tab.general" = "General";
+"settings.tab.appearance" = "Aspect";
+"about.tagline" = "Dictare pe Mac, complet local.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Versiunea %@";
+"about.versionBuild" = "Versiunea %@ (%@)";
+"about.repository" = "Pegel pe GitHub";
+"about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Traducere";
+"about.translation.machine" = "Această traducere a fost creată automat și nu a fost verificată de un vorbitor nativ.";
+"about.translation.report" = "Raportați o greșeală";
+"about.translation.useEnglish" = "Folosiți Pegel în engleză…";
+"about.section.updates" = "Actualizări";
+"about.updates.automatic" = "Căutați automat actualizări";
+"about.updates.install" = "Instalați automat actualizările";
+"about.updates.install.explanation" = "Pegel descarcă în fundal o actualizare găsită și o instalează la următoarea închidere. Dacă opțiunea este dezactivată, Pegel întreabă mai întâi. Funcționează doar cu căutarea automată.";
+"about.updates.check" = "Căutați actualizări…";
+"about.updates.privacy" = "Pentru căutare, Pegel descarcă un fișier de pe GitHub. GitHub vede adresa dvs. IP și versiunile Pegel și macOS. Sunetul și textul nu părăsesc niciodată acest Mac.";
+"about.section.licenses" = "Licențe";
+"about.licenses.explanation" = "Pegel este publicat sub licența MIT. Include FluidAudio (Apache 2.0) și dependențele sale. Modelul de vorbire Parakeet TDT 0.6B v3 este realizat de NVIDIA, versiunea pentru Core ML de FluidInference, ambele sub licența CC-BY-4.0.";
+"about.licenses.show" = "Afișați textele licențelor…";

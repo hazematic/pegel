@@ -1,0 +1,184 @@
+/* Menu */
+"menu.status.last" = "Ostatnio: %@";
+"menu.status.hotkeyInactive" = "Skrót nieaktywny, brak Dostępności";
+"menu.resetPosition" = "Przywróć położenie";
+"menu.copyLast" = "Kopiuj ostatnie dyktowanie";
+"menu.transcribeFile" = "Transkrybuj plik audio lub wideo…";
+"menu.setup" = "Konfiguruj…";
+"menu.status.notInstalled" = "Model nie jest jeszcze zainstalowany";
+"menu.settings" = "Ustawienia…";
+"menu.quit" = "Zakończ";
+
+/* Status */
+"status.ready" = "Gotowe";
+"status.recording" = "Nagrywanie…";
+"status.transcribing" = "Transkrypcja…";
+"status.transcribingFile" = "Transkrypcja… %@";
+"status.finished" = "Wstawiono";
+"status.discarded" = "Odrzucono";
+"status.failed" = "Błąd";
+
+/* Model preparation */
+"preparing.downloading" = "Pobieranie modelu %@";
+"preparing.loading" = "Inicjowanie modelu";
+"preparing.warmup" = "Rozgrzewanie modelu";
+"preparing.waiting" = "Model nie jest zainstalowany";
+"preparing.listing" = "Przygotowywanie pobierania";
+"preparing.compiling" = "Kompilowanie modelu";
+
+/* Errors */
+"error.microphone" = "Brak dostępu do mikrofonu";
+"error.tooShort" = "Za krótko";
+"error.unreadableFile" = "Nie można odczytać %@";
+"error.noSpeech" = "Nic nie rozpoznano";
+"error.modelLoading" = "Model wciąż się wczytuje";
+"error.noInputDevice" = "Nie znaleziono mikrofonu.";
+"error.deviceUnavailable" = "Mikrofon %@ jest niedostępny";
+"error.silentInput" = "Brak sygnału z %@";
+"error.noAudioData" = "Brak danych z %@";
+"error.notReady" = "Model mowy nie jest jeszcze wczytany.";
+
+/* Windows */
+"window.settings" = "Ustawienia";
+"window.about" = "O aplikacji Pegel";
+"window.licences" = "Licencje";
+"window.onboarding" = "Skonfiguruj Pegel";
+
+/* Settings */
+"settings.section.hotkey" = "Skrót klawiszowy";
+"settings.hotkey.label" = "Rozpoczynanie i kończenie dyktowania";
+"settings.hotkey.reset" = "Przywróć %@";
+"settings.ptt.label" = "Przytrzymanie od";
+"settings.ptt.explanation" = "Krótkie naciśnięcie włącza lub wyłącza nagrywanie. Dłuższe to push-to-talk: puszczenie klawisza kończy nagrywanie.";
+"settings.section.audio" = "Audio";
+"settings.input.label" = "Mikrofon";
+"settings.input.systemDefault" = "Domyślny systemowy";
+"settings.input.current" = "Nagrywanie przez %@";
+"settings.input.narrowband" = "Wąskie pasmo poniżej 16 kHz, typowe dla zestawów słuchawkowych Bluetooth w profilu telefonicznym. Rozpoznawanie wyraźnie na tym traci.";
+"settings.input.missing" = "Wybrany mikrofon nie jest podłączony. Do tego czasu używany jest domyślny mikrofon systemu.";
+"settings.input.none" = "Nie znaleziono urządzenia wejściowego.";
+"settings.input.explanation" = "Przy ustawieniu domyślnym Pegel używa mikrofonu, który wybierze macOS. Może to być głośnik Bluetooth, który właśnie się połączył: macOS traktuje go jak zestaw słuchawkowy i ustawia jako wejście. Stałe urządzenie to wyklucza.";
+"settings.section.tones" = "Dźwięki";
+"settings.tones.label" = "Dźwięk";
+"settings.tones.play" = "Odsłuchaj";
+"settings.tones.volume" = "Głośność";
+"settings.tones.explanation" = "Krótki, cichy dźwięk potwierdza początek i koniec nagrania: rosnący na początku, opadający po puszczeniu klawisza. Lista biegnie od najdyskretniejszego do najwyraźniejszego. Wszystkie są na tyle ciche, że nie trafiają do dyktowania.";
+"tones.off" = "Wył.";
+"tones.cricket" = "Świerszcz";
+"tones.pebble" = "Kamyk";
+"tones.drop" = "Kropla";
+"tones.moss" = "Mech";
+"tones.glass" = "Szkło";
+"settings.section.appearance" = "Wygląd";
+"settings.waveform" = "Kształt fali";
+"settings.showTime" = "Pokazuj czas nagrania";
+"settings.showTime.explanation" = "Bez czasu wskaźnik poziomu jest węższy i obywa się zupełnie bez cyfr.";
+"settings.section.permissions" = "Uprawnienia";
+"settings.permissions.explanation" = "Dostępność do wklejania i ustalania położenia punktu wstawiania, Monitorowanie wprowadzania do skrótu działającego w całym systemie.";
+"settings.section.model" = "Model";
+"settings.model.label" = "Rozpoznawanie mowy";
+"settings.model.explanation" = "Działa lokalnie na Neural Engine. Po pierwszym pobraniu sieć nie jest już potrzebna.";
+
+/* Waveforms */
+"waveform.trace" = "Ślad";
+"waveform.trace.explanation" = "Pokazuje ostatnie dwie sekundy. Widać też wstecz, czy dźwięk dotarł.";
+"waveform.levels" = "Poziomy";
+"waveform.levels.explanation" = "Jedenaście słupków z falą biegnącą w prawo. Spokojniejszy i węższy, pokazuje tylko bieżącą chwilę.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "Domyślny systemowy";
+"audio.device.unknown" = "Nieznane urządzenie";
+
+/* Permissions */
+"permission.microphone" = "Mikrofon";
+"permission.accessibility" = "Dostępność";
+"permission.inputMonitoring" = "Monitorowanie wprowadzania";
+
+/* Onboarding */
+"onboarding.subtitle" = "Dyktowanie, lokalnie, w całym systemie";
+"onboarding.intro" = "Potrzebne są trzy uprawnienia, potem wszystko działa bez dalszych pytań.";
+"onboarding.microphone.detail" = "Do nagrywania. Dźwięk nigdy nie opuszcza tego Maca.";
+"onboarding.accessibility.detail" = "Do wklejania przy kursorze i ustalania położenia punktu wstawiania.";
+"onboarding.inputMonitoring.detail" = "Aby skrót był rozpoznawany w całym systemie. Osobna pozycja w Ustawieniach systemowych.";
+"onboarding.start" = "Zaczynamy";
+"onboarding.later" = "Później";
+
+/* Buttons and keys */
+"button.open" = "Otwórz";
+"button.allow" = "Pozwól";
+"button.openSettings" = "Ustawienia systemowe…";
+"hotkey.pressKey" = "Naciśnij klawisz…";
+"hotkey.clickToChange" = "Kliknij, aby zmienić";
+"key.space" = "Spacja";
+"key.unknown" = "Klawisz %ld";
+"hotkey.reject.noModifier" = "Bez klawisza modyfikującego skrót przechwytywałby każde zwykłe naciśnięcie klawisza.";
+"hotkey.reject.escape" = "Escape jest zarezerwowany do przerywania nagrania.";
+"hotkey.reject.quit" = "⌘Q kończy aplikacje.";
+"hotkey.reject.close" = "⌘W zamyka okna.";
+"hotkey.reject.switchApp" = "⌘Tab przełącza aplikacje.";
+"hotkey.reject.spotlight" = "⌘Spacja otwiera Spotlight.";
+
+/* Setup */
+"setup.welcome.title" = "Raz skonfiguruj i zapomnij";
+"setup.welcome.body" = "Pegel rozpoznaje mowę w całości na tym Macu. W tym celu teraz jednorazowo pobiera model mowy. Bez niego aplikacja nie może transkrybować.";
+"setup.welcome.privacy" = "To jedyny dostęp do sieci, jaki Pegel kiedykolwiek wykonuje. Potem wszystko działa offline: bez konta, bez chmury, bez telemetrii.";
+"setup.welcome.size" = "461 MB z Hugging Face, kilka minut w zależności od łącza.";
+"setup.welcome.confirm" = "Pobierz model";
+"setup.next" = "Dalej";
+"setup.permissions.title" = "Uprawnienia";
+"setup.install.done" = "Model jest zainstalowany i gotowy";
+"setup.install.failed" = "Pobieranie nie powiodło się";
+"setup.install.retry" = "Spróbuj ponownie";
+"setup.install.retry.hint" = "Już pobrane części zostają, kolejna próba zacznie od tego miejsca.";
+"setup.install.retry.offline" = "Połącz się z internetem i spróbuj ponownie. Już pobrane części zostają.";
+"setup.phase.waiting" = "Oczekiwanie na potwierdzenie";
+"setup.phase.listing" = "Pobieranie listy plików";
+"setup.phase.downloading" = "Plik %ld z %ld";
+"setup.phase.downloadingPlain" = "Pobieranie modelu";
+"setup.phase.compiling" = "Kompilowanie modelu dla Neural Engine";
+"setup.done.title" = "Pegel jest gotowy";
+"setup.done.body" = "Aplikacja działa na pasku menu i nie ma własnego okna. Dyktuje wszędzie tam, gdzie jest punkt wstawiania.";
+"setup.done.shortcut.label" = "Twój skrót, tutaj możesz go zmienić";
+"setup.done.shortcut.explanation" = "Krótkie naciśnięcie rozpoczyna nagrywanie i pozostawia je włączone, kolejne je kończy. Przytrzymanie to push-to-talk. Escape odrzuca nagranie.";
+"setup.done.openSettings" = "Więcej ustawień…";
+"setup.done.permissionsMissing" = "Brakuje jeszcze uprawnień. Bez Dostępności i Monitorowania wprowadzania skrót nie reaguje. Możesz je nadać później w ustawieniach.";
+
+/* Installation errors */
+"install.error.offline" = "Brak połączenia z siecią. Pegel potrzebuje sieci tylko do tego jednego pobrania.";
+
+/* Audiodatei */
+"file.panel.message" = "Wynik trafi do schowka.";
+"file.panel.prompt" = "Transkrybuj";
+
+/* Colours */
+"settings.palette" = "Kolory";
+"palette.standard" = "Standardowy";
+"palette.citrus" = "Cytrus";
+"palette.lagoon" = "Laguna";
+"palette.ember" = "Żar";
+"palette.neon" = "Neon";
+"palette.fern" = "Paproć";
+
+/* Settings and About */
+"menu.about" = "O aplikacji Pegel…";
+"settings.tab.general" = "Ogólne";
+"settings.tab.appearance" = "Wygląd";
+"about.tagline" = "Dyktowanie na Macu, w pełni lokalnie.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Wersja %@";
+"about.versionBuild" = "Wersja %@ (%@)";
+"about.repository" = "Pegel na GitHubie";
+"about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Tłumaczenie";
+"about.translation.machine" = "To tłumaczenie powstało automatycznie i nie zostało sprawdzone przez rodzimego użytkownika języka.";
+"about.translation.report" = "Zgłoś błąd";
+"about.translation.useEnglish" = "Używaj Pegel po angielsku…";
+"about.section.updates" = "Uaktualnienia";
+"about.updates.automatic" = "Automatycznie sprawdzaj uaktualnienia";
+"about.updates.install" = "Automatycznie instaluj uaktualnienia";
+"about.updates.install.explanation" = "Pegel pobiera znalezione uaktualnienie w tle i instaluje je przy następnym zamknięciu. Gdy ta opcja jest wyłączona, Pegel najpierw pyta. Działa tylko z automatycznym sprawdzaniem.";
+"about.updates.check" = "Sprawdź uaktualnienia…";
+"about.updates.privacy" = "Aby sprawdzić, Pegel pobiera plik z GitHuba. GitHub widzi przy tym twój adres IP oraz wersje Pegel i macOS. Dźwięk i tekst nigdy nie opuszczają tego Maca.";
+"about.section.licenses" = "Licencje";
+"about.licenses.explanation" = "Pegel jest udostępniany na licencji MIT. Zawiera FluidAudio (Apache 2.0) wraz z zależnościami. Model mowy Parakeet TDT 0.6B v3 pochodzi od firmy NVIDIA, konwersja do Core ML od FluidInference, oba na licencji CC-BY-4.0.";
+"about.licenses.show" = "Pokaż teksty licencji…";

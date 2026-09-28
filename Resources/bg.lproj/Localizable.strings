@@ -1,0 +1,184 @@
+/* Menu */
+"menu.status.last" = "Последно: %@";
+"menu.status.hotkeyInactive" = "Комбинацията е неактивна, липсва Достъпност";
+"menu.resetPosition" = "Възстанови позицията";
+"menu.copyLast" = "Копирай последната диктовка";
+"menu.transcribeFile" = "Транскрибирай аудио- или видеофайл…";
+"menu.setup" = "Първоначална настройка…";
+"menu.status.notInstalled" = "Моделът още не е инсталиран";
+"menu.settings" = "Настройки…";
+"menu.quit" = "Изход";
+
+/* Status */
+"status.ready" = "Готово";
+"status.recording" = "Записване…";
+"status.transcribing" = "Транскрибиране…";
+"status.transcribingFile" = "Транскрибиране… %@";
+"status.finished" = "Вмъкнато";
+"status.discarded" = "Отхвърлено";
+"status.failed" = "Грешка";
+
+/* Model preparation */
+"preparing.downloading" = "Изтегляне на модела %@";
+"preparing.loading" = "Инициализиране на модела";
+"preparing.warmup" = "Подготовка на модела";
+"preparing.waiting" = "Моделът не е инсталиран";
+"preparing.listing" = "Подготовка на изтеглянето";
+"preparing.compiling" = "Компилиране на модела";
+
+/* Errors */
+"error.microphone" = "Няма достъп до микрофона";
+"error.tooShort" = "Твърде кратко";
+"error.unreadableFile" = "%@ не може да бъде прочетен";
+"error.noSpeech" = "Нищо не е разпознато";
+"error.modelLoading" = "Моделът още се зарежда";
+"error.noInputDevice" = "Не е намерен микрофон.";
+"error.deviceUnavailable" = "Микрофонът %@ не е достъпен";
+"error.silentInput" = "Няма сигнал от %@";
+"error.noAudioData" = "Няма данни от %@";
+"error.notReady" = "Речевият модел още не е зареден.";
+
+/* Windows */
+"window.settings" = "Настройки";
+"window.about" = "За Pegel";
+"window.licences" = "Лицензи";
+"window.onboarding" = "Настройване на Pegel";
+
+/* Settings */
+"settings.section.hotkey" = "Клавишна комбинация";
+"settings.hotkey.label" = "Стартиране и спиране на диктовката";
+"settings.hotkey.reset" = "Върни на %@";
+"settings.ptt.label" = "Задържане от";
+"settings.ptt.explanation" = "Кратко натискане включва или изключва записа. По-дълго натискане е push-to-talk: отпускането го спира.";
+"settings.section.audio" = "Звук";
+"settings.input.label" = "Микрофон";
+"settings.input.systemDefault" = "Системен по подразбиране";
+"settings.input.current" = "Записва се чрез %@";
+"settings.input.narrowband" = "Тясна лента под 16 kHz, типично за Bluetooth слушалки в телефонен профил. Разпознаването видимо страда.";
+"settings.input.missing" = "Избраният микрофон не е свързан. Дотогава се използва системният по подразбиране.";
+"settings.input.none" = "Не е намерено входно устройство.";
+"settings.input.explanation" = "При системния по подразбиране Pegel използва микрофона, който macOS избере в момента. Това може да е Bluetooth колонка, която току-що се е свързала: macOS я смята за слушалки и я прави вход. Фиксирано избрано устройство изключва това.";
+"settings.section.tones" = "Звуци";
+"settings.tones.label" = "Звук";
+"settings.tones.play" = "Възпроизведи";
+"settings.tones.volume" = "Сила на звука";
+"settings.tones.explanation" = "Кратък, тих тон потвърждава началото и края на записа: възходящ при старт, низходящ при отпускане. Списъкът върви от най-дискретния до най-забележимия. Всички са достатъчно тихи, за да не попаднат в диктовката.";
+"tones.off" = "Изключено";
+"tones.cricket" = "Щурец";
+"tones.pebble" = "Камъче";
+"tones.drop" = "Капка";
+"tones.moss" = "Мъх";
+"tones.glass" = "Стъкло";
+"settings.section.appearance" = "Външен вид";
+"settings.waveform" = "Форма на вълната";
+"settings.showTime" = "Показвай изминалото време";
+"settings.showTime.explanation" = "Без времето индикаторът за ниво е по-тесен и изцяло без цифри.";
+"settings.section.permissions" = "Разрешения";
+"settings.permissions.explanation" = "Достъпност за вмъкването и позицията на курсора, Наблюдение на въвеждането за клавишната комбинация в цялата система.";
+"settings.section.model" = "Модел";
+"settings.model.label" = "Разпознаване на реч";
+"settings.model.explanation" = "Работи локално на Neural Engine. След първото изтегляне не е нужна мрежа.";
+
+/* Waveforms */
+"waveform.trace" = "Следа";
+"waveform.trace.explanation" = "Показва последните две секунди. Виждате и след това дали е пристигнал звук.";
+"waveform.levels" = "Нива";
+"waveform.levels.explanation" = "Единадесет черти с вълна, която се движи надясно. По-спокойно и по-тясно, показва само момента.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "Системен по подразбиране";
+"audio.device.unknown" = "Неизвестно устройство";
+
+/* Permissions */
+"permission.microphone" = "Микрофон";
+"permission.accessibility" = "Достъпност (Accessibility)";
+"permission.inputMonitoring" = "Наблюдение на въвеждането (Input Monitoring)";
+
+/* Onboarding */
+"onboarding.subtitle" = "Диктовка, локално, навсякъде в системата";
+"onboarding.intro" = "Нужни са три разрешения, след това всичко работи без допълнителни въпроси.";
+"onboarding.microphone.detail" = "За записа. Звукът никога не напуска този Mac.";
+"onboarding.accessibility.detail" = "За вмъкването при курсора и позицията на курсора.";
+"onboarding.inputMonitoring.detail" = "За да се разпознава клавишната комбинация в цялата система. Отделен елемент в Системни настройки (System Settings).";
+"onboarding.start" = "Да започваме";
+"onboarding.later" = "По-късно";
+
+/* Buttons and keys */
+"button.open" = "Отвори";
+"button.allow" = "Разреши";
+"button.openSettings" = "Системни настройки…";
+"hotkey.pressKey" = "Натиснете клавиш…";
+"hotkey.clickToChange" = "Щракнете за промяна";
+"key.space" = "Интервал";
+"key.unknown" = "Клавиш %ld";
+"hotkey.reject.noModifier" = "Без модифициращ клавиш комбинацията би прихващала всяко обикновено въвеждане.";
+"hotkey.reject.escape" = "Escape е запазен за прекъсване на записа.";
+"hotkey.reject.quit" = "⌘Q затваря приложенията.";
+"hotkey.reject.close" = "⌘W затваря прозорците.";
+"hotkey.reject.switchApp" = "⌘Tab превключва приложенията.";
+"hotkey.reject.spotlight" = "⌘Интервал отваря Spotlight.";
+
+/* Setup */
+"setup.welcome.title" = "Настройте веднъж и никога повече";
+"setup.welcome.body" = "Pegel разпознава речта изцяло на този Mac. За целта сега еднократно изтегля речевия модел. Без него приложението не може да транскрибира.";
+"setup.welcome.privacy" = "Това е единственият достъп до мрежата, който Pegel някога прави. След това всичко работи офлайн: без акаунт, без облак, без телеметрия.";
+"setup.welcome.size" = "461 MB от Hugging Face, няколко минути в зависимост от връзката.";
+"setup.welcome.confirm" = "Изтегли модела";
+"setup.next" = "Продължи";
+"setup.permissions.title" = "Разрешения";
+"setup.install.done" = "Моделът е инсталиран и готов";
+"setup.install.failed" = "Изтеглянето не бе успешно";
+"setup.install.retry" = "Опитай отново";
+"setup.install.retry.hint" = "Вече изтеглените части остават, следващият опит продължава от тях.";
+"setup.install.retry.offline" = "Свържете се отново с мрежата и опитайте пак. Вече изтеглените части остават.";
+"setup.phase.waiting" = "Изчаква се потвърждение";
+"setup.phase.listing" = "Извлича се списъкът с файлове";
+"setup.phase.downloading" = "Файл %ld от %ld";
+"setup.phase.downloadingPlain" = "Изтегляне на модела";
+"setup.phase.compiling" = "Компилиране на модела за Neural Engine";
+"setup.done.title" = "Pegel е готов";
+"setup.done.body" = "Приложението е в лентата с менюта и няма собствен прозорец. Диктувате навсякъде, където е курсорът.";
+"setup.done.shortcut.label" = "Вашата комбинация, можете да я промените тук";
+"setup.done.shortcut.explanation" = "Кратко натискане стартира записа и го оставя да върви, още едно натискане го спира. Задържането е push-to-talk. Escape отхвърля.";
+"setup.done.openSettings" = "Още настройки…";
+"setup.done.permissionsMissing" = "Все още липсват разрешения. Без Достъпност и Наблюдение на въвеждането комбинацията не реагира. Можете да ги дадете по-късно в настройките.";
+
+/* Installation errors */
+"install.error.offline" = "Няма връзка с мрежата. Pegel се нуждае от мрежа само за това едно изтегляне.";
+
+/* Audiodatei */
+"file.panel.message" = "Резултатът отива в клипборда.";
+"file.panel.prompt" = "Транскрибирай";
+
+/* Colours */
+"settings.palette" = "Цветове";
+"palette.standard" = "Стандартно";
+"palette.citrus" = "Цитрус";
+"palette.lagoon" = "Лагуна";
+"palette.ember" = "Жар";
+"palette.neon" = "Неон";
+"palette.fern" = "Папрат";
+
+/* Settings and About */
+"menu.about" = "За Pegel…";
+"settings.tab.general" = "Общи";
+"settings.tab.appearance" = "Външен вид";
+"about.tagline" = "Диктовка на Mac, изцяло локално.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Версия %@";
+"about.versionBuild" = "Версия %@ (%@)";
+"about.repository" = "Pegel в GitHub";
+"about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Превод";
+"about.translation.machine" = "Този превод е създаден автоматично и не е проверен от носител на езика.";
+"about.translation.report" = "Съобщи за грешка";
+"about.translation.useEnglish" = "Използвай Pegel на английски…";
+"about.section.updates" = "Актуализации";
+"about.updates.automatic" = "Автоматично търси актуализации";
+"about.updates.install" = "Автоматично инсталирай актуализации";
+"about.updates.install.explanation" = "Pegel изтегля намерена актуализация във фонов режим и я инсталира при следващото затваряне. Когато е изключено, Pegel първо пита. Работи само с автоматичното търсене.";
+"about.updates.check" = "Търси актуализации…";
+"about.updates.privacy" = "За търсенето Pegel изтегля файл от GitHub. GitHub при това вижда вашия IP адрес и версиите на Pegel и macOS. Звукът и текстът никога не напускат този Mac.";
+"about.section.licenses" = "Лицензи";
+"about.licenses.explanation" = "Pegel е публикуван под лиценза MIT. Съдържа FluidAudio (Apache 2.0) с неговите зависимости. Речевият модел Parakeet TDT 0.6B v3 е на NVIDIA, версията за Core ML е на FluidInference, и двете под лиценз CC‑BY‑4.0.";
+"about.licenses.show" = "Покажи текстовете на лицензите…";

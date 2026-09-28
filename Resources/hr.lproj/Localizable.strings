@@ -1,0 +1,184 @@
+/* Menu */
+"menu.status.last" = "Zadnje: %@";
+"menu.status.hotkeyInactive" = "Prečac neaktivan, nedostaje Pristupačnost";
+"menu.resetPosition" = "Vrati položaj";
+"menu.copyLast" = "Kopiraj zadnji diktat";
+"menu.transcribeFile" = "Transkribiraj audio ili video datoteku…";
+"menu.setup" = "Otvori podešavanje…";
+"menu.status.notInstalled" = "Model još nije instaliran";
+"menu.settings" = "Postavke…";
+"menu.quit" = "Zatvori";
+
+/* Status */
+"status.ready" = "Spremno";
+"status.recording" = "Snimanje…";
+"status.transcribing" = "Transkribiranje…";
+"status.transcribingFile" = "Transkribiranje… %@";
+"status.finished" = "Umetnuto";
+"status.discarded" = "Odbačeno";
+"status.failed" = "Greška";
+
+/* Model preparation */
+"preparing.downloading" = "Preuzimanje modela %@";
+"preparing.loading" = "Inicijalizacija modela";
+"preparing.warmup" = "Zagrijavanje modela";
+"preparing.waiting" = "Model nije instaliran";
+"preparing.listing" = "Priprema preuzimanja";
+"preparing.compiling" = "Kompiliranje modela";
+
+/* Errors */
+"error.microphone" = "Nema pristupa mikrofonu";
+"error.tooShort" = "Prekratko";
+"error.unreadableFile" = "%@ nije moguće pročitati";
+"error.noSpeech" = "Ništa nije prepoznato";
+"error.modelLoading" = "Model se još učitava";
+"error.noInputDevice" = "Nije pronađen mikrofon.";
+"error.deviceUnavailable" = "Mikrofon %@ nije dostupan";
+"error.silentInput" = "Nema signala s uređaja %@";
+"error.noAudioData" = "Nema podataka s uređaja %@";
+"error.notReady" = "Model govora još nije učitan.";
+
+/* Windows */
+"window.settings" = "Postavke";
+"window.about" = "O aplikaciji Pegel";
+"window.licences" = "Licence";
+"window.onboarding" = "Podesi Pegel";
+
+/* Settings */
+"settings.section.hotkey" = "Prečac tipkovnice";
+"settings.hotkey.label" = "Pokretanje i zaustavljanje diktata";
+"settings.hotkey.reset" = "Vrati na %@";
+"settings.ptt.label" = "Držanje od";
+"settings.ptt.explanation" = "Kratki pritisak uključuje ili isključuje snimanje. Dulji pritisak je push-to-talk: otpuštanje ga završava.";
+"settings.section.audio" = "Zvuk";
+"settings.input.label" = "Mikrofon";
+"settings.input.systemDefault" = "Standardno podešenje sustava";
+"settings.input.current" = "Snima se preko %@";
+"settings.input.narrowband" = "Uski pojas ispod 16 kHz, tipično za Bluetooth slušalice u telefonskom profilu. Prepoznavanje osjetno slabi.";
+"settings.input.missing" = "Odabrani mikrofon nije priključen. Do tada vrijedi standardno podešenje sustava.";
+"settings.input.none" = "Nije pronađen ulazni uređaj.";
+"settings.input.explanation" = "Uz standardno podešenje sustava Pegel koristi mikrofon koji macOS upravo odabere. To može biti Bluetooth zvučnik koji se upravo povezao: macOS ga smatra slušalicama i postavlja ga kao ulaz. Fiksno odabran uređaj to isključuje.";
+"settings.section.tones" = "Zvukovi";
+"settings.tones.label" = "Zvuk";
+"settings.tones.play" = "Reproduciraj";
+"settings.tones.volume" = "Glasnoća";
+"settings.tones.explanation" = "Kratak, tih ton potvrđuje početak i kraj snimanja: uzlazni pri pokretanju, silazni pri otpuštanju. Popis ide od najdiskretnijeg do najupadljivijeg. Svi su dovoljno tihi da ne završe u diktatu.";
+"tones.off" = "Isključeno";
+"tones.cricket" = "Cvrčak";
+"tones.pebble" = "Kamenčić";
+"tones.drop" = "Kap";
+"tones.moss" = "Mahovina";
+"tones.glass" = "Staklo";
+"settings.section.appearance" = "Izgled";
+"settings.waveform" = "Oblik vala";
+"settings.showTime" = "Prikaži proteklo vrijeme";
+"settings.showTime.explanation" = "Bez vremena indikator razine je uži i potpuno bez znamenki.";
+"settings.section.permissions" = "Dopuštenja";
+"settings.permissions.explanation" = "Pristupačnost za umetanje i položaj točke umetanja, Nadzor unosa za prečac tipkovnice u cijelom sustavu.";
+"settings.section.model" = "Model";
+"settings.model.label" = "Prepoznavanje govora";
+"settings.model.explanation" = "Radi lokalno na Neural Engineu. Nakon prvog preuzimanja mreža više nije potrebna.";
+
+/* Waveforms */
+"waveform.trace" = "Trag";
+"waveform.trace.explanation" = "Prikazuje posljednje dvije sekunde. I naknadno se vidi je li zvuk stigao.";
+"waveform.levels" = "Razine";
+"waveform.levels.explanation" = "Jedanaest stupića s valom koji ide udesno. Mirnije i uže, prikazuje samo trenutak.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "Standardno podešenje sustava";
+"audio.device.unknown" = "Nepoznat uređaj";
+
+/* Permissions */
+"permission.microphone" = "Mikrofon";
+"permission.accessibility" = "Pristupačnost";
+"permission.inputMonitoring" = "Nadzor unosa";
+
+/* Onboarding */
+"onboarding.subtitle" = "Diktiranje, lokalno, bilo gdje u sustavu";
+"onboarding.intro" = "Potrebna su tri dopuštenja, nakon toga sve radi bez daljnjih pitanja.";
+"onboarding.microphone.detail" = "Za snimanje. Zvuk nikada ne napušta ovaj Mac.";
+"onboarding.accessibility.detail" = "Za umetanje kod kursora i položaj točke umetanja.";
+"onboarding.inputMonitoring.detail" = "Kako bi se prečac tipkovnice prepoznao u cijelom sustavu. Zasebna stavka u Postavkama sustava.";
+"onboarding.start" = "Krenimo";
+"onboarding.later" = "Kasnije";
+
+/* Buttons and keys */
+"button.open" = "Otvori";
+"button.allow" = "Dozvoli";
+"button.openSettings" = "Postavke sustava…";
+"hotkey.pressKey" = "Pritisnite tipku…";
+"hotkey.clickToChange" = "Kliknite za promjenu";
+"key.space" = "Razmaknica";
+"key.unknown" = "Tipka %ld";
+"hotkey.reject.noModifier" = "Bez modifikatorske tipke prečac bi presretao svaki običan unos.";
+"hotkey.reject.escape" = "Escape je rezerviran za prekid snimanja.";
+"hotkey.reject.quit" = "⌘Q zatvara aplikacije.";
+"hotkey.reject.close" = "⌘W zatvara prozore.";
+"hotkey.reject.switchApp" = "⌘Tab mijenja aplikaciju.";
+"hotkey.reject.spotlight" = "⌘Razmaknica otvara Spotlight.";
+
+/* Setup */
+"setup.welcome.title" = "Jednom podesite, a onda nikad više";
+"setup.welcome.body" = "Pegel prepoznaje govor u potpunosti na ovom Macu. Za to sada jednokratno preuzima model govora. Bez njega aplikacija ne može transkribirati.";
+"setup.welcome.privacy" = "To je jedini pristup mreži koji Pegel ikada napravi. Nakon toga sve radi offline: bez računa, bez oblaka, bez telemetrije.";
+"setup.welcome.size" = "461 MB s Hugging Facea, nekoliko minuta, ovisno o vezi.";
+"setup.welcome.confirm" = "Preuzmi model";
+"setup.next" = "Nastavi";
+"setup.permissions.title" = "Dopuštenja";
+"setup.install.done" = "Model je instaliran i spreman";
+"setup.install.failed" = "Preuzimanje nije uspjelo";
+"setup.install.retry" = "Pokušaj ponovno";
+"setup.install.retry.hint" = "Već preuzeti dijelovi ostaju, sljedeći pokušaj nastavlja od njih.";
+"setup.install.retry.offline" = "Ponovno se povežite s mrežom i pokušajte ponovno. Već preuzeti dijelovi ostaju.";
+"setup.phase.waiting" = "Čeka se potvrda";
+"setup.phase.listing" = "Dohvaća se popis datoteka";
+"setup.phase.downloading" = "Datoteka %ld od %ld";
+"setup.phase.downloadingPlain" = "Preuzimanje modela";
+"setup.phase.compiling" = "Kompiliranje modela za Neural Engine";
+"setup.done.title" = "Pegel je spreman";
+"setup.done.body" = "Aplikacija se nalazi u traci s izbornicima i nema vlastiti prozor. Diktira se svugdje gdje je točka umetanja.";
+"setup.done.shortcut.label" = "Vaš prečac, ovdje ga možete promijeniti";
+"setup.done.shortcut.explanation" = "Kratki pritisak pokreće snimanje i ostavlja ga da radi, još jedan pritisak ga završava. Držanje je push-to-talk. Escape odbacuje.";
+"setup.done.openSettings" = "Više postavki…";
+"setup.done.permissionsMissing" = "Još nedostaju dopuštenja. Bez Pristupačnosti i Nadzora unosa prečac ne reagira. Možete ih dodijeliti kasnije u postavkama.";
+
+/* Installation errors */
+"install.error.offline" = "Nema veze s mrežom. Pegel treba mrežu samo za ovo jedno preuzimanje.";
+
+/* Audiodatei */
+"file.panel.message" = "Rezultat ide u memorijski pretinac.";
+"file.panel.prompt" = "Transkribiraj";
+
+/* Colours */
+"settings.palette" = "Boje";
+"palette.standard" = "Standardno";
+"palette.citrus" = "Citrus";
+"palette.lagoon" = "Laguna";
+"palette.ember" = "Žar";
+"palette.neon" = "Neon";
+"palette.fern" = "Paprat";
+
+/* Settings and About */
+"menu.about" = "O aplikaciji Pegel…";
+"settings.tab.general" = "Općenito";
+"settings.tab.appearance" = "Izgled";
+"about.tagline" = "Diktiranje na Macu, potpuno lokalno.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Verzija %@";
+"about.versionBuild" = "Verzija %@ (%@)";
+"about.repository" = "Pegel na GitHubu";
+"about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Prijevod";
+"about.translation.machine" = "Ovaj je prijevod izrađen automatski i nije ga provjerio izvorni govornik.";
+"about.translation.report" = "Prijavi pogrešku";
+"about.translation.useEnglish" = "Koristi Pegel na engleskom…";
+"about.section.updates" = "Ažuriranja";
+"about.updates.automatic" = "Automatski traži ažuriranja";
+"about.updates.install" = "Automatski instaliraj ažuriranja";
+"about.updates.install.explanation" = "Pegel preuzima pronađeno ažuriranje u pozadini i instalira ga pri sljedećem zatvaranju. Ako je isključeno, Pegel najprije pita. Radi samo uz automatsko traženje.";
+"about.updates.check" = "Potraži ažuriranja…";
+"about.updates.privacy" = "Za traženje Pegel dohvaća datoteku s GitHuba. GitHub pritom vidi vašu IP adresu te verzije Pegela i macOS-a. Zvuk i tekst nikada ne napuštaju ovaj Mac.";
+"about.section.licenses" = "Licence";
+"about.licenses.explanation" = "Pegel je objavljen pod licencom MIT. Sadrži FluidAudio (Apache 2.0) s njegovim ovisnostima. Model govora Parakeet TDT 0.6B v3 izradio je NVIDIA, verziju za Core ML FluidInference, oboje pod licencom CC‑BY‑4.0.";
+"about.licenses.show" = "Prikaži tekstove licenci…";

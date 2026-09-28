@@ -1,0 +1,184 @@
+/* Menu */
+"menu.status.last" = "Laatste: %@";
+"menu.status.hotkeyInactive" = "Toetscombinatie inactief, Toegankelijkheid ontbreekt";
+"menu.resetPosition" = "Herstel positie";
+"menu.copyLast" = "Kopieer laatste dictaat";
+"menu.transcribeFile" = "Transcribeer audio- of videobestand…";
+"menu.setup" = "Open configuratie…";
+"menu.status.notInstalled" = "Model nog niet geïnstalleerd";
+"menu.settings" = "Instellingen…";
+"menu.quit" = "Stop";
+
+/* Status */
+"status.ready" = "Gereed";
+"status.recording" = "Opnemen…";
+"status.transcribing" = "Transcriberen…";
+"status.transcribingFile" = "Transcriberen… %@";
+"status.finished" = "Ingevoegd";
+"status.discarded" = "Weggegooid";
+"status.failed" = "Fout";
+
+/* Model preparation */
+"preparing.downloading" = "Model wordt gedownload %@";
+"preparing.loading" = "Model wordt geïnitialiseerd";
+"preparing.warmup" = "Model wordt opgewarmd";
+"preparing.waiting" = "Model niet geïnstalleerd";
+"preparing.listing" = "Download wordt voorbereid";
+"preparing.compiling" = "Model wordt gecompileerd";
+
+/* Errors */
+"error.microphone" = "Geen toegang tot microfoon";
+"error.tooShort" = "Te kort";
+"error.unreadableFile" = "%@ is niet leesbaar";
+"error.noSpeech" = "Niets herkend";
+"error.modelLoading" = "Model wordt nog geladen";
+"error.noInputDevice" = "Geen microfoon gevonden.";
+"error.deviceUnavailable" = "Microfoon %@ is niet beschikbaar";
+"error.silentInput" = "Geen signaal van %@";
+"error.noAudioData" = "Geen gegevens van %@";
+"error.notReady" = "Het spraakmodel is nog niet geladen.";
+
+/* Windows */
+"window.settings" = "Instellingen";
+"window.about" = "Over Pegel";
+"window.licences" = "Licenties";
+"window.onboarding" = "Pegel configureren";
+
+/* Settings */
+"settings.section.hotkey" = "Toetscombinatie";
+"settings.hotkey.label" = "Dicteren starten en stoppen";
+"settings.hotkey.reset" = "Terug naar %@";
+"settings.ptt.label" = "Vasthouden vanaf";
+"settings.ptt.explanation" = "Kort indrukken start of stopt de opname. Langer ingedrukt houden is push-to-talk: loslaten stopt.";
+"settings.section.audio" = "Audio";
+"settings.input.label" = "Microfoon";
+"settings.input.systemDefault" = "Systeemstandaard";
+"settings.input.current" = "Neemt op via %@";
+"settings.input.narrowband" = "Smalband onder 16 kHz, typisch voor bluetoothheadsets in het telefoonprofiel. De herkenning gaat merkbaar achteruit.";
+"settings.input.missing" = "De gekozen microfoon is niet aangesloten. Tot dan geldt de systeemstandaard.";
+"settings.input.none" = "Geen invoerapparaat gevonden.";
+"settings.input.explanation" = "Met systeemstandaard volgt Pegel de microfoon die macOS op dat moment kiest. Dat kan een bluetoothspeaker zijn die net verbinding heeft gemaakt: macOS ziet die als headset en maakt hem tot invoer. Een vast apparaat sluit dat uit.";
+"settings.section.tones" = "Geluiden";
+"settings.tones.label" = "Geluid";
+"settings.tones.play" = "Speel af";
+"settings.tones.volume" = "Volume";
+"settings.tones.explanation" = "Een korte, zachte toon bevestigt begin en einde van een opname: stijgend bij het begin, dalend bij het loslaten. De lijst loopt van het meest subtiele naar het duidelijkste geluid. Alle zijn zacht genoeg om niet in het dictaat te belanden.";
+"tones.off" = "Uit";
+"tones.cricket" = "Krekel";
+"tones.pebble" = "Kiezel";
+"tones.drop" = "Druppel";
+"tones.moss" = "Mos";
+"tones.glass" = "Glas";
+"settings.section.appearance" = "Weergave";
+"settings.waveform" = "Golfvorm";
+"settings.showTime" = "Toon verstreken tijd";
+"settings.showTime.explanation" = "Zonder tijd wordt de niveaumeter smaller en kan hij helemaal zonder cijfers.";
+"settings.section.permissions" = "Toestemmingen";
+"settings.permissions.explanation" = "Toegankelijkheid voor het invoegen en voor de positie van het invoegpunt, Invoer vastleggen voor de toetscombinatie in het hele systeem.";
+"settings.section.model" = "Model";
+"settings.model.label" = "Spraakherkenning";
+"settings.model.explanation" = "Draait lokaal op de Neural Engine. Na de eerste download is geen netwerk meer nodig.";
+
+/* Waveforms */
+"waveform.trace" = "Spoor";
+"waveform.trace.explanation" = "Toont de laatste twee seconden. Je ziet ook achteraf of er geluid binnenkwam.";
+"waveform.levels" = "Niveaus";
+"waveform.levels.explanation" = "Elf staafjes met een golf die naar rechts loopt. Rustiger en smaller, toont alleen het moment zelf.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "Systeemstandaard";
+"audio.device.unknown" = "Onbekend apparaat";
+
+/* Permissions */
+"permission.microphone" = "Microfoon";
+"permission.accessibility" = "Toegankelijkheid";
+"permission.inputMonitoring" = "Invoer vastleggen";
+
+/* Onboarding */
+"onboarding.subtitle" = "Dicteren, lokaal, overal in het systeem";
+"onboarding.intro" = "Er zijn drie toestemmingen nodig, daarna werkt alles zonder verdere vragen.";
+"onboarding.microphone.detail" = "Voor de opname. Het geluid verlaat deze Mac nooit.";
+"onboarding.accessibility.detail" = "Voor het invoegen bij de cursor en de positie van het invoegpunt.";
+"onboarding.inputMonitoring.detail" = "Zodat de toetscombinatie in het hele systeem wordt herkend. Een apart onderdeel in Systeeminstellingen.";
+"onboarding.start" = "Aan de slag";
+"onboarding.later" = "Later";
+
+/* Buttons and keys */
+"button.open" = "Open";
+"button.allow" = "Sta toe";
+"button.openSettings" = "Systeeminstellingen…";
+"hotkey.pressKey" = "Druk op een toets…";
+"hotkey.clickToChange" = "Klik om te wijzigen";
+"key.space" = "Spatie";
+"key.unknown" = "Toets %ld";
+"hotkey.reject.noModifier" = "Zonder speciale toets zou de toetscombinatie elke gewone toetsaanslag onderscheppen.";
+"hotkey.reject.escape" = "Escape is gereserveerd voor het afbreken van een opname.";
+"hotkey.reject.quit" = "⌘Q stopt apps.";
+"hotkey.reject.close" = "⌘W sluit vensters.";
+"hotkey.reject.switchApp" = "⌘Tab wisselt tussen apps.";
+"hotkey.reject.spotlight" = "⌘Spatie opent Spotlight.";
+
+/* Setup */
+"setup.welcome.title" = "Eén keer instellen, daarna nooit meer";
+"setup.welcome.body" = "Pegel herkent spraak volledig op deze Mac. Daarvoor wordt nu eenmalig het spraakmodel gedownload. Zonder dit model kan de app niet transcriberen.";
+"setup.welcome.privacy" = "Dit is de enige netwerktoegang die Pegel ooit gebruikt. Daarna werkt alles offline: geen account, geen cloud, geen telemetrie.";
+"setup.welcome.size" = "461 MB van Hugging Face, een paar minuten, afhankelijk van je verbinding.";
+"setup.welcome.confirm" = "Download model";
+"setup.next" = "Ga door";
+"setup.permissions.title" = "Toestemmingen";
+"setup.install.done" = "Model is geïnstalleerd en gereed";
+"setup.install.failed" = "De download is mislukt";
+"setup.install.retry" = "Probeer opnieuw";
+"setup.install.retry.hint" = "Al gedownloade delen blijven bewaard, een tweede poging gaat daar verder.";
+"setup.install.retry.offline" = "Maak weer verbinding en probeer het opnieuw. Al gedownloade delen blijven bewaard.";
+"setup.phase.waiting" = "Wacht op bevestiging";
+"setup.phase.listing" = "Bestandslijst wordt opgehaald";
+"setup.phase.downloading" = "Bestand %ld van %ld";
+"setup.phase.downloadingPlain" = "Model wordt gedownload";
+"setup.phase.compiling" = "Model wordt gecompileerd voor de Neural Engine";
+"setup.done.title" = "Pegel is klaar voor gebruik";
+"setup.done.body" = "De app staat in de menubalk en heeft geen eigen venster. Je dicteert overal waar het invoegpunt staat.";
+"setup.done.shortcut.label" = "Je toetscombinatie, hier te wijzigen";
+"setup.done.shortcut.explanation" = "Kort indrukken start de opname en laat die doorlopen, nog een keer indrukken stopt hem. Ingedrukt houden is push-to-talk. Escape gooit weg.";
+"setup.done.openSettings" = "Meer instellingen…";
+"setup.done.permissionsMissing" = "Er ontbreken nog toestemmingen. Zonder Toegankelijkheid en Invoer vastleggen reageert de toetscombinatie niet. Je kunt ze later in de instellingen geven.";
+
+/* Installation errors */
+"install.error.offline" = "Geen netwerkverbinding. Pegel heeft het netwerk alleen nodig voor deze ene download.";
+
+/* Audiodatei */
+"file.panel.message" = "Het resultaat komt op het klembord.";
+"file.panel.prompt" = "Transcribeer";
+
+/* Colours */
+"settings.palette" = "Kleuren";
+"palette.standard" = "Standaard";
+"palette.citrus" = "Citrus";
+"palette.lagoon" = "Lagune";
+"palette.ember" = "Gloed";
+"palette.neon" = "Neon";
+"palette.fern" = "Varen";
+
+/* Settings and About */
+"menu.about" = "Over Pegel…";
+"settings.tab.general" = "Algemeen";
+"settings.tab.appearance" = "Weergave";
+"about.tagline" = "Dicteren op de Mac, volledig lokaal.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Versie %@";
+"about.versionBuild" = "Versie %@ (%@)";
+"about.repository" = "Pegel op GitHub";
+"about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Vertaling";
+"about.translation.machine" = "Deze vertaling is automatisch gemaakt en niet door moedertaalsprekers gecontroleerd.";
+"about.translation.report" = "Meld een fout";
+"about.translation.useEnglish" = "Gebruik Pegel in het Engels…";
+"about.section.updates" = "Updates";
+"about.updates.automatic" = "Zoek automatisch naar updates";
+"about.updates.install" = "Installeer updates automatisch";
+"about.updates.install.explanation" = "Pegel downloadt een gevonden update op de achtergrond en installeert die de volgende keer dat de app stopt. Staat dit uit, dan vraagt Pegel het eerst. Werkt alleen als automatisch zoeken aanstaat.";
+"about.updates.check" = "Zoek naar updates…";
+"about.updates.privacy" = "Om te zoeken haalt Pegel een bestand op bij GitHub. GitHub ziet daarbij je IP-adres en de versies van Pegel en macOS. Audio en tekst verlaten deze Mac nooit.";
+"about.section.licenses" = "Licenties";
+"about.licenses.explanation" = "Pegel valt onder de MIT-licentie. Inbegrepen zijn FluidAudio (Apache 2.0) en de onderdelen waarvan het afhankelijk is. Het spraakmodel Parakeet TDT 0.6B v3 is van NVIDIA, de Core ML-versie van FluidInference, beide onder CC-BY-4.0.";
+"about.licenses.show" = "Toon licentieteksten…";
