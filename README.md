@@ -121,9 +121,12 @@ When there is already text in front of the cursor, Pegel adds a space by itself.
 It reads M4A, MP3, WAV, AIFF, CAF, FLAC and AAC, the sound of MP4 and MOV videos, and
 from macOS 15.4 also Ogg and Opus.
 
-The interface is in English and German. French, Spanish and Italian are
-machine-translated; mistakes can be reported through the
-[translation form](../../issues/new?template=translation.yml).
+The interface is in English and German, and machine-translated into Bulgarian,
+Croatian, Czech, Dutch, Finnish, French, Italian, Polish, Portuguese, Romanian, Slovak
+and Spanish; mistakes can be reported through the
+[translation form](../../issues/new?template=translation.yml). macOS itself has no
+Bulgarian interface: add Bulgarian to the preferred languages, or choose it for Pegel
+alone under Language & Region › Applications.
 
 ## How fast
 
