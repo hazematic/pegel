@@ -75,7 +75,7 @@ struct SetupView: View {
             PegelMark(color: .primary)
                 .frame(width: 32, height: 32)
             VStack(alignment: .leading) {
-                Text("Pegel").font(.title2).bold()
+                Wordmark()
                 Text(L("onboarding.subtitle"))
                     .foregroundStyle(.secondary)
             }

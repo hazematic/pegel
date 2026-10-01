@@ -56,6 +56,19 @@ because the model does the actual work.
 
 
 --------------------------------------------------------------------------------
+PT Sans
+--------------------------------------------------------------------------------
+https://www.paratype.com/public
+Copyright (c) 2010, ParaType Ltd., with Reserved Font Names "PT Sans" and
+"ParaType".
+Licensed under the SIL Open Font License, Version 1.1.
+
+PT Sans Bold sets the wordmark in the About and setup windows. The font file
+ships unmodified in Contents/Resources/Fonts, with its license:
+licenses/PT_Sans-OFL.txt.
+
+
+--------------------------------------------------------------------------------
 System frameworks
 --------------------------------------------------------------------------------
 AVFoundation, AppKit, SwiftUI, Core ML, Carbon.HIToolbox, ApplicationServices

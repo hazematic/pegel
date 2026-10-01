@@ -64,6 +64,9 @@ mkdir -p "$APP/Contents/Resources/Licenses"
 cp LICENSE NOTICE "$APP/Contents/Resources/Licenses/"
 cp -R licenses/. "$APP/Contents/Resources/Licenses/"
 
+# PT Sans Bold for the wordmark, registered for Pegel alone via ATSApplicationFontsPath.
+cp -R Resources/Fonts "$APP/Contents/Resources/"
+
 for lproj in Resources/*.lproj; do
     [ -d "$lproj" ] && cp -R "$lproj" "$APP/Contents/Resources/"
 done
@@ -93,6 +96,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
     <key>CFBundleDevelopmentRegion</key><string>en</string>
     <key>NSHighResolutionCapable</key><true/>
     <key>LSUIElement</key><true/>
+    <key>ATSApplicationFontsPath</key><string>Fonts</string>
     <!-- Sparkle: no automatic checks, no prompt, no system profile. -->
 $FEED_KEY
     <key>SUPublicEDKey</key><string>M5CY+6kw4VpY9xdB2ZpNO+2OjZ1KmI3rf7W9C+6t/CE=</string>
