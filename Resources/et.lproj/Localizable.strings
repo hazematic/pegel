@@ -1,0 +1,184 @@
+/* Menu */
+"menu.status.last" = "Viimati: %@";
+"menu.status.hotkeyInactive" = "Kiirklahv pole aktiivne, Hõlbustus puudub";
+"menu.resetPosition" = "Lähtesta asukoht";
+"menu.copyLast" = "Kopeeri viimane dikteerimine";
+"menu.transcribeFile" = "Transkribeeri heli- või videofail…";
+"menu.setup" = "Seadista Pegel…";
+"menu.status.notInstalled" = "Mudel pole veel installitud";
+"menu.settings" = "Sätted…";
+"menu.quit" = "Välju";
+
+/* Status */
+"status.ready" = "Valmis";
+"status.recording" = "Salvestamine…";
+"status.transcribing" = "Transkribeerimine…";
+"status.transcribingFile" = "Transkribeerimine… %@";
+"status.finished" = "Lisatud";
+"status.discarded" = "Loobutud";
+"status.failed" = "Viga";
+
+/* Model preparation */
+"preparing.downloading" = "Mudeli allalaadimine %@";
+"preparing.loading" = "Mudeli lähtestamine";
+"preparing.warmup" = "Mudeli soojendamine";
+"preparing.waiting" = "Mudel pole installitud";
+"preparing.listing" = "Allalaadimise ettevalmistamine";
+"preparing.compiling" = "Mudeli kompileerimine";
+
+/* Errors */
+"error.microphone" = "Puudub juurdepääs mikrofonile";
+"error.tooShort" = "Liiga lühike";
+"error.unreadableFile" = "Faili %@ ei saa lugeda";
+"error.noSpeech" = "Midagi ei tuvastatud";
+"error.modelLoading" = "Mudel alles laadib";
+"error.noInputDevice" = "Mikrofoni ei leitud.";
+"error.deviceUnavailable" = "Mikrofon %@ pole saadaval";
+"error.silentInput" = "Seadmest %@ ei tule signaali";
+"error.noAudioData" = "Seadmest %@ ei tule andmeid";
+"error.notReady" = "Kõnemudel pole veel laaditud.";
+
+/* Windows */
+"window.settings" = "Sätted";
+"window.about" = "Teave: Pegel";
+"window.licences" = "Litsentsid";
+"window.onboarding" = "Pegeli seadistamine";
+
+/* Settings */
+"settings.section.hotkey" = "Kiirklahv";
+"settings.hotkey.label" = "Dikteerimise alustamine ja lõpetamine";
+"settings.hotkey.reset" = "Lähtesta: %@";
+"settings.ptt.label" = "Hoidmine alates";
+"settings.ptt.explanation" = "Lühike vajutus lülitab salvestuse sisse või välja ja jätab selle käima. Pikem vajutus on push-to-talk: lahtilaskmine lõpetab.";
+"settings.section.audio" = "Heli";
+"settings.input.label" = "Mikrofon";
+"settings.input.systemDefault" = "Süsteemi vaikesäte";
+"settings.input.current" = "Salvestamine seadmega %@";
+"settings.input.narrowband" = "Kitsasriba alla 16 kHz, tüüpiline telefoniprofiilis Bluetooth-peakomplektidele. Tuvastus on märgatavalt halvem.";
+"settings.input.missing" = "Valitud mikrofon pole ühendatud. Seni kehtib süsteemi vaikesäte.";
+"settings.input.none" = "Sisendseadet ei leitud.";
+"settings.input.explanation" = "Süsteemi vaikesätte korral järgib Pegel mikrofoni, mille macOS parasjagu valib. See võib olla äsja ühendatud Bluetooth-kõlar: macOS käsitleb seda peakomplektina ja teeb sellest sisendi. Kindlalt valitud seade välistab selle.";
+"settings.section.tones" = "Helisignaalid";
+"settings.tones.label" = "Signaal";
+"settings.tones.play" = "Kuula";
+"settings.tones.volume" = "Helitugevus";
+"settings.tones.explanation" = "Lühike vaikne heli kinnitab salvestuse algust ja lõppu: tõusev alustamisel, langev lahtilaskmisel. Loend algab kõige diskreetsemast ja lõpeb kõige märgatavamaga. Kõik on piisavalt vaiksed, et dikteerimisse mitte sattuda.";
+"tones.off" = "Väljas";
+"tones.cricket" = "Ritsikas";
+"tones.pebble" = "Kivike";
+"tones.drop" = "Tilk";
+"tones.moss" = "Sammal";
+"tones.glass" = "Klaas";
+"settings.section.appearance" = "Välimus";
+"settings.waveform" = "Lainekuju";
+"settings.showTime" = "Kuva kulunud aeg";
+"settings.showTime.explanation" = "Ilma ajata on tasemenäidik kitsam ja läheb täiesti ilma numbriteta.";
+"settings.section.permissions" = "Õigused";
+"settings.permissions.explanation" = "Hõlbustus lisamiseks ja kursori asukoha leidmiseks, Sisestuse jälgimine süsteemiülese kiirklahvi jaoks.";
+"settings.section.model" = "Mudel";
+"settings.model.label" = "Kõnetuvastus";
+"settings.model.explanation" = "Töötab kohapeal Neural Engine’il. Pärast esimest allalaadimist pole võrku enam vaja.";
+
+/* Waveforms */
+"waveform.trace" = "Jälg";
+"waveform.trace.explanation" = "Näitab viimast kahte sekundit. Ka tagantjärele on näha, kas heli tuli kohale.";
+"waveform.levels" = "Tasemed";
+"waveform.levels.explanation" = "Üksteist tulpa, millel liigub laine paremale. Rahulikum ja kitsam, näitab ainult hetke.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "Süsteemi vaikesäte";
+"audio.device.unknown" = "Tundmatu seade";
+
+/* Permissions */
+"permission.microphone" = "Mikrofon";
+"permission.accessibility" = "Hõlbustus (Accessibility)";
+"permission.inputMonitoring" = "Sisestuse jälgimine (Input Monitoring)";
+
+/* Onboarding */
+"onboarding.subtitle" = "Dikteerimine, kohapeal, kõikjal süsteemis";
+"onboarding.intro" = "Vaja on kolme õigust, seejärel töötab kõik ilma edasiste küsimusteta.";
+"onboarding.microphone.detail" = "Salvestamiseks. Heli ei lahku kunagi sellest Macist.";
+"onboarding.accessibility.detail" = "Kursori juurde lisamiseks ja kursori asukoha leidmiseks.";
+"onboarding.inputMonitoring.detail" = "Et kiirklahv tuvastataks kogu süsteemis. Eraldi punkt Süsteemisätetes (System Settings).";
+"onboarding.start" = "Alustame";
+"onboarding.later" = "Hiljem";
+
+/* Buttons and keys */
+"button.open" = "Ava";
+"button.allow" = "Luba";
+"button.openSettings" = "Süsteemisätted…";
+"hotkey.pressKey" = "Vajutage klahvi…";
+"hotkey.clickToChange" = "Klõpsake muutmiseks";
+"key.space" = "Tühik";
+"key.unknown" = "Klahv %ld";
+"hotkey.reject.noModifier" = "Muuteklahvita püüaks kiirklahv kinni iga tavalise klahvivajutuse.";
+"hotkey.reject.escape" = "Esc on reserveeritud salvestuse katkestamiseks.";
+"hotkey.reject.quit" = "⌘Q sulgeb rakendused.";
+"hotkey.reject.close" = "⌘W sulgeb aknad.";
+"hotkey.reject.switchApp" = "⌘Tab vahetab rakendust.";
+"hotkey.reject.spotlight" = "⌘Tühik avab Spotlighti.";
+
+/* Setup */
+"setup.welcome.title" = "Seadistage üks kord, siis mitte kunagi enam";
+"setup.welcome.body" = "Pegel tuvastab kõne täielikult selles Macis. Selleks laaditakse nüüd üks kord alla kõnemudel. Ilma selleta ei saa rakendus transkribeerida.";
+"setup.welcome.privacy" = "See on ainus võrgupöördumine, mida Pegel kunagi teeb. Pärast seda töötab kõik võrguühenduseta: kontot pole, pilve pole, telemeetriat pole.";
+"setup.welcome.size" = "461 MB Hugging Face’ist, olenevalt ühendusest mõni minut.";
+"setup.welcome.confirm" = "Laadi mudel alla";
+"setup.next" = "Jätka";
+"setup.permissions.title" = "Õigused";
+"setup.install.done" = "Mudel on installitud ja valmis";
+"setup.install.failed" = "Allalaadimine nurjus";
+"setup.install.retry" = "Proovi uuesti";
+"setup.install.retry.hint" = "Juba alla laaditud osad jäävad alles, teine katse jätkab sealt.";
+"setup.install.retry.offline" = "Looge ühendus ja proovige uuesti. Juba alla laaditud osad jäävad alles.";
+"setup.phase.waiting" = "Ootab kinnitust";
+"setup.phase.listing" = "Faililoendi toomine";
+"setup.phase.downloading" = "Fail %ld/%ld";
+"setup.phase.downloadingPlain" = "Mudeli allalaadimine";
+"setup.phase.compiling" = "Mudeli kompileerimine Neural Engine’i jaoks";
+"setup.done.title" = "Pegel on kasutusvalmis";
+"setup.done.body" = "Rakendus asub menüüribal ja sellel pole oma akent. Dikteerida saab kõikjal, kus on kursor.";
+"setup.done.shortcut.label" = "Teie kiirklahv, saate seda siin muuta";
+"setup.done.shortcut.explanation" = "Lühike vajutus alustab salvestust ja jätab selle käima, uus vajutus lõpetab. Allhoidmine on push-to-talk. Esc loobub.";
+"setup.done.openSettings" = "Rohkem sätteid…";
+"setup.done.permissionsMissing" = "Mõned õigused on veel puudu. Ilma Hõlbustuse ja Sisestuse jälgimiseta kiirklahv ei reageeri. Saate need hiljem sätetes anda.";
+
+/* Installation errors */
+"install.error.offline" = "Võrguühendus puudub. Pegel vajab võrku ainult selle ühe allalaadimise jaoks.";
+
+/* Audiodatei */
+"file.panel.message" = "Tulemus läheb lõikelauale.";
+"file.panel.prompt" = "Transkribeeri";
+
+/* Colours */
+"settings.palette" = "Värvid";
+"palette.standard" = "Standard";
+"palette.citrus" = "Tsitrus";
+"palette.lagoon" = "Laguun";
+"palette.ember" = "Hõõgsüsi";
+"palette.neon" = "Neoon";
+"palette.fern" = "Sõnajalg";
+
+/* Settings and About */
+"menu.about" = "Teave: Pegel…";
+"settings.tab.general" = "Üldine";
+"settings.tab.appearance" = "Välimus";
+"about.tagline" = "Dikteerimine Macis, täielikult kohapeal.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Versioon %@";
+"about.versionBuild" = "Versioon %@ (%@)";
+"about.repository" = "Pegel GitHubis";
+"about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Tõlge";
+"about.translation.machine" = "See tõlge on loodud automaatselt ja emakeelne kõneleja pole seda üle vaadanud.";
+"about.translation.report" = "Teata veast";
+"about.translation.useEnglish" = "Kasuta Pegelit inglise keeles…";
+"about.section.updates" = "Värskendused";
+"about.updates.automatic" = "Otsi värskendusi automaatselt";
+"about.updates.install" = "Installi värskendused automaatselt";
+"about.updates.install.explanation" = "Pegel laadib leitud värskenduse taustal alla ja installib selle järgmisel sulgemisel. Kui see on väljas, küsib Pegel enne. Töötab ainult automaatse otsinguga.";
+"about.updates.check" = "Otsi värskendusi…";
+"about.updates.privacy" = "Otsimiseks laadib Pegel GitHubist alla ühe faili. GitHub näeb seejuures teie IP-aadressi ning Pegeli ja macOS-i versiooni. Heli ja tekst ei lahku kunagi sellest Macist.";
+"about.section.licenses" = "Litsentsid";
+"about.licenses.explanation" = "Pegel on avaldatud MIT-litsentsi all. See sisaldab FluidAudiot (Apache 2.0) koos sõltuvustega. Kõnemudel Parakeet TDT 0.6B v3 on NVIDIA loodud, Core ML-i versioon FluidInference’i tehtud, mõlemad CC-BY-4.0 litsentsi all.";
+"about.licenses.show" = "Kuva litsentsitekstid…";

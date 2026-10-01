@@ -1,0 +1,184 @@
+/* Menu */
+"menu.status.last" = "Paskutinis: %@";
+"menu.status.hotkeyInactive" = "Spartusis klavišas neveikia, trūksta leidimo";
+"menu.resetPosition" = "Atkurti padėtį";
+"menu.copyLast" = "Kopijuoti paskutinį diktavimą";
+"menu.transcribeFile" = "Transkribuoti garso ar vaizdo failą…";
+"menu.setup" = "Nustatyti Pegel…";
+"menu.status.notInstalled" = "Modelis dar neįdiegtas";
+"menu.settings" = "Nuostatos…";
+"menu.quit" = "Išeiti";
+
+/* Status */
+"status.ready" = "Paruošta";
+"status.recording" = "Įrašymas…";
+"status.transcribing" = "Transkribavimas…";
+"status.transcribingFile" = "Transkribavimas… %@";
+"status.finished" = "Įterpta";
+"status.discarded" = "Atmesta";
+"status.failed" = "Klaida";
+
+/* Model preparation */
+"preparing.downloading" = "Atsisiunčiamas modelis %@";
+"preparing.loading" = "Inicijuojamas modelis";
+"preparing.warmup" = "Įšildomas modelis";
+"preparing.waiting" = "Modelis neįdiegtas";
+"preparing.listing" = "Ruošiamas atsisiuntimas";
+"preparing.compiling" = "Kompiliuojamas modelis";
+
+/* Errors */
+"error.microphone" = "Nėra prieigos prie mikrofono";
+"error.tooShort" = "Per trumpa";
+"error.unreadableFile" = "Nepavyko perskaityti %@";
+"error.noSpeech" = "Nieko neatpažinta";
+"error.modelLoading" = "Modelis dar įkeliamas";
+"error.noInputDevice" = "Mikrofonas nerastas.";
+"error.deviceUnavailable" = "Mikrofonas %@ nepasiekiamas";
+"error.silentInput" = "Nėra signalo iš %@";
+"error.noAudioData" = "Nėra duomenų iš %@";
+"error.notReady" = "Kalbos modelis dar neįkeltas.";
+
+/* Windows */
+"window.settings" = "Nuostatos";
+"window.about" = "Apie Pegel";
+"window.licences" = "Licencijos";
+"window.onboarding" = "Pegel nustatymas";
+
+/* Settings */
+"settings.section.hotkey" = "Spartusis klavišas";
+"settings.hotkey.label" = "Pradėti ir baigti diktavimą";
+"settings.hotkey.reset" = "Atkurti: %@";
+"settings.ptt.label" = "Laikymas nuo";
+"settings.ptt.explanation" = "Trumpas paspaudimas įjungia arba išjungia įrašymą ir palieka jį veikti. Ilgesnis paspaudimas yra push-to-talk: atleidus įrašymas baigiamas.";
+"settings.section.audio" = "Garsas";
+"settings.input.label" = "Mikrofonas";
+"settings.input.systemDefault" = "Sistemos numatytasis";
+"settings.input.current" = "Įrašoma per %@";
+"settings.input.narrowband" = "Siaura juosta žemiau 16 kHz, būdinga Bluetooth ausinėms telefono profilyje. Atpažinimas pastebimai prastėja.";
+"settings.input.missing" = "Pasirinktas mikrofonas neprijungtas. Kol jis neprijungtas, naudojamas sistemos numatytasis.";
+"settings.input.none" = "Įvesties įrenginys nerastas.";
+"settings.input.explanation" = "Pasirinkus „Sistemos numatytasis“ Pegel naudoja tą mikrofoną, kurį tuo metu pasirenka macOS. Tai gali būti ką tik prisijungęs Bluetooth garsiakalbis: macOS laiko jį ausinėmis ir paverčia įvestimi. Fiksuotai pasirinktas įrenginys to išvengia.";
+"settings.section.tones" = "Garso signalai";
+"settings.tones.label" = "Signalas";
+"settings.tones.play" = "Klausyti";
+"settings.tones.volume" = "Garsumas";
+"settings.tones.explanation" = "Trumpas, tylus garsas patvirtina įrašymo pradžią ir pabaigą: kylantis pradedant, krintantis atleidus. Sąrašas eina nuo subtiliausio iki labiausiai pastebimo. Visi pakankamai tylūs, kad nepatektų į diktavimą.";
+"tones.off" = "Išjungta";
+"tones.cricket" = "Svirplys";
+"tones.pebble" = "Akmenėlis";
+"tones.drop" = "Lašas";
+"tones.moss" = "Samanos";
+"tones.glass" = "Stiklas";
+"settings.section.appearance" = "Išvaizda";
+"settings.waveform" = "Bangos forma";
+"settings.showTime" = "Rodyti praėjusį laiką";
+"settings.showTime.explanation" = "Be laiko lygio indikatorius siauresnis ir apsieina visai be skaitmenų.";
+"settings.section.permissions" = "Leidimai";
+"settings.permissions.explanation" = "Pritaikymas neįgaliesiems įterpti tekstą ir rasti žymeklio vietą, Įvesties stebėjimas sparčiajam klavišui visoje sistemoje.";
+"settings.section.model" = "Modelis";
+"settings.model.label" = "Kalbos atpažinimas";
+"settings.model.explanation" = "Veikia vietoje su Neural Engine. Po pirmojo atsisiuntimo tinklo nebereikia.";
+
+/* Waveforms */
+"waveform.trace" = "Pėdsakas";
+"waveform.trace.explanation" = "Rodo paskutines dvi sekundes. Ir vėliau matyti, ar garsas atėjo.";
+"waveform.levels" = "Lygiai";
+"waveform.levels.explanation" = "Vienuolika stulpelių, kuriais į dešinę bėga banga. Ramesnis ir siauresnis, rodo tik akimirką.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "Sistemos numatytasis";
+"audio.device.unknown" = "Nežinomas įrenginys";
+
+/* Permissions */
+"permission.microphone" = "Mikrofonas";
+"permission.accessibility" = "Pritaikymas neįgaliesiems (Accessibility)";
+"permission.inputMonitoring" = "Įvesties stebėjimas (Input Monitoring)";
+
+/* Onboarding */
+"onboarding.subtitle" = "Diktavimas, vietoje, bet kurioje sistemos vietoje";
+"onboarding.intro" = "Reikia trijų leidimų, tada viskas veikia be papildomų klausimų.";
+"onboarding.microphone.detail" = "Įrašymui. Garsas niekada nepalieka šio Mac.";
+"onboarding.accessibility.detail" = "Įterpti tekstą prie žymeklio ir rasti jo vietą.";
+"onboarding.inputMonitoring.detail" = "Kad spartusis klavišas būtų atpažįstamas visoje sistemoje. Atskiras punktas Sistemos nuostatose (System Settings).";
+"onboarding.start" = "Pradėkime";
+"onboarding.later" = "Vėliau";
+
+/* Buttons and keys */
+"button.open" = "Atidaryti";
+"button.allow" = "Leisti";
+"button.openSettings" = "Sistemos nuostatos…";
+"hotkey.pressKey" = "Paspauskite klavišą…";
+"hotkey.clickToChange" = "Spustelėkite, kad pakeistumėte";
+"key.space" = "Tarpas";
+"key.unknown" = "Klavišas %ld";
+"hotkey.reject.noModifier" = "Be modifikavimo klavišo spartusis klavišas perimtų kiekvieną įprastą paspaudimą.";
+"hotkey.reject.escape" = "Esc skirtas įrašymui atšaukti.";
+"hotkey.reject.quit" = "⌘Q uždaro programas.";
+"hotkey.reject.close" = "⌘W uždaro langus.";
+"hotkey.reject.switchApp" = "⌘Tab perjungia programas.";
+"hotkey.reject.spotlight" = "⌘Tarpas atidaro Spotlight.";
+
+/* Setup */
+"setup.welcome.title" = "Nustatykite vieną kartą ir daugiau niekada";
+"setup.welcome.body" = "Pegel atpažįsta kalbą tik šiame Mac. Tam dabar vieną kartą atsisiunčiamas kalbos modelis. Be jo programėlė negali transkribuoti.";
+"setup.welcome.privacy" = "Tai vienintelė prieiga prie tinklo, kurią Pegel kada nors atlieka. Toliau viskas veikia neprisijungus: be paskyros, be debesies, be telemetrijos.";
+"setup.welcome.size" = "461 MB iš Hugging Face, priklausomai nuo ryšio kelios minutės.";
+"setup.welcome.confirm" = "Atsisiųsti modelį";
+"setup.next" = "Tęsti";
+"setup.permissions.title" = "Leidimai";
+"setup.install.done" = "Modelis įdiegtas ir paruoštas";
+"setup.install.failed" = "Atsisiųsti nepavyko";
+"setup.install.retry" = "Bandyti dar kartą";
+"setup.install.retry.hint" = "Jau atsisiųstos dalys lieka, antras bandymas tęsia nuo ten.";
+"setup.install.retry.offline" = "Prisijunkite prie tinklo ir bandykite dar kartą. Jau atsisiųstos dalys lieka.";
+"setup.phase.waiting" = "Laukiama patvirtinimo";
+"setup.phase.listing" = "Gaunamas failų sąrašas";
+"setup.phase.downloading" = "Failas %ld iš %ld";
+"setup.phase.downloadingPlain" = "Atsisiunčiamas modelis";
+"setup.phase.compiling" = "Modelis kompiliuojamas Neural Engine";
+"setup.done.title" = "Pegel paruoštas";
+"setup.done.body" = "Programėlė yra meniu juostoje ir neturi savo lango. Diktuoti galite visur, kur yra žymeklis.";
+"setup.done.shortcut.label" = "Jūsų spartusis klavišas, galite pakeisti čia";
+"setup.done.shortcut.explanation" = "Trumpas paspaudimas pradeda įrašymą ir palieka jį veikti, dar vienas paspaudimas baigia. Laikymas yra push-to-talk. Esc atmeta.";
+"setup.done.openSettings" = "Daugiau nuostatų…";
+"setup.done.permissionsMissing" = "Dar trūksta kai kurių leidimų. Be pritaikymo neįgaliesiems ir įvesties stebėjimo spartusis klavišas nereaguoja. Juos galite suteikti vėliau nuostatose.";
+
+/* Installation errors */
+"install.error.offline" = "Nėra tinklo ryšio. Pegel tinklo reikia tik šiam vienam atsisiuntimui.";
+
+/* Audiodatei */
+"file.panel.message" = "Rezultatas patenka į mainų sritį.";
+"file.panel.prompt" = "Transkribuoti";
+
+/* Colours */
+"settings.palette" = "Spalvos";
+"palette.standard" = "Standartinė";
+"palette.citrus" = "Citrusai";
+"palette.lagoon" = "Lagūna";
+"palette.ember" = "Žarijos";
+"palette.neon" = "Neonas";
+"palette.fern" = "Papartis";
+
+/* Settings and About */
+"menu.about" = "Apie Pegel…";
+"settings.tab.general" = "Bendra";
+"settings.tab.appearance" = "Išvaizda";
+"about.tagline" = "Diktavimas Mac kompiuteryje, visiškai vietoje.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Versija %@";
+"about.versionBuild" = "Versija %@ (%@)";
+"about.repository" = "Pegel svetainėje GitHub";
+"about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Vertimas";
+"about.translation.machine" = "Šis vertimas sukurtas automatiškai ir gimtakalbis jo nepatikrino.";
+"about.translation.report" = "Pranešti apie klaidą";
+"about.translation.useEnglish" = "Naudoti Pegel anglų kalba…";
+"about.section.updates" = "Naujinimai";
+"about.updates.automatic" = "Automatiškai ieškoti naujinimų";
+"about.updates.install" = "Automatiškai diegti naujinimus";
+"about.updates.install.explanation" = "Pegel rastą naujinimą atsisiunčia fone ir įdiegia kitą kartą uždarant programėlę. Kai išjungta, Pegel pirmiausia paklausia. Veikia tik su automatine paieška.";
+"about.updates.check" = "Ieškoti naujinimų…";
+"about.updates.privacy" = "Ieškodama Pegel atsisiunčia failą iš GitHub. GitHub tada mato jūsų IP adresą ir Pegel bei macOS versijas. Garsas ir tekstas niekada nepalieka šio Mac.";
+"about.section.licenses" = "Licencijos";
+"about.licenses.explanation" = "Pegel išleistas pagal MIT licenciją. Jame yra FluidAudio (Apache 2.0) su priklausomybėmis. Kalbos modelį Parakeet TDT 0.6B v3 sukūrė NVIDIA, Core ML versiją FluidInference, abu pagal CC-BY-4.0 licenciją.";
+"about.licenses.show" = "Rodyti licencijų tekstus…";

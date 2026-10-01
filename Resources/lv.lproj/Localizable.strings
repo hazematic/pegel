@@ -1,0 +1,184 @@
+/* Menu */
+"menu.status.last" = "Pēdējais: %@";
+"menu.status.hotkeyInactive" = "Īsinājumtaustiņš nedarbojas, trūkst Pieejamības";
+"menu.resetPosition" = "Atiestatīt pozīciju";
+"menu.copyLast" = "Kopēt pēdējo diktējumu";
+"menu.transcribeFile" = "Transkribēt audio vai video failu…";
+"menu.setup" = "Iestatīt Pegel…";
+"menu.status.notInstalled" = "Modelis vēl nav instalēts";
+"menu.settings" = "Iestatījumi…";
+"menu.quit" = "Iziet";
+
+/* Status */
+"status.ready" = "Gatavs";
+"status.recording" = "Ierakstīšana…";
+"status.transcribing" = "Transkribēšana…";
+"status.transcribingFile" = "Transkribēšana… %@";
+"status.finished" = "Ievietots";
+"status.discarded" = "Atmests";
+"status.failed" = "Kļūda";
+
+/* Model preparation */
+"preparing.downloading" = "Lejupielādē modeli %@";
+"preparing.loading" = "Inicializē modeli";
+"preparing.warmup" = "Iesilda modeli";
+"preparing.waiting" = "Modelis nav instalēts";
+"preparing.listing" = "Sagatavo lejupielādi";
+"preparing.compiling" = "Kompilē modeli";
+
+/* Errors */
+"error.microphone" = "Nav piekļuves mikrofonam";
+"error.tooShort" = "Pārāk īss";
+"error.unreadableFile" = "Nevar nolasīt %@";
+"error.noSpeech" = "Nekas netika atpazīts";
+"error.modelLoading" = "Modelis vēl ielādējas";
+"error.noInputDevice" = "Mikrofons nav atrasts.";
+"error.deviceUnavailable" = "Mikrofons %@ nav pieejams";
+"error.silentInput" = "Nav signāla no %@";
+"error.noAudioData" = "Nav datu no %@";
+"error.notReady" = "Runas modelis vēl nav ielādēts.";
+
+/* Windows */
+"window.settings" = "Iestatījumi";
+"window.about" = "Par Pegel";
+"window.licences" = "Licences";
+"window.onboarding" = "Pegel iestatīšana";
+
+/* Settings */
+"settings.section.hotkey" = "Īsinājumtaustiņš";
+"settings.hotkey.label" = "Sākt un beigt diktēšanu";
+"settings.hotkey.reset" = "Atiestatīt uz %@";
+"settings.ptt.label" = "Turēšana no";
+"settings.ptt.explanation" = "Īss nospiediens ieslēdz vai izslēdz ierakstīšanu un atstāj to darbojamies. Garāks nospiediens ir push-to-talk: atlaižot ierakstīšana beidzas.";
+"settings.section.audio" = "Audio";
+"settings.input.label" = "Mikrofons";
+"settings.input.systemDefault" = "Sistēmas noklusējums";
+"settings.input.current" = "Ieraksta ar %@";
+"settings.input.narrowband" = "Šaura josla zem 16 kHz, raksturīga Bluetooth austiņām tālruņa profilā. Atpazīšana manāmi pasliktinās.";
+"settings.input.missing" = "Izvēlētais mikrofons nav pievienots. Līdz tam tiek izmantots sistēmas noklusējums.";
+"settings.input.none" = "Ievades ierīce nav atrasta.";
+"settings.input.explanation" = "Ja izvēlēts sistēmas noklusējums, Pegel seko mikrofonam, kuru pašlaik izvēlas macOS. Tas var būt tikko pievienojies Bluetooth skaļrunis: macOS to uzskata par austiņām un padara par ievadi. Fiksēti izvēlēta ierīce to novērš.";
+"settings.section.tones" = "Skaņas signāli";
+"settings.tones.label" = "Signāls";
+"settings.tones.play" = "Noklausīties";
+"settings.tones.volume" = "Skaļums";
+"settings.tones.explanation" = "Īsa, klusa skaņa apstiprina ieraksta sākumu un beigas: augoša sākumā, krītoša atlaižot. Saraksts iet no diskrētākās līdz pamanāmākajai. Visas ir pietiekami klusas, lai nenonāktu diktējumā.";
+"tones.off" = "Izslēgts";
+"tones.cricket" = "Circenis";
+"tones.pebble" = "Olis";
+"tones.drop" = "Piliens";
+"tones.moss" = "Sūnas";
+"tones.glass" = "Stikls";
+"settings.section.appearance" = "Izskats";
+"settings.waveform" = "Viļņa forma";
+"settings.showTime" = "Rādīt pagājušo laiku";
+"settings.showTime.explanation" = "Bez laika līmeņa indikators ir šaurāks un iztiek bez cipariem.";
+"settings.section.permissions" = "Atļaujas";
+"settings.permissions.explanation" = "Pieejamība ievietošanai un kursora atrašanās vietas noteikšanai, Ievades uzraudzība visas sistēmas īsinājumtaustiņam.";
+"settings.section.model" = "Modelis";
+"settings.model.label" = "Runas atpazīšana";
+"settings.model.explanation" = "Darbojas lokāli ar Neural Engine. Pēc pirmās lejupielādes tīkls vairs nav vajadzīgs.";
+
+/* Waveforms */
+"waveform.trace" = "Pēdas";
+"waveform.trace.explanation" = "Rāda pēdējās divas sekundes. Arī vēlāk var redzēt, vai skaņa pienāca.";
+"waveform.levels" = "Līmeņi";
+"waveform.levels.explanation" = "Vienpadsmit stabiņi, pa kuriem pa labi skrien vilnis. Mierīgāks un šaurāks, rāda tikai mirkli.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "Sistēmas noklusējums";
+"audio.device.unknown" = "Nezināma ierīce";
+
+/* Permissions */
+"permission.microphone" = "Mikrofons";
+"permission.accessibility" = "Pieejamība (Accessibility)";
+"permission.inputMonitoring" = "Ievades uzraudzība (Input Monitoring)";
+
+/* Onboarding */
+"onboarding.subtitle" = "Diktēšana, lokāli, jebkur sistēmā";
+"onboarding.intro" = "Nepieciešamas trīs atļaujas, pēc tam viss darbojas bez papildu jautājumiem.";
+"onboarding.microphone.detail" = "Ierakstīšanai. Skaņa nekad neatstāj šo Mac datoru.";
+"onboarding.accessibility.detail" = "Ievietošanai pie kursora un tā atrašanās vietas noteikšanai.";
+"onboarding.inputMonitoring.detail" = "Lai īsinājumtaustiņš tiktu atpazīts visā sistēmā. Atsevišķs punkts Sistēmas iestatījumos (System Settings).";
+"onboarding.start" = "Sāksim";
+"onboarding.later" = "Vēlāk";
+
+/* Buttons and keys */
+"button.open" = "Atvērt";
+"button.allow" = "Atļaut";
+"button.openSettings" = "Sistēmas iestatījumi…";
+"hotkey.pressKey" = "Nospiediet taustiņu…";
+"hotkey.clickToChange" = "Noklikšķiniet, lai mainītu";
+"key.space" = "Atstarpe";
+"key.unknown" = "Taustiņš %ld";
+"hotkey.reject.noModifier" = "Bez modifikatortaustiņa īsinājumtaustiņš pārtvertu katru parasto taustiņa nospiedienu.";
+"hotkey.reject.escape" = "Esc ir rezervēts ieraksta atcelšanai.";
+"hotkey.reject.quit" = "⌘Q aizver lietotnes.";
+"hotkey.reject.close" = "⌘W aizver logus.";
+"hotkey.reject.switchApp" = "⌘Tab pārslēdz lietotnes.";
+"hotkey.reject.spotlight" = "⌘Atstarpe atver Spotlight.";
+
+/* Setup */
+"setup.welcome.title" = "Iestatiet vienreiz un vairs nekad";
+"setup.welcome.body" = "Pegel atpazīst runu pilnībā šajā Mac datorā. Šim nolūkam tagad vienreiz tiek lejupielādēts runas modelis. Bez tā lietotne nevar transkribēt.";
+"setup.welcome.privacy" = "Šī ir vienīgā tīkla piekļuve, ko Pegel jebkad veic. Pēc tam viss darbojas bezsaistē: bez konta, bez mākoņa, bez telemetrijas.";
+"setup.welcome.size" = "461 MB no Hugging Face, atkarībā no savienojuma dažas minūtes.";
+"setup.welcome.confirm" = "Lejupielādēt modeli";
+"setup.next" = "Turpināt";
+"setup.permissions.title" = "Atļaujas";
+"setup.install.done" = "Modelis ir instalēts un gatavs";
+"setup.install.failed" = "Lejupielāde neizdevās";
+"setup.install.retry" = "Mēģināt vēlreiz";
+"setup.install.retry.hint" = "Jau lejupielādētās daļas paliek, otrais mēģinājums turpina no turienes.";
+"setup.install.retry.offline" = "Izveidojiet savienojumu ar tīklu un mēģiniet vēlreiz. Jau lejupielādētās daļas paliek.";
+"setup.phase.waiting" = "Gaida apstiprinājumu";
+"setup.phase.listing" = "Iegūst failu sarakstu";
+"setup.phase.downloading" = "Fails %ld no %ld";
+"setup.phase.downloadingPlain" = "Lejupielādē modeli";
+"setup.phase.compiling" = "Kompilē modeli Neural Engine";
+"setup.done.title" = "Pegel ir gatavs darbam";
+"setup.done.body" = "Lietotne atrodas izvēļņu joslā, un tai nav sava loga. Diktēt var visur, kur atrodas kursors.";
+"setup.done.shortcut.label" = "Jūsu īsinājumtaustiņš, mainiet to šeit";
+"setup.done.shortcut.explanation" = "Īss nospiediens sāk ierakstīšanu un atstāj to darbojamies, vēl viens nospiediens to beidz. Turēšana ir push-to-talk. Esc atmet.";
+"setup.done.openSettings" = "Citi iestatījumi…";
+"setup.done.permissionsMissing" = "Dažas atļaujas vēl trūkst. Bez Pieejamības un Ievades uzraudzības īsinājumtaustiņš nereaģē. Tās var piešķirt vēlāk iestatījumos.";
+
+/* Installation errors */
+"install.error.offline" = "Nav tīkla savienojuma. Pegel tīkls ir vajadzīgs tikai šai vienai lejupielādei.";
+
+/* Audiodatei */
+"file.panel.message" = "Rezultāts nonāk starpliktuvē.";
+"file.panel.prompt" = "Transkribēt";
+
+/* Colours */
+"settings.palette" = "Krāsas";
+"palette.standard" = "Standarta";
+"palette.citrus" = "Citruss";
+"palette.lagoon" = "Lagūna";
+"palette.ember" = "Ogles";
+"palette.neon" = "Neons";
+"palette.fern" = "Paparde";
+
+/* Settings and About */
+"menu.about" = "Par Pegel…";
+"settings.tab.general" = "Vispārīgi";
+"settings.tab.appearance" = "Izskats";
+"about.tagline" = "Diktēšana Mac datorā, pilnībā lokāli.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Versija %@";
+"about.versionBuild" = "Versija %@ (%@)";
+"about.repository" = "Pegel vietnē GitHub";
+"about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Tulkojums";
+"about.translation.machine" = "Šis tulkojums ir izveidots automātiski, un dzimtās valodas runātājs to nav pārbaudījis.";
+"about.translation.report" = "Ziņot par kļūdu";
+"about.translation.useEnglish" = "Lietot Pegel angļu valodā…";
+"about.section.updates" = "Atjauninājumi";
+"about.updates.automatic" = "Automātiski meklēt atjauninājumus";
+"about.updates.install" = "Automātiski instalēt atjauninājumus";
+"about.updates.install.explanation" = "Pegel atrasto atjauninājumu lejupielādē fonā un instalē nākamajā aizvēršanas reizē. Ja izslēgts, Pegel vispirms jautā. Darbojas tikai ar automātisko meklēšanu.";
+"about.updates.check" = "Meklēt atjauninājumus…";
+"about.updates.privacy" = "Lai meklētu, Pegel lejupielādē failu no GitHub. GitHub tad redz jūsu IP adresi un Pegel un macOS versiju. Skaņa un teksts nekad neatstāj šo Mac datoru.";
+"about.section.licenses" = "Licences";
+"about.licenses.explanation" = "Pegel ir izdots ar MIT licenci. Tas ietver FluidAudio (Apache 2.0) ar tā atkarībām. Runas modeli Parakeet TDT 0.6B v3 izveidojis NVIDIA, Core ML versiju FluidInference, abi ar CC-BY-4.0 licenci.";
+"about.licenses.show" = "Rādīt licenču tekstus…";

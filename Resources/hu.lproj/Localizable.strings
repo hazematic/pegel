@@ -1,0 +1,184 @@
+/* Menu */
+"menu.status.last" = "Legutóbbi: %@";
+"menu.status.hotkeyInactive" = "Billentyűparancs inaktív, nincs Kisegítő lehetőségek";
+"menu.resetPosition" = "Pozíció visszaállítása";
+"menu.copyLast" = "Utolsó diktálás másolása";
+"menu.transcribeFile" = "Hang- vagy videófájl átírása…";
+"menu.setup" = "Pegel beállítása…";
+"menu.status.notInstalled" = "A modell még nincs telepítve";
+"menu.settings" = "Beállítások…";
+"menu.quit" = "Kilépés";
+
+/* Status */
+"status.ready" = "Készen áll";
+"status.recording" = "Felvétel…";
+"status.transcribing" = "Átírás…";
+"status.transcribingFile" = "Átírás… %@";
+"status.finished" = "Beillesztve";
+"status.discarded" = "Elvetve";
+"status.failed" = "Hiba";
+
+/* Model preparation */
+"preparing.downloading" = "Modell letöltése %@";
+"preparing.loading" = "Modell inicializálása";
+"preparing.warmup" = "Modell bemelegítése";
+"preparing.waiting" = "A modell nincs telepítve";
+"preparing.listing" = "Letöltés előkészítése";
+"preparing.compiling" = "Modell fordítása";
+
+/* Errors */
+"error.microphone" = "Nincs hozzáférés a mikrofonhoz";
+"error.tooShort" = "Túl rövid";
+"error.unreadableFile" = "A(z) %@ fájl nem olvasható";
+"error.noSpeech" = "Nem sikerült semmit felismerni";
+"error.modelLoading" = "A modell még töltődik";
+"error.noInputDevice" = "Nem található mikrofon.";
+"error.deviceUnavailable" = "A(z) %@ mikrofon nem érhető el";
+"error.silentInput" = "Nincs jel innen: %@";
+"error.noAudioData" = "Nincs adat innen: %@";
+"error.notReady" = "A beszédmodell még nincs betöltve.";
+
+/* Windows */
+"window.settings" = "Beállítások";
+"window.about" = "A Pegel névjegye";
+"window.licences" = "Licencek";
+"window.onboarding" = "Pegel beállítása";
+
+/* Settings */
+"settings.section.hotkey" = "Billentyűparancs";
+"settings.hotkey.label" = "Diktálás indítása és leállítása";
+"settings.hotkey.reset" = "Visszaállítás: %@";
+"settings.ptt.label" = "Nyomva tartás legalább";
+"settings.ptt.explanation" = "Rövid lenyomásra a felvétel be- vagy kikapcsol, és tovább fut. A hosszabb lenyomás push-to-talk: elengedéskor véget ér.";
+"settings.section.audio" = "Hang";
+"settings.input.label" = "Mikrofon";
+"settings.input.systemDefault" = "Rendszer alapértelmezése";
+"settings.input.current" = "Felvétel ezzel: %@";
+"settings.input.narrowband" = "Keskeny sáv 16 kHz alatt, ami a telefonprofilt használó Bluetooth-headsetekre jellemző. A felismerés érezhetően romlik.";
+"settings.input.missing" = "A kiválasztott mikrofon nincs csatlakoztatva. Addig a rendszer alapértelmezése érvényes.";
+"settings.input.none" = "Nem található bemeneti eszköz.";
+"settings.input.explanation" = "Rendszer alapértelmezése esetén a Pegel azt a mikrofont követi, amelyet a macOS éppen kiválaszt. Ez lehet egy épp csatlakozott Bluetooth-hangszóró is: a macOS headsetként kezeli, és bemenetté teszi. Rögzített eszközzel ez kizárható.";
+"settings.section.tones" = "Hangjelzések";
+"settings.tones.label" = "Hangjelzés";
+"settings.tones.play" = "Lejátszás";
+"settings.tones.volume" = "Hangerő";
+"settings.tones.explanation" = "Egy rövid, halk hang jelzi a felvétel kezdetét és végét: emelkedő az indításkor, ereszkedő az elengedéskor. A lista a legdiszkrétebbtől a legfeltűnőbbig halad. Mindegyik elég halk ahhoz, hogy ne kerüljön bele a diktálásba.";
+"tones.off" = "Ki";
+"tones.cricket" = "Tücsök";
+"tones.pebble" = "Kavics";
+"tones.drop" = "Csepp";
+"tones.moss" = "Moha";
+"tones.glass" = "Üveg";
+"settings.section.appearance" = "Megjelenés";
+"settings.waveform" = "Hullámforma";
+"settings.showTime" = "Eltelt idő megjelenítése";
+"settings.showTime.explanation" = "Idő nélkül a szintjelző keskenyebb, és teljesen számjegyek nélkül működik.";
+"settings.section.permissions" = "Engedélyek";
+"settings.permissions.explanation" = "Kisegítő lehetőségek a beillesztéshez és a beszúrási pont megtalálásához, Bemenet figyelése a rendszerszintű billentyűparancshoz.";
+"settings.section.model" = "Modell";
+"settings.model.label" = "Beszédfelismerés";
+"settings.model.explanation" = "Helyben fut a Neural Engine-en. Az első letöltés után nincs szükség hálózatra.";
+
+/* Waveforms */
+"waveform.trace" = "Nyomvonal";
+"waveform.trace.explanation" = "Az utolsó két másodpercet mutatja. Utólag is látható, hogy érkezett-e hang.";
+"waveform.levels" = "Szintek";
+"waveform.levels.explanation" = "Tizenegy sáv, amelyeken jobbra fut egy hullám. Nyugodtabb és keskenyebb, csak a pillanatot mutatja.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "Rendszer alapértelmezése";
+"audio.device.unknown" = "Ismeretlen eszköz";
+
+/* Permissions */
+"permission.microphone" = "Mikrofon";
+"permission.accessibility" = "Kisegítő lehetőségek";
+"permission.inputMonitoring" = "Bemenet figyelése";
+
+/* Onboarding */
+"onboarding.subtitle" = "Diktálás, helyben, bárhol a rendszerben";
+"onboarding.intro" = "Három engedély szükséges, utána minden további kérdés nélkül működik.";
+"onboarding.microphone.detail" = "A felvételhez. A hang soha nem hagyja el ezt a Macet.";
+"onboarding.accessibility.detail" = "A kurzornál történő beillesztéshez és a beszúrási pont megtalálásához.";
+"onboarding.inputMonitoring.detail" = "Hogy a billentyűparancs az egész rendszerben működjön. Külön tétel a Rendszerbeállításokban.";
+"onboarding.start" = "Kezdjük";
+"onboarding.later" = "Később";
+
+/* Buttons and keys */
+"button.open" = "Megnyitás";
+"button.allow" = "Engedélyezés";
+"button.openSettings" = "Rendszerbeállítások…";
+"hotkey.pressKey" = "Nyomjon meg egy billentyűt…";
+"hotkey.clickToChange" = "Kattintson a módosításhoz";
+"key.space" = "Szóköz";
+"key.unknown" = "Billentyű: %ld";
+"hotkey.reject.noModifier" = "Módosító billentyű nélkül a billentyűparancs minden normál billentyűleütést elnyelne.";
+"hotkey.reject.escape" = "Az Esc a felvétel megszakítására van fenntartva.";
+"hotkey.reject.quit" = "A ⌘Q kilép az appokból.";
+"hotkey.reject.close" = "A ⌘W bezárja az ablakokat.";
+"hotkey.reject.switchApp" = "A ⌘Tab az appok közötti váltásra szolgál.";
+"hotkey.reject.spotlight" = "A ⌘Szóköz megnyitja a Spotlightot.";
+
+/* Setup */
+"setup.welcome.title" = "Egyszer kell beállítani, aztán soha többé";
+"setup.welcome.body" = "A Pegel teljes egészében ezen a Macen ismeri fel a beszédet. Ehhez most egyszer letölti a beszédmodellt. Enélkül az app nem tud átírni.";
+"setup.welcome.privacy" = "Ez az egyetlen hálózati hozzáférés, amelyet a Pegel valaha végez. Utána minden offline fut: nincs fiók, nincs felhő, nincs telemetria.";
+"setup.welcome.size" = "461 MB a Hugging Face-ről, a kapcsolattól függően néhány perc.";
+"setup.welcome.confirm" = "Modell letöltése";
+"setup.next" = "Folytatás";
+"setup.permissions.title" = "Engedélyek";
+"setup.install.done" = "A modell telepítve van, és készen áll";
+"setup.install.failed" = "A letöltés nem sikerült";
+"setup.install.retry" = "Újrapróbálkozás";
+"setup.install.retry.hint" = "A már letöltött részek megmaradnak, egy második próbálkozás onnan folytatja.";
+"setup.install.retry.offline" = "Csatlakozzon a hálózathoz, és próbálja újra. A már letöltött részek megmaradnak.";
+"setup.phase.waiting" = "Megerősítésre vár";
+"setup.phase.listing" = "Fájllista lekérése";
+"setup.phase.downloading" = "%ld/%ld fájl";
+"setup.phase.downloadingPlain" = "Modell letöltése";
+"setup.phase.compiling" = "Modell fordítása a Neural Engine-hez";
+"setup.done.title" = "A Pegel használatra kész";
+"setup.done.body" = "Az app a menüsorban található, és nincs saját ablaka. Mindenhol diktálhat, ahol a beszúrási pont áll.";
+"setup.done.shortcut.label" = "Az Ön billentyűparancsa, itt módosíthatja";
+"setup.done.shortcut.explanation" = "Rövid lenyomásra elindul a felvétel, és tovább fut, egy újabb lenyomás leállítja. Nyomva tartva push-to-talk. Az Esc elveti.";
+"setup.done.openSettings" = "További beállítások…";
+"setup.done.permissionsMissing" = "Néhány engedély még hiányzik. Kisegítő lehetőségek és Bemenet figyelése nélkül a billentyűparancs nem reagál. Később a beállításokban is megadhatja őket.";
+
+/* Installation errors */
+"install.error.offline" = "Nincs hálózati kapcsolat. A Pegelnek csak ehhez az egy letöltéshez kell hálózat.";
+
+/* Audiodatei */
+"file.panel.message" = "Az eredmény a vágólapra kerül.";
+"file.panel.prompt" = "Átírás";
+
+/* Colours */
+"settings.palette" = "Színek";
+"palette.standard" = "Alap";
+"palette.citrus" = "Citrus";
+"palette.lagoon" = "Lagúna";
+"palette.ember" = "Parázs";
+"palette.neon" = "Neon";
+"palette.fern" = "Páfrány";
+
+/* Settings and About */
+"menu.about" = "A Pegel névjegye…";
+"settings.tab.general" = "Általános";
+"settings.tab.appearance" = "Megjelenés";
+"about.tagline" = "Diktálás a Macen, teljesen helyben.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Verzió: %@";
+"about.versionBuild" = "Verzió: %@ (%@)";
+"about.repository" = "A Pegel a GitHubon";
+"about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Fordítás";
+"about.translation.machine" = "Ez a fordítás automatikusan készült, és anyanyelvi beszélő nem ellenőrizte.";
+"about.translation.report" = "Hiba jelentése";
+"about.translation.useEnglish" = "A Pegel használata angolul…";
+"about.section.updates" = "Frissítések";
+"about.updates.automatic" = "Frissítések automatikus keresése";
+"about.updates.install" = "Frissítések automatikus telepítése";
+"about.updates.install.explanation" = "A Pegel a háttérben letölti a talált frissítést, és a következő kilépéskor telepíti. Kikapcsolva a Pegel előbb rákérdez. Csak az automatikus kereséssel működik.";
+"about.updates.check" = "Frissítések keresése…";
+"about.updates.privacy" = "A kereséshez a Pegel letölt egy fájlt a GitHubról. A GitHub ekkor látja az Ön IP-címét, valamint a Pegel és a macOS verzióját. A hang és a szöveg soha nem hagyja el ezt a Macet.";
+"about.section.licenses" = "Licencek";
+"about.licenses.explanation" = "A Pegel MIT-licenc alatt érhető el. Tartalmazza a FluidAudiót (Apache 2.0) és annak függőségeit. A Parakeet TDT 0.6B v3 beszédmodellt az NVIDIA készítette, a Core ML-változatot a FluidInference, mindkettő CC-BY-4.0 licenc alatt áll.";
+"about.licenses.show" = "Licencszövegek megjelenítése…";

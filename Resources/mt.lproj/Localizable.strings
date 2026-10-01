@@ -1,0 +1,184 @@
+/* Menu */
+"menu.status.last" = "L-aħħar: %@";
+"menu.status.hotkeyInactive" = "Shortcut mhux attiv, nieqsa l-Aċċessibbiltà";
+"menu.resetPosition" = "Erġa' poġġi fil-post";
+"menu.copyLast" = "Ikkopja l-aħħar dettatura";
+"menu.transcribeFile" = "Ittraskrivi fajl tal-awdjo jew tal-vidjo…";
+"menu.setup" = "Issettja Pegel…";
+"menu.status.notInstalled" = "Il-mudell għadu mhux installat";
+"menu.settings" = "Issettjar…";
+"menu.quit" = "Oħroġ";
+
+/* Status */
+"status.ready" = "Lest";
+"status.recording" = "Qed jirrekordja…";
+"status.transcribing" = "Qed jittraskrivi…";
+"status.transcribingFile" = "Qed jittraskrivi… %@";
+"status.finished" = "Imdaħħal";
+"status.discarded" = "Imwarrab";
+"status.failed" = "Żball";
+
+/* Model preparation */
+"preparing.downloading" = "Qed iniżżel il-mudell %@";
+"preparing.loading" = "Qed jibda l-mudell";
+"preparing.warmup" = "Qed isaħħan il-mudell";
+"preparing.waiting" = "Il-mudell mhux installat";
+"preparing.listing" = "Qed iħejji t-tniżżil";
+"preparing.compiling" = "Qed jikkompila l-mudell";
+
+/* Errors */
+"error.microphone" = "L-ebda aċċess għall-mikrofonu";
+"error.tooShort" = "Qasir wisq";
+"error.unreadableFile" = "Ma jistax jinqara: %@";
+"error.noSpeech" = "Ma ntgħaraf xejn";
+"error.modelLoading" = "Il-mudell għadu qed jitgħabba";
+"error.noInputDevice" = "Ma nstab l-ebda mikrofonu.";
+"error.deviceUnavailable" = "Il-mikrofonu %@ mhux disponibbli";
+"error.silentInput" = "L-ebda sinjal minn %@";
+"error.noAudioData" = "L-ebda data minn %@";
+"error.notReady" = "Il-mudell tad-diskors għadu mhux mgħobbi.";
+
+/* Windows */
+"window.settings" = "Issettjar";
+"window.about" = "Dwar Pegel";
+"window.licences" = "Liċenzji";
+"window.onboarding" = "Issettja Pegel";
+
+/* Settings */
+"settings.section.hotkey" = "Shortcut tat-tastiera";
+"settings.hotkey.label" = "Ibda u waqqaf id-dettatura";
+"settings.hotkey.reset" = "Erġa' lura għal %@";
+"settings.ptt.label" = "Żomm minn";
+"settings.ptt.explanation" = "Għafsa qasira tixgħel jew titfi r-reġistrazzjoni u tħalliha għaddejja. Għafsa itwal hija push-to-talk: meta titlaq, tieqaf.";
+"settings.section.audio" = "Awdjo";
+"settings.input.label" = "Mikrofonu";
+"settings.input.systemDefault" = "Default tas-sistema";
+"settings.input.current" = "Qed jirrekordja permezz ta' %@";
+"settings.input.narrowband" = "Band dejjaq taħt is-16 kHz, tipiku tal-headsets Bluetooth fil-profil tat-telefon. Ir-rikonoxximent isir notevolment agħar.";
+"settings.input.missing" = "Il-mikrofonu magħżul mhux imqabbad. Sakemm ma jitqabbadx, japplika d-default tas-sistema.";
+"settings.input.none" = "Ma nstab l-ebda apparat tal-input.";
+"settings.input.explanation" = "Bid-default tas-sistema, Pegel isegwi l-mikrofonu li jagħżel macOS. Dan jista' jkun speaker Bluetooth li għadu kif qabad: macOS jittrattah bħala headset u jagħmlu l-input. Apparat magħżul b'mod fiss jeskludi dan.";
+"settings.section.tones" = "Ħsejjes";
+"settings.tones.label" = "Ħoss";
+"settings.tones.play" = "Isma'";
+"settings.tones.volume" = "Volum";
+"settings.tones.explanation" = "Ħoss qasir u baxx jikkonferma l-bidu u t-tmiem tar-reġistrazzjoni: jogħla meta tibda, jinżel meta titlaq. Il-lista tmur mill-aktar diskret sal-aktar notevoli. Kollha baxxi biżżejjed biex ma jispiċċawx fid-dettatura.";
+"tones.off" = "Mitfi";
+"tones.cricket" = "Ġrillu";
+"tones.pebble" = "Żrara";
+"tones.drop" = "Qatra";
+"tones.moss" = "Ħażiż";
+"tones.glass" = "Ħġieġ";
+"settings.section.appearance" = "Dehra";
+"settings.waveform" = "Forma tal-mewġa";
+"settings.showTime" = "Uri l-ħin li għadda";
+"settings.showTime.explanation" = "Mingħajr il-ħin, l-indikatur tal-livell ikun idjaq u jaħdem kompletament mingħajr numri.";
+"settings.section.permissions" = "Permessi";
+"settings.permissions.explanation" = "Aċċessibbiltà biex idaħħal it-test u jsib il-kursur, Monitoraġġ tal-Input għall-shortcut fis-sistema kollha.";
+"settings.section.model" = "Mudell";
+"settings.model.label" = "Rikonoxximent tad-diskors";
+"settings.model.explanation" = "Jaħdem lokalment fuq in-Neural Engine. Wara l-ewwel tniżżil ma hemmx bżonn ta' netwerk.";
+
+/* Waveforms */
+"waveform.trace" = "Traċċa";
+"waveform.trace.explanation" = "Turi l-aħħar żewġ sekondi. Tista' tara anki wara jekk wasalx il-ħoss.";
+"waveform.levels" = "Livelli";
+"waveform.levels.explanation" = "Ħdax-il bar b'mewġa li tiċċaqlaq lejn il-lemin. Aktar kalma u idjaq, turi biss il-mument.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "Default tas-sistema";
+"audio.device.unknown" = "Apparat mhux magħruf";
+
+/* Permissions */
+"permission.microphone" = "Mikrofonu";
+"permission.accessibility" = "Aċċessibbiltà (Accessibility)";
+"permission.inputMonitoring" = "Monitoraġġ tal-Input (Input Monitoring)";
+
+/* Onboarding */
+"onboarding.subtitle" = "Dettatura, lokali, kullimkien fis-sistema";
+"onboarding.intro" = "Hemm bżonn ta' tliet permessi, imbagħad kollox jaħdem mingħajr aktar mistoqsijiet.";
+"onboarding.microphone.detail" = "Għar-reġistrazzjoni. L-awdjo qatt ma jitlaq minn dan il-Mac.";
+"onboarding.accessibility.detail" = "Biex idaħħal it-test fejn hemm il-kursur u jsib il-pożizzjoni tiegħu.";
+"onboarding.inputMonitoring.detail" = "Biex ix-shortcut jintgħaraf fis-sistema kollha. Entrata separata fl-Issettjar tas-Sistema (System Settings).";
+"onboarding.start" = "Nibdew";
+"onboarding.later" = "Aktar tard";
+
+/* Buttons and keys */
+"button.open" = "Iftaħ";
+"button.allow" = "Ippermetti";
+"button.openSettings" = "Issettjar tas-Sistema…";
+"hotkey.pressKey" = "Agħfas tasta…";
+"hotkey.clickToChange" = "Ikklikkja biex tibdel";
+"key.space" = "Spazju";
+"key.unknown" = "Tasta %ld";
+"hotkey.reject.noModifier" = "Mingħajr tasta modifikatur, ix-shortcut jaqbad kull tasta normali li tagħfas.";
+"hotkey.reject.escape" = "Esc hija riżervata biex tikkanċella r-reġistrazzjoni.";
+"hotkey.reject.quit" = "⌘Q toħroġ mill-apps.";
+"hotkey.reject.close" = "⌘W tagħlaq it-twieqi.";
+"hotkey.reject.switchApp" = "⌘Tab taqleb bejn l-apps.";
+"hotkey.reject.spotlight" = "⌘Spazju tiftaħ Spotlight.";
+
+/* Setup */
+"setup.welcome.title" = "Issettja darba, imbagħad qatt aktar";
+"setup.welcome.body" = "Pegel jagħraf id-diskors kompletament fuq dan il-Mac. Għal dan, issa jniżżel il-mudell tad-diskors darba waħda. Mingħajru l-app ma tistax tittraskrivi.";
+"setup.welcome.privacy" = "Dan huwa l-uniku aċċess għan-netwerk li Pegel qatt jagħmel. Wara, kollox jaħdem offline: l-ebda kont, l-ebda cloud, l-ebda telemetrija.";
+"setup.welcome.size" = "461 MB minn Hugging Face, ftit minuti skont il-konnessjoni.";
+"setup.welcome.confirm" = "Niżżel il-mudell";
+"setup.next" = "Kompli";
+"setup.permissions.title" = "Permessi";
+"setup.install.done" = "Il-mudell installat u lest";
+"setup.install.failed" = "It-tniżżil falla";
+"setup.install.retry" = "Erġa' pprova";
+"setup.install.retry.hint" = "Il-partijiet li diġà tniżżlu jibqgħu, it-tieni tentattiv ikompli minn hemm.";
+"setup.install.retry.offline" = "Qabbad man-netwerk u erġa' pprova. Il-partijiet li diġà tniżżlu jibqgħu.";
+"setup.phase.waiting" = "Qed jistenna konferma";
+"setup.phase.listing" = "Qed iġib il-lista tal-fajls";
+"setup.phase.downloading" = "Fajl %ld minn %ld";
+"setup.phase.downloadingPlain" = "Qed iniżżel il-mudell";
+"setup.phase.compiling" = "Qed jikkompila l-mudell għan-Neural Engine";
+"setup.done.title" = "Pegel lest";
+"setup.done.body" = "L-app tinsab fil-menu bar u m'għandhiex tieqa tagħha. Tista' tiddetta kullimkien fejn hemm il-kursur.";
+"setup.done.shortcut.label" = "Ix-shortcut tiegħek, tibdlu hawn";
+"setup.done.shortcut.explanation" = "Għafsa qasira tibda r-reġistrazzjoni u tħalliha għaddejja, għafsa oħra twaqqafha. Iż-żamma hija push-to-talk. Esc twarrab.";
+"setup.done.openSettings" = "Aktar issettjar…";
+"setup.done.permissionsMissing" = "Għad hemm xi permessi neqsin. Mingħajr Aċċessibbiltà u Monitoraġġ tal-Input ix-shortcut ma jirreaġixxix. Tista' tagħtihom aktar tard fl-issettjar.";
+
+/* Installation errors */
+"install.error.offline" = "L-ebda konnessjoni man-netwerk. Pegel jeħtieġ in-netwerk biss għal dan it-tniżżil wieħed.";
+
+/* Audiodatei */
+"file.panel.message" = "Ir-riżultat imur fil-clipboard.";
+"file.panel.prompt" = "Ittraskrivi";
+
+/* Colours */
+"settings.palette" = "Kuluri";
+"palette.standard" = "Standard";
+"palette.citrus" = "Lumi";
+"palette.lagoon" = "Laguna";
+"palette.ember" = "Ġamar";
+"palette.neon" = "Neon";
+"palette.fern" = "Felċi";
+
+/* Settings and About */
+"menu.about" = "Dwar Pegel…";
+"settings.tab.general" = "Ġenerali";
+"settings.tab.appearance" = "Dehra";
+"about.tagline" = "Dettatura fuq il-Mac, kompletament lokali.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Verżjoni %@";
+"about.versionBuild" = "Verżjoni %@ (%@)";
+"about.repository" = "Pegel fuq GitHub";
+"about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Traduzzjoni";
+"about.translation.machine" = "Din it-traduzzjoni saret awtomatikament u ma ġietx iċċekkjata minn kelliem nattiv.";
+"about.translation.report" = "Irrapporta żball";
+"about.translation.useEnglish" = "Uża Pegel bl-Ingliż…";
+"about.section.updates" = "Aġġornamenti";
+"about.updates.automatic" = "Fittex aġġornamenti awtomatikament";
+"about.updates.install" = "Installa l-aġġornamenti awtomatikament";
+"about.updates.install.explanation" = "Pegel iniżżel aġġornament li jsib fl-isfond u jinstallah il-darba li jmiss li toħroġ. Meta jkun mitfi, Pegel jistaqsi l-ewwel. Jaħdem biss mat-tfittxija awtomatika.";
+"about.updates.check" = "Fittex aġġornamenti…";
+"about.updates.privacy" = "Biex ifittex, Pegel iġib fajl minn GitHub. GitHub jara l-indirizz IP tiegħek u l-verżjonijiet ta' Pegel u macOS. L-awdjo u t-test qatt ma jitilqu minn dan il-Mac.";
+"about.section.licenses" = "Liċenzji";
+"about.licenses.explanation" = "Pegel huwa maħruġ taħt il-Liċenzja MIT. Jinkludi FluidAudio (Apache 2.0) u d-dipendenzi tiegħu. Il-mudell tad-diskors Parakeet TDT 0.6B v3 huwa ta' NVIDIA, il-verżjoni Core ML ta' FluidInference, it-tnejn taħt CC-BY-4.0.";
+"about.licenses.show" = "Uri t-testi tal-liċenzji…";

@@ -1,0 +1,184 @@
+/* Menu */
+"menu.status.last" = "Senast: %@";
+"menu.status.hotkeyInactive" = "Kortkommando inaktivt, Hjälpmedel saknas";
+"menu.resetPosition" = "Återställ position";
+"menu.copyLast" = "Kopiera senaste diktering";
+"menu.transcribeFile" = "Transkribera ljud- eller videofil…";
+"menu.setup" = "Ställ in Pegel…";
+"menu.status.notInstalled" = "Modellen är inte installerad än";
+"menu.settings" = "Inställningar…";
+"menu.quit" = "Avsluta";
+
+/* Status */
+"status.ready" = "Redo";
+"status.recording" = "Spelar in…";
+"status.transcribing" = "Transkriberar…";
+"status.transcribingFile" = "Transkriberar… %@";
+"status.finished" = "Infogad";
+"status.discarded" = "Kasserad";
+"status.failed" = "Fel";
+
+/* Model preparation */
+"preparing.downloading" = "Hämtar modell %@";
+"preparing.loading" = "Initierar modell";
+"preparing.warmup" = "Värmer upp modell";
+"preparing.waiting" = "Modellen är inte installerad";
+"preparing.listing" = "Förbereder hämtning";
+"preparing.compiling" = "Kompilerar modell";
+
+/* Errors */
+"error.microphone" = "Ingen åtkomst till mikrofonen";
+"error.tooShort" = "För kort";
+"error.unreadableFile" = "Det går inte att läsa %@";
+"error.noSpeech" = "Inget kändes igen";
+"error.modelLoading" = "Modellen läses fortfarande in";
+"error.noInputDevice" = "Ingen mikrofon hittades.";
+"error.deviceUnavailable" = "Mikrofonen %@ är inte tillgänglig";
+"error.silentInput" = "Ingen signal från %@";
+"error.noAudioData" = "Inga data från %@";
+"error.notReady" = "Talmodellen är inte inläst än.";
+
+/* Windows */
+"window.settings" = "Inställningar";
+"window.about" = "Om Pegel";
+"window.licences" = "Licenser";
+"window.onboarding" = "Ställ in Pegel";
+
+/* Settings */
+"settings.section.hotkey" = "Kortkommando";
+"settings.hotkey.label" = "Starta och stoppa diktering";
+"settings.hotkey.reset" = "Återställ till %@";
+"settings.ptt.label" = "Håll ned från";
+"settings.ptt.explanation" = "Ett kort tryck växlar inspelningen och låter den fortsätta. Ett längre tryck är push-to-talk: när du släpper avslutas den.";
+"settings.section.audio" = "Ljud";
+"settings.input.label" = "Mikrofon";
+"settings.input.systemDefault" = "Systemförval";
+"settings.input.current" = "Spelar in via %@";
+"settings.input.narrowband" = "Smalband under 16 kHz, typiskt för Bluetooth-headset i telefoniprofilen. Igenkänningen blir märkbart sämre.";
+"settings.input.missing" = "Den valda mikrofonen är inte ansluten. Tills den är det gäller systemförvalet.";
+"settings.input.none" = "Ingen enhet för inljud hittades.";
+"settings.input.explanation" = "Med Systemförval följer Pegel den mikrofon som macOS väljer. Det kan vara en Bluetooth-högtalare som precis har anslutits: macOS behandlar den som ett headset och gör den till ingång. En fast vald enhet utesluter det.";
+"settings.section.tones" = "Toner";
+"settings.tones.label" = "Ton";
+"settings.tones.play" = "Spela";
+"settings.tones.volume" = "Volym";
+"settings.tones.explanation" = "En kort, svag ton bekräftar början och slutet av en inspelning: stigande vid start, fallande när du släpper. Listan går från den diskretaste till den tydligaste. Alla är tillräckligt svaga för att inte hamna i dikteringen.";
+"tones.off" = "Av";
+"tones.cricket" = "Syrsa";
+"tones.pebble" = "Småsten";
+"tones.drop" = "Droppe";
+"tones.moss" = "Mossa";
+"tones.glass" = "Glas";
+"settings.section.appearance" = "Utseende";
+"settings.waveform" = "Vågform";
+"settings.showTime" = "Visa förfluten tid";
+"settings.showTime.explanation" = "Utan tid blir nivåmätaren smalare och klarar sig helt utan siffror.";
+"settings.section.permissions" = "Behörigheter";
+"settings.permissions.explanation" = "Hjälpmedel för att infoga text och hitta insättningspunkten, Övervakning av inmatning för kortkommandot i hela systemet.";
+"settings.section.model" = "Modell";
+"settings.model.label" = "Taligenkänning";
+"settings.model.explanation" = "Körs lokalt på Neural Engine. Efter den första hämtningen behövs inget nätverk.";
+
+/* Waveforms */
+"waveform.trace" = "Spår";
+"waveform.trace.explanation" = "Visar de senaste två sekunderna. Du ser även i efterhand om ljud har kommit fram.";
+"waveform.levels" = "Nivåer";
+"waveform.levels.explanation" = "Elva staplar med en våg som löper åt höger. Lugnare och smalare, visar bara ögonblicket.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "Systemförval";
+"audio.device.unknown" = "Okänd enhet";
+
+/* Permissions */
+"permission.microphone" = "Mikrofon";
+"permission.accessibility" = "Hjälpmedel";
+"permission.inputMonitoring" = "Övervakning av inmatning";
+
+/* Onboarding */
+"onboarding.subtitle" = "Diktering, lokalt, överallt i systemet";
+"onboarding.intro" = "Tre behörigheter behövs, sedan fungerar allt utan fler frågor.";
+"onboarding.microphone.detail" = "För inspelningen. Ljudet lämnar aldrig denna Mac.";
+"onboarding.accessibility.detail" = "För att infoga text vid markören och hitta insättningspunkten.";
+"onboarding.inputMonitoring.detail" = "Så att kortkommandot känns igen i hela systemet. En egen punkt i Systeminställningar.";
+"onboarding.start" = "Nu kör vi";
+"onboarding.later" = "Senare";
+
+/* Buttons and keys */
+"button.open" = "Öppna";
+"button.allow" = "Tillåt";
+"button.openSettings" = "Systeminställningar…";
+"hotkey.pressKey" = "Tryck på en tangent…";
+"hotkey.clickToChange" = "Klicka för att ändra";
+"key.space" = "Mellanslag";
+"key.unknown" = "Tangent %ld";
+"hotkey.reject.noModifier" = "Utan specialtangent skulle kortkommandot fånga upp varje vanlig tangenttryckning.";
+"hotkey.reject.escape" = "Escape är reserverad för att avbryta en inspelning.";
+"hotkey.reject.quit" = "⌘Q avslutar appar.";
+"hotkey.reject.close" = "⌘W stänger fönster.";
+"hotkey.reject.switchApp" = "⌘Tabb växlar mellan appar.";
+"hotkey.reject.spotlight" = "⌘Mellanslag öppnar Spotlight.";
+
+/* Setup */
+"setup.welcome.title" = "Ställ in en gång, sedan aldrig igen";
+"setup.welcome.body" = "Pegel känner igen tal helt på denna Mac. För det hämtar appen nu talmodellen, en enda gång. Utan den kan appen inte transkribera.";
+"setup.welcome.privacy" = "Det här är den enda nätverksåtkomst Pegel någonsin gör. Allt därefter körs offline: inget konto, inget moln, ingen telemetri.";
+"setup.welcome.size" = "461 MB från Hugging Face, några minuter beroende på anslutningen.";
+"setup.welcome.confirm" = "Hämta modellen";
+"setup.next" = "Fortsätt";
+"setup.permissions.title" = "Behörigheter";
+"setup.install.done" = "Modellen är installerad och redo";
+"setup.install.failed" = "Hämtningen misslyckades";
+"setup.install.retry" = "Försök igen";
+"setup.install.retry.hint" = "Delar som redan har hämtats ligger kvar, ett andra försök fortsätter därifrån.";
+"setup.install.retry.offline" = "Anslut till nätverket och försök igen. Delar som redan har hämtats ligger kvar.";
+"setup.phase.waiting" = "Väntar på bekräftelse";
+"setup.phase.listing" = "Hämtar fillistan";
+"setup.phase.downloading" = "Fil %ld av %ld";
+"setup.phase.downloadingPlain" = "Hämtar modellen";
+"setup.phase.compiling" = "Kompilerar modellen för Neural Engine";
+"setup.done.title" = "Pegel är redo";
+"setup.done.body" = "Appen finns i menyraden och har inget eget fönster. Du dikterar överallt där insättningspunkten står.";
+"setup.done.shortcut.label" = "Ditt kortkommando, ändra det här";
+"setup.done.shortcut.explanation" = "Ett kort tryck startar inspelningen och låter den fortsätta, ett tryck till avslutar den. Håll ned för push-to-talk. Escape kasserar.";
+"setup.done.openSettings" = "Fler inställningar…";
+"setup.done.permissionsMissing" = "Vissa behörigheter saknas fortfarande. Utan Hjälpmedel och Övervakning av inmatning reagerar kortkommandot inte. Du kan ge dem senare i inställningarna.";
+
+/* Installation errors */
+"install.error.offline" = "Ingen nätverksanslutning. Pegel behöver nätverket bara för den här enda hämtningen.";
+
+/* Audiodatei */
+"file.panel.message" = "Resultatet hamnar i urklipp.";
+"file.panel.prompt" = "Transkribera";
+
+/* Colours */
+"settings.palette" = "Färger";
+"palette.standard" = "Standard";
+"palette.citrus" = "Citrus";
+"palette.lagoon" = "Lagun";
+"palette.ember" = "Glöd";
+"palette.neon" = "Neon";
+"palette.fern" = "Ormbunke";
+
+/* Settings and About */
+"menu.about" = "Om Pegel…";
+"settings.tab.general" = "Allmänt";
+"settings.tab.appearance" = "Utseende";
+"about.tagline" = "Diktering på Mac, helt lokalt.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Version %@";
+"about.versionBuild" = "Version %@ (%@)";
+"about.repository" = "Pegel på GitHub";
+"about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Översättning";
+"about.translation.machine" = "Den här översättningen har skapats automatiskt och har inte granskats av någon med svenska som modersmål.";
+"about.translation.report" = "Rapportera ett fel";
+"about.translation.useEnglish" = "Använd Pegel på engelska…";
+"about.section.updates" = "Uppdateringar";
+"about.updates.automatic" = "Leta efter uppdateringar automatiskt";
+"about.updates.install" = "Installera uppdateringar automatiskt";
+"about.updates.install.explanation" = "Pegel hämtar en hittad uppdatering i bakgrunden och installerar den nästa gång appen avslutas. När det är avstängt frågar Pegel först. Fungerar bara med automatisk sökning.";
+"about.updates.check" = "Leta efter uppdateringar…";
+"about.updates.privacy" = "För att leta hämtar Pegel en fil från GitHub. GitHub ser då din IP-adress och versionerna av Pegel och macOS. Ljud och text lämnar aldrig denna Mac.";
+"about.section.licenses" = "Licenser";
+"about.licenses.explanation" = "Pegel är licensierad under MIT-licensen. Den innehåller FluidAudio (Apache 2.0) med dess beroenden. Talmodellen Parakeet TDT 0.6B v3 kommer från NVIDIA, Core ML-versionen från FluidInference, båda under CC-BY-4.0.";
+"about.licenses.show" = "Visa licenstexter…";

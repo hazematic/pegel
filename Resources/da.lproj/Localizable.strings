@@ -1,0 +1,184 @@
+/* Menu */
+"menu.status.last" = "Senest: %@";
+"menu.status.hotkeyInactive" = "Genvej inaktiv, Tilgængelighed mangler";
+"menu.resetPosition" = "Nulstil placering";
+"menu.copyLast" = "Kopier seneste diktering";
+"menu.transcribeFile" = "Transskriber lyd- eller videofil…";
+"menu.setup" = "Indstil Pegel…";
+"menu.status.notInstalled" = "Modellen er ikke installeret endnu";
+"menu.settings" = "Indstillinger…";
+"menu.quit" = "Slut";
+
+/* Status */
+"status.ready" = "Klar";
+"status.recording" = "Optager…";
+"status.transcribing" = "Transskriberer…";
+"status.transcribingFile" = "Transskriberer… %@";
+"status.finished" = "Indsat";
+"status.discarded" = "Kasseret";
+"status.failed" = "Fejl";
+
+/* Model preparation */
+"preparing.downloading" = "Henter model %@";
+"preparing.loading" = "Initialiserer model";
+"preparing.warmup" = "Varmer model op";
+"preparing.waiting" = "Modellen er ikke installeret";
+"preparing.listing" = "Forbereder hentning";
+"preparing.compiling" = "Kompilerer model";
+
+/* Errors */
+"error.microphone" = "Ingen adgang til mikrofonen";
+"error.tooShort" = "For kort";
+"error.unreadableFile" = "%@ kan ikke læses";
+"error.noSpeech" = "Intet blev genkendt";
+"error.modelLoading" = "Modellen indlæses stadig";
+"error.noInputDevice" = "Ingen mikrofon fundet.";
+"error.deviceUnavailable" = "Mikrofonen %@ er ikke tilgængelig";
+"error.silentInput" = "Intet signal fra %@";
+"error.noAudioData" = "Ingen data fra %@";
+"error.notReady" = "Talemodellen er ikke indlæst endnu.";
+
+/* Windows */
+"window.settings" = "Indstillinger";
+"window.about" = "Om Pegel";
+"window.licences" = "Licenser";
+"window.onboarding" = "Indstil Pegel";
+
+/* Settings */
+"settings.section.hotkey" = "Tastaturgenvej";
+"settings.hotkey.label" = "Start og stop diktering";
+"settings.hotkey.reset" = "Nulstil til %@";
+"settings.ptt.label" = "Hold nede fra";
+"settings.ptt.explanation" = "Et kort tryk slår optagelsen til eller fra og lader den køre. Et længere tryk er push-to-talk: når du slipper, stopper den.";
+"settings.section.audio" = "Lyd";
+"settings.input.label" = "Mikrofon";
+"settings.input.systemDefault" = "Systemstandard";
+"settings.input.current" = "Optager via %@";
+"settings.input.narrowband" = "Smalbånd under 16 kHz, typisk for Bluetooth-headsets i telefonprofilen. Genkendelsen bliver mærkbart dårligere.";
+"settings.input.missing" = "Den valgte mikrofon er ikke tilsluttet. Indtil den er det, gælder systemstandarden.";
+"settings.input.none" = "Ingen enhed til lyd ind fundet.";
+"settings.input.explanation" = "Med Systemstandard følger Pegel den mikrofon, som macOS vælger. Det kan være en Bluetooth-højttaler, der lige har oprettet forbindelse: macOS behandler den som et headset og gør den til input. En fast valgt enhed udelukker det.";
+"settings.section.tones" = "Lyde";
+"settings.tones.label" = "Lyd";
+"settings.tones.play" = "Afspil";
+"settings.tones.volume" = "Lydstyrke";
+"settings.tones.explanation" = "En kort, svag lyd bekræfter start og slut på en optagelse: stigende ved start, faldende når du slipper. Listen går fra den mest diskrete til den mest tydelige. Alle er svage nok til ikke at havne i dikteringen.";
+"tones.off" = "Fra";
+"tones.cricket" = "Fårekylling";
+"tones.pebble" = "Småsten";
+"tones.drop" = "Dråbe";
+"tones.moss" = "Mos";
+"tones.glass" = "Glas";
+"settings.section.appearance" = "Udseende";
+"settings.waveform" = "Bølgeform";
+"settings.showTime" = "Vis forløbet tid";
+"settings.showTime.explanation" = "Uden tid bliver niveaumåleren smallere og klarer sig helt uden cifre.";
+"settings.section.permissions" = "Tilladelser";
+"settings.permissions.explanation" = "Tilgængelighed til indsætning og til at finde indsætningsmærket, Overvågning af tastatur til genvejen i hele systemet.";
+"settings.section.model" = "Model";
+"settings.model.label" = "Talegenkendelse";
+"settings.model.explanation" = "Kører lokalt på Neural Engine. Efter den første hentning er der ikke brug for netværk.";
+
+/* Waveforms */
+"waveform.trace" = "Spor";
+"waveform.trace.explanation" = "Viser de sidste to sekunder. Du kan også se bagefter, om der kom lyd igennem.";
+"waveform.levels" = "Niveauer";
+"waveform.levels.explanation" = "Elleve søjler med en bølge, der løber mod højre. Roligere og smallere, viser kun øjeblikket.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "Systemstandard";
+"audio.device.unknown" = "Ukendt enhed";
+
+/* Permissions */
+"permission.microphone" = "Mikrofon";
+"permission.accessibility" = "Tilgængelighed";
+"permission.inputMonitoring" = "Overvågning af tastatur";
+
+/* Onboarding */
+"onboarding.subtitle" = "Diktering, lokalt, overalt i systemet";
+"onboarding.intro" = "Der skal bruges tre tilladelser, derefter kører alt uden flere spørgsmål.";
+"onboarding.microphone.detail" = "Til optagelsen. Lyden forlader aldrig denne Mac.";
+"onboarding.accessibility.detail" = "Til at indsætte ved markøren og finde indsætningsmærket.";
+"onboarding.inputMonitoring.detail" = "Så genvejen genkendes i hele systemet. Et separat punkt i Systemindstillinger.";
+"onboarding.start" = "Kom i gang";
+"onboarding.later" = "Senere";
+
+/* Buttons and keys */
+"button.open" = "Åbn";
+"button.allow" = "Tillad";
+"button.openSettings" = "Systemindstillinger…";
+"hotkey.pressKey" = "Tryk på en tast…";
+"hotkey.clickToChange" = "Klik for at ændre";
+"key.space" = "Mellemrum";
+"key.unknown" = "Tast %ld";
+"hotkey.reject.noModifier" = "Uden en kombitast ville genvejen opfange alle almindelige tastetryk.";
+"hotkey.reject.escape" = "Esc er reserveret til at annullere en optagelse.";
+"hotkey.reject.quit" = "⌘Q slutter apps.";
+"hotkey.reject.close" = "⌘W lukker vinduer.";
+"hotkey.reject.switchApp" = "⌘Tab skifter mellem apps.";
+"hotkey.reject.spotlight" = "⌘Mellemrum åbner Spotlight.";
+
+/* Setup */
+"setup.welcome.title" = "Indstil én gang, derefter aldrig igen";
+"setup.welcome.body" = "Pegel genkender tale helt på denne Mac. Derfor henter appen nu talemodellen én gang. Uden den kan appen ikke transskribere.";
+"setup.welcome.privacy" = "Det er den eneste netværksadgang, Pegel nogensinde foretager. Alt derefter kører offline: ingen konto, ingen sky, ingen telemetri.";
+"setup.welcome.size" = "461 MB fra Hugging Face, nogle minutter afhængigt af forbindelsen.";
+"setup.welcome.confirm" = "Hent model";
+"setup.next" = "Fortsæt";
+"setup.permissions.title" = "Tilladelser";
+"setup.install.done" = "Modellen er installeret og klar";
+"setup.install.failed" = "Hentningen mislykkedes";
+"setup.install.retry" = "Prøv igen";
+"setup.install.retry.hint" = "Dele, der allerede er hentet, bliver liggende, et nyt forsøg fortsætter derfra.";
+"setup.install.retry.offline" = "Opret forbindelse til netværket, og prøv igen. Dele, der allerede er hentet, bliver liggende.";
+"setup.phase.waiting" = "Venter på bekræftelse";
+"setup.phase.listing" = "Henter fillisten";
+"setup.phase.downloading" = "Fil %ld af %ld";
+"setup.phase.downloadingPlain" = "Henter model";
+"setup.phase.compiling" = "Kompilerer model til Neural Engine";
+"setup.done.title" = "Pegel er klar";
+"setup.done.body" = "Appen ligger på menulinjen og har intet eget vindue. Du dikterer overalt, hvor indsætningsmærket står.";
+"setup.done.shortcut.label" = "Din genvej, kan ændres her";
+"setup.done.shortcut.explanation" = "Et kort tryk starter optagelsen og lader den køre, et nyt tryk stopper den. Hold nede for push-to-talk. Esc kasserer.";
+"setup.done.openSettings" = "Flere indstillinger…";
+"setup.done.permissionsMissing" = "Der mangler stadig tilladelser. Uden Tilgængelighed og Overvågning af tastatur reagerer genvejen ikke. Du kan give dem senere i indstillingerne.";
+
+/* Installation errors */
+"install.error.offline" = "Ingen netværksforbindelse. Pegel bruger kun netværket til denne ene hentning.";
+
+/* Audiodatei */
+"file.panel.message" = "Resultatet havner i udklipsholderen.";
+"file.panel.prompt" = "Transskriber";
+
+/* Colours */
+"settings.palette" = "Farver";
+"palette.standard" = "Standard";
+"palette.citrus" = "Citrus";
+"palette.lagoon" = "Lagune";
+"palette.ember" = "Glød";
+"palette.neon" = "Neon";
+"palette.fern" = "Bregne";
+
+/* Settings and About */
+"menu.about" = "Om Pegel…";
+"settings.tab.general" = "Generelt";
+"settings.tab.appearance" = "Udseende";
+"about.tagline" = "Diktering på Mac, helt lokalt.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Version %@";
+"about.versionBuild" = "Version %@ (%@)";
+"about.repository" = "Pegel på GitHub";
+"about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Oversættelse";
+"about.translation.machine" = "Denne oversættelse er lavet automatisk og er ikke gennemgået af en person med dansk som modersmål.";
+"about.translation.report" = "Rapporter en fejl";
+"about.translation.useEnglish" = "Brug Pegel på engelsk…";
+"about.section.updates" = "Opdateringer";
+"about.updates.automatic" = "Søg automatisk efter opdateringer";
+"about.updates.install" = "Installer opdateringer automatisk";
+"about.updates.install.explanation" = "Pegel henter en fundet opdatering i baggrunden og installerer den, næste gang appen slutter. Når det er slået fra, spørger Pegel først. Virker kun med automatisk søgning.";
+"about.updates.check" = "Søg efter opdateringer…";
+"about.updates.privacy" = "For at søge henter Pegel en fil fra GitHub. GitHub ser da din IP-adresse og versionerne af Pegel og macOS. Lyd og tekst forlader aldrig denne Mac.";
+"about.section.licenses" = "Licenser";
+"about.licenses.explanation" = "Pegel er udgivet under MIT-licensen. Den indeholder FluidAudio (Apache 2.0) med dens afhængigheder. Talemodellen Parakeet TDT 0.6B v3 er fra NVIDIA, Core ML-versionen fra FluidInference, begge under CC-BY-4.0.";
+"about.licenses.show" = "Vis licenstekster…";

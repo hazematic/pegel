@@ -1,0 +1,184 @@
+/* Menu */
+"menu.status.last" = "Τελευταία: %@";
+"menu.status.hotkeyInactive" = "Συντόμευση ανενεργή, λείπει η Προσβασιμότητα";
+"menu.resetPosition" = "Επαναφορά θέσης";
+"menu.copyLast" = "Αντιγραφή τελευταίας υπαγόρευσης";
+"menu.transcribeFile" = "Μεταγραφή αρχείου ήχου ή βίντεο…";
+"menu.setup" = "Διαμόρφωση του Pegel…";
+"menu.status.notInstalled" = "Το μοντέλο δεν έχει εγκατασταθεί ακόμα";
+"menu.settings" = "Ρυθμίσεις…";
+"menu.quit" = "Τερματισμός";
+
+/* Status */
+"status.ready" = "Έτοιμο";
+"status.recording" = "Εγγραφή…";
+"status.transcribing" = "Μεταγραφή…";
+"status.transcribingFile" = "Μεταγραφή… %@";
+"status.finished" = "Εισήχθη";
+"status.discarded" = "Απορρίφθηκε";
+"status.failed" = "Σφάλμα";
+
+/* Model preparation */
+"preparing.downloading" = "Λήψη μοντέλου %@";
+"preparing.loading" = "Αρχικοποίηση μοντέλου";
+"preparing.warmup" = "Προθέρμανση μοντέλου";
+"preparing.waiting" = "Το μοντέλο δεν έχει εγκατασταθεί";
+"preparing.listing" = "Προετοιμασία λήψης";
+"preparing.compiling" = "Μεταγλώττιση μοντέλου";
+
+/* Errors */
+"error.microphone" = "Δεν υπάρχει πρόσβαση στο μικρόφωνο";
+"error.tooShort" = "Πολύ σύντομο";
+"error.unreadableFile" = "Μη αναγνώσιμο: %@";
+"error.noSpeech" = "Δεν αναγνωρίστηκε τίποτα";
+"error.modelLoading" = "Το μοντέλο φορτώνεται ακόμα";
+"error.noInputDevice" = "Δεν βρέθηκε μικρόφωνο.";
+"error.deviceUnavailable" = "Το μικρόφωνο %@ δεν είναι διαθέσιμο";
+"error.silentInput" = "Κανένα σήμα από %@";
+"error.noAudioData" = "Κανένα δεδομένο από %@";
+"error.notReady" = "Το μοντέλο ομιλίας δεν έχει φορτωθεί ακόμα.";
+
+/* Windows */
+"window.settings" = "Ρυθμίσεις";
+"window.about" = "Πληροφορίες για το Pegel";
+"window.licences" = "Άδειες";
+"window.onboarding" = "Διαμόρφωση του Pegel";
+
+/* Settings */
+"settings.section.hotkey" = "Συντόμευση πληκτρολογίου";
+"settings.hotkey.label" = "Έναρξη και λήξη υπαγόρευσης";
+"settings.hotkey.reset" = "Επαναφορά σε %@";
+"settings.ptt.label" = "Κράτημα από";
+"settings.ptt.explanation" = "Ένα σύντομο πάτημα εναλλάσσει την εγγραφή και την αφήνει να τρέχει. Ένα μεγαλύτερο πάτημα είναι push-to-talk: τελειώνει όταν το αφήσετε.";
+"settings.section.audio" = "Ήχος";
+"settings.input.label" = "Μικρόφωνο";
+"settings.input.systemDefault" = "Προεπιλογή συστήματος";
+"settings.input.current" = "Εγγραφή μέσω %@";
+"settings.input.narrowband" = "Στενή ζώνη κάτω από 16 kHz, συνηθισμένη στα ακουστικά Bluetooth με προφίλ τηλεφώνου. Η αναγνώριση χειροτερεύει αισθητά.";
+"settings.input.missing" = "Το επιλεγμένο μικρόφωνο δεν είναι συνδεδεμένο. Μέχρι τότε ισχύει η προεπιλογή συστήματος.";
+"settings.input.none" = "Δεν βρέθηκε συσκευή εισόδου.";
+"settings.input.explanation" = "Με την Προεπιλογή συστήματος το Pegel ακολουθεί το μικρόφωνο που επιλέγει το macOS. Αυτό μπορεί να είναι ένα ηχείο Bluetooth που μόλις συνδέθηκε: το macOS το θεωρεί ακουστικά και το κάνει είσοδο. Μια σταθερά επιλεγμένη συσκευή το αποκλείει.";
+"settings.section.tones" = "Ηχητικά σήματα";
+"settings.tones.label" = "Σήμα";
+"settings.tones.play" = "Ακρόαση";
+"settings.tones.volume" = "Ένταση ήχου";
+"settings.tones.explanation" = "Ένας σύντομος, χαμηλός ήχος επιβεβαιώνει την αρχή και το τέλος της εγγραφής: ανιόντος στην έναρξη, κατιόντος όταν αφήνετε το πλήκτρο. Η λίστα πηγαίνει από τον πιο διακριτικό ως τον πιο έντονο. Όλοι είναι αρκετά χαμηλοί ώστε να μην καταλήγουν στην υπαγόρευση.";
+"tones.off" = "Όχι";
+"tones.cricket" = "Γρύλος";
+"tones.pebble" = "Βότσαλο";
+"tones.drop" = "Σταγόνα";
+"tones.moss" = "Βρύο";
+"tones.glass" = "Γυαλί";
+"settings.section.appearance" = "Εμφάνιση";
+"settings.waveform" = "Κυματομορφή";
+"settings.showTime" = "Εμφάνιση χρόνου που πέρασε";
+"settings.showTime.explanation" = "Χωρίς χρόνο ο δείκτης στάθμης είναι στενότερος και λειτουργεί εντελώς χωρίς ψηφία.";
+"settings.section.permissions" = "Άδειες";
+"settings.permissions.explanation" = "Προσβασιμότητα για την επικόλληση και τον εντοπισμό του σημείου εισαγωγής, Παρακολούθηση εισόδου για τη συντόμευση σε όλο το σύστημα.";
+"settings.section.model" = "Μοντέλο";
+"settings.model.label" = "Αναγνώριση ομιλίας";
+"settings.model.explanation" = "Εκτελείται τοπικά στο Neural Engine. Μετά την πρώτη λήψη δεν χρειάζεται δίκτυο.";
+
+/* Waveforms */
+"waveform.trace" = "Ίχνος";
+"waveform.trace.explanation" = "Δείχνει τα δύο τελευταία δευτερόλεπτα. Φαίνεται και εκ των υστέρων αν έφτασε ήχος.";
+"waveform.levels" = "Στάθμες";
+"waveform.levels.explanation" = "Έντεκα μπάρες με ένα κύμα που κινείται προς τα δεξιά. Πιο ήρεμη και στενότερη, δείχνει μόνο τη στιγμή.";
+
+/* Audio devices */
+"audio.device.systemDefault" = "Προεπιλογή συστήματος";
+"audio.device.unknown" = "Άγνωστη συσκευή";
+
+/* Permissions */
+"permission.microphone" = "Μικρόφωνο";
+"permission.accessibility" = "Προσβασιμότητα";
+"permission.inputMonitoring" = "Παρακολούθηση εισόδου";
+
+/* Onboarding */
+"onboarding.subtitle" = "Υπαγόρευση, τοπικά, παντού στο σύστημα";
+"onboarding.intro" = "Χρειάζονται τρεις άδειες, μετά όλα λειτουργούν χωρίς άλλες ερωτήσεις.";
+"onboarding.microphone.detail" = "Για την εγγραφή. Ο ήχος δεν φεύγει ποτέ από αυτό το Mac.";
+"onboarding.accessibility.detail" = "Για την επικόλληση στον δρομέα και τον εντοπισμό του σημείου εισαγωγής.";
+"onboarding.inputMonitoring.detail" = "Ώστε η συντόμευση να αναγνωρίζεται σε όλο το σύστημα. Ξεχωριστό στοιχείο στις Ρυθμίσεις συστήματος.";
+"onboarding.start" = "Ξεκινάμε";
+"onboarding.later" = "Αργότερα";
+
+/* Buttons and keys */
+"button.open" = "Άνοιγμα";
+"button.allow" = "Να επιτρέπεται";
+"button.openSettings" = "Ρυθμίσεις συστήματος…";
+"hotkey.pressKey" = "Πατήστε ένα πλήκτρο…";
+"hotkey.clickToChange" = "Κάντε κλικ για αλλαγή";
+"key.space" = "Διάστημα";
+"key.unknown" = "Πλήκτρο %ld";
+"hotkey.reject.noModifier" = "Χωρίς πλήκτρο τροποποίησης η συντόμευση θα έπιανε κάθε κανονικό πάτημα πλήκτρου.";
+"hotkey.reject.escape" = "Το Esc προορίζεται για την ακύρωση της εγγραφής.";
+"hotkey.reject.quit" = "Το ⌘Q τερματίζει εφαρμογές.";
+"hotkey.reject.close" = "Το ⌘W κλείνει παράθυρα.";
+"hotkey.reject.switchApp" = "Το ⌘Tab αλλάζει εφαρμογή.";
+"hotkey.reject.spotlight" = "Το ⌘Διάστημα ανοίγει το Spotlight.";
+
+/* Setup */
+"setup.welcome.title" = "Μία διαμόρφωση, και μετά ποτέ ξανά";
+"setup.welcome.body" = "Το Pegel αναγνωρίζει την ομιλία εξ ολοκλήρου σε αυτό το Mac. Γι’ αυτό κάνει τώρα μία φορά λήψη του μοντέλου ομιλίας. Χωρίς αυτό η εφαρμογή δεν μπορεί να κάνει μεταγραφή.";
+"setup.welcome.privacy" = "Αυτή είναι η μόνη πρόσβαση στο δίκτυο που κάνει ποτέ το Pegel. Μετά όλα λειτουργούν εκτός σύνδεσης: χωρίς λογαριασμό, χωρίς cloud, χωρίς τηλεμετρία.";
+"setup.welcome.size" = "461 MB από το Hugging Face, λίγα λεπτά ανάλογα με τη σύνδεση.";
+"setup.welcome.confirm" = "Λήψη μοντέλου";
+"setup.next" = "Συνέχεια";
+"setup.permissions.title" = "Άδειες";
+"setup.install.done" = "Το μοντέλο εγκαταστάθηκε και είναι έτοιμο";
+"setup.install.failed" = "Η λήψη απέτυχε";
+"setup.install.retry" = "Νέα δοκιμή";
+"setup.install.retry.hint" = "Όσα τμήματα έχουν ήδη ληφθεί παραμένουν, μια δεύτερη προσπάθεια συνεχίζει από εκεί.";
+"setup.install.retry.offline" = "Συνδεθείτε στο δίκτυο και δοκιμάστε ξανά. Όσα τμήματα έχουν ήδη ληφθεί παραμένουν.";
+"setup.phase.waiting" = "Αναμονή επιβεβαίωσης";
+"setup.phase.listing" = "Ανάκτηση λίστας αρχείων";
+"setup.phase.downloading" = "Αρχείο %ld από %ld";
+"setup.phase.downloadingPlain" = "Λήψη μοντέλου";
+"setup.phase.compiling" = "Μεταγλώττιση μοντέλου για το Neural Engine";
+"setup.done.title" = "Το Pegel είναι έτοιμο";
+"setup.done.body" = "Η εφαρμογή βρίσκεται στη γραμμή μενού και δεν έχει δικό της παράθυρο. Υπαγορεύετε όπου βρίσκεται το σημείο εισαγωγής.";
+"setup.done.shortcut.label" = "Η συντόμευσή σας, αλλάζει εδώ";
+"setup.done.shortcut.explanation" = "Ένα σύντομο πάτημα ξεκινά την εγγραφή και την αφήνει να συνεχίζει, ένα δεύτερο πάτημα την τελειώνει. Κρατώντας το πατημένο είναι push-to-talk. Το Esc την απορρίπτει.";
+"setup.done.openSettings" = "Περισσότερες ρυθμίσεις…";
+"setup.done.permissionsMissing" = "Λείπουν ακόμα κάποιες άδειες. Χωρίς Προσβασιμότητα και Παρακολούθηση εισόδου η συντόμευση δεν αντιδρά. Μπορείτε να τις δώσετε αργότερα στις ρυθμίσεις.";
+
+/* Installation errors */
+"install.error.offline" = "Δεν υπάρχει σύνδεση δικτύου. Το Pegel χρειάζεται το δίκτυο μόνο για αυτή τη μία λήψη.";
+
+/* Audiodatei */
+"file.panel.message" = "Το αποτέλεσμα πηγαίνει στο πρόχειρο.";
+"file.panel.prompt" = "Μεταγραφή";
+
+/* Colours */
+"settings.palette" = "Χρώματα";
+"palette.standard" = "Τυπικό";
+"palette.citrus" = "Λεμόνι";
+"palette.lagoon" = "Λαγούνα";
+"palette.ember" = "Θράκα";
+"palette.neon" = "Νέον";
+"palette.fern" = "Φτέρη";
+
+/* Settings and About */
+"menu.about" = "Πληροφορίες για το Pegel…";
+"settings.tab.general" = "Γενικά";
+"settings.tab.appearance" = "Εμφάνιση";
+"about.tagline" = "Υπαγόρευση στο Mac, εντελώς τοπικά.";
+"about.copyright" = "© 2026 Alexander Koppe";
+"about.version" = "Έκδοση %@";
+"about.versionBuild" = "Έκδοση %@ (%@)";
+"about.repository" = "Το Pegel στο GitHub";
+"about.coffee" = "Buy me a coffee";
+"about.section.translation" = "Μετάφραση";
+"about.translation.machine" = "Αυτή η μετάφραση δημιουργήθηκε αυτόματα και δεν έχει ελεγχθεί από φυσικό ομιλητή.";
+"about.translation.report" = "Αναφορά σφάλματος";
+"about.translation.useEnglish" = "Χρήση του Pegel στα αγγλικά…";
+"about.section.updates" = "Ενημερώσεις";
+"about.updates.automatic" = "Αυτόματος έλεγχος για ενημερώσεις";
+"about.updates.install" = "Αυτόματη εγκατάσταση ενημερώσεων";
+"about.updates.install.explanation" = "Το Pegel κάνει λήψη μιας ενημέρωσης που βρέθηκε στο παρασκήνιο και την εγκαθιστά στον επόμενο τερματισμό. Όταν είναι απενεργοποιημένο, το Pegel ρωτά πρώτα. Λειτουργεί μόνο με τον αυτόματο έλεγχο.";
+"about.updates.check" = "Έλεγχος για ενημερώσεις…";
+"about.updates.privacy" = "Για τον έλεγχο το Pegel ανακτά ένα αρχείο από το GitHub. Το GitHub βλέπει τότε τη διεύθυνση IP σας και τις εκδόσεις του Pegel και του macOS. Ο ήχος και το κείμενο δεν φεύγουν ποτέ από αυτό το Mac.";
+"about.section.licenses" = "Άδειες χρήσης";
+"about.licenses.explanation" = "Το Pegel διατίθεται με την άδεια MIT. Περιλαμβάνει το FluidAudio (Apache 2.0) με τις εξαρτήσεις του. Το μοντέλο ομιλίας Parakeet TDT 0.6B v3 είναι της NVIDIA, η έκδοση Core ML της FluidInference, και τα δύο με άδεια CC-BY-4.0.";
+"about.licenses.show" = "Εμφάνιση κειμένων αδειών…";
