@@ -6,6 +6,20 @@
     <description>Updates for Pegel</description>
     <language>en</language>
     <item>
+      <title>Version 1.5.0</title>
+      <pubDate>Thu, 01 Oct 2026 23:16:32 +0200</pubDate>
+      <sparkle:version>1.5.0</sparkle:version>
+      <sparkle:shortVersionString>1.5.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+      <description><![CDATA[<ul>
+<li>The interface is now in all 25 languages the model recognises: new are Swedish, Hungarian, Danish, Estonian, Lithuanian, Latvian, Slovenian, Russian, Ukrainian, Greek and Maltese, machine-translated. About Pegel says so and links to a form for reporting mistakes.</li>
+<li>macOS has no Estonian, Latvian, Lithuanian or Maltese interface. To use Pegel in one of them, add the language to the preferred languages or choose it for Pegel alone under Language &amp; Region › Applications.</li>
+<li>Greek dictation: the speech model has no final sigma and wrote &quot;&lt;unk&gt;&quot; in its place. Pegel now puts ς there.</li>
+<li>The name in the About and setup windows is set in PT Sans, the typeface of the website.</li>
+</ul>]]></description>
+      <enclosure url="https://github.com/hazematic/pegel/releases/download/v1.5.0/Pegel-1.5.0.zip" type="application/octet-stream" sparkle:edSignature="S1PosfbpSQymddMuWSlePg+MphzavjXK+Vz/F3taaDwBQcoYOb7fey9J2ZhHHniaa6sql8yh01l3hb4LUw7iDA==" length="11339212" />
+    </item>
+    <item>
       <title>Version 1.4.0</title>
       <pubDate>Mon, 28 Sep 2026 23:14:57 +0200</pubDate>
       <sparkle:version>1.4.0</sparkle:version>
