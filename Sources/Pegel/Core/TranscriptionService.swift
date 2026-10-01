@@ -133,7 +133,7 @@ actor TranscriptionService {
                 "Transcribed: \(audioSeconds, format: .fixed(precision: 1)) s of audio in \(elapsed, format: .fixed(precision: 2)) s, factor \(audioSeconds / elapsed, format: .fixed(precision: 0))x"
             )
         }
-        return result.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        return Self.cleaned(result.text)
     }
 
     /// FluidAudio handles decoding, resampling and chunking; large files stream from disk.
@@ -176,7 +176,19 @@ actor TranscriptionService {
                 "File transcribed: \(duration, format: .fixed(precision: 1)) s of audio in \(elapsed, format: .fixed(precision: 2)) s, factor \(duration / elapsed, format: .fixed(precision: 0))x"
             )
         }
-        return result.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        return Self.cleaned(result.text)
+    }
+
+    /// Mends gaps in the model's vocabulary (spec 4.1): Parakeet v3 has no Greek final sigma
+    /// and writes <unk> or a word-final σ in its place. Any other <unk> is dropped.
+    static func cleaned(_ text: String) -> String {
+        var text = text
+            .replacingOccurrences(of: #"(?<=\p{Greek})<unk>"#, with: "ς", options: .regularExpression)
+            .replacingOccurrences(of: #"(?<=\p{Greek})σ(?![\p{L}\p{M}])"#, with: "ς", options: .regularExpression)
+            .replacingOccurrences(of: "<unk>", with: "")
+        text = text.replacingOccurrences(of: #"[ \t]{2,}"#, with: " ", options: .regularExpression)
+            .replacingOccurrences(of: #" ([.,;:!?])"#, with: "$1", options: .regularExpression)
+        return text.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     enum ServiceError: LocalizedError {
